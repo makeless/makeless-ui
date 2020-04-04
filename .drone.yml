@@ -8,10 +8,15 @@ steps:
     commands:
       - yarn install
 
-  - name: linter
+  - name: eslint
     image: node:13
     commands:
       - make eslint
+
+  - name: lint
+    image: node:13
+    commands:
+      - make lint
 
   - name: ls-lint
     image: node:13
@@ -21,4 +26,4 @@ steps:
   - name: build
     image: node:13
     commands:
-      - yarn prod
+      - make build

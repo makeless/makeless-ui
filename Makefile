@@ -1,8 +1,14 @@
 eslint:
-	./node_modules/.bin/eslint src/js --ext js,vue,json
+	./node_modules/.bin/eslint src --ext ts,js,vue,json
+
+lint:
+	yarn lint
 
 ls-lint:
 	./node_modules/.bin/ls-lint
 
-test:
-	yarn jest
+serve:
+	yarn serve
+
+build:
+	yarn build
