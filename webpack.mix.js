@@ -1,8 +1,7 @@
 const mix = require('laravel-mix');
 const webpack = require('webpack');
 
-mix.js('src/js/app.js', 'public/js/app.js').
-    js('src/js/env.js', 'public/js/env.js').
+mix.js('src/app.js', 'public/app.js').
     copy('src/index.html', 'public/index.html');
 
 mix.webpackConfig({
@@ -19,6 +18,11 @@ mix.webpackConfig({
             use: ['raw-loader', 'pug-plain-loader'],
           },
         ],
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
       },
     ],
   },
