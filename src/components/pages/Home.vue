@@ -1,20 +1,15 @@
 <template>
-    <master-component>
+    <master>
         <template slot="page">
             <h1>Home</h1>
         </template>
-    </master-component>
+    </master>
 </template>
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import MasterComponent from '@/components/master/Master.vue';
 
-@Component({
-  components: {
-    MasterComponent,
-  },
-})
+@Component({})
 export default class Home extends Vue {
 }
 </script>

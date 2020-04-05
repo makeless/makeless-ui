@@ -5,17 +5,22 @@ import RouterInterface from '@/packages/router/router';
 import PageInterface from '@/packages/page/page';
 import HomePage from '@/pages/home';
 
-Vue.use(VueRouter);
-
 export default class Saas {
   private router: RouterInterface;
+  private readonly master: any;
 
   private pages: { [key: string]: PageInterface } = {
     'home': new HomePage(),
   };
 
-  constructor(router: RouterInterface) {
+  constructor(router: RouterInterface, master: any) {
     this.router = router;
+    this.master = master;
+  }
+
+  private preload(): void {
+    Vue.use(VueRouter);
+    Vue.component('master', this.master);
   }
 
   private getPages(): PageInterface[] {
@@ -33,6 +38,8 @@ export default class Saas {
   }
 
   public run(): Vue {
+    this.preload();
+
     return new Vue({
       render: (h) => h(SaasComponent),
       router: this.router.getRouter(this.getPages()),
