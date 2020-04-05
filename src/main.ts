@@ -1,8 +1,8 @@
-import Vue from 'vue';
-import App from './App.vue';
+import Saas from '@/saas';
+import Router from '@/packages/router/basic/router';
 
-Vue.config.productionTip = false;
+const saas = new Saas(
+    new Router(),
+);
 
-new Vue({
-  render: (h) => h(App),
-}).$mount('#app');
+saas.run();
