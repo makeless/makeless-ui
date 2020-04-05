@@ -6,7 +6,11 @@
                     <b-col>
                         <div class="text-center">
                             <h1>{{ $saas.getName() }}</h1>
-                            <a href="https://github.com/loeffel-io/go-saas" target="_blank">GitHub</a>
+                            <h2>Extendable SaaS Packages</h2>
+                            <a href="https://github.com/loeffel-io/go-saas" target="_blank">
+                                <b-icon-link45deg></b-icon-link45deg>
+                                GitHub
+                            </a>
                         </div>
                     </b-col>
                 </b-row>
@@ -26,5 +30,10 @@ export default class Home extends Vue {
 <style lang="scss" scoped>
     h1 {
         font-size: 28px;
+    }
+
+    h2 {
+        font-weight: normal;
+        font-size: 20px;
     }
 </style>
