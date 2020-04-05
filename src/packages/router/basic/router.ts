@@ -12,6 +12,7 @@ export default class Router {
       configs.push({
         path: page.path,
         component: page.component,
+        meta: page.meta,
       });
     });
 
