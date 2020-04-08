@@ -8,13 +8,13 @@ export default interface Security {
 
   setupAuthMiddleware(): void
 
-  isExpired(): boolean
-
   getExpire(): number | null
 
   setExpire(expire: Date | null): void
 
   removeExpire(): void
+
+  isAuth(): boolean
 
   login(response: ResponseInterface): void
 }

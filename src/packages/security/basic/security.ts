@@ -1,5 +1,3 @@
-import dayjs from 'dayjs';
-
 import HttpInterface from '@/packages/http/http';
 import RouterInterface from '@/packages/router/router';
 import ResponseInterface from '@/packages/http/response';
@@ -16,14 +14,14 @@ export default class Security {
 
   public setupAuthMiddleware(): void {
     this.router.getRouter().beforeEach((to, from, next) => {
-      if (to.matched.some(record => record.meta.requiresAuth) && this.isExpired()) {
+      if (to.matched.some(record => record.meta.requiresAuth) && !this.isAuth()) {
         next({
           path: '/login',
         });
         return;
       }
 
-      if (to.matched.some(record => record.meta.guest) && !this.isExpired()) {
+      if (to.matched.some(record => record.meta.guest) && this.isAuth()) {
         next({
           path: '/dashboard',
         });
@@ -34,7 +32,7 @@ export default class Security {
     });
   }
 
-  public isExpired(): boolean {
+  public isAuth(): boolean {
     const expire = this.getExpire();
 
     if (expire === null) {
