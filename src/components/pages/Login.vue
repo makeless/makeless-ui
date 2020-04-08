@@ -46,7 +46,9 @@ export default class Login extends Vue {
   private response: Response | null = null;
   private readonly user: User = new User();
 
-  onSubmit(): void {
+  onSubmit($event: Event): void {
+    $event.preventDefault();
+
     this.hasError = false;
     this.isDisabled = true;
     this.response = null;
