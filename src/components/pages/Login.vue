@@ -43,15 +43,14 @@
 </template>
 
 <script lang="ts">
-import SaasVue from '@/packages/vue/vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Vue} from 'vue-property-decorator';
 
 @Component({})
-export default class Login extends SaasVue {
+export default class Login extends Vue {
   test: string | null = null;
 
   mounted() {
-    console.log(this.getSaas());
+    console.log(this.$saas);
   }
 }
 </script>
