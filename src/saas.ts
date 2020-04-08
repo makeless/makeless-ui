@@ -12,6 +12,7 @@ import SecurityInterface from '@/packages/security/security';
 // pages
 import HomePage from '@/pages/home';
 import LoginPage from '@/pages/login';
+import Dashboard from '@/pages/dashboard';
 
 // scss
 import './scss/app.scss';
@@ -40,15 +41,8 @@ export default class Saas {
   private pages: { [key: string]: PageInterface } = {
     'home': new HomePage(),
     'login': new LoginPage(),
+    'dashboard': new Dashboard(),
   };
-
-  private preload(): void {
-    Vue.use(BootstrapVue);
-    Vue.use(IconsPlugin);
-    Vue.use(VueRouter);
-
-    Vue.component('master', this.master);
-  }
 
   private getPages(): PageInterface[] {
     const pages: PageInterface[] = [];
@@ -81,10 +75,19 @@ export default class Saas {
   }
 
   public run(): Vue {
-    this.preload();
+    // plugins
+    Vue.use(BootstrapVue);
+    Vue.use(IconsPlugin);
+    Vue.use(VueRouter);
+
+    // components
+    Vue.component('master', this.master);
 
     // router
     this.getRouter().create(this.getPages());
+
+    // auth middleware
+    this.getSecurity().setupAuthMiddleware();
 
     // prototypes
     Vue.prototype.$saas = this;

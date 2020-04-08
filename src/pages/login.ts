@@ -4,5 +4,7 @@ export default class Login {
   name: string = 'login';
   path: string = '/login';
   component: any = LoginComponent;
-  meta: Object | null = null;
+  meta: Object | null = {
+    guest: true,
+  };
 }
