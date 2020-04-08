@@ -6,4 +6,8 @@ export default class Axios {
   constructor(config ?: AxiosRequestConfig) {
     this.axios = axios.create(config);
   }
+
+  public post(url: string, data: any, config ?: any): Promise<any> {
+    return this.axios.post(url, data, config);
+  }
 }
