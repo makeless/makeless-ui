@@ -5,7 +5,7 @@
                 <b-row class="justify-content-md-center">
                     <b-col lg="6">
                         <b-card title="Login">
-                            <b-form>
+                            <b-form @submit="onSubmit">
                                 <b-alert v-if="hasError && response" v-model="hasError" variant="danger" dismissible>
                                     <template v-if="response.getCode() >= 400 && response.getCode() < 500">
                                         Login failed.
@@ -24,7 +24,7 @@
                                     <b-form-input v-model="user.password" type="password" required placeholder="Password"></b-form-input>
                                 </b-form-group>
 
-                                <b-button href="#" variant="primary" @click="onSubmit" :disabled="isDisabled">Login</b-button>
+                                <b-button type="submit" variant="primary" :disabled="isDisabled">Login</b-button>
                             </b-form>
                         </b-card>
                     </b-col>
@@ -44,7 +44,7 @@ export default class Login extends Vue {
   private hasError: boolean = false;
   private isDisabled: boolean = false;
   private response: Response | null = null;
-  private user: User = new User();
+  private readonly user: User = new User();
 
   onSubmit(): void {
     this.hasError = false;
