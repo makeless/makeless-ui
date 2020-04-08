@@ -10,6 +10,7 @@ Go SaaS UI - Extendable SaaS TypeScript Vue Package
 const saas = new Saas(
     'Go SaaS',
     new Router(),
+    new Axios(),
     Master,
 );
 

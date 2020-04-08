@@ -5,5 +5,5 @@ export default interface Router {
   mode: any;
   base: string;
 
-  getRouter(pages: PageInterface[]): VueRouter;
-};
+  createRouter(pages: PageInterface[]): VueRouter;
+}

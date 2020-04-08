@@ -32,7 +32,7 @@
                                     ></b-form-input>
                                 </b-form-group>
 
-                                <b-button href="#" variant="primary" @click="onSubmit">Login</b-button>
+                                <b-button href="#" variant="primary">Login</b-button>
                             </b-form>
                         </b-card>
                     </b-col>
@@ -43,14 +43,15 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
+import SaasVue from '@/packages/vue/vue';
+import {Component} from 'vue-property-decorator';
 
 @Component({})
-export default class Login extends Vue {
+export default class Login extends SaasVue {
   test: string | null = null;
 
-  onSubmit() {
-    console.log('submit');
+  mounted() {
+    console.log(this.getSaas());
   }
 }
 </script>

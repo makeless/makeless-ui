@@ -19,7 +19,7 @@ export default class Router {
     return configs;
   }
 
-  getRouter(pages: PageInterface[]): VueRouter {
+  createRouter(pages: PageInterface[]): VueRouter {
     return new VueRouter({
       mode: this.mode,
       base: this.base,

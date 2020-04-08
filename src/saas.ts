@@ -6,6 +6,7 @@ import SaasComponent from '@/Saas.vue';
 // interfaces
 import RouterInterface from '@/packages/router/router';
 import PageInterface from '@/packages/page/page';
+import HttpInterface from '@/packages/http/http';
 
 // pages
 import HomePage from '@/pages/home';
@@ -17,6 +18,7 @@ import './scss/app.scss';
 export default class Saas {
   private readonly name: string;
   private readonly router: RouterInterface;
+  private readonly http: HttpInterface;
   private readonly master: any;
 
   private pages: { [key: string]: PageInterface } = {
@@ -24,9 +26,15 @@ export default class Saas {
     'login': new LoginPage(),
   };
 
-  constructor(name: string, router: RouterInterface, master: any) {
+  constructor(
+      name: string,
+      router: RouterInterface,
+      http: HttpInterface,
+      master: any,
+  ) {
     this.name = name;
     this.router = router;
+    this.http = http;
     this.master = master;
   }
 
@@ -34,6 +42,7 @@ export default class Saas {
     Vue.use(BootstrapVue);
     Vue.use(IconsPlugin);
     Vue.use(VueRouter);
+
     Vue.component('master', this.master);
   }
 
@@ -55,6 +64,14 @@ export default class Saas {
     this.pages[key] = page;
   }
 
+  public getRouter(): RouterInterface {
+    return this.router;
+  }
+
+  public getHttp(): HttpInterface {
+    return this.http;
+  }
+
   public run(): Vue {
     this.preload();
 
@@ -62,7 +79,7 @@ export default class Saas {
 
     return new Vue({
       render: (h) => h(SaasComponent),
-      router: this.router.getRouter(this.getPages()),
+      router: this.getRouter().createRouter(this.getPages()),
     }).$mount('#app');
   }
 }
