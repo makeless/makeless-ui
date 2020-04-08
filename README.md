@@ -1,24 +1,17 @@
 # go-saas-ui
 
-## Project setup
-```
-yarn install
-```
+Go SaaS UI - Extendable SaaS TypeScript Vue Package
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+[![Build Status](https://ci.loeffel.io/api/badges/loeffel-io/go-saas-ui/status.svg)](https://ci.loeffel.io/loeffel-io/go-saas-ui)
 
-### Compiles and minifies for production
-```
-yarn build
-```
+## Usage
 
-### Lints and fixes files
-```
-yarn lint
-```
+```javascript
+const saas = new Saas(
+    'Go SaaS',
+    new Router(),
+    Master,
+);
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+saas.run();
+```
