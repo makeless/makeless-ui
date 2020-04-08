@@ -7,6 +7,7 @@ import SaasComponent from '@/Saas.vue';
 import RouterInterface from '@/packages/router/router';
 import PageInterface from '@/packages/page/page';
 import HttpInterface from '@/packages/http/http';
+import SecurityInterface from '@/packages/security/security';
 
 // pages
 import HomePage from '@/pages/home';
@@ -17,26 +18,29 @@ import './scss/app.scss';
 
 export default class Saas {
   private readonly name: string;
+  private readonly master: any;
   private readonly router: RouterInterface;
   private readonly http: HttpInterface;
-  private readonly master: any;
+  private readonly security: SecurityInterface;
+
+  constructor(
+      name: string,
+      master: any,
+      router: RouterInterface,
+      http: HttpInterface,
+      security: SecurityInterface,
+  ) {
+    this.name = name;
+    this.master = master;
+    this.router = router;
+    this.http = http;
+    this.security = security;
+  }
 
   private pages: { [key: string]: PageInterface } = {
     'home': new HomePage(),
     'login': new LoginPage(),
   };
-
-  constructor(
-      name: string,
-      router: RouterInterface,
-      http: HttpInterface,
-      master: any,
-  ) {
-    this.name = name;
-    this.router = router;
-    this.http = http;
-    this.master = master;
-  }
 
   private preload(): void {
     Vue.use(BootstrapVue);
@@ -72,14 +76,22 @@ export default class Saas {
     return this.http;
   }
 
+  public getSecurity(): SecurityInterface {
+    return this.security;
+  }
+
   public run(): Vue {
     this.preload();
 
+    // router
+    this.getRouter().create(this.getPages());
+
+    // prototypes
     Vue.prototype.$saas = this;
 
     return new Vue({
       render: (h) => h(SaasComponent),
-      router: this.getRouter().createRouter(this.getPages()),
+      router: this.getRouter().getRouter(),
     }).$mount('#app');
   }
 }

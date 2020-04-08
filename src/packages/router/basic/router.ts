@@ -4,6 +4,7 @@ import PageInterface from '@/packages/page/page';
 export default class Router {
   mode: any = 'history';
   base: string = __dirname;
+  router: VueRouter | null = null;
 
   private computePages(pages: PageInterface[]): RouteConfig[] {
     let configs: RouteConfig[] = [];
@@ -19,11 +20,19 @@ export default class Router {
     return configs;
   }
 
-  public createRouter(pages: PageInterface[]): VueRouter {
-    return new VueRouter({
+  public create(pages: PageInterface[]): void {
+    this.router = new VueRouter({
       mode: this.mode,
       base: this.base,
       routes: this.computePages(pages),
     });
+  }
+
+  public getRouter(): VueRouter {
+    if (this.router === null) {
+      throw new Error('router not created');
+    }
+
+    return this.router;
   }
 }

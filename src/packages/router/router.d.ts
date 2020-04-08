@@ -4,6 +4,9 @@ import PageInterface from '@/packages/page/page';
 export default interface Router {
   mode: any;
   base: string;
+  router: VueRouter | null;
 
-  createRouter(pages: PageInterface[]): VueRouter;
+  create(pages: PageInterface[]): void;
+
+  getRouter(): VueRouter
 }
