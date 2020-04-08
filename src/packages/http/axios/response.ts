@@ -2,7 +2,7 @@ import {AxiosResponse} from 'axios';
 
 export default class Response {
   private readonly code: number;
-  private readonly data: object;
+  private readonly data: any;
 
   constructor(response: AxiosResponse) {
     this.code = response.status;
@@ -13,7 +13,7 @@ export default class Response {
     return this.code;
   }
 
-  public getData(): object {
+  public getData(): any {
     return this.data;
   }
 }

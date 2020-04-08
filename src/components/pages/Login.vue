@@ -57,11 +57,16 @@ export default class Login extends Vue {
       this.response = new Response(data);
       this.disabled = false;
       this.user = new User();
+
+      localStorage.setItem('token', this.response.getData().token);
+      this.$router.push('dashboard');
     }).catch((data) => {
       this.response = new Response(data.response);
       this.hasError = true;
       this.disabled = false;
       this.user = new User();
+
+      localStorage.removeItem('token');
     });
   }
 }

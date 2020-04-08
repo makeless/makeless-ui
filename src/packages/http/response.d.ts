@@ -1,5 +1,5 @@
 export default interface Response {
   getCode(): number;
 
-  getData(): object;
+  getData(): any;
 }
