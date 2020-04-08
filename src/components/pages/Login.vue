@@ -24,7 +24,7 @@
                                     <b-form-input v-model="user.password" type="password" required placeholder="Password"></b-form-input>
                                 </b-form-group>
 
-                                <b-button type="submit" variant="primary" :disabled="isDisabled">Login</b-button>
+                                <b-button type="submit" variant="primary" :disabled="disabled">Login</b-button>
                             </b-form>
                         </b-card>
                     </b-col>
@@ -42,24 +42,26 @@ import Response from '@/packages/http/axios/response';
 @Component({})
 export default class Login extends Vue {
   private hasError: boolean = false;
-  private isDisabled: boolean = false;
+  private disabled: boolean = false;
   private response: Response | null = null;
-  private readonly user: User = new User();
+  private user: User = new User();
 
   onSubmit($event: Event): void {
     $event.preventDefault();
 
     this.hasError = false;
-    this.isDisabled = true;
+    this.disabled = true;
     this.response = null;
 
     this.$saas.getHttp().post('/api/login', this.user).then((data) => {
-      this.response = new Response(data.response);
-      this.isDisabled = false;
+      this.response = new Response(data);
+      this.disabled = false;
+      this.user = new User();
     }).catch((data) => {
       this.response = new Response(data.response);
       this.hasError = true;
-      this.isDisabled = false;
+      this.disabled = false;
+      this.user = new User();
     });
   }
 }
