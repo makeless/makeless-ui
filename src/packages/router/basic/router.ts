@@ -11,6 +11,7 @@ export default class Router {
 
     pages.forEach((page: PageInterface) => {
       configs.push({
+        name: page.name,
         path: page.path,
         component: page.component,
         meta: page.meta,

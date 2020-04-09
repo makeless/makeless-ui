@@ -1,2 +1,15 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap-vue/src/index.scss';
+
+body{
+  margin-bottom: 50px;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  font-weight: normal;
+  font-size: 20px;
+}

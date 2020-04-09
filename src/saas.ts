@@ -12,7 +12,9 @@ import SecurityInterface from '@/packages/security/security';
 // pages
 import HomePage from '@/pages/home';
 import LoginPage from '@/pages/login';
-import Dashboard from '@/pages/dashboard';
+import DashboardPage from '@/pages/dashboard';
+import PaymentMethodPage from '@/pages/payment-method';
+import PageNotFoundPage from '@/pages/page-not-found';
 
 // scss
 import './scss/app.scss';
@@ -41,7 +43,9 @@ export default class Saas {
   private pages: { [key: string]: PageInterface } = {
     'home': new HomePage(),
     'login': new LoginPage(),
-    'dashboard': new Dashboard(),
+    'dashboard': new DashboardPage(),
+    'payment-method': new PaymentMethodPage(),
+    'page-not-found': new PageNotFoundPage(),
   };
 
   private getPages(): PageInterface[] {

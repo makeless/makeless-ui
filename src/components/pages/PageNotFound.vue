@@ -5,7 +5,7 @@
                 <b-row>
                     <b-col>
                         <div>
-                            <h1>Dashboard</h1>
+                            <h1>Page not found</h1>
                         </div>
                     </b-col>
                 </b-row>
@@ -18,6 +18,6 @@
 import {Component, Vue} from 'vue-property-decorator';
 
 @Component({})
-export default class Dashboard extends Vue {
+export default class PageNotFound extends Vue {
 }
 </script>

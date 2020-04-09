@@ -26,14 +26,3 @@ import {Component, Vue} from 'vue-property-decorator';
 export default class Home extends Vue {
 }
 </script>
-
-<style lang="scss" scoped>
-    h1 {
-        font-size: 28px;
-    }
-
-    h2 {
-        font-weight: normal;
-        font-size: 20px;
-    }
-</style>
