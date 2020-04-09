@@ -86,8 +86,8 @@ export default class Saas {
     // router
     this.getRouter().create(this.getPages());
 
-    // auth middleware
-    this.getSecurity().setupAuthMiddleware();
+    // setup security
+    this.getSecurity().setup();
 
     // prototypes
     Vue.prototype.$saas = this;

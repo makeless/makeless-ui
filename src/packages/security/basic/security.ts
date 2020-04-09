@@ -1,9 +1,10 @@
 import HttpInterface from '@/packages/http/http';
 import RouterInterface from '@/packages/router/router';
 import ResponseInterface from '@/packages/http/response';
+import Response from '@/packages/http/axios/response';
 
 export default class Security {
-  readonly localStorageKey = 'jwt-expire';
+  readonly localStorageKey: string = 'jwt-expire';
   readonly router: RouterInterface;
   readonly http: HttpInterface;
 
@@ -12,7 +13,7 @@ export default class Security {
     this.http = http;
   }
 
-  public setupAuthMiddleware(): void {
+  private authMiddleware(): void {
     this.router.getRouter().beforeEach((to, from, next) => {
       if (to.matched.some(record => record.meta.requiresAuth) && !this.isAuth()) {
         next({
@@ -32,6 +33,22 @@ export default class Security {
     });
   }
 
+  private refreshAuth(): void {
+    if (!this.isAuth()) {
+      return;
+    }
+
+    setInterval(() => {
+      this.http.get('/api/auth/refresh-token').then((data) => {
+        const response = new Response(data);
+        this.setExpire(new Date(response.getData().expire));
+      }).catch(() => {
+        this.removeExpire();
+        this.router.getRouter().push('/login').then(null);
+      });
+    }, 10 * 60 * 1000);
+  }
+
   public isAuth(): boolean {
     const expire = this.getExpire();
 
@@ -40,6 +57,11 @@ export default class Security {
     }
 
     return expire > new Date().getTime();
+  }
+
+  public setup(): void {
+    this.authMiddleware();
+    this.refreshAuth();
   }
 
   public getExpire(): number | null {

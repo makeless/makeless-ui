@@ -6,7 +6,7 @@ export default interface Security {
   http: HttpInterface;
   router: RouterInterface;
 
-  setupAuthMiddleware(): void
+  setup(): void
 
   getExpire(): number | null
 
