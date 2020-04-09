@@ -86,4 +86,9 @@ export default class Security {
     this.setExpire(new Date(response.getData().expire));
     this.router.getRouter().push('/dashboard').then(null);
   }
+
+  public logout(): void {
+    this.removeExpire();
+    this.router.getRouter().push('/login').then(null);
+  }
 }

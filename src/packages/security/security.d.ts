@@ -17,4 +17,6 @@ export default interface Security {
   isAuth(): boolean
 
   login(response: ResponseInterface): void
+
+  logout(): void
 }
