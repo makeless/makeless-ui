@@ -44,9 +44,29 @@ export default class Security {
         this.setExpire(new Date(response.getData().expire));
       }).catch(() => {
         this.removeExpire();
-        this.router.getRouter().push('/login').then(null);
+        this.router.getRouter().push('login').then(null);
       });
     }, 10 * 60 * 1000);
+  }
+
+  private logoutHandler(): void {
+    window.addEventListener('storage', (event: StorageEvent) => {
+      if (event.key !== this.localStorageKey) {
+        return;
+      }
+
+      if (!this.router.getRouter().currentRoute.meta.requiresAuth) {
+        return;
+      }
+
+      this.router.getRouter().push('login').then(null);
+    });
+  }
+
+  public setup(): void {
+    this.authMiddleware();
+    this.refreshAuth();
+    this.logoutHandler();
   }
 
   public isAuth(): boolean {
@@ -57,11 +77,6 @@ export default class Security {
     }
 
     return expire > new Date().getTime();
-  }
-
-  public setup(): void {
-    this.authMiddleware();
-    this.refreshAuth();
   }
 
   public getExpire(): number | null {
@@ -84,11 +99,11 @@ export default class Security {
 
   public login(response: ResponseInterface): void {
     this.setExpire(new Date(response.getData().expire));
-    this.router.getRouter().push('/dashboard').then(null);
+    this.router.getRouter().push('dashboard').then(null);
   }
 
   public logout(): void {
     this.removeExpire();
-    this.router.getRouter().push('/login').then(null);
+    this.router.getRouter().push('login').then(null);
   }
 }
