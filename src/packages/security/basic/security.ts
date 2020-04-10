@@ -44,17 +44,22 @@ export default class Security {
     localStorage.removeItem(this.localStorageKey);
   }
 
+  private initAccount(): Account | null {
+    if (this.user === null || this.user.id === null) {
+      return null;
+    }
+
+    return new Account(this.user.id, this.user.getFullName(), false);
+  }
+
   private loadUser(): void {
     if (!this.isAuth()) {
       return;
     }
 
     this.http.get('/api/auth/user').then((data) => {
-      const response = new Response(data);
-      this.user = new User().create(response.getData().data);
-      if (this.user !== null && this.user.id !== null) {
-        this.account = new Account(this.user.id, this.user.getFullName(), false);
-      }
+      this.user = new User().create(new Response(data).getData().data);
+      this.account = this.initAccount();
       window.dispatchEvent(new Event('user-loaded'));
     }).catch((_) => {
       this.logout(true);

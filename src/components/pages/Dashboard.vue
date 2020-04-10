@@ -6,7 +6,7 @@
                     <b-col>
                         <div>
                             <h1>Dashboard</h1>
-                            <h2 v-if="userLoaded">{{ $saas.getSecurity().getUser().getFullName() }}</h2>
+                            <h2 v-if="userLoaded">{{ $saas.getSecurity().getAccount().name }}</h2>
                         </div>
                     </b-col>
                 </b-row>

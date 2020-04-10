@@ -1,8 +1,8 @@
 <template>
-    <b-nav-item-dropdown v-if="show" :text="$saas.getSecurity().getUser().getFullName()" right>
+    <b-nav-item-dropdown :lazy="true" v-if="show" :text="$saas.getSecurity().getAccount().name" right>
         <b-dropdown-group id="dropdown-group-1" header="Accounts">
             <b-dropdown-item :to="{name: 'dashboard'}" active>
-                {{ $saas.getSecurity().getUser().getFullName() }}
+                {{ $saas.getSecurity().getAccount().name }}
             </b-dropdown-item>
             <template v-if="$saas.getSecurity().getUser().teams !== null">
                 <b-dropdown-item :to="{name: 'dashboard'}" v-for="team in $saas.getSecurity().getUser().teams" :key="team.name">
