@@ -14,6 +14,8 @@ export default interface Security {
 
   getAccount(): Account | null
 
+  switchAccount(team: boolean, id: number | null): void
+
   isAuth(): boolean
 
   login(response: ResponseInterface): void

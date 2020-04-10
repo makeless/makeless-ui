@@ -1,11 +1,11 @@
 <template>
     <b-nav-item-dropdown :lazy="true" v-if="show" :text="$saas.getSecurity().getAccount().name" right>
         <b-dropdown-group id="dropdown-group-1" header="Accounts">
-            <b-dropdown-item :to="{name: 'dashboard'}" active>
-                {{ $saas.getSecurity().getAccount().name }}
+            <b-dropdown-item @click="$saas.getSecurity().switchAccount(false, null)">
+                {{ $saas.getSecurity().getUser().getFullName() }}
             </b-dropdown-item>
             <template v-if="$saas.getSecurity().getUser().teams !== null">
-                <b-dropdown-item :to="{name: 'dashboard'}" v-for="team in $saas.getSecurity().getUser().teams" :key="team.name">
+                <b-dropdown-item @click="$saas.getSecurity().switchAccount(true, team.id)" v-for="team in $saas.getSecurity().getUser().teams" :key="team.name">
                     {{ team.name }}
                 </b-dropdown-item>
             </template>
@@ -26,7 +26,7 @@ export default class Navigation extends Mixins(UserMixin) {
     return this.$saas.getSecurity().isAuth() && this.userLoaded;
   }
 
-  logout() {
+  public logout() {
     this.$saas.getHttp().get('/api/auth/logout').then(() => {
       this.$saas.getSecurity().logout(true);
     }).catch(() => {

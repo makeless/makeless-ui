@@ -44,6 +44,22 @@ export default class Security {
     localStorage.removeItem(this.localStorageKey);
   }
 
+  private redirectToLogin() {
+    if (this.router.getRouter().currentRoute.name === 'login') {
+      return;
+    }
+
+    this.router.getRouter().push({name: 'login'}).then(null);
+  }
+
+  private redirectToDashboard() {
+    if (this.router.getRouter().currentRoute.name === 'dashboard') {
+      return;
+    }
+
+    this.router.getRouter().push({name: 'dashboard'}).then(null);
+  }
+
   private initAccount(): Account | null {
     if (this.user === null || this.user.id === null) {
       return null;
@@ -127,6 +143,36 @@ export default class Security {
     return this.account;
   }
 
+  public switchAccount(team: boolean, id: number | null): void {
+    if (this.user === null) {
+      throw new Error('user not found');
+    }
+
+    if (!team) {
+      this.account = this.initAccount();
+      this.redirectToDashboard();
+      return;
+    }
+
+    if (this.user.teams === null) {
+      throw new Error('teams not found');
+    }
+
+    for (let i = 0; i < this.user.teams.length; i++) {
+      const team = this.user.teams[i];
+
+      if (team.id === null || team.name === null || team.id !== id) {
+        continue;
+      }
+
+      this.account = new Account(team.id, team.name, true);
+      this.redirectToDashboard();
+      return;
+    }
+
+    throw new Error('team not found');
+  }
+
   public isAuth(): boolean {
     const expire = this.getExpire();
 
@@ -140,7 +186,7 @@ export default class Security {
   public login(response: ResponseInterface): void {
     this.setExpire(new Date(response.getData().expire));
     this.loadUser();
-    this.router.getRouter().push('dashboard').then(null);
+    this.redirectToDashboard();
   }
 
   public logout(redirect: boolean): void {
@@ -149,7 +195,7 @@ export default class Security {
     this.removeAccount();
 
     if (redirect) {
-      this.router.getRouter().push({name: 'login'}).then(null);
+      this.redirectToLogin();
     }
   }
 }
