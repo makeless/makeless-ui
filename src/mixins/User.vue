@@ -3,11 +3,13 @@ import {Component, Vue} from 'vue-property-decorator';
 
 @Component
 export default class UserLoaded extends Vue {
-  public isUserLoaded: boolean = false;
+  public userLoaded: boolean = false;
 
-  mounted() {
+  created() {
+    this.userLoaded = this.$saas.getSecurity().getUser() !== null;
+
     window.addEventListener('user-loaded', () => {
-      this.isUserLoaded = true;
+      this.userLoaded = true;
     });
   }
 }

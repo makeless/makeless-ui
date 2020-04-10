@@ -23,7 +23,7 @@ import UserMixin from '@/mixins/User.vue';
 @Component
 export default class Navigation extends Mixins(UserMixin) {
   get show() {
-    return this.$saas.getSecurity().isAuth() && (this.isUserLoaded || this.$saas.getSecurity().getUser());
+    return this.$saas.getSecurity().isAuth() && this.userLoaded;
   }
 
   logout() {

@@ -6,6 +6,7 @@
                     <b-col>
                         <div>
                             <h1>Dashboard</h1>
+                            <h2 v-if="userLoaded">{{ $saas.getSecurity().getUser().getFullName() }}</h2>
                         </div>
                     </b-col>
                 </b-row>
@@ -15,9 +16,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
+import {Component, Mixins} from 'vue-property-decorator';
+import UserMixin from '@/mixins/User.vue';
 
 @Component({})
-export default class Dashboard extends Vue {
+export default class Dashboard extends Mixins(UserMixin) {
 }
 </script>
