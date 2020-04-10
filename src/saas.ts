@@ -94,7 +94,7 @@ export default class Saas {
     this.getSecurity().setup();
 
     // prototypes
-    Vue.prototype.$saas = this;
+    Vue.prototype.$saas = Vue.observable(this);
 
     return new Vue({
       render: (h) => h(SaasComponent),
