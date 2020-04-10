@@ -1,6 +1,8 @@
 import HttpInterface from '@/packages/http/http';
 import RouterInterface from '@/packages/router/router';
 import ResponseInterface from '@/packages/http/response';
+import User from '@/models/user';
+import Account from '@/models/account';
 
 export default interface Security {
   http: HttpInterface;
@@ -8,15 +10,13 @@ export default interface Security {
 
   setup(): void
 
-  getExpire(): number | null
+  getUser(): User | null;
 
-  setExpire(expire: Date | null): void
-
-  removeExpire(): void
+  getAccount(): Account | null
 
   isAuth(): boolean
 
   login(response: ResponseInterface): void
 
-  logout(): void
+  logout(redirect: boolean): void
 }

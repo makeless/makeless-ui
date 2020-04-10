@@ -65,7 +65,7 @@ export default class Login extends Vue {
       this.disabled = false;
       this.user = new User();
 
-      this.$saas.getSecurity().removeExpire();
+      this.$saas.getSecurity().logout(false);
     });
   }
 }

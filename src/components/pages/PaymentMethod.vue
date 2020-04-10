@@ -3,6 +3,12 @@
         <template slot="page">
             <b-container>
                 <b-row>
+                    <b-col>
+                        Lucas Löffel
+                    </b-col>
+                </b-row>
+
+                <b-row>
                     <b-col lg="3">
                         <settings-navigation></settings-navigation>
                     </b-col>

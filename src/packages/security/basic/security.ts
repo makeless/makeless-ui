@@ -2,8 +2,13 @@ import HttpInterface from '@/packages/http/http';
 import RouterInterface from '@/packages/router/router';
 import ResponseInterface from '@/packages/http/response';
 import Response from '@/packages/http/axios/response';
+import User from '@/models/user';
+import Account from '@/models/account';
 
 export default class Security {
+  user: User | null = null;
+  account: Account | null = null;
+
   readonly localStorageKey: string = 'jwt-expire';
   readonly router: RouterInterface;
   readonly http: HttpInterface;
@@ -13,19 +18,58 @@ export default class Security {
     this.http = http;
   }
 
+  private removeUser(): void {
+    this.user = null;
+  }
+
+  private removeAccount(): void {
+    this.account = null;
+  }
+
+  private getExpire(): number | null {
+    const expire = localStorage.getItem(this.localStorageKey);
+
+    if (expire === null || expire === '') {
+      return null;
+    }
+
+    return parseInt(expire);
+  }
+
+  private setExpire(expire: Date): void {
+    localStorage.setItem(this.localStorageKey, expire.getTime().toString());
+  }
+
+  private removeExpire(): void {
+    localStorage.removeItem(this.localStorageKey);
+  }
+
+  private loadUser(): void {
+    if (!this.isAuth()) {
+      return;
+    }
+
+    this.http.get('/api/auth/user').then((data) => {
+      const response = new Response(data);
+      this.user = new User().create(response.getData().data);
+      if (this.user !== null && this.user.id !== null) {
+        this.account = new Account(this.user.id, this.user.getFullName(), false);
+      }
+      window.dispatchEvent(new Event('user-loaded'));
+    }).catch((_) => {
+      this.logout(true);
+    });
+  }
+
   private authMiddleware(): void {
     this.router.getRouter().beforeEach((to, from, next) => {
       if (to.matched.some(record => record.meta.requiresAuth) && !this.isAuth()) {
-        next({
-          path: '/login',
-        });
+        next({path: '/login'});
         return;
       }
 
       if (to.matched.some(record => record.meta.guest) && this.isAuth()) {
-        next({
-          path: '/dashboard',
-        });
+        next({path: '/dashboard'});
         return;
       }
 
@@ -64,9 +108,18 @@ export default class Security {
   }
 
   public setup(): void {
+    this.loadUser();
     this.authMiddleware();
     this.refreshAuth();
     this.logoutHandler();
+  }
+
+  public getUser(): User | null {
+    return this.user;
+  }
+
+  public getAccount(): Account | null {
+    return this.account;
   }
 
   public isAuth(): boolean {
@@ -79,31 +132,19 @@ export default class Security {
     return expire > new Date().getTime();
   }
 
-  public getExpire(): number | null {
-    const expire = localStorage.getItem(this.localStorageKey);
-
-    if (expire === null || expire === '') {
-      return null;
-    }
-
-    return parseInt(expire);
-  }
-
-  public setExpire(expire: Date): void {
-    localStorage.setItem(this.localStorageKey, expire.getTime().toString());
-  }
-
-  public removeExpire(): void {
-    localStorage.removeItem(this.localStorageKey);
-  }
-
   public login(response: ResponseInterface): void {
     this.setExpire(new Date(response.getData().expire));
+    this.loadUser();
     this.router.getRouter().push('dashboard').then(null);
   }
 
-  public logout(): void {
+  public logout(redirect: boolean): void {
     this.removeExpire();
-    this.router.getRouter().push('login').then(null);
+    this.removeUser();
+    this.removeAccount();
+
+    if (redirect) {
+      this.router.getRouter().push({name: 'login'}).then(null);
+    }
   }
 }

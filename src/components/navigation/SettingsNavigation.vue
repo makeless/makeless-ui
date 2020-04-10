@@ -4,6 +4,7 @@
             <b-list-group flush>
                 <b-list-group-item href="#">Profile</b-list-group-item>
                 <b-list-group-item href="#">Password</b-list-group-item>
+                <b-list-group-item href="#">Teams</b-list-group-item>
                 <b-list-group-item href="#">Tokens</b-list-group-item>
             </b-list-group>
         </b-card>

@@ -11,10 +11,7 @@
             <b-navbar-nav class="ml-auto">
                 <b-nav-item :to="{name: 'login'}" v-show="!$saas.getSecurity().isAuth()">Login</b-nav-item>
                 <b-nav-item :to="{name: 'register'}" v-show="!$saas.getSecurity().isAuth()">Register</b-nav-item>
-                <b-nav-item-dropdown text="Lucas Löffel" right v-show="$saas.getSecurity().isAuth()">
-                    <b-dropdown-item :to="{name: 'payment-method'}">Settings</b-dropdown-item>
-                    <b-dropdown-item @click="logout">Logout</b-dropdown-item>
-                </b-nav-item-dropdown>
+                <user-dropdown></user-dropdown>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>
@@ -22,15 +19,11 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
+import UserDropdown from '@/components/navigation/UserDropdown.vue';
 
-@Component
+@Component({
+  components: {UserDropdown},
+})
 export default class Navigation extends Vue {
-  logout() {
-    this.$saas.getHttp().get('/api/auth/logout').then(() => {
-      this.$saas.getSecurity().logout();
-    }).catch(() => {
-      this.$saas.getSecurity().logout();
-    });
-  }
 }
 </script>

@@ -1,5 +1,5 @@
 export default class Model {
-  ID: number | null = null;
-  CreatedAt: Date | null = null;
-  UpdatedAt: Date | null = null;
+  public id: number | null = null;
+  public createdAt: Date | null = null;
+  public updatedAt: Date | null = null;
 }
