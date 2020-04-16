@@ -26,8 +26,11 @@ export default class Security {
 
   private removeTeam(): void {
     this.team = null;
-    this.teamIndex = {};
     localStorage.removeItem(this.localStorageTeamKey);
+  }
+
+  private removeTeamIndex(): void {
+    this.teamIndex = {};
   }
 
   private getExpire(): number | null {
@@ -70,11 +73,9 @@ export default class Security {
     }
 
     this.user.teams.forEach((team: Team) => {
-      if (team.id === null) {
-        return;
+      if (team.id !== null) {
+        this.teamIndex[team.id] = team;
       }
-
-      this.teamIndex[team.id] = team;
     });
   }
 
@@ -166,7 +167,7 @@ export default class Security {
     const team = this.teamIndex[this.team.id];
 
     if (team === null) {
-      return this.user.getFullName();
+      return null;
     }
 
     return team.name;
@@ -213,6 +214,7 @@ export default class Security {
     this.removeExpire();
     this.removeUser();
     this.removeTeam();
+    this.removeTeamIndex();
 
     if (redirect) {
       this.redirectToLogin();
