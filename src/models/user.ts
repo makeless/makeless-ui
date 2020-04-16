@@ -2,8 +2,7 @@ import Model from '@/models/model';
 import Team from '@/models/team';
 
 export default class User extends Model {
-  public firstName: string | null = null;
-  public lastName: string | null = null;
+  public name: string | null = null;
   public username: string | null = null;
   public password: string | null = null;
   public email: string | null = null;
@@ -16,8 +15,8 @@ export default class User extends Model {
     return user;
   }
 
-  public getFullName(): string {
-    return `${this.firstName} ${this.lastName}`;
+  public getName(): string | null {
+    return this.name;
   }
 
   public hasTeams(): boolean {

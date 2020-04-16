@@ -148,7 +148,7 @@ export default class Security {
     }
 
     if (this.team === null || this.team.id === null) {
-      return this.user.getFullName();
+      return this.user.getName();
     }
 
     const team = this.teamIndex[this.team.id];

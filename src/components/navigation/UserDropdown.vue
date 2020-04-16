@@ -2,7 +2,7 @@
     <b-nav-item-dropdown :lazy="true" v-if="$saas.getSecurity().isAuth() && this.userLoaded" :text="$saas.getSecurity().getDisplayName()" right>
         <template v-if="$saas.getSecurity().getUser().teams.length > 0">
             <b-dropdown-item @click="$saas.getSecurity().switchToUser()">
-                {{ $saas.getSecurity().getUser().getFullName() }}
+                {{ $saas.getSecurity().getUser().getName() }}
             </b-dropdown-item>
             <b-dropdown-group header="Teams">
                 <template v-if="$saas.getSecurity().getUser().hasTeams()">
@@ -13,7 +13,7 @@
             </b-dropdown-group>
             <b-dropdown-divider></b-dropdown-divider>
         </template>
-        <b-dropdown-item :to="{name: 'payment-method'}">Account</b-dropdown-item>
+        <b-dropdown-item :to="{name: 'profile'}">Account</b-dropdown-item>
         <b-dropdown-item @click="logout">Logout</b-dropdown-item>
     </b-nav-item-dropdown>
 </template>
