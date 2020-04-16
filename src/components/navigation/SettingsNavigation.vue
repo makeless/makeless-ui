@@ -3,8 +3,13 @@
         <b-card no-body header="Settings">
             <b-list-group flush>
                 <b-list-group-item href="#">Profile</b-list-group-item>
-                <b-list-group-item href="#">Password</b-list-group-item>
-                <b-list-group-item href="#">Teams</b-list-group-item>
+                <template v-if="!$saas.getSecurity().getTeam()">
+                    <b-list-group-item href="#">Password</b-list-group-item>
+                    <b-list-group-item href="#">Teams</b-list-group-item>
+                </template>
+                <template v-else>
+                    <b-list-group-item href="#">Team Members</b-list-group-item>
+                </template>
                 <b-list-group-item href="#">Tokens</b-list-group-item>
             </b-list-group>
         </b-card>
