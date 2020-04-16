@@ -10,7 +10,7 @@
                     <b-col lg="9">
                         <h1>Profile</h1>
                         <hr>
-                        <b-form v-if="$saas.getSecurity().isAuth() && this.userLoaded">
+                        <b-form v-if="$saas.getSecurity().isAuth() && this.userLoaded" @submit="onSubmit">
                             <b-form-group label="Name" label-for="name">
                                 <b-form-input v-if="!$saas.getSecurity().getTeam()" id="name" v-model="$saas.getSecurity().getUser().name" type="text" required placeholder="Name"></b-form-input>
                                 <b-form-input v-else id="name" v-model="$saas.getSecurity().getTeam().name" type="text" required placeholder="Name"></b-form-input>

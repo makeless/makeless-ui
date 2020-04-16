@@ -2,7 +2,6 @@ import HttpInterface from '@/packages/http/http';
 import RouterInterface from '@/packages/router/router';
 import ResponseInterface from '@/packages/http/response';
 import StorageInterface from '@/packages/storage/storage';
-import Response from '@/packages/http/axios/response';
 import User from '@/models/user';
 import Team from '@/models/team';
 
@@ -80,7 +79,7 @@ export default class Security {
     }
 
     this.http.get('/api/auth/user').then((data) => {
-      this.user = new User().create(new Response(data).getData().data);
+      this.user = new User().create(this.http.response(data).getData().data);
       this.createTeamIndex();
       this.initTeam();
       window.dispatchEvent(new Event('user-loaded'));
@@ -112,7 +111,7 @@ export default class Security {
 
     setInterval(() => {
       this.http.get('/api/auth/refresh-token').then((data) => {
-        const response = new Response(data);
+        const response = this.http.response(data);
         this.setExpire(new Date(response.getData().expire));
       }).catch(() => {
         this.removeExpire();

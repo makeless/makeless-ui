@@ -37,13 +37,13 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import User from '@/models/user';
-import Response from '@/packages/http/axios/response';
+import ResponseInterface from '@/packages/http/response';
 
 @Component({})
 export default class Login extends Vue {
   private hasError: boolean = false;
   private disabled: boolean = false;
-  private response: Response | null = null;
+  private response: ResponseInterface | null = null;
   private user: User = new User();
 
   onSubmit($event: Event): void {
@@ -54,13 +54,13 @@ export default class Login extends Vue {
     this.response = null;
 
     this.$saas.getHttp().post('/api/login', this.user).then((data) => {
-      this.response = new Response(data);
+      this.response = this.$saas.getHttp().response(data);
       this.disabled = false;
       this.user = new User();
 
       this.$saas.getSecurity().login(this.response);
     }).catch((data) => {
-      this.response = new Response(data.response);
+      this.response = this.$saas.getHttp().response(data.response);
       this.hasError = true;
       this.disabled = false;
       this.user = new User();
