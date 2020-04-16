@@ -19,4 +19,8 @@ export default class User extends Model {
   public getFullName(): string {
     return `${this.firstName} ${this.lastName}`;
   }
+
+  public hasTeams(): boolean {
+    return this.teams.length > 0;
+  }
 }

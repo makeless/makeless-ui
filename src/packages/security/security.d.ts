@@ -2,7 +2,7 @@ import HttpInterface from '@/packages/http/http';
 import RouterInterface from '@/packages/router/router';
 import ResponseInterface from '@/packages/http/response';
 import User from '@/models/user';
-import Account from '@/models/account';
+import Team from '@/models/team';
 
 export default interface Security {
   http: HttpInterface;
@@ -10,13 +10,17 @@ export default interface Security {
 
   setup(): void
 
+  getDisplayName(): string | null
+
   getUser(): User | null;
 
-  getAccount(): Account | null
-
-  switchAccount(team: boolean, id: number | null): void
+  getTeam(): Team | null
 
   isAuth(): boolean
+
+  switchToUser(): void
+
+  switchToTeam(id: number): void
 
   login(response: ResponseInterface): void
 

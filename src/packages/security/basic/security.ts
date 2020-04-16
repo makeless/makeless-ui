@@ -3,13 +3,15 @@ import RouterInterface from '@/packages/router/router';
 import ResponseInterface from '@/packages/http/response';
 import Response from '@/packages/http/axios/response';
 import User from '@/models/user';
-import Account from '@/models/account';
+import Team from '@/models/team';
 
 export default class Security {
   user: User | null = null;
-  account: Account | null = null;
+  team: Team | null = null;
+  teamIndex: { [key: number]: Team | null } = {};
 
-  readonly localStorageKey: string = 'jwt-expire';
+  readonly localStorageJwtKey: string = 'jwt-expire';
+  readonly localStorageTeamKey: string = 'team';
   readonly router: RouterInterface;
   readonly http: HttpInterface;
 
@@ -22,12 +24,14 @@ export default class Security {
     this.user = null;
   }
 
-  private removeAccount(): void {
-    this.account = null;
+  private removeTeam(): void {
+    this.team = null;
+    this.teamIndex = {};
+    localStorage.removeItem(this.localStorageTeamKey);
   }
 
   private getExpire(): number | null {
-    const expire = localStorage.getItem(this.localStorageKey);
+    const expire = localStorage.getItem(this.localStorageJwtKey);
 
     if (expire === null || expire === '') {
       return null;
@@ -37,11 +41,11 @@ export default class Security {
   }
 
   private setExpire(expire: Date): void {
-    localStorage.setItem(this.localStorageKey, expire.getTime().toString());
+    localStorage.setItem(this.localStorageJwtKey, expire.getTime().toString());
   }
 
   private removeExpire(): void {
-    localStorage.removeItem(this.localStorageKey);
+    localStorage.removeItem(this.localStorageJwtKey);
   }
 
   private redirectToLogin() {
@@ -60,12 +64,26 @@ export default class Security {
     this.router.getRouter().push({name: 'dashboard'}).then(null);
   }
 
-  private initAccount(): Account | null {
-    if (this.user === null || this.user.id === null) {
-      return null;
+  private createTeamIndex() {
+    if (this.user === null || !this.user.hasTeams()) {
+      return;
     }
 
-    return new Account(this.user.id, this.user.getFullName(), false);
+    this.user.teams.forEach((team: Team) => {
+      if (team.id === null) {
+        return;
+      }
+
+      this.teamIndex[team.id] = team;
+    });
+  }
+
+  private initTeam() {
+    const storageId = localStorage.getItem(this.localStorageTeamKey);
+
+    if (storageId !== null) {
+      this.team = this.teamIndex[parseInt(storageId)];
+    }
   }
 
   private loadUser(): void {
@@ -75,7 +93,8 @@ export default class Security {
 
     this.http.get('/api/auth/user').then((data) => {
       this.user = new User().create(new Response(data).getData().data);
-      this.account = this.initAccount();
+      this.createTeamIndex();
+      this.initTeam();
       window.dispatchEvent(new Event('user-loaded'));
     }).catch((_) => {
       this.logout(true);
@@ -116,7 +135,7 @@ export default class Security {
 
   private logoutHandler(): void {
     window.addEventListener('storage', (event: StorageEvent) => {
-      if (event.key !== this.localStorageKey) {
+      if (event.key !== this.localStorageJwtKey) {
         return;
       }
 
@@ -135,42 +154,34 @@ export default class Security {
     this.logoutHandler();
   }
 
+  public getDisplayName(): string | null {
+    if (this.user === null) {
+      return null;
+    }
+
+    if (this.team === null || this.team.id === null) {
+      return this.user.getFullName();
+    }
+
+    const team = this.teamIndex[this.team.id];
+
+    if (team === null) {
+      return this.user.getFullName();
+    }
+
+    return team.name;
+  }
+
   public getUser(): User | null {
     return this.user;
   }
 
-  public getAccount(): Account | null {
-    return this.account;
-  }
-
-  public switchAccount(team: boolean, id: number | null): void {
-    if (this.user === null) {
-      throw new Error('user not found');
+  public getTeam(): Team | null {
+    if (this.team === null) {
+      return null;
     }
 
-    if (!team) {
-      this.account = this.initAccount();
-      this.redirectToDashboard();
-      return;
-    }
-
-    if (this.user.teams === null) {
-      throw new Error('teams not found');
-    }
-
-    for (let i = 0; i < this.user.teams.length; i++) {
-      const team = this.user.teams[i];
-
-      if (team.id === null || team.name === null || team.id !== id) {
-        continue;
-      }
-
-      this.account = new Account(team.id, team.name, true);
-      this.redirectToDashboard();
-      return;
-    }
-
-    throw new Error('team not found');
+    return this.team;
   }
 
   public isAuth(): boolean {
@@ -183,6 +194,15 @@ export default class Security {
     return expire > new Date().getTime();
   }
 
+  public switchToUser(): void {
+    this.removeTeam();
+  }
+
+  public switchToTeam(id: number): void {
+    this.team = this.teamIndex[id];
+    localStorage.setItem(this.localStorageTeamKey, id.toString());
+  }
+
   public login(response: ResponseInterface): void {
     this.setExpire(new Date(response.getData().expire));
     this.loadUser();
@@ -192,7 +212,7 @@ export default class Security {
   public logout(redirect: boolean): void {
     this.removeExpire();
     this.removeUser();
-    this.removeAccount();
+    this.removeTeam();
 
     if (redirect) {
       this.redirectToLogin();

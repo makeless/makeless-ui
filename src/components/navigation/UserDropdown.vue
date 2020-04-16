@@ -1,16 +1,18 @@
 <template>
-    <b-nav-item-dropdown :lazy="true" v-if="show" :text="$saas.getSecurity().getAccount().name" right>
-        <b-dropdown-group id="dropdown-group-1" header="Accounts">
-            <b-dropdown-item @click="$saas.getSecurity().switchAccount(false, null)">
+    <b-nav-item-dropdown :lazy="true" v-if="$saas.getSecurity().isAuth() && this.userLoaded" :text="$saas.getSecurity().getDisplayName()" right>
+        <template v-if="$saas.getSecurity().getUser().teams.length > 0">
+            <b-dropdown-item @click="$saas.getSecurity().switchToUser()">
                 {{ $saas.getSecurity().getUser().getFullName() }}
             </b-dropdown-item>
-            <template v-if="$saas.getSecurity().getUser().teams !== null">
-                <b-dropdown-item @click="$saas.getSecurity().switchAccount(true, team.id)" v-for="team in $saas.getSecurity().getUser().teams" :key="team.name">
-                    {{ team.name }}
-                </b-dropdown-item>
-            </template>
-        </b-dropdown-group>
-        <b-dropdown-divider></b-dropdown-divider>
+            <b-dropdown-group header="Teams">
+                <template v-if="$saas.getSecurity().getUser().hasTeams()">
+                    <b-dropdown-item @click="$saas.getSecurity().switchToTeam(team.id)" v-for="team in $saas.getSecurity().getUser().teams" :key="team.name">
+                        {{ team.name }}
+                    </b-dropdown-item>
+                </template>
+            </b-dropdown-group>
+            <b-dropdown-divider></b-dropdown-divider>
+        </template>
         <b-dropdown-item :to="{name: 'payment-method'}">Account</b-dropdown-item>
         <b-dropdown-item @click="logout">Logout</b-dropdown-item>
     </b-nav-item-dropdown>
@@ -22,10 +24,6 @@ import UserMixin from '@/mixins/User.vue';
 
 @Component
 export default class Navigation extends Mixins(UserMixin) {
-  get show() {
-    return this.$saas.getSecurity().isAuth() && this.userLoaded;
-  }
-
   public logout() {
     this.$saas.getHttp().get('/api/auth/logout').then(() => {
       this.$saas.getSecurity().logout(true);
