@@ -1,6 +1,7 @@
 import HttpInterface from '@/packages/http/http';
 import RouterInterface from '@/packages/router/router';
 import ResponseInterface from '@/packages/http/response';
+import StorageInterface from '@/packages/storage/storage';
 import Response from '@/packages/http/axios/response';
 import User from '@/models/user';
 import Team from '@/models/team';
@@ -14,10 +15,12 @@ export default class Security {
   readonly localStorageTeamKey: string = 'team';
   readonly router: RouterInterface;
   readonly http: HttpInterface;
+  readonly storage: StorageInterface;
 
-  constructor(router: RouterInterface, http: HttpInterface) {
+  constructor(router: RouterInterface, http: HttpInterface, storage: StorageInterface) {
     this.router = router;
     this.http = http;
+    this.storage = storage;
   }
 
   private removeUser(): void {
@@ -26,7 +29,7 @@ export default class Security {
 
   private removeTeam(): void {
     this.team = null;
-    localStorage.removeItem(this.localStorageTeamKey);
+    this.storage.removeItem(this.localStorageTeamKey);
   }
 
   private removeTeamIndex(): void {
@@ -34,7 +37,7 @@ export default class Security {
   }
 
   private getExpire(): number | null {
-    const expire = localStorage.getItem(this.localStorageJwtKey);
+    const expire = this.storage.getItem(this.localStorageJwtKey);
 
     if (expire === null || expire === '') {
       return null;
@@ -44,11 +47,11 @@ export default class Security {
   }
 
   private setExpire(expire: Date): void {
-    localStorage.setItem(this.localStorageJwtKey, expire.getTime().toString());
+    this.storage.setItem(this.localStorageJwtKey, expire.getTime().toString());
   }
 
   private removeExpire(): void {
-    localStorage.removeItem(this.localStorageJwtKey);
+    this.storage.removeItem(this.localStorageJwtKey);
   }
 
   private createTeamIndex() {
@@ -64,7 +67,7 @@ export default class Security {
   }
 
   private initTeam() {
-    const storageId = localStorage.getItem(this.localStorageTeamKey);
+    const storageId = this.storage.getItem(this.localStorageTeamKey);
 
     if (storageId !== null) {
       this.team = this.teamIndex[parseInt(storageId)];
@@ -185,7 +188,7 @@ export default class Security {
 
   public switchToTeam(id: number): void {
     this.team = this.teamIndex[id];
-    localStorage.setItem(this.localStorageTeamKey, id.toString());
+    this.storage.setItem(this.localStorageTeamKey, id.toString());
   }
 
   public login(response: ResponseInterface): void {
