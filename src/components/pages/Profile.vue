@@ -36,5 +36,8 @@ import UserMixin from '@/mixins/User.vue';
   },
 })
 export default class Profile extends Mixins(UserMixin) {
+  onSubmit($event: Event) {
+    $event.preventDefault();
+  }
 }
 </script>
