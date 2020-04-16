@@ -29,6 +29,22 @@ export default class Router {
     });
   }
 
+  public redirectToLogin(): void {
+    if (this.getRouter().currentRoute.name === 'login') {
+      return;
+    }
+
+    this.getRouter().push({name: 'login'}).then(null);
+  }
+
+  public redirectToDashboard(): void {
+    if (this.getRouter().currentRoute.name === 'dashboard') {
+      return;
+    }
+
+    this.getRouter().push({name: 'dashboard'}).then(null);
+  }
+
   public getRouter(): VueRouter {
     if (this.router === null) {
       throw new Error('router not created');

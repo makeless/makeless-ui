@@ -8,5 +8,9 @@ export default interface Router {
 
   create(pages: PageInterface[]): void;
 
+  redirectToLogin(): void
+
+  redirectToDashboard(): void
+
   getRouter(): VueRouter
 }

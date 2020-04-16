@@ -51,22 +51,6 @@ export default class Security {
     localStorage.removeItem(this.localStorageJwtKey);
   }
 
-  private redirectToLogin() {
-    if (this.router.getRouter().currentRoute.name === 'login') {
-      return;
-    }
-
-    this.router.getRouter().push({name: 'login'}).then(null);
-  }
-
-  private redirectToDashboard() {
-    if (this.router.getRouter().currentRoute.name === 'dashboard') {
-      return;
-    }
-
-    this.router.getRouter().push({name: 'dashboard'}).then(null);
-  }
-
   private createTeamIndex() {
     if (this.user === null || !this.user.hasTeams()) {
       return;
@@ -207,7 +191,7 @@ export default class Security {
   public login(response: ResponseInterface): void {
     this.setExpire(new Date(response.getData().expire));
     this.loadUser();
-    this.redirectToDashboard();
+    this.router.redirectToDashboard();
   }
 
   public logout(redirect: boolean): void {
@@ -217,7 +201,7 @@ export default class Security {
     this.removeTeamIndex();
 
     if (redirect) {
-      this.redirectToLogin();
+      this.router.redirectToLogin();
     }
   }
 }
