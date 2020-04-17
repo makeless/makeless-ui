@@ -17,6 +17,10 @@ export default class Axios {
     return this.axios.post(url, data, config);
   }
 
+  public patch(url: string, data: any, config ?: any): Promise<any> {
+    return this.axios.patch(url, data, config);
+  }
+
   public response(data: any): ResponseInterface {
     return new Response(data);
   }

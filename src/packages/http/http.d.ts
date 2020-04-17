@@ -5,5 +5,7 @@ export default interface Http {
 
   post(url: string, data: any, config ?: any): Promise<any>
 
+  patch(url: string, data: any, config ?: any): Promise<any>
+
   response(data: any): ResponseInterface;
 }

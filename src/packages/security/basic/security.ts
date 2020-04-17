@@ -115,7 +115,7 @@ export default class Security {
         this.setExpire(new Date(response.getData().expire));
       }).catch(() => {
         this.removeExpire();
-        this.router.getRouter().push('login').then(null);
+        this.router.redirectToLogin();
       });
     }, 10 * 60 * 1000);
   }
