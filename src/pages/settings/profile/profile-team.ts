@@ -6,6 +6,5 @@ export default class ProfileTeam {
   component: any = ProfileTeamComponent;
   meta: Object | null = {
     requiresAuth: true,
-    teamOnly: true,
   };
 }
