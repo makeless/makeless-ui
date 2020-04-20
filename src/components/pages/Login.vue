@@ -44,7 +44,10 @@ export default class Login extends Vue {
   private hasError: boolean = false;
   private disabled: boolean = false;
   private response: ResponseInterface | null = null;
-  private user: User = new User();
+
+  public get user(): User {
+    return new User();
+  }
 
   onSubmit($event: Event): void {
     $event.preventDefault();
@@ -56,14 +59,14 @@ export default class Login extends Vue {
     this.$saas.getHttp().post('/api/login', this.user).then((data) => {
       this.response = this.$saas.getHttp().response(data);
       this.disabled = false;
-      this.user = new User();
+      Object.assign(this.user, new User());
 
       this.$saas.getSecurity().login(this.response);
     }).catch((data) => {
       this.response = this.$saas.getHttp().response(data.response);
       this.hasError = true;
       this.disabled = false;
-      this.user = new User();
+      Object.assign(this.user, new User());
 
       this.$saas.getSecurity().logout(false);
     });
