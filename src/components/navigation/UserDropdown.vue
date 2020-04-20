@@ -13,7 +13,7 @@
             </b-dropdown-group>
             <b-dropdown-divider></b-dropdown-divider>
         </template>
-        <b-dropdown-item :to="{name: 'profile'}">Account</b-dropdown-item>
+        <b-dropdown-item :to="{name: toAccount}">Account</b-dropdown-item>
         <b-dropdown-item @click="logout">Logout</b-dropdown-item>
     </b-nav-item-dropdown>
 </template>
@@ -24,6 +24,14 @@ import UserMixin from '@/mixins/User.vue';
 
 @Component
 export default class Navigation extends Mixins(UserMixin) {
+  get toAccount(): string {
+    if (this.$saas.getSecurity().getTeam()) {
+      return 'profile-team';
+    }
+
+    return 'profile'
+  }
+
   public logout() {
     this.$saas.getHttp().get('/api/auth/logout').then(() => {
       this.$saas.getSecurity().logout(true);

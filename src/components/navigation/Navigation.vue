@@ -10,7 +10,7 @@
 
             <b-navbar-nav class="ml-auto">
                 <b-nav-item :to="{name: 'login'}" v-show="!$saas.getSecurity().isAuth()">Login</b-nav-item>
-                <b-nav-item :to="{name: 'register'}" v-show="!$saas.getSecurity().isAuth()">Register</b-nav-item>
+                <!--<b-nav-item :to="{name: 'register'}" v-show="!$saas.getSecurity().isAuth()">Register</b-nav-item>-->
                 <user-dropdown></user-dropdown>
             </b-navbar-nav>
         </b-collapse>

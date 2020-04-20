@@ -10,7 +10,7 @@
                     <b-col lg="9">
                         <h1>Profile</h1>
                         <hr>
-                        <b-form v-if="$saas.getSecurity().isAuth() && this.userLoaded" @submit="onSubmit">
+                        <b-form v-if="$saas.getSecurity().isAuth() && this.userLoaded && team" @submit="onSubmit">
                             <b-alert v-if="hasError && response" variant="danger" dismissible :show="true">
                                 <template v-if="response.getCode() >= 400 && response.getCode() < 500">
                                     Update failed.
@@ -26,8 +26,7 @@
                             </b-alert>
 
                             <b-form-group label="Name" label-for="name">
-                                <b-form-input v-if="!$saas.getSecurity().getTeam()" id="name" v-model="$saas.getSecurity().getUser().name" type="text" required placeholder="Name"></b-form-input>
-                                <b-form-input v-else id="name" v-model="$saas.getSecurity().getTeam().name" type="text" required placeholder="Name"></b-form-input>
+                                <b-form-input id="name" v-model="team.name" type="text" required placeholder="Name"></b-form-input>
                             </b-form-group>
 
                             <b-button type="submit" variant="primary" :disabled="disabled">Update profile</b-button>
@@ -43,58 +42,45 @@
 import {Component, Mixins} from 'vue-property-decorator';
 import SettingsNavigation from '@/components/navigation/SettingsNavigation.vue';
 import UserMixin from '@/mixins/User.vue';
+import CloneService from '@/services/clone';
 import ResponseInterface from '@/packages/http/response';
+import Team from '@/models/team';
 
 @Component({
   components: {
     SettingsNavigation,
   },
 })
-export default class Profile extends Mixins(UserMixin) {
-  private hasError: boolean = false;
-  private disabled: boolean = false;
-  private response: ResponseInterface | null = null;
+export default class ProfileTeam extends Mixins(UserMixin) {
+  public hasError: boolean = false;
+  public disabled: boolean = false;
+  public response: ResponseInterface | null = null;
 
-  private request(): Promise<any> {
-    const team = this.$saas.getSecurity().getTeam();
-
-    if (team !== null && team.id !== null) {
-      return this.$saas.getHttp().patch('/api/auth/team/profile', team, {
-        headers: {'Team': team.id},
-      });
-    }
-
-    return this.$saas.getHttp().patch('/api/auth/profile', this.$saas.getSecurity().getUser());
-  }
-
-  private update(response: ResponseInterface): void {
-    const data = response.getData().data;
-
-    if (this.$saas.getSecurity().getTeam()) {
-      Object.assign(this.$saas.getSecurity().getTeam(), {
-        name: data.name,
-        updatedAt: data.updatedAt,
-      });
-      return;
-    }
-
-    Object.assign(this.$saas.getSecurity().getUser(), {
-      name: data.name,
-      updatedAt: data.updatedAt,
-    });
+  public get team(): Team | null {
+    return CloneService.clone(this.$saas.getSecurity().getTeam());
   }
 
   public onSubmit($event: Event) {
     $event.preventDefault();
-
     this.hasError = false;
-    this.disabled = true;
     this.response = null;
+    this.disabled = true;
 
-    this.request().then((data) => {
+    if (this.team === null || this.team.id === null) {
+      return;
+    }
+
+    this.$saas.getHttp().patch('/api/auth/team/profile', this.team, {
+      headers: {
+        'Team': this.team.id,
+      },
+    }).then((data) => {
       this.response = this.$saas.getHttp().response(data);
       this.disabled = false;
-      this.update(this.response);
+      Object.assign(this.$saas.getSecurity().getTeam(), {
+        name: this.response.getData().data.name,
+        updatedAt: this.response.getData().data.updatedAt,
+      });
     }).catch((data) => {
       this.response = this.$saas.getHttp().response(data.response);
       this.hasError = true;

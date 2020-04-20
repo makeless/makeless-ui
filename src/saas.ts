@@ -13,7 +13,8 @@ import SecurityInterface from '@/packages/security/security';
 import HomePage from '@/pages/home';
 import LoginPage from '@/pages/login';
 import DashboardPage from '@/pages/dashboard';
-import ProfilePage from '@/pages/profile';
+import ProfilePage from '@/pages/settings/profile/profile';
+import ProfileTeamPage from '@/pages/settings/profile/profile-team';
 import PageNotFoundPage from '@/pages/page-not-found';
 
 // scss
@@ -45,6 +46,7 @@ export default class Saas {
     'login': new LoginPage(),
     'dashboard': new DashboardPage(),
     'profile': new ProfilePage(),
+    'profile-team': new ProfileTeamPage(),
     'page-not-found': new PageNotFoundPage(),
   };
 

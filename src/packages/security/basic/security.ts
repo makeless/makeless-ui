@@ -130,7 +130,7 @@ export default class Security {
         return;
       }
 
-      this.router.getRouter().push('login').then(null);
+      this.router.redirectToLogin();
     });
   }
 
@@ -183,11 +183,13 @@ export default class Security {
 
   public switchToUser(): void {
     this.removeTeam();
+    this.router.redirectToDashboard();
   }
 
   public switchToTeam(id: number): void {
     this.team = this.teamIndex[id];
     this.storage.setItem(this.localStorageTeamKey, id.toString());
+    this.router.redirectToDashboard();
   }
 
   public login(response: ResponseInterface): void {
