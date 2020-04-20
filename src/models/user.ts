@@ -9,13 +9,7 @@ export default class User extends Model {
   public teams: Team[] = [];
 
   public create(data: any): User {
-    return Object.assign(new User(), {
-      name: data.name,
-      username: data.username,
-      password: null,
-      email: data.email,
-      teams: data.teams,
-    });
+    return Object.assign(new User(), data);
   }
 
   public getName(): string | null {
