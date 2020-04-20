@@ -10,7 +10,7 @@
                     <b-col lg="9">
                         <h1 class="d-flex justify-content-between align-items-center">
                             Teams
-                            <b-button size="sm">Create</b-button>
+                            <b-button size="sm" variant="success" v-b-modal.create>Create</b-button>
                         </h1>
                         <hr>
                         <div v-if="$saas.getSecurity().isAuth() && userLoaded">
@@ -26,17 +26,23 @@
                 </b-row>
             </b-container>
         </template>
+
+        <template slot="outside">
+            <create-modal></create-modal>
+        </template>
     </master>
 </template>
 
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
-import SettingsNavigation from '@/components/navigation/SettingsNavigation.vue';
+import SettingsNavigation from '@/components/navigations/SettingsNavigation.vue';
+import CreateModal from '@/components/modals/settings/teams/Create.vue';
 import UserMixin from '@/mixins/User.vue';
 
 @Component({
   components: {
     SettingsNavigation,
+    CreateModal,
   },
 })
 export default class Profile extends Mixins(UserMixin) {

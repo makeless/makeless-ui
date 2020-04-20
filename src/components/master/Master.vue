@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import Navigation from '@/components/navigation/Navigation.vue';
+import Navigation from '@/components/navigations/Navigation.vue';
 
 @Component({
   components: {Navigation},

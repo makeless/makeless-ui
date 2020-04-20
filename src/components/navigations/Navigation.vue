@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import UserDropdown from '@/components/navigation/UserDropdown.vue';
+import UserDropdown from '@/components/navigations/UserDropdown.vue';
 
 @Component({
   components: {UserDropdown},

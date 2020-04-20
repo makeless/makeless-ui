@@ -40,7 +40,7 @@
 
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
-import SettingsNavigation from '@/components/navigation/SettingsNavigation.vue';
+import SettingsNavigation from '@/components/navigations/SettingsNavigation.vue';
 import UserMixin from '@/mixins/User.vue';
 import CloneService from '@/services/clone';
 import ResponseInterface from '@/packages/http/response';
