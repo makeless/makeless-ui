@@ -7,5 +7,5 @@ eslint:
 ls-lint:
 	npx @ls-lint/ls-lint
 
-build:
+package-build:
 	yarn build

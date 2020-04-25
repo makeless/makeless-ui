@@ -21,4 +21,4 @@ steps:
   - name: build
     image: node:13
     commands:
-      - make build
+      - make package-build
