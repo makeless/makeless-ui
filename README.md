@@ -7,21 +7,24 @@ Go SaaS UI - Extendable SaaS TypeScript Vue Package
 ## Usage
 
 ```javascript
-import Saas from '@/saas';
-import Router from '@/packages/router/basic/router';
-import Axios from '@/packages/http/axios/axios';
-import Master from '@/components/master/Master.vue';
-import Security from '@/packages/security/basic/security';
-import LocalStorage from '@/packages/storage/local-storage/local-storage';
+import Saas from 'go-saas-ui/src/saas'
 
-const storage = new LocalStorage();
+// packages
+import Router from "go-saas-ui/src/packages/router/basic/router";
+import Axios from "go-saas-ui/src/packages/http/axios/axios";
+import LocalStorage from "go-saas-ui/src/packages/storage/local-storage/local-storage";
+import Security from "go-saas-ui/src/packages/security/basic/security";
+
+// components
+import Master from "go-saas-ui/src/components/master/Master.vue";
+
 const router = new Router();
 const http = new Axios({
-  baseURL: 'http://localhost:3000',
-  withCredentials: true,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+    baseURL: 'http://localhost:3000',
+    withCredentials: true,
+    headers: {
+        'Content-Type': 'application/json',
+    },
 });
 
 new Saas(
@@ -29,6 +32,6 @@ new Saas(
     Master,
     router,
     http,
-    new Security(router, http, storage),
+    new Security(router, http, new LocalStorage()),
 ).run();
 ```

@@ -1,11 +1,11 @@
+install:
+	yarn
+
 eslint:
-	./node_modules/.bin/eslint src --ext ts,js,vue,json
+	npx eslint src --ext ts,js,vue,json
 
 ls-lint:
-	./node_modules/.bin/ls-lint
-
-lint:
-	yarn lint
+	npx @ls-lint/ls-lint
 
 build:
 	yarn build

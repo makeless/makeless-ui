@@ -17,3 +17,8 @@ steps:
     image: node:13
     commands:
       - make ls-lint
+
+  - name: build
+    image: node:13
+    commands:
+      - make build
