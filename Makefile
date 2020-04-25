@@ -6,6 +6,3 @@ eslint:
 
 ls-lint:
 	npx @ls-lint/ls-lint
-
-package-build:
-	yarn build
