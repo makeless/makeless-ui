@@ -17,3 +17,15 @@ steps:
     image: node:13
     commands:
       - make ls-lint
+
+  - name: npm
+    image: plugins/npm
+    settings:
+      username: loeffel-io
+      password:
+        from_secret: NPM_PASSWORD
+      email: lucas@loeffel.io
+      folder: npm
+      access: public
+    when:
+      event: tag
