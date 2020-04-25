@@ -18,9 +18,6 @@ import ProfileTeamPage from './pages/settings/profile/profile-team';
 import TeamsPage from './pages/settings/teams/teams';
 import PageNotFoundPage from './pages/page-not-found';
 
-// scss
-// import './scss/app.scss';
-
 export default class Saas {
   private readonly name: string;
   private readonly master: any;
