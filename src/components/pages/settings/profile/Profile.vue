@@ -40,11 +40,11 @@
 
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
-import SettingsNavigation from '@/components/navigations/SettingsNavigation.vue';
-import UserMixin from '@/mixins/User.vue';
-import User from '@/models/user';
-import CloneService from '@/services/clone';
-import ResponseInterface from '@/packages/http/response';
+import SettingsNavigation from './../../../../components/navigations/SettingsNavigation.vue';
+import UserMixin from './../../../../mixins/User.vue';
+import User from './../../../../models/user';
+import CloneService from './../../../../services/clone';
+import ResponseInterface from './../../../../packages/http/response';
 
 @Component({
   components: {

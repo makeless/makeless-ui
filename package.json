@@ -1,45 +1,41 @@
 {
   "name": "@go-saas/go-saas-ui",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "private": false,
   "license": "MIT",
-  "main": "dist/go-saas-ui.common.js",
-  "types": "",
   "files": [
-    "src/*",
-    "dist/*"
+    "src/*"
   ],
   "scripts": {
-    "build": "vue-cli-service build --target lib --name go-saas-ui scripts/build.ts",
     "lint": "vue-cli-service lint"
   },
-  "devDependencies": {
+  "dependencies": {
     "bootstrap-vue": "^2.10.1",
     "vue": "^2.6.11",
-    "@ls-lint/ls-lint": "^1.8.0",
-    "@typescript-eslint/eslint-plugin": "^2.26.0",
-    "@typescript-eslint/parser": "^2.26.0",
     "@vue/cli-plugin-babel": "~4.3.0",
     "@vue/cli-plugin-eslint": "~4.3.0",
     "@vue/cli-plugin-typescript": "~4.3.0",
     "@vue/cli-service": "~4.3.0",
-    "@vue/eslint-config-typescript": "^5.0.2",
     "axios": "^0.19.2",
-    "babel-eslint": "^10.1.0",
     "core-js": "^3.6.4",
-    "eslint": "^6.7.2",
-    "eslint-config-google": "^0.14.0",
-    "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.26.3",
     "sass-loader": "^8.0.2",
     "typescript": "~3.8.3",
     "vue-class-component": "^7.2.3",
-    "vue-i18n": "^8.16.0",
     "vue-property-decorator": "^8.4.1",
     "vue-router": "^3.1.6",
     "vue-template-compiler": "^2.6.11",
-    "vuelidate": "^0.7.5",
     "bootstrap": "^4.4.1"
+  },
+  "devDependencies": {
+    "@ls-lint/ls-lint": "^1.8.0",
+    "@typescript-eslint/eslint-plugin": "^2.26.0",
+    "@typescript-eslint/parser": "^2.26.0",
+    "@vue/eslint-config-typescript": "^5.0.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-vue": "^6.2.2"
   },
   "eslintConfig": {
     "root": true,

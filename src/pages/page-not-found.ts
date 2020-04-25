@@ -1,4 +1,4 @@
-import PageNotFoundComponent from '@/components/pages/PageNotFound.vue';
+import PageNotFoundComponent from './../components/pages/PageNotFound.vue';
 
 export default class PageNotFound {
   name: string = 'page-not-found';

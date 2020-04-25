@@ -1,4 +1,4 @@
-import ProfileTeamComponent from '@/components/pages/settings/profile/ProfileTeam.vue';
+import ProfileTeamComponent from './../../../components/pages/settings/profile/ProfileTeam.vue';
 
 export default class ProfileTeam {
   name: string = 'profile-team';

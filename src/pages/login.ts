@@ -1,4 +1,4 @@
-import LoginComponent from '@/components/pages/Login.vue';
+import LoginComponent from './../components/pages/Login.vue';
 
 export default class Login {
   name: string = 'login';

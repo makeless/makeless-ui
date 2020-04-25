@@ -1,9 +1,9 @@
-import HttpInterface from '@/packages/http/http';
-import RouterInterface from '@/packages/router/router';
-import ResponseInterface from '@/packages/http/response';
-import StorageInterface from '@/packages/storage/storage';
-import User from '@/models/user';
-import Team from '@/models/team';
+import HttpInterface from './../../../packages/http/http';
+import RouterInterface from './../../../packages/router/router';
+import ResponseInterface from './../../../packages/http/response';
+import StorageInterface from './../../../packages/storage/storage';
+import User from './../../../models/user';
+import Team from './../../../models/team';
 
 export default class Security {
   user: User | null = null;

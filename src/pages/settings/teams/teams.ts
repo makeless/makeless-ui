@@ -1,4 +1,4 @@
-import TeamsComponent from '@/components/pages/settings/teams/Teams.vue';
+import TeamsComponent from './../../../components/pages/settings/teams/Teams.vue';
 
 export default class Teams {
   name: string = 'teams';

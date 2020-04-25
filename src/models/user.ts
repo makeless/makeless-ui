@@ -1,5 +1,5 @@
-import Model from '@/models/model';
-import Team from '@/models/team';
+import Model from './../models/model';
+import Team from './../models/team';
 
 export default class User extends Model {
   public name: string | null = null;

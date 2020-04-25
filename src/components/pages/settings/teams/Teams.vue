@@ -35,9 +35,9 @@
 
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
-import SettingsNavigation from '@/components/navigations/SettingsNavigation.vue';
-import CreateModal from '@/components/modals/settings/teams/Create.vue';
-import UserMixin from '@/mixins/User.vue';
+import SettingsNavigation from './../../../../components/navigations/SettingsNavigation.vue';
+import CreateModal from './../../../../components/modals/settings/teams/Create.vue';
+import UserMixin from './../../../../mixins/User.vue';
 
 @Component({
   components: {

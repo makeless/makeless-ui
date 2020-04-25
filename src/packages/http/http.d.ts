@@ -1,4 +1,4 @@
-import ResponseInterface from '@/packages/http/response';
+import ResponseInterface from './../../packages/http/response';
 
 export default interface Http {
   get(url: string, config ?: any): Promise<any>

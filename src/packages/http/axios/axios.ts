@@ -1,6 +1,6 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
-import ResponseInterface from '@/packages/http/response';
-import Response from '@/packages/http/axios/response';
+import ResponseInterface from './../../../packages/http/response';
+import Response from './../../../packages/http/axios/response';
 
 export default class Axios {
   private axios: AxiosInstance;

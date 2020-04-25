@@ -36,8 +36,8 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import User from '@/models/user';
-import ResponseInterface from '@/packages/http/response';
+import User from './../../models/user';
+import ResponseInterface from './../../packages/http/response';
 
 @Component({})
 export default class Login extends Vue {

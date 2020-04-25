@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
-import UserMixin from '@/mixins/User.vue';
+import UserMixin from './../../mixins/User.vue';
 
 @Component
 export default class Navigation extends Mixins(UserMixin) {

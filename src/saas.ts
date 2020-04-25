@@ -1,25 +1,25 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue';
-import SaasComponent from '@/Saas.vue';
+import SaasComponent from './Saas.vue';
 
 // interfaces
-import RouterInterface from '@/packages/router/router';
-import PageInterface from '@/packages/page/page';
-import HttpInterface from '@/packages/http/http';
-import SecurityInterface from '@/packages/security/security';
+import RouterInterface from './packages/router/router';
+import PageInterface from './packages/page/page';
+import HttpInterface from './packages/http/http';
+import SecurityInterface from './packages/security/security';
 
 // pages
-import HomePage from '@/pages/home';
-import LoginPage from '@/pages/login';
-import DashboardPage from '@/pages/dashboard';
-import ProfilePage from '@/pages/settings/profile/profile';
-import ProfileTeamPage from '@/pages/settings/profile/profile-team';
-import TeamsPage from '@/pages/settings/teams/teams';
-import PageNotFoundPage from '@/pages/page-not-found';
+import HomePage from './pages/home';
+import LoginPage from './pages/login';
+import DashboardPage from './pages/dashboard';
+import ProfilePage from './pages/settings/profile/profile';
+import ProfileTeamPage from './pages/settings/profile/profile-team';
+import TeamsPage from './pages/settings/teams/teams';
+import PageNotFoundPage from './pages/page-not-found';
 
 // scss
-import './scss/app.scss';
+// import './scss/app.scss';
 
 export default class Saas {
   private readonly name: string;

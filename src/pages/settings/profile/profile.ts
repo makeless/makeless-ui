@@ -1,4 +1,4 @@
-import ProfileComponent from '@/components/pages/settings/profile/Profile.vue';
+import ProfileComponent from './../../../components/pages/settings/profile/Profile.vue';
 
 export default class Profile {
   name: string = 'profile';

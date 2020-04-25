@@ -20,9 +20,9 @@
 
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
-import UserMixin from '@/mixins/User.vue';
-import ResponseInterface from '@/packages/http/response';
-import Team from '@/models/team';
+import UserMixin from './../../../../mixins/User.vue';
+import ResponseInterface from './../../../../packages/http/response';
+import Team from './../../../../models/team';
 
 @Component({})
 export default class Create extends Mixins(UserMixin) {

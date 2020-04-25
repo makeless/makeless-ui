@@ -1,5 +1,5 @@
 import VueRouter from 'vue-router';
-import PageInterface from '@/packages/page/page';
+import PageInterface from './../../packages/page/page';
 
 export default interface Router {
   mode: any;

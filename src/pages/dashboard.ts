@@ -1,4 +1,4 @@
-import DashboardComponent from '@/components/pages/Dashboard.vue';
+import DashboardComponent from './../components/pages/Dashboard.vue';
 
 export default class Dashboard {
   name: string = 'dashboard';
