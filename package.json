@@ -3,15 +3,9 @@
   "version": "0.1.0",
   "private": false,
   "license": "MIT",
-  "main": "dist/go-saas-ui.common.js",
   "files": [
-    "src",
-    "dist/*.js",
-    "dist/*.css"
+    "src"
   ],
-  "scripts": {
-    "build": "vue-cli-service build --target=lib --dest=dist --inline-vue --name=go-saas-ui build/build.js"
-  },
   "dependencies": {
     "vue": "^2.6.11",
     "axios": "^0.19.2",
