@@ -25,7 +25,6 @@ steps:
       password:
         from_secret: NPM_PASSWORD
       email: lucas@loeffel.io
-      folder: npm
       access: public
     when:
       event: tag
