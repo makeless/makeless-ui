@@ -7,20 +7,24 @@ Go SaaS UI - Extendable SaaS TypeScript Vue Package
 ## Usage
 
 ```javascript
-import Saas from 'go-saas-ui/src/saas'
+import Saas from '@go-saas/go-saas-ui/src/saas';
 
 // packages
-import Router from "go-saas-ui/src/packages/router/basic/router";
-import Axios from "go-saas-ui/src/packages/http/axios/axios";
-import LocalStorage from "go-saas-ui/src/packages/storage/local-storage/local-storage";
-import Security from "go-saas-ui/src/packages/security/basic/security";
+import Router from "@go-saas/go-saas-ui/src/packages/router/basic/router";
+import Axios from "@go-saas/go-saas-ui/src/packages/http/axios/axios";
+import LocalStorage from "@go-saas/go-saas-ui/src/packages/storage/local-storage/local-storage";
+import Security from "@go-saas/go-saas-ui/src/packages/security/basic/security";
 
 // components
-import Master from "go-saas-ui/src/components/master/Master.vue";
+import Master from "@go-saas/go-saas-ui/src/components/master/Master.vue";
 
+// scss
+import '@go-saas/go-saas-ui/src/scss/app.scss'
+
+const storage = new LocalStorage();
 const router = new Router();
 const http = new Axios({
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://backend:3000',
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
@@ -32,6 +36,6 @@ new Saas(
     Master,
     router,
     http,
-    new Security(router, http, new LocalStorage()),
+    new Security(router, http, storage),
 ).run();
 ```
