@@ -1,4 +1,4 @@
-import Saas from './../../saas';
+import Saas from './saas';
 
 declare module 'vue/types/vue' {
   interface Vue {
