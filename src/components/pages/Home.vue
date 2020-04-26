@@ -6,8 +6,8 @@
                     <b-col>
                         <div class="text-center">
                             <h1>{{ $saas.getName() }}</h1>
-                            <h2>Extendable SaaS Packages</h2>
-                            <a href="https://github.com/loeffel-io/go-saas" target="_blank">
+                            <h2>SaaS Framework</h2>
+                            <a href="https://github.com/go-saas/go-saas" target="_blank">
                                 <b-icon-link45deg></b-icon-link45deg>
                                 GitHub
                             </a>
