@@ -2,7 +2,7 @@
 
 Go SaaS UI - Extendable SaaS TypeScript Vue Package
 
-[![Build Status](https://ci.loeffel.io/api/badges/loeffel-io/go-saas-ui/status.svg)](https://ci.loeffel.io/loeffel-io/go-saas-ui)
+[![Build Status](https://ci.loeffel.io/api/badges/go-saas/go-saas-ui/status.svg)](https://ci.loeffel.io/go-saas/go-saas-ui)
 
 ## Usage
 
