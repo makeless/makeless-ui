@@ -1,0 +1,20 @@
+{
+  "en": {
+    "components": {
+      "user-dropdown": {
+        "teams": "Teams",
+        "account": "Account",
+        "logout": "Logout"
+      }
+    }
+  },
+  "de": {
+    "components": {
+      "user-dropdown": {
+        "teams": "Teams",
+        "account": "Account",
+        "logout": "Abmelden"
+      }
+    }
+  }
+}
