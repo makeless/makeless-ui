@@ -4,9 +4,13 @@ import Response from './../../../packages/http/axios/response';
 
 export default class Axios {
   private axios: AxiosInstance;
+  private readonly baseConfig: Object = {
+    withCredentials: true,
+    headers: {'Content-Type': 'application/json'},
+  };
 
   constructor(config ?: AxiosRequestConfig) {
-    this.axios = axios.create(config);
+    this.axios = axios.create(Object.assign(this.baseConfig, config));
   }
 
   public get(url: string, config ?: any): Promise<any> {

@@ -104,7 +104,7 @@ export default class Saas {
     return this.getI18n().getI18n().t(key, values);
   }
 
-  public init(): void {
+  public init(): Saas {
     // components
     Vue.component('master', this.master);
 
@@ -119,6 +119,8 @@ export default class Saas {
 
     // prototypes
     Vue.prototype.$saas = Vue.observable(this);
+
+    return this;
   }
 
   public run(): Vue {
