@@ -22,6 +22,7 @@ import ProfileTeamPage from './pages/settings/profile/profile-team';
 import TeamsPage from './pages/settings/teams/teams';
 import PageNotFoundPage from './pages/page-not-found';
 
+// plugins
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(VueRouter);
