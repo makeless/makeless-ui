@@ -1,5 +1,5 @@
 <template>
-    <b-modal id="create" no-fade centered :title="$saas.t('pages.teams.forms.create.title')">
+    <b-modal id="create" no-fade :title="$saas.t('pages.teams.forms.create.title')">
         <b-form v-if="$saas.getSecurity().isAuth() && this.userLoaded && team" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
