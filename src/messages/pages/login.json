@@ -1,8 +1,26 @@
 {
   "en": {
-    "title": "Login"
-  },
-  "de": {
-    "title": "Anmelden"
+    "title": "Login",
+    "form": {
+      "fields": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Email"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Password"
+        }
+      },
+      "button": "Login",
+      "validations": {
+        "email": "Email is required",
+        "password": "Password is required and must me at least 3 characters long"
+      },
+      "errors": {
+        "4x": "Login failed",
+        "5x": "Server error - Please try again later"
+      }
+    }
   }
 }

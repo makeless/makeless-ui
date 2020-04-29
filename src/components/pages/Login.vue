@@ -4,33 +4,35 @@
             <b-container>
                 <b-row class="justify-content-md-center">
                     <b-col lg="6">
-                        <b-card title="Login">
+                        <b-card :title="$saas.t('pages.login.title')">
                             <b-form @submit="onSubmit">
                                 <b-alert v-if="form.hasError() && form.getResponse()" v-model="form.hasError" variant="danger" dismissible>
                                     <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
-                                        Login failed.
+                                        {{ $saas.t('pages.login.form.errors.4x') }}
                                     </template>
 
                                     <template v-if="form.getResponse().getCode() >= 500">
-                                        System error.
+                                        {{ $saas.t('pages.login.form.errors.5x') }}
                                     </template>
                                 </b-alert>
 
-                                <b-form-group label="Email" label-for="email">
-                                    <b-form-input id="email" v-model="user.email" type="email" required placeholder="Email"></b-form-input>
+                                <b-form-group :label="$saas.t('pages.login.form.fields.email.label')" label-for="email">
+                                    <b-form-input id="email" v-model="user.email" type="email" required :placeholder="$saas.t('pages.login.form.fields.email.placeholder')"></b-form-input>
                                     <b-form-invalid-feedback :state="validateEmail()">
-                                        Email must be present.
+                                        {{ $saas.t('pages.login.form.validations.email') }}
                                     </b-form-invalid-feedback>
                                 </b-form-group>
 
-                                <b-form-group label="Password" label-for="password">
-                                    <b-form-input v-model="user.password" type="password" required placeholder="Password" autocomplete="false"></b-form-input>
+                                <b-form-group :label="$saas.t('pages.login.form.fields.password.label')" label-for="password">
+                                    <b-form-input v-model="user.password" type="password" required :placeholder="$saas.t('pages.login.form.fields.password.placeholder')" autocomplete="false"></b-form-input>
                                     <b-form-invalid-feedback :state="validatePassword()">
-                                        Password must be minimum 6 characters long.
+                                        {{ $saas.t('pages.login.form.validations.password') }}
                                     </b-form-invalid-feedback>
                                 </b-form-group>
 
-                                <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid">Login</b-button>
+                                <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid">
+                                    {{ $saas.t('pages.login.form.button') }}
+                                </b-button>
                             </b-form>
                         </b-card>
                     </b-col>
@@ -46,7 +48,7 @@ import User from './../../models/user';
 import Form from '../../packages/form/basic/form';
 import Validator from '../../packages/validator/basic/validator';
 
-@Component({})
+@Component
 export default class Login extends Vue {
   private user: User = new User();
   private form: Form = new Form();
