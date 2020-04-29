@@ -1,0 +1,29 @@
+{
+  "en": {
+    "title": "Teams",
+    "actions": {
+      "create": "Create",
+      "delete": "Delete",
+      "leave": "Leave"
+    },
+    "forms": {
+      "create": {
+        "title": "Create team",
+        "fields": {
+          "name": {
+            "label": "Name",
+            "placeholder": "Name"
+          }
+        },
+        "button": "Create team",
+        "validations": {
+          "name": "Name is required"
+        },
+        "errors": {
+          "4x": "Login failed",
+          "5x": "Server error - Please try again later"
+        }
+      }
+    }
+  }
+}

@@ -9,16 +9,16 @@
 
                     <b-col lg="9">
                         <h1 class="d-flex justify-content-between align-items-center">
-                            Teams
-                            <b-button size="sm" variant="success" v-b-modal.create>Create</b-button>
+                            {{ $saas.t('pages.teams.title') }}
+                            <b-button size="sm" variant="success" v-b-modal.create>{{ $saas.t('pages.teams.actions.create') }}</b-button>
                         </h1>
                         <hr>
                         <div v-if="$saas.getSecurity().isAuth() && userLoaded">
                             <b-list-group v-if="$saas.getSecurity().isAuth() && userLoaded">
                                 <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="team in $saas.getSecurity().getUser().teams" :key="team.name">
                                     {{ team.name }}
-                                    <b-button v-if="$saas.getSecurity().getUser().id === team.userId" size="sm" variant="danger">Delete</b-button>
-                                    <b-button v-else size="sm">Leave</b-button>
+                                    <b-button v-if="$saas.getSecurity().getUser().id === team.userId" size="sm" variant="danger">{{ $saas.t('pages.teams.actions.delete') }}</b-button>
+                                    <b-button v-else size="sm">{{ $saas.t('pages.teams.actions.leave') }}</b-button>
                                 </b-list-group-item>
                             </b-list-group>
                         </div>
@@ -45,6 +45,6 @@ import UserMixin from './../../../../mixins/User.vue';
     CreateModal,
   },
 })
-export default class Profile extends Mixins(UserMixin) {
+export default class Teams extends Mixins(UserMixin) {
 }
 </script>
