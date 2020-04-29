@@ -6,7 +6,7 @@
                     <b-col lg="6">
                         <b-card title="Login">
                             <b-form @submit="onSubmit">
-                                <b-alert v-if="form.hasError() && form.getResponse()" v-model="form.hasError()" variant="danger" dismissible>
+                                <b-alert v-if="form.hasError() && form.getResponse()" v-model="form.hasError" variant="danger" dismissible>
                                     <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                                         Login failed.
                                     </template>
