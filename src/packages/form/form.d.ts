@@ -1,15 +1,15 @@
 import ResponseInterface from '../http/response';
-import ValidatorInterface from '../validator/validator';
 
 export default interface Form {
-  error: boolean;
-  disabled: boolean;
-  response: ResponseInterface | null;
-  validator: ValidatorInterface | null;
+  setError(error: boolean): void
 
-  /**
-   * Returns validator
-   * @returns ValidatorInterface
-   */
-  getValidator(): ValidatorInterface
+  hasError(): boolean
+
+  setDisabled(disabled: boolean): void
+
+  isDisabled(): boolean
+
+  setResponse(response: ResponseInterface| null): void
+
+  getResponse(): ResponseInterface | null
 }

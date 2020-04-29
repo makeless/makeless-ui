@@ -4,10 +4,4 @@ export default interface Validator {
    * @returns boolean
    */
   isValid(): boolean
-
-  /**
-   * Sets error
-   * @param error - error status
-   */
-  setError(error: boolean): void
 }

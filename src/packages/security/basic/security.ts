@@ -192,7 +192,11 @@ export default class Security {
     this.router.redirectToDashboard();
   }
 
-  public login(response: ResponseInterface): void {
+  public login(response: ResponseInterface | null): void {
+    if (response === null) {
+      return;
+    }
+
     this.setExpire(new Date(response.getData().expire));
     this.loadUser();
     this.router.redirectToDashboard();

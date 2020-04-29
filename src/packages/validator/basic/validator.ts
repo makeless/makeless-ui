@@ -1,11 +1,19 @@
-export default class Validator {
-  private error: boolean = false;
+import ValidatorMethod from '../validator-method';
 
-  public isValid(): boolean {
-    return !this.error;
+export default class Validator {
+  private readonly validators: ValidatorMethod[];
+
+  constructor(validators: ValidatorMethod[]) {
+    this.validators = validators;
   }
 
-  public setError(error: boolean): void {
-    this.error = error;
+  public get isValid(): boolean {
+    for (let i = 0; i < this.validators.length; i++) {
+      if (this.validators[i]() !== true) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }
