@@ -13,8 +13,8 @@
         "name": "Name is required"
       },
       "errors": {
-        "2x": "Profile updated successfully",
-        "4x": "Profile update failed",
+        "2x": "Team profile updated successfully",
+        "4x": "Team profile update failed",
         "5x": "Server error - Please try again later"
       }
     }

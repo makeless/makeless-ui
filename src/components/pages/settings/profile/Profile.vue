@@ -27,6 +27,9 @@
 
                             <b-form-group :label="$saas.t('pages.profile.form.fields.name.label')" label-for="name">
                                 <b-form-input id="name" v-model="user.name" type="text" required :placeholder="$saas.t('pages.profile.form.fields.name.placeholder')"></b-form-input>
+                                <b-form-invalid-feedback :state="validateName()">
+                                    {{ $saas.t('pages.profile.form.validations.name') }}
+                                </b-form-invalid-feedback>
                             </b-form-group>
 
                             <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid">
@@ -57,10 +60,20 @@ import Validator from '../../../../packages/validator/basic/validator';
 export default class Profile extends Mixins(UserMixin) {
   private user: User | null = UtilObject.clone(this.$saas.getSecurity().getUser());
   private form: Form = new Form();
-  private validator: Validator = new Validator([]);
+  private validator: Validator = new Validator([
+    this.validateName,
+  ]);
 
   public onUserLoaded(): void {
     this.user = UtilObject.clone(this.$saas.getSecurity().getUser());
+  }
+
+  public validateName(): boolean | null {
+    if (this.user === null || this.user.name === null) {
+      return null;
+    }
+
+    return this.user.name.length > 0;
   }
 
   public onSubmit($event: Event) {
