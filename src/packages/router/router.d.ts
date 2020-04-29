@@ -6,11 +6,25 @@ export default interface Router {
   base: string;
   router: VueRouter | null;
 
+  /**
+   * Creates VueRouter
+   * @param pages - pages
+   */
   create(pages: PageInterface[]): void;
 
+  /**
+   * Shorthand for login redirection
+   */
   redirectToLogin(): void
 
+  /**
+   * Shorthand for dashboard redirection
+   */
   redirectToDashboard(): void
 
+  /**
+   * Returns VueRouter
+   * @returns VueRouter
+   */
   getRouter(): VueRouter
 }

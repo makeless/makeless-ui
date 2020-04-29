@@ -11,17 +11,17 @@
                         <h1>Profile</h1>
                         <hr>
                         <b-form v-if="$saas.getSecurity().isAuth() && this.userLoaded && user" @submit="onSubmit">
-                            <b-alert v-if="hasError && response" variant="danger" dismissible :show="true">
-                                <template v-if="response.getCode() >= 400 && response.getCode() < 500">
+                            <b-alert v-if="form.error && form.response" variant="danger" dismissible :show="true">
+                                <template v-if="form.response.getCode() >= 400 && form.response.getCode() < 500">
                                     Update failed.
                                 </template>
 
-                                <template v-if="response.getCode() >= 500">
+                                <template v-if="form.response.getCode() >= 500">
                                     System error.
                                 </template>
                             </b-alert>
 
-                            <b-alert v-if="response && response.getCode() === 200" variant="success" dismissible :show="true">
+                            <b-alert v-if="form.response && form.response.getCode() === 200" variant="success" dismissible :show="true">
                                 Update successfully.
                             </b-alert>
 
@@ -29,7 +29,7 @@
                                 <b-form-input id="name" v-model="user.name" type="text" required placeholder="Name"></b-form-input>
                             </b-form-group>
 
-                            <b-button type="submit" variant="primary" :disabled="disabled">Update profile</b-button>
+                            <b-button type="submit" variant="primary" :disabled="form.disabled">Update profile</b-button>
                         </b-form>
                     </b-col>
                 </b-row>
@@ -43,8 +43,9 @@ import {Component, Mixins} from 'vue-property-decorator';
 import SettingsNavigation from './../../../../components/navigations/SettingsNavigation.vue';
 import UserMixin from './../../../../mixins/User.vue';
 import User from './../../../../models/user';
-import CloneService from './../../../../services/clone';
-import ResponseInterface from './../../../../packages/http/response';
+import UtilObject from './../../../../utils/object';
+import Form from '../../../../packages/form/basic/form';
+import Validator from '../../../../packages/validator/basic/validator';
 
 @Component({
   components: {
@@ -52,31 +53,30 @@ import ResponseInterface from './../../../../packages/http/response';
   },
 })
 export default class Profile extends Mixins(UserMixin) {
-  public hasError: boolean = false;
-  public disabled: boolean = false;
-  public response: ResponseInterface | null = null;
+  private user: User | null = UtilObject.clone(this.$saas.getSecurity().getUser());
+  private form: Form = new Form(new Validator());
 
-  public get user(): User | null {
-    return CloneService.clone(this.$saas.getSecurity().getUser());
+  public onUserLoaded(): void {
+    this.user = UtilObject.clone(this.$saas.getSecurity().getUser());
   }
 
   public onSubmit($event: Event) {
     $event.preventDefault();
-    this.hasError = false;
-    this.response = null;
-    this.disabled = true;
+    this.form.error = false;
+    this.form.response = null;
+    this.form.disabled = true;
 
     this.$saas.getHttp().patch('/api/auth/profile', this.user).then((data) => {
-      this.response = this.$saas.getHttp().response(data);
-      this.disabled = false;
+      this.form.response = this.$saas.getHttp().response(data);
+      this.form.disabled = false;
       Object.assign(this.$saas.getSecurity().getUser(), {
-        name: this.response.getData().data.name,
-        updatedAt: this.response.getData().data.updatedAt,
+        name: this.form.response.getData().data.name,
+        updatedAt: this.form.response.getData().data.updatedAt,
       });
     }).catch((data) => {
-      this.response = this.$saas.getHttp().response(data.response);
-      this.hasError = true;
-      this.disabled = false;
+      this.form.response = this.$saas.getHttp().response(data.response);
+      this.form.error = true;
+      this.form.disabled = false;
     });
   }
 }

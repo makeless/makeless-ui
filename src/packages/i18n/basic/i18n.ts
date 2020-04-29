@@ -1,4 +1,4 @@
-import VueI18n, {LocaleMessages} from 'vue-i18n';
+import VueI18n, {Locale, LocaleMessages} from 'vue-i18n';
 import PageInterface from './../../../packages/page/page';
 import global from './../../../messages/global.json';
 
@@ -16,7 +16,7 @@ export default class i18n {
     return this.vueI18n;
   }
 
-  public changeLocale(locale: string): void {
+  public changeLocale(locale: Locale): void {
     this.getI18n().locale = locale;
   }
 

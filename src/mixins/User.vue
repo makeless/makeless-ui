@@ -10,6 +10,10 @@ export default class User extends Vue {
 
     window.addEventListener('user-loaded', () => {
       this.userLoaded = true;
+
+      if (typeof this['onUserLoaded'] === 'function') {
+        this.onUserLoaded();
+      }
     });
   }
 }

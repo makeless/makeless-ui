@@ -42,7 +42,7 @@
 import {Component, Mixins} from 'vue-property-decorator';
 import SettingsNavigation from './../../../../components/navigations/SettingsNavigation.vue';
 import UserMixin from './../../../../mixins/User.vue';
-import CloneService from './../../../../services/clone';
+import Object from './../../../../utils/object';
 import ResponseInterface from './../../../../packages/http/response';
 import Team from './../../../../models/team';
 
@@ -57,7 +57,7 @@ export default class ProfileTeam extends Mixins(UserMixin) {
   public response: ResponseInterface | null = null;
 
   public get team(): Team | null {
-    return CloneService.clone(this.$saas.getSecurity().getTeam());
+    return Object.clone(this.$saas.getSecurity().getTeam());
   }
 
   public onSubmit($event: Event) {

@@ -1,8 +1,10 @@
+$body-bottom-spacing: 50px;
+
 @import '~bootstrap/scss/bootstrap';
 @import '~bootstrap-vue/src/index.scss';
 
 body {
-  margin-bottom: 50px;
+  margin-bottom: $body-bottom-spacing;
 }
 
 h1 {

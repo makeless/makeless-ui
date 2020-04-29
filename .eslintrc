@@ -7,10 +7,14 @@
     "plugin:vue/essential",
     "@vue/typescript"
   ],
+  "plugins": [
+    "eslint-plugin-tsdoc"
+  ],
   "parserOptions": {
     "parser": "@typescript-eslint/parser"
   },
   "rules": {
-    "max-len": "off"
+    "max-len": "off",
+    "tsdoc/syntax": "warn"
   }
 }
