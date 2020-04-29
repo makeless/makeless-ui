@@ -53,7 +53,7 @@ export default interface Security {
    * Handles login and redirects to dashboard if successful
    * @param response - response interface from http package
    */
-  login(response: ResponseInterface | null): void
+  login(response: ResponseInterface): void
 
   /**
    * Handles logout and redirects to login if set

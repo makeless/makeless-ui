@@ -8,28 +8,30 @@
                     </b-col>
 
                     <b-col lg="9">
-                        <h1>Profile</h1>
+                        <h1>{{ $saas.t('pages.profile.title') }}</h1>
                         <hr>
                         <b-form v-if="$saas.getSecurity().isAuth() && this.userLoaded && user" @submit="onSubmit">
-                            <b-alert v-if="form.error && form.response" variant="danger" dismissible :show="true">
-                                <template v-if="form.response.getCode() >= 400 && form.response.getCode() < 500">
-                                    Update failed.
+                            <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
+                                <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
+                                    {{ $saas.t('pages.profile.form.errors.4x') }}
                                 </template>
 
-                                <template v-if="form.response.getCode() >= 500">
-                                    System error.
+                                <template v-if="form.getResponse().getCode() >= 500">
+                                    {{ $saas.t('pages.profile.form.errors.5x') }}
                                 </template>
                             </b-alert>
 
-                            <b-alert v-if="form.response && form.response.getCode() === 200" variant="success" dismissible :show="true">
-                                Update successfully.
+                            <b-alert v-if="form.getResponse() && form.getResponse().getCode() === 200" variant="success" dismissible :show="true">
+                                {{ $saas.t('pages.profile.form.errors.2x') }}
                             </b-alert>
 
-                            <b-form-group label="Name" label-for="name">
-                                <b-form-input id="name" v-model="user.name" type="text" required placeholder="Name"></b-form-input>
+                            <b-form-group :label="$saas.t('pages.profile.form.fields.name.label')" label-for="name">
+                                <b-form-input id="name" v-model="user.name" type="text" required :placeholder="$saas.t('pages.profile.form.fields.name.placeholder')"></b-form-input>
                             </b-form-group>
 
-                            <b-button type="submit" variant="primary" :disabled="form.disabled">Update profile</b-button>
+                            <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid">
+                                {{ $saas.t('pages.profile.form.button') }}
+                            </b-button>
                         </b-form>
                     </b-col>
                 </b-row>
@@ -54,7 +56,8 @@ import Validator from '../../../../packages/validator/basic/validator';
 })
 export default class Profile extends Mixins(UserMixin) {
   private user: User | null = UtilObject.clone(this.$saas.getSecurity().getUser());
-  private form: Form = new Form(new Validator());
+  private form: Form = new Form();
+  private validator: Validator = new Validator([]);
 
   public onUserLoaded(): void {
     this.user = UtilObject.clone(this.$saas.getSecurity().getUser());
@@ -62,21 +65,21 @@ export default class Profile extends Mixins(UserMixin) {
 
   public onSubmit($event: Event) {
     $event.preventDefault();
-    this.form.error = false;
-    this.form.response = null;
-    this.form.disabled = true;
+    this.form.setError(false);
+    this.form.setResponse(null);
+    this.form.setDisabled(true);
 
     this.$saas.getHttp().patch('/api/auth/profile', this.user).then((data) => {
-      this.form.response = this.$saas.getHttp().response(data);
-      this.form.disabled = false;
+      this.form.setResponse(this.$saas.getHttp().response(data));
+      this.form.setDisabled(false);
       Object.assign(this.$saas.getSecurity().getUser(), {
-        name: this.form.response.getData().data.name,
-        updatedAt: this.form.response.getData().data.updatedAt,
+        name: this.form.getResponse()!.getData().data.name,
+        updatedAt: this.form.getResponse()!.getData().data.updatedAt,
       });
     }).catch((data) => {
-      this.form.response = this.$saas.getHttp().response(data.response);
-      this.form.error = true;
-      this.form.disabled = false;
+      this.form.setResponse(this.$saas.getHttp().response(data.response));
+      this.form.setError(true);
+      this.form.setDisabled(false);
     });
   }
 }

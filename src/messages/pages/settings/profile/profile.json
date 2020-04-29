@@ -1,0 +1,22 @@
+{
+  "en": {
+    "title": "Profile",
+    "form": {
+      "fields": {
+        "name": {
+          "label": "Name",
+          "placeholder": "Name"
+        }
+      },
+      "button": "Update profile",
+      "validations": {
+        "name": "Name is required"
+      },
+      "errors": {
+        "2x": "Profile update successful",
+        "4x": "Profile update failed",
+        "5x": "Server error - Please try again later"
+      }
+    }
+  }
+}
