@@ -20,7 +20,7 @@
           "name": "Name is required"
         },
         "errors": {
-          "4x": "Login failed",
+          "4x": "Create team failed",
           "5x": "Server error - Please try again later"
         }
       }

@@ -10,7 +10,7 @@
                     <b-col lg="9">
                         <h1 class="d-flex justify-content-between align-items-center">
                             {{ $saas.t('pages.teams.title') }}
-                            <b-button size="sm" variant="success" v-b-modal.create>{{ $saas.t('pages.teams.actions.create') }}</b-button>
+                            <b-button size="sm" variant="primary" v-b-modal.create>{{ $saas.t('pages.teams.actions.create') }}</b-button>
                         </h1>
                         <hr>
                         <div v-if="$saas.getSecurity().isAuth() && userLoaded">

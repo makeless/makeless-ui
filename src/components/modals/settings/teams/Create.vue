@@ -1,6 +1,6 @@
 <template>
     <b-modal id="create" no-fade :title="$saas.t('pages.teams.forms.create.title')">
-        <b-form v-if="$saas.getSecurity().isAuth() && this.userLoaded && team" @submit="onSubmit">
+        <b-form id="teams-create" v-if="$saas.getSecurity().isAuth() && this.userLoaded && team" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                     {{ $saas.t('pages.teams.forms.create.errors.4x') }}
@@ -18,6 +18,15 @@
                 </b-form-invalid-feedback>
             </b-form-group>
         </b-form>
+
+        <template v-slot:modal-footer="{ cancel }">
+            <b-button @click="cancel()">
+                Cancel
+            </b-button>
+            <b-button form="teams-create" type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid">
+                {{ $saas.t('pages.teams.forms.create.button') }}
+            </b-button>
+        </template>
     </b-modal>
 </template>
 
@@ -54,8 +63,11 @@ export default class Create extends Mixins(UserMixin) {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
       Object.assign(this.team, {
-        name: this.form.getResponse()!.getData().data.name,
+        id: this.form.getResponse()!.getData().data.id,
+        createdAt: this.form.getResponse()!.getData().data.createdAt,
         updatedAt: this.form.getResponse()!.getData().data.updatedAt,
+        name: this.form.getResponse()!.getData().data.name,
+        userId: this.form.getResponse()!.getData().data.userId,
       });
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
