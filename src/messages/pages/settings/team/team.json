@@ -46,6 +46,26 @@
           "4x": "Delete team failed",
           "5x": "Server error - Please try again later"
         }
+      },
+      "leave": {
+        "title": "Leave team",
+        "fields": {
+          "name": {
+            "label": "Please type {name} to confirm",
+            "placeholder": "Name"
+          }
+        },
+        "buttons": {
+          "leave": "Leave team",
+          "cancel": "Cancel"
+        },
+        "validations": {
+          "name": "Input must match team name"
+        },
+        "errors": {
+          "4x": "Leave team failed",
+          "5x": "Server error - Please try again later"
+        }
       }
     }
   }

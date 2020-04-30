@@ -30,6 +30,7 @@
         <template slot="outside">
             <create-modal></create-modal>
             <delete-modal :team="selectedTeam"></delete-modal>
+            <leave-modal :team="selectedTeam"></leave-modal>
         </template>
     </master>
 </template>
@@ -39,6 +40,7 @@ import {Component, Mixins} from 'vue-property-decorator';
 import SettingsNavigation from './../../../../components/navigations/SettingsNavigation.vue';
 import CreateModal from './../../../../components/modals/settings/team/Create.vue';
 import DeleteModal from './../../../../components/modals/settings/team/Delete.vue';
+import LeaveModal from './../../../../components/modals/settings/team/Leave.vue';
 import UserMixin from './../../../../mixins/User.vue';
 
 @Component({
@@ -46,6 +48,7 @@ import UserMixin from './../../../../mixins/User.vue';
     SettingsNavigation,
     CreateModal,
     DeleteModal,
+    LeaveModal,
   },
 })
 export default class Team extends Mixins(UserMixin) {
