@@ -5,7 +5,7 @@
                 <template v-if="!$saas.getSecurity().getTeam()">
                     <b-list-group-item :to="{name: 'profile'}">Profile</b-list-group-item>
                     <b-list-group-item href="#">Password</b-list-group-item>
-                    <b-list-group-item :to="{name: 'teams'}">Teams</b-list-group-item>
+                    <b-list-group-item :to="{name: 'team'}">Teams</b-list-group-item>
                     <b-list-group-item href="#">Tokens</b-list-group-item>
                 </template>
                 <template v-else>

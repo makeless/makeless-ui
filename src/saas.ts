@@ -19,7 +19,7 @@ import LoginPage from './pages/login';
 import DashboardPage from './pages/dashboard';
 import ProfilePage from './pages/settings/profile/profile';
 import ProfileTeamPage from './pages/settings/profile/profile-team';
-import TeamsPage from './pages/settings/teams/teams';
+import TeamPage from './pages/settings/team/team';
 import PageNotFoundPage from './pages/page-not-found';
 
 // plugins
@@ -58,7 +58,7 @@ export default class Saas {
     'dashboard': new DashboardPage(),
     'profile': new ProfilePage(),
     'profile-team': new ProfileTeamPage(),
-    'teams': new TeamsPage(),
+    'team': new TeamPage(),
     'page-not-found': new PageNotFoundPage(),
   };
 

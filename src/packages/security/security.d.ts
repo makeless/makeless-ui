@@ -39,6 +39,18 @@ export default interface Security {
   isAuth(): boolean
 
   /**
+   * Adds team to user
+   * @param team - team instance
+   */
+  addTeam(team: Team): void
+
+  /**
+   * Deletes team from user
+   * @param team - team instance
+   */
+  deleteTeam(team: Team): void
+
+  /**
    * Switchs to user and redirects to dashboard if successful
    */
   switchToUser(): void

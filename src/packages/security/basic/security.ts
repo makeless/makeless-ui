@@ -181,6 +181,32 @@ export default class Security {
     return expire > new Date().getTime();
   }
 
+  public addTeam(team: Team): void {
+    if (this.user === null || team.id === null) {
+      return;
+    }
+
+    this.user.teams.push(team);
+    this.teamIndex[team.id] = team;
+  }
+
+  public deleteTeam(team: Team): void {
+    if (this.user === null || team.id === null) {
+      return;
+    }
+
+    for (let i = 0; i < this.user.teams.length; i++) {
+      if (team.id !== this.user.teams[i].id) {
+        continue;
+      }
+
+      this.team = null;
+      this.user.teams.splice(i, 1);
+      delete this.teamIndex[team.id];
+      return;
+    }
+  }
+
   public switchToUser(): void {
     this.removeTeam();
     this.router.redirectToDashboard();

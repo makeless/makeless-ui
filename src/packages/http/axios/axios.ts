@@ -25,6 +25,10 @@ export default class Axios {
     return this.axios.patch(url, data, config);
   }
 
+  public delete(url: string, config ?: any): Promise<any> {
+    return this.axios.delete(url, config);
+  }
+
   public response(data: any): ResponseInterface {
     return new Response(data);
   }

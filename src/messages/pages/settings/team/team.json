@@ -1,0 +1,52 @@
+{
+  "en": {
+    "title": "Teams",
+    "actions": {
+      "create": "Create",
+      "delete": "Delete",
+      "leave": "Leave"
+    },
+    "forms": {
+      "create": {
+        "title": "Create team",
+        "fields": {
+          "name": {
+            "label": "Name",
+            "placeholder": "Name"
+          }
+        },
+        "buttons": {
+          "create": "Create team",
+          "cancel": "Cancel"
+        },
+        "validations": {
+          "name": "Name is required and must me at least 4 characters long"
+        },
+        "errors": {
+          "4x": "Create team failed",
+          "5x": "Server error - Please try again later"
+        }
+      },
+      "delete": {
+        "title": "Delete team",
+        "fields": {
+          "name": {
+            "label": "Please type {name} to confirm",
+            "placeholder": "Name"
+          }
+        },
+        "buttons": {
+          "delete": "Delete team",
+          "cancel": "Cancel"
+        },
+        "validations": {
+          "name": "Input must match team name"
+        },
+        "errors": {
+          "4x": "Delete team failed",
+          "5x": "Server error - Please try again later"
+        }
+      }
+    }
+  }
+}

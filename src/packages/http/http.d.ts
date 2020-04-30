@@ -28,6 +28,14 @@ export default interface Http {
   patch(url: string, data: any, config ?: any): Promise<any>
 
   /**
+   * Perform delete request
+   * @param url - http endpoint
+   * @param config - client configuration
+   * @returns Promise<any>
+   */
+  delete(url: string, config ?: any): Promise<any>
+
+  /**
    * Returns new http response
    * @param data - response
    * @returns ResponseInterface
