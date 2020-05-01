@@ -12,6 +12,7 @@ import PageInterface from './packages/page/page';
 import HttpInterface from './packages/http/http';
 import SecurityInterface from './packages/security/security';
 import I18nInterface from './packages/i18n/i18n';
+import EventInterface from './packages/event/event';
 
 // pages
 import HomePage from './pages/home';
@@ -34,6 +35,7 @@ export default class Saas {
   private readonly router: RouterInterface;
   private readonly http: HttpInterface;
   private readonly i18n: I18nInterface;
+  private readonly event: EventInterface;
   private readonly security: SecurityInterface;
 
   constructor(
@@ -42,6 +44,7 @@ export default class Saas {
       router: RouterInterface,
       http: HttpInterface,
       i18n: I18nInterface,
+      event: EventInterface,
       security: SecurityInterface,
   ) {
     this.name = name;
@@ -49,6 +52,7 @@ export default class Saas {
     this.router = router;
     this.http = http;
     this.i18n = i18n;
+    this.event = event;
     this.security = security;
   }
 
@@ -94,6 +98,10 @@ export default class Saas {
 
   public getI18n(): I18nInterface {
     return this.i18n;
+  }
+
+  public getEvent(): EventInterface {
+    return this.event;
   }
 
   public getSecurity(): SecurityInterface {
