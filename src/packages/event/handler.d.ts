@@ -1,5 +1,15 @@
+import StdEvent from './std';
 import Data from './data';
 
-export default interface Handler {
-  (data: Data): void
+interface Handler {
+  (event: StdEvent): void
 }
+
+interface SubscribeHandler {
+  (data: Data, event: MessageEvent): void
+}
+
+export {
+  Handler,
+  SubscribeHandler,
+};
