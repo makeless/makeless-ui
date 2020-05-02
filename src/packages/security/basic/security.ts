@@ -117,8 +117,7 @@ export default class Security {
         const response = this.http.response(data);
         this.setExpire(new Date(response.getData().expire));
       }).catch(() => {
-        this.removeExpire();
-        this.router.redirectToLogin();
+        this.logout(true);
       });
     }, 10 * 60 * 1000);
   }
