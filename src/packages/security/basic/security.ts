@@ -152,7 +152,7 @@ export default class Security {
     }
 
     this.event.subscribe('go-saas', (data: Data) => {
-      console.log(data);
+      console.log(data, document.hidden);
     });
   }
 
