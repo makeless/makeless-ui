@@ -15,7 +15,7 @@
                         <hr>
                         <div v-if="$saas.getSecurity().isAuth() && userLoaded">
                             <b-list-group v-if="$saas.getSecurity().isAuth() && userLoaded">
-                                <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="team in $saas.getSecurity().getUser().teams" :key="team.name">
+                                <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="team in $saas.getSecurity().getUser().teams" :key="team.id">
                                     {{ team.name }}
                                     <b-button v-if="$saas.getSecurity().getUser().id === team.userId" size="sm" variant="danger" v-b-modal.team-delete @click="selectTeam(team)">{{ $saas.t('pages.team.actions.delete') }}</b-button>
                                     <b-button v-else size="sm" v-b-modal.team-leave @click="selectTeam(team)">{{ $saas.t('pages.team.actions.leave') }}</b-button>
