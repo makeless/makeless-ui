@@ -15,13 +15,6 @@
                 </template>
             </b-list-group>
         </b-card>
-
-        <b-card no-body header="Payment" class="mt-4">
-            <b-list-group flush>
-                <!--<b-list-group-item :to="{name: 'payment-method'}">Payment Method</b-list-group-item>-->
-                <b-list-group-item href="#">Invoices</b-list-group-item>
-            </b-list-group>
-        </b-card>
     </div>
 </template>
 
