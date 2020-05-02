@@ -3,10 +3,14 @@ import RouterInterface from './../../packages/router/router';
 import ResponseInterface from './../../packages/http/response';
 import User from './../../models/user';
 import Team from './../../models/team';
+import EventInterface from '../event/event';
+import StorageInterface from '../storage/storage';
 
 export default interface Security {
-  http: HttpInterface;
   router: RouterInterface;
+  http: HttpInterface;
+  event: EventInterface;
+  storage: StorageInterface;
 
   /**
    * Required method to init go-saas

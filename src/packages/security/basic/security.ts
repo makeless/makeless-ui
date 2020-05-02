@@ -1,6 +1,7 @@
 import HttpInterface from './../../../packages/http/http';
 import RouterInterface from './../../../packages/router/router';
 import ResponseInterface from './../../../packages/http/response';
+import EventInterface from './../../../packages/event/event';
 import StorageInterface from './../../../packages/storage/storage';
 import User from './../../../models/user';
 import Team from './../../../models/team';
@@ -14,11 +15,13 @@ export default class Security {
   readonly localStorageTeamKey: string = 'team';
   readonly router: RouterInterface;
   readonly http: HttpInterface;
+  readonly event: EventInterface;
   readonly storage: StorageInterface;
 
-  constructor(router: RouterInterface, http: HttpInterface, storage: StorageInterface) {
+  constructor(router: RouterInterface, http: HttpInterface, event: EventInterface, storage: StorageInterface) {
     this.router = router;
     this.http = http;
+    this.event = event;
     this.storage = storage;
   }
 
@@ -68,7 +71,7 @@ export default class Security {
   private initTeam() {
     const storageId = this.storage.getItem(this.localStorageTeamKey);
 
-    if (storageId !== null) {
+    if (storageId !== null && this.teamIndex[parseInt(storageId)]) {
       this.team = this.teamIndex[parseInt(storageId)];
     }
   }
@@ -152,7 +155,7 @@ export default class Security {
 
     const team = this.teamIndex[this.team.id];
 
-    if (team === null) {
+    if (!team) {
       return null;
     }
 

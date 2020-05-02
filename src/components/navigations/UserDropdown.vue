@@ -1,18 +1,17 @@
 <template>
-    <b-nav-item-dropdown :lazy="true" v-if="$saas.getSecurity().isAuth() && this.userLoaded" :text="$saas.getSecurity().getDisplayName()" right>
-        <template v-if="$saas.getSecurity().getUser().teams.length > 0">
-            <b-dropdown-item @click="$saas.getSecurity().switchToUser()">
-                {{ $saas.getSecurity().getUser().getName() }}
-            </b-dropdown-item>
+    <b-nav-item-dropdown v-if="$saas.getSecurity().isAuth() && this.userLoaded" right>
+        <template slot="button-content">{{ $saas.getSecurity().getDisplayName() }}</template>
+        <b-dropdown-item @click="$saas.getSecurity().switchToUser()">
+            {{ $saas.getSecurity().getUser().getName() }}
+        </b-dropdown-item>
+        <template v-if="$saas.getSecurity().getUser().hasTeams()">
             <b-dropdown-group :header="$saas.t('components.user-dropdown.teams')">
-                <template v-if="$saas.getSecurity().getUser().hasTeams()">
-                    <b-dropdown-item @click="$saas.getSecurity().switchToTeam(team.id)" v-for="team in $saas.getSecurity().getUser().teams" :key="team.name">
-                        {{ team.name }}
-                    </b-dropdown-item>
-                </template>
+                <b-dropdown-item @click="$saas.getSecurity().switchToTeam(team.id)" v-for="team in $saas.getSecurity().getUser().teams" :key="team.name">
+                    {{ team.name }}
+                </b-dropdown-item>
             </b-dropdown-group>
-            <b-dropdown-divider></b-dropdown-divider>
         </template>
+        <b-dropdown-divider></b-dropdown-divider>
         <b-dropdown-item :to="{name: toAccount}">{{ $saas.t('components.user-dropdown.account') }}</b-dropdown-item>
         <b-dropdown-item @click="logout">{{ $saas.t('components.user-dropdown.logout') }}</b-dropdown-item>
     </b-nav-item-dropdown>
