@@ -103,6 +103,11 @@ export default class Security {
         return;
       }
 
+      if (to.matched.some(record => record.meta.requiresTeamOwner) && this.isAuth() && !this.isTeamOwner()) {
+        next({path: '/dashboard'});
+        return;
+      }
+
       next();
     });
   }
@@ -181,6 +186,14 @@ export default class Security {
     }
 
     return expire > new Date().getTime();
+  }
+
+  public isTeamOwner(): boolean {
+    if (!this.isAuth() || this.getUser() === null || this.getTeam() === null) {
+      return false;
+    }
+
+    return this.getTeam()!.userId === this.getUser()!.id;
   }
 
   public addTeam(team: Team): void {

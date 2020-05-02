@@ -12,7 +12,9 @@
             </b-dropdown-group>
         </template>
         <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item :to="{name: toAccount}">{{ $saas.t('components.user-dropdown.account') }}</b-dropdown-item>
+        <b-dropdown-item v-if="showAccount" :to="{name: toAccount}">
+            {{ $saas.t('components.user-dropdown.account') }}
+        </b-dropdown-item>
         <b-dropdown-item @click="logout">{{ $saas.t('components.user-dropdown.logout') }}</b-dropdown-item>
     </b-nav-item-dropdown>
 </template>
@@ -23,7 +25,11 @@ import UserMixin from './../../mixins/User.vue';
 
 @Component
 export default class UserDropdown extends Mixins(UserMixin) {
-  get toAccount(): string {
+  public get showAccount(): boolean {
+    return !this.$saas.getSecurity().getTeam() || this.$saas.getSecurity().isTeamOwner();
+  }
+
+  public get toAccount(): string {
     if (this.$saas.getSecurity().getTeam()) {
       return 'profile-team';
     }

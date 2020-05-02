@@ -43,6 +43,12 @@ export default interface Security {
   isAuth(): boolean
 
   /**
+   * Returns if user is current team owner
+   * @returns boolean
+   */
+  isTeamOwner(): boolean
+
+  /**
    * Adds team to user
    * @param team - team instance
    */
