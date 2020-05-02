@@ -1,12 +1,12 @@
 <template>
     <b-nav-item-dropdown v-if="$saas.getSecurity().isAuth() && this.userLoaded" right>
         <template slot="button-content">{{ $saas.getSecurity().getDisplayName() }}</template>
-        <b-dropdown-item @click="$saas.getSecurity().switchToUser()">
+        <b-dropdown-item @click="$saas.getSecurity().switchToUser()" :active="$saas.getSecurity().getTeam() === null">
             {{ $saas.getSecurity().getUser().getName() }}
         </b-dropdown-item>
         <template v-if="$saas.getSecurity().getUser().hasTeams()">
             <b-dropdown-group :header="$saas.t('components.user-dropdown.teams')">
-                <b-dropdown-item @click="$saas.getSecurity().switchToTeam(team.id)" v-for="team in $saas.getSecurity().getUser().teams" :key="team.id">
+                <b-dropdown-item @click="$saas.getSecurity().switchToTeam(team.id)" v-for="team in $saas.getSecurity().getUser().teams" :key="team.id" :active="$saas.getSecurity().getTeam() !== null && $saas.getSecurity().getTeam().id === team.id">
                     {{ team.name }}
                 </b-dropdown-item>
             </b-dropdown-group>
