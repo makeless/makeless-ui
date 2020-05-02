@@ -5,6 +5,7 @@ import EventInterface from './../../../packages/event/event';
 import StorageInterface from './../../../packages/storage/storage';
 import User from './../../../models/user';
 import Team from './../../../models/team';
+import Data from '../../event/data';
 
 export default class Security {
   user: User | null = null;
@@ -141,11 +142,26 @@ export default class Security {
     });
   }
 
+  private handleEvents(): void {
+    if (!this.isAuth()) {
+      return;
+    }
+
+    if (!this.event.isConnected()) {
+      this.event.connect();
+    }
+
+    this.event.subscribe('go-saas', (data: Data) => {
+      console.log(data);
+    });
+  }
+
   public setup(): void {
     this.loadUser();
     this.authMiddleware();
     this.refreshAuth();
     this.logoutHandler();
+    this.handleEvents();
   }
 
   public getDisplayName(): string | null {
@@ -236,6 +252,7 @@ export default class Security {
   public login(response: ResponseInterface): void {
     this.setExpire(new Date(response.getData().expire));
     this.loadUser();
+    this.handleEvents();
     this.router.redirectToDashboard();
   }
 
@@ -244,6 +261,7 @@ export default class Security {
     this.removeUser();
     this.removeTeam();
     this.removeTeamIndex();
+    this.event.close();
 
     if (redirect) {
       this.router.redirectToLogin();

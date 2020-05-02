@@ -22,31 +22,56 @@ export default class Event {
     };
   }
 
+  public isConnected(): boolean {
+    return this.eventSource !== null;
+  }
+
   public connect(): void {
+    if (this.isConnected()) {
+      return;
+    }
+
     this.eventSource = new EventSource(this.host + this.path, {
       withCredentials: true,
     });
   }
 
   public onOpen(handler: Handler): void {
+    if (!this.isConnected()) {
+      return;
+    }
+
     this.eventSource!.onopen = (event: StdEvent) => {
       handler(event);
     };
   }
 
   public onError(handler: Handler): void {
+    if (!this.isConnected()) {
+      return;
+    }
+
     this.eventSource!.onerror = (event: StdEvent) => {
       handler(event);
     };
   }
 
   public subscribe(channel: string, handler: SubscribeHandler): void {
+    if (!this.isConnected()) {
+      return;
+    }
+
     this.eventSource!.addEventListener(channel, ((event: MessageEvent) => {
       handler(this.parseMessageEvent(event), event);
     }) as EventListener);
   }
 
   public close(): void {
+    if (!this.isConnected()) {
+      return;
+    }
+
     this.eventSource!.close();
+    this.eventSource = null;
   }
 }

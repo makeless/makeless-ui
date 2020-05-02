@@ -1,6 +1,8 @@
 import {Handler, SubscribeHandler} from './handler';
 
 export default interface Event {
+  isConnected(): boolean
+
   connect(): void
 
   onOpen(handler: Handler): void
