@@ -1,0 +1,52 @@
+{
+  "en": {
+    "title": "Members",
+    "actions": {
+      "invite": "Invite",
+      "delete": "Remove"
+    },
+    "loading": "Loading ...",
+    "forms": {
+      "invite": {
+        "title": "Invite team member",
+        "fields": {
+          "email": {
+            "label": "Email",
+            "placeholder": "Email"
+          }
+        },
+        "buttons": {
+          "invite": "Invite",
+          "cancel": "Cancel"
+        },
+        "validations": {
+          "invite": "Email is required"
+        },
+        "errors": {
+          "4x": "Invite team member failed",
+          "5x": "Server error - Please try again later"
+        }
+      },
+      "delete": {
+        "title": "Delete team member",
+        "fields": {
+          "email": {
+            "label": "Please type {name} to confirm",
+            "placeholder": "Name"
+          }
+        },
+        "buttons": {
+          "delete": "Delete team member",
+          "cancel": "Cancel"
+        },
+        "validations": {
+          "name": "Input must match team member name"
+        },
+        "errors": {
+          "4x": "Delete team member failed",
+          "5x": "Server error - Please try again later"
+        }
+      }
+    }
+  }
+}

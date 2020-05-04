@@ -10,7 +10,7 @@
                 </template>
                 <template v-else>
                     <b-list-group-item :to="{name: 'profile-team'}">Profile</b-list-group-item>
-                    <b-list-group-item href="#">Team Members</b-list-group-item>
+                    <b-list-group-item :to="{name: 'member'}">Members</b-list-group-item>
                     <b-list-group-item href="#">Tokens</b-list-group-item>
                 </template>
             </b-list-group>
