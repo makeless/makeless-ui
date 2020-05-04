@@ -19,7 +19,7 @@
                                 <b-button v-if="$saas.getSecurity().getUser().id !== user.id" size="sm" variant="danger" v-b-modal.member-remove @click="selectUser(user)">{{ $saas.t('pages.member.actions.remove') }}</b-button>
                                 <div v-else>
                                     <b-icon-lock></b-icon-lock>
-                                    Owner
+                                    {{ $saas.t('pages.member.owner') }}
                                 </div>
                             </b-list-group-item>
                         </b-list-group>

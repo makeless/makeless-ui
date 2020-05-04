@@ -6,6 +6,7 @@
       "remove": "Remove"
     },
     "loading": "Loading ...",
+    "owner": "Owner",
     "forms": {
       "invite": {
         "title": "Invite member",
