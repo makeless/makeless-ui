@@ -3,12 +3,12 @@
     "title": "Members",
     "actions": {
       "invite": "Invite",
-      "delete": "Remove"
+      "remove": "Remove"
     },
     "loading": "Loading ...",
     "forms": {
       "invite": {
-        "title": "Invite team member",
+        "title": "Invite member",
         "fields": {
           "email": {
             "label": "Email",
@@ -23,27 +23,27 @@
           "invite": "Email is required"
         },
         "errors": {
-          "4x": "Invite team member failed",
+          "4x": "Invite member failed",
           "5x": "Server error - Please try again later"
         }
       },
-      "delete": {
-        "title": "Delete team member",
+      "remove": {
+        "title": "Remove member",
         "fields": {
-          "email": {
+          "name": {
             "label": "Please type {name} to confirm",
             "placeholder": "Name"
           }
         },
         "buttons": {
-          "delete": "Delete team member",
+          "remove": "Remove member",
           "cancel": "Cancel"
         },
         "validations": {
-          "name": "Input must match team member name"
+          "name": "Input must match member name"
         },
         "errors": {
-          "4x": "Delete team member failed",
+          "4x": "Remove member failed",
           "5x": "Server error - Please try again later"
         }
       }
