@@ -6,7 +6,7 @@
                     <b-list-group-item :to="{name: 'profile'}">Profile</b-list-group-item>
                     <b-list-group-item :to="{name: 'password'}">Password</b-list-group-item>
                     <b-list-group-item :to="{name: 'team'}">Teams</b-list-group-item>
-                    <b-list-group-item href="#">Tokens</b-list-group-item>
+                    <b-list-group-item :to="{name: 'token'}">Tokens</b-list-group-item>
                 </template>
                 <template v-else>
                     <b-list-group-item :to="{name: 'profile-team'}">Profile</b-list-group-item>

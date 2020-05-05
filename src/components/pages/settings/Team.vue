@@ -42,6 +42,7 @@ import CreateModal from './../../../components/modals/settings/team/Create.vue';
 import DeleteModal from './../../../components/modals/settings/team/Delete.vue';
 import LeaveModal from './../../../components/modals/settings/team/Leave.vue';
 import UserMixin from './../../../mixins/User.vue';
+import TeamModel from '../../../models/team';
 
 @Component({
   components: {
@@ -52,9 +53,9 @@ import UserMixin from './../../../mixins/User.vue';
   },
 })
 export default class Team extends Mixins(UserMixin) {
-  private selectedTeam: Team | null = null;
+  private selectedTeam: TeamModel | null = null;
 
-  public selectTeam(team: Team) {
+  public selectTeam(team: TeamModel) {
     this.selectedTeam = team;
   }
 }
