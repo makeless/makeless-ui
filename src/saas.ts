@@ -22,6 +22,7 @@ import ProfilePage from './pages/settings/profile/profile';
 import ProfileTeamPage from './pages/settings/profile/profile-team';
 import TeamPage from './pages/settings/team';
 import MemberPage from './pages/settings/member';
+import PasswordPage from './pages/settings/password';
 import PageNotFoundPage from './pages/page-not-found';
 
 // plugins
@@ -65,6 +66,7 @@ export default class Saas {
     'profile-team': new ProfileTeamPage(),
     'team': new TeamPage(),
     'member': new MemberPage(),
+    'password': new PasswordPage(),
     'page-not-found': new PageNotFoundPage(),
   };
 

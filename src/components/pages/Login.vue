@@ -6,7 +6,7 @@
                     <b-col lg="6">
                         <b-card :title="$saas.t('pages.login.title')">
                             <b-form @submit="onSubmit">
-                                <b-alert v-if="form.hasError() && form.getResponse()" v-model="form.hasError" variant="danger" dismissible>
+                                <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                                     <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                                         {{ $saas.t('pages.login.form.errors.4x') }}
                                     </template>
@@ -83,14 +83,14 @@ export default class Login extends Vue {
     this.$saas.getHttp().post('/api/login', this.user).then((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
-      Object.assign(this.user, new User());
+      this.user = new User();
 
       this.$saas.getSecurity().login(this.form.getResponse()!);
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
-      Object.assign(this.user, new User());
+      this.user = new User();
 
       this.$saas.getSecurity().logout(false);
     });
