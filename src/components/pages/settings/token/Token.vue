@@ -30,6 +30,7 @@
 
         <template slot="outside">
             <create-modal :tokens="tokens"></create-modal>
+            <delete-modal :tokens="tokens" :token="selectedToken"></delete-modal>
         </template>
     </master>
 </template>
@@ -41,11 +42,13 @@ import UserMixin from './../../../../mixins/User.vue';
 import ResponseInterface from '../../../../packages/http/response';
 import TokenModel from '../../../../models/token';
 import CreateModal from '../../../modals/settings/token/token/Create.vue';
+import DeleteModal from '../../../modals/settings/token/token/Delete.vue';
 
 @Component({
   components: {
     SettingsNavigation,
     CreateModal,
+    DeleteModal,
   },
 })
 export default class Token extends Mixins(UserMixin) {
