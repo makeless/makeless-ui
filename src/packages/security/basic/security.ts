@@ -104,6 +104,7 @@ export default class Security {
         return;
       }
 
+      console.log(this.isTeamOwner());
       if (to.matched.some(record => record.meta.requiresTeamOwner) && this.isAuth() && !this.isTeamOwner()) {
         next({path: '/dashboard'});
         return;
@@ -204,6 +205,7 @@ export default class Security {
     return expire > new Date().getTime();
   }
 
+  // bug: user not loaded on hard reload
   public isTeamOwner(): boolean {
     if (!this.isAuth() || this.getUser() === null || this.getTeam() === null) {
       return false;

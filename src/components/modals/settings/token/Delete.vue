@@ -1,6 +1,6 @@
 <template>
     <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.token.forms.delete.title')">
-        <b-form id="form-token-create" v-if="$saas.getSecurity().isAuth() && this.userLoaded && token" @submit="onSubmit">
+        <b-form id="form-token-delete" v-if="$saas.getSecurity().isAuth() && this.userLoaded && token" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                     {{ $saas.t('pages.token.forms.delete.errors.4x') }}
@@ -23,7 +23,7 @@
             <b-button @click="cancel()">
                 {{ $saas.t('pages.token.forms.delete.buttons.cancel') }}
             </b-button>
-            <b-button form="form-token-create" type="submit" variant="danger" :disabled="form.isDisabled() || !validator.isValid">
+            <b-button form="form-token-delete" type="submit" variant="danger" :disabled="form.isDisabled() || !validator.isValid">
                 {{ $saas.t('pages.token.forms.delete.buttons.delete') }}
             </b-button>
         </template>
@@ -32,11 +32,11 @@
 
 <script lang="ts">
 import {Component, Mixins, Prop} from 'vue-property-decorator';
-import UserMixin from './../../../../../mixins/User.vue';
-import Form from '../../../../../packages/form/basic/form';
-import Validator from '../../../../../packages/validator/basic/validator';
+import UserMixin from '../../../../mixins/User.vue';
+import Form from '../../../../packages/form/basic/form';
+import Validator from '../../../../packages/validator/basic/validator';
 import {BvModalEvent} from 'bootstrap-vue';
-import Token from '../../../../../models/token';
+import Token from '../../../../models/token';
 
 @Component
 export default class Delete extends Mixins(UserMixin) {

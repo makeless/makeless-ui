@@ -24,6 +24,7 @@ import TeamPage from './pages/settings/team';
 import MemberPage from './pages/settings/member';
 import PasswordPage from './pages/settings/password';
 import TokenPage from './pages/settings/token/token';
+import TokenTeamPage from './pages/settings/token/token-team';
 import PageNotFoundPage from './pages/page-not-found';
 
 // plugins
@@ -69,6 +70,7 @@ export default class Saas {
     'member': new MemberPage(),
     'password': new PasswordPage(),
     'token': new TokenPage(),
+    'token-team': new TokenTeamPage(),
     'page-not-found': new PageNotFoundPage(),
   };
 

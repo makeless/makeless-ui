@@ -32,12 +32,12 @@
 
 <script lang="ts">
 import {Component, Mixins, Prop} from 'vue-property-decorator';
-import UserMixin from './../../../../../mixins/User.vue';
-import Form from '../../../../../packages/form/basic/form';
-import Validator from '../../../../../packages/validator/basic/validator';
+import UserMixin from '../../../../mixins/User.vue';
+import Form from '../../../../packages/form/basic/form';
+import Validator from '../../../../packages/validator/basic/validator';
 import {BvModalEvent} from 'bootstrap-vue';
-import Token from '../../../../../models/token';
-import TokenUtil from '../../../../../utils/token';
+import Token from '../../../../models/token';
+import TokenUtil from '../../../../utils/token';
 
 @Component
 export default class Create extends Mixins(UserMixin) {

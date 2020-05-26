@@ -1,0 +1,52 @@
+{
+  "en": {
+    "title": "Tokens",
+    "actions": {
+      "create": "Create",
+      "delete": "Delete"
+    },
+    "loading": "Loading ...",
+    "forms": {
+      "create": {
+        "title": "Create token",
+        "fields": {
+          "note": {
+            "label": "Note",
+            "placeholder": "Note"
+          }
+        },
+        "buttons": {
+          "create": "Create token",
+          "cancel": "Cancel"
+        },
+        "validations": {
+          "note": "Note is required and must me at least 4 characters long"
+        },
+        "errors": {
+          "4x": "Create token failed",
+          "5x": "Server error - Please try again later"
+        }
+      },
+      "delete": {
+        "title": "Delete token",
+        "fields": {
+          "note": {
+            "label": "Please type {note} to confirm",
+            "placeholder": "Note"
+          }
+        },
+        "buttons": {
+          "delete": "Delete token",
+          "cancel": "Cancel"
+        },
+        "validations": {
+          "note": "Input must match member name"
+        },
+        "errors": {
+          "4x": "Delete token failed",
+          "5x": "Server error - Please try again later"
+        }
+      }
+    }
+  }
+}

@@ -4,7 +4,7 @@ import messages from './../../../messages/pages/settings/token/token.json';
 
 export default class Token {
   name: string = 'token';
-  path: string = '/settings/team/token';
+  path: string = '/settings/token';
   component: any = TokenComponent;
   messages: LocaleMessageObject | null = messages;
   meta: Object | null = {

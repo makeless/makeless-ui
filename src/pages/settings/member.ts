@@ -9,5 +9,6 @@ export default class Member {
   messages: LocaleMessageObject | null = messages;
   meta: Object | null = {
     requiresAuth: true,
+    requiresTeamOwner: true,
   };
 }
