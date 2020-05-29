@@ -19,7 +19,7 @@
             </b-form-group>
 
             <b-form-group :label="$saas.t('pages.token-team.forms.create.fields.user.label')" label-for="user">
-                <user-team :obj="token"></user-team>
+                <user :obj="token"></user>
                 <b-form-invalid-feedback :state="validateUser()">
                     {{ $saas.t('pages.token-team.forms.create.validations.user') }}
                 </b-form-invalid-feedback>
@@ -45,10 +45,10 @@ import Validator from '../../../../../packages/validator/basic/validator';
 import {BvModalEvent} from 'bootstrap-vue';
 import Token from '../../../../../models/token';
 import TokenUtil from '../../../../../utils/token';
-import UserTeam from "../../../../selects/UserTeam.vue";
+import User from "../../../../selects/team/User.vue";
 
 @Component({
-  components: {UserTeam}
+  components: {User}
 })
 export default class Create extends Mixins(UserMixin) {
   @Prop(Array) readonly tokens!: Token[];
@@ -96,6 +96,7 @@ export default class Create extends Mixins(UserMixin) {
     this.form.setResponse(null);
 
     this.token.token = TokenUtil.generate();
+    this.token.userId = this.token.user!.id;
     this.$saas.getHttp().post('/api/auth/team/token', this.token, {
       headers: {
         "Team": this.$saas.getSecurity().getTeam()!.id,

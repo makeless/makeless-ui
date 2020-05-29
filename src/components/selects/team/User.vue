@@ -4,7 +4,7 @@
             id="user"
             name="user"
             :options="users"
-            placeholder="asdf"
+            :placeholder="$saas.t('components.selects.team.user.placeholder')"
             :multiple="false"
             :loading="loading"
             :showLabels="false"
@@ -16,8 +16,8 @@
             <div>{{ props.option.name }}<br><small>{{ props.option.email }}</small></div>
         </template>
 
-        <template slot="noOptions">No options</template>
-        <template slot="noResult">No</template>
+        <template slot="noOptions">{{ $saas.t('components.selects.team.user.noOption') }}</template>
+        <template slot="noResult">{{ $saas.t('components.selects.team.user.noResult') }}</template>
     </vue-multiselect>
 </template>
 
@@ -25,19 +25,18 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import VueMultiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
-import User from "../../models/user";
 
 @Component({
   components: {VueMultiselect},
 })
-export default class UserTeam extends Vue {
+export default class User extends Vue {
   @Prop(Object) obj!: Object;
 
   protected users: User[] = [];
   private loading: boolean = false;
 
   public onSearch(value: string): void {
-    if (!this.$saas.getSecurity().getUser() || !this.$saas.getSecurity().getTeam()) {
+    if (!this.$saas.getSecurity().getUser() || !this.$saas.getSecurity().getTeam() || value === "") {
       return;
     }
 

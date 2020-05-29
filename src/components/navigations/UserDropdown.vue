@@ -5,7 +5,7 @@
             {{ $saas.getSecurity().getUser().getName() }}
         </b-dropdown-item>
         <template v-if="$saas.getSecurity().getUser().hasTeams()">
-            <b-dropdown-group :header="$saas.t('components.user-dropdown.teams')">
+            <b-dropdown-group :header="$saas.t('components.navigations.userDropdown.teams')">
                 <b-dropdown-item @click="$saas.getSecurity().switchToTeam(team.id)" v-for="team in $saas.getSecurity().getUser().teams" :key="team.id" :active="$saas.getSecurity().getTeam() !== null && $saas.getSecurity().getTeam().id === team.id">
                     {{ team.name }}
                 </b-dropdown-item>
@@ -13,9 +13,9 @@
         </template>
         <b-dropdown-divider></b-dropdown-divider>
         <b-dropdown-item v-if="showAccount" :to="{name: toAccount}">
-            {{ $saas.t('components.user-dropdown.account') }}
+            {{ $saas.t('components.navigations.userDropdown.account') }}
         </b-dropdown-item>
-        <b-dropdown-item @click="logout">{{ $saas.t('components.user-dropdown.logout') }}</b-dropdown-item>
+        <b-dropdown-item @click="logout">{{ $saas.t('components.navigations.userDropdown.logout') }}</b-dropdown-item>
     </b-nav-item-dropdown>
 </template>
 

@@ -1,19 +1,21 @@
 {
   "en": {
     "components": {
-      "user-dropdown": {
-        "teams": "Teams",
-        "account": "Account",
-        "logout": "Logout"
-      }
-    }
-  },
-  "de": {
-    "components": {
-      "user-dropdown": {
-        "teams": "Teams",
-        "account": "Account",
-        "logout": "Abmelden"
+      "navigations": {
+        "userDropdown": {
+          "teams": "Teams",
+          "account": "Account",
+          "logout": "Logout"
+        }
+      },
+      "selects": {
+        "team": {
+          "user": {
+            "placeholder": "Search user",
+            "noOption": "Search user",
+            "noResult": "No user found"
+          }
+        }
       }
     }
   }
