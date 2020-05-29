@@ -11,9 +11,9 @@
       "selects": {
         "team": {
           "user": {
-            "placeholder": "Search user",
-            "noOption": "Search user",
-            "noResult": "No user found"
+            "placeholder": "User",
+            "noOption": "Search user by name",
+            "noResult": "No users found"
           }
         }
       }
