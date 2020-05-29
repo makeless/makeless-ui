@@ -1,0 +1,28 @@
+@import "~bootstrap/scss/variables";
+
+.multiselect {
+  color: $input-color;
+
+  .multiselect__tags {
+    border-color: $input-border-color;
+    border-radius: $input-border-radius;
+    padding: $input-padding-y $input-padding-x;
+    font-size: $input-font-size;
+
+    .multiselect__placeholder {
+      margin-bottom: 0;
+      color: $input-placeholder-color;
+      padding: 0;
+    }
+
+    .multiselect__input, .multiselect__single {
+      line-height: $input-line-height;
+      padding: 0;
+      margin-bottom: 0;
+    }
+  }
+
+  .multiselect__option--highlight {
+    background-color: $primary;
+  }
+}
