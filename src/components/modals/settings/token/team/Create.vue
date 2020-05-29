@@ -19,7 +19,7 @@
             </b-form-group>
 
             <b-form-group :label="$saas.t('pages.token-team.forms.create.fields.user.label')" label-for="user">
-                <user-team :token="token" :placeholder="$saas.t('pages.token-team.forms.create.fields.user.placeholder')"/>
+                <user-team :obj="token"></user-team>
                 <b-form-invalid-feedback :state="validateUser()">
                     {{ $saas.t('pages.token-team.forms.create.validations.user') }}
                 </b-form-invalid-feedback>
