@@ -104,11 +104,10 @@ export default class Security {
         return;
       }
 
-      console.log(this.isTeamOwner());
-      if (to.matched.some(record => record.meta.requiresTeamOwner) && this.isAuth() && !this.isTeamOwner()) {
-        next({path: '/dashboard'});
-        return;
-      }
+      // if (to.matched.some(record => record.meta.requiresTeamOwner) && this.isAuth() && !this.isTeamOwner()) {
+      //   next({path: '/dashboard'});
+      //   return;
+      // }
 
       next();
     });
@@ -121,9 +120,8 @@ export default class Security {
 
     setInterval(() => {
       this.http.get('/api/auth/refresh-token').then((data) => {
-        const response = this.http.response(data);
-        this.setExpire(new Date(response.getData().expire));
-      }).catch(() => {
+        this.setExpire(new Date(this.http.response(data).getData().expire));
+      }).catch((_) => {
         this.logout(true);
       });
     }, 10 * 60 * 1000);
@@ -153,7 +151,7 @@ export default class Security {
     }
 
     this.event.subscribe('go-saas', (data: Data) => {
-      console.log(data, document.hidden);
+      console.log(data);
     });
   }
 

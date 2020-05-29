@@ -10,7 +10,7 @@
                     <b-col lg="9">
                         <h1 class="d-flex justify-content-between align-items-center">
                             {{ $saas.t('pages.token-team.title') }}
-                            <b-button size="sm" variant="primary" v-b-modal.token-create>{{ $saas.t('pages.token-team.actions.create') }}</b-button>
+                            <b-button size="sm" variant="primary" v-b-modal.token-team-create>{{ $saas.t('pages.token-team.actions.create') }}</b-button>
                         </h1>
                         <hr>
                         <b-list-group v-if="$saas.getSecurity().isAuth() && userLoaded && response && tokens">
@@ -44,7 +44,7 @@ import SettingsNavigation from './../../../../components/navigations/SettingsNav
 import UserMixin from './../../../../mixins/User.vue';
 import ResponseInterface from '../../../../packages/http/response';
 import TokenModel from '../../../../models/token';
-import CreateModal from '../../../modals/settings/token/Create.vue';
+import CreateModal from '../../../modals/settings/token/team/Create.vue';
 import DeleteModal from '../../../modals/settings/token/team/Delete.vue';
 
 @Component({

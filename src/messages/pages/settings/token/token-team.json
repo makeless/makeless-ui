@@ -13,6 +13,10 @@
           "note": {
             "label": "Note",
             "placeholder": "Note"
+          },
+          "user": {
+            "label": "User",
+            "placeholder": "Select user"
           }
         },
         "buttons": {
@@ -20,7 +24,8 @@
           "cancel": "Cancel"
         },
         "validations": {
-          "note": "Note is required and must me at least 4 characters long"
+          "note": "Note is required and must me at least 4 characters long",
+          "user": "User is required"
         },
         "errors": {
           "4x": "Create token failed",

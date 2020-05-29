@@ -34,7 +34,7 @@ export default class Router {
       return;
     }
 
-    this.getRouter().push({name: 'login'}).then(null);
+    this.getRouter().push({name: 'login'}).then();
   }
 
   public redirectToDashboard(): void {
@@ -42,7 +42,7 @@ export default class Router {
       return;
     }
 
-    this.getRouter().push({name: 'dashboard'}).then(null);
+    this.getRouter().push({name: 'dashboard'}).then();
   }
 
   public getRouter(): VueRouter {
