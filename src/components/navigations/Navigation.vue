@@ -10,28 +10,28 @@
 
         <b-collapse id="nav-collapse" is-nav>
             <b-navbar-nav v-if="$saas.getConfig().getConfiguration().getNavigation().getLeft()">
-                <template v-for="item in $saas.getConfig().getConfiguration().getNavigation().getLeft()[this.$saas.getI18n().getLocale()]">
+                <div v-for="(item, index) in $saas.getConfig().getConfiguration().getNavigation().getLeft()[this.$saas.getI18n().getLocale()]" :key="index">
                     <b-nav-item v-if="!item.hasChildren()" @click="to(item)" :show="show(item)">{{ item.getLabel() }}</b-nav-item>
                     <b-nav-item-dropdown v-else>
                         <template slot="button-content">{{ item.getLabel() }}</template>
-                        <b-dropdown-item v-for="children in item.getChildren()" :key="children.getTo()" @click="to(children)" :show="show(children)">
+                        <b-dropdown-item v-for="(children, index) in item.getChildren()" :key="index" @click="to(children)" :show="show(children)">
                             {{ children.getLabel() }}
                         </b-dropdown-item>
                     </b-nav-item-dropdown>
-                </template>
+                </div>
             </b-navbar-nav>
 
             <b-navbar-nav class="ml-auto">
                 <template v-if="$saas.getConfig().getConfiguration().getNavigation().getRight()">
-                    <template v-for="item in $saas.getConfig().getConfiguration().getNavigation().getRight()[this.$saas.getI18n().getLocale()]">
+                    <div v-for="(item, index) in $saas.getConfig().getConfiguration().getNavigation().getRight()[this.$saas.getI18n().getLocale()]" :key="index">
                         <b-nav-item v-if="!item.hasChildren()" @click="to(item)" :show="show(item)">{{ item.getLabel() }}</b-nav-item>
                         <b-nav-item-dropdown v-else>
                             <template slot="button-content">{{ item.getLabel() }}</template>
-                            <b-dropdown-item v-for="children in item.getChildren()" :key="children.getTo()" @click="to(children)" :show="show(children)">
+                            <b-dropdown-item v-for="(children, index) in item.getChildren()" :key="index" @click="to(children)" :show="show(children)">
                                 {{ children.getLabel() }}
                             </b-dropdown-item>
                         </b-nav-item-dropdown>
-                    </template>
+                    </div>
                 </template>
                 <user-dropdown></user-dropdown>
             </b-navbar-nav>
