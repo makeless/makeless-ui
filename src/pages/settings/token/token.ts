@@ -7,7 +7,7 @@ export default class Token {
   path: string = '/settings/token';
   component: any = TokenComponent;
   messages: LocaleMessageObject | null = messages;
-  meta: Object | null = {
+  meta: any | null = {
     requiresAuth: true,
   };
 }

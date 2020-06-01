@@ -6,5 +6,5 @@ export default class Home {
   path: string = '/';
   component: any = HomeComponent;
   messages: LocaleMessageObject | null = null;
-  meta: Object | null = null;
+  meta: any | null = null;
 }

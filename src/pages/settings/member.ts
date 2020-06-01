@@ -7,7 +7,7 @@ export default class Member {
   path: string = '/settings/team/member';
   component: any = MemberComponent;
   messages: LocaleMessageObject | null = messages;
-  meta: Object | null = {
+  meta: any | null = {
     requiresAuth: true,
     requiresTeamOwner: true,
   };

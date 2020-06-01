@@ -7,7 +7,7 @@ export default class TokenTeam {
   path: string = '/settings/team/token';
   component: any = TokenComponent;
   messages: LocaleMessageObject | null = messages;
-  meta: Object | null = {
+  meta: any | null = {
     requiresAuth: true,
     requiresTeamOwner: true,
   };

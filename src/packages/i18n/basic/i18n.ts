@@ -16,6 +16,10 @@ export default class i18n {
     return this.vueI18n;
   }
 
+  public getLocale(): string {
+    return this.getI18n().locale;
+  }
+
   public changeLocale(locale: Locale): void {
     this.getI18n().locale = locale;
   }

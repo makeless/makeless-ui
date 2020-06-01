@@ -9,6 +9,11 @@ export default interface i18n {
   getI18n(): VueI18n
 
   /**
+   * Returns current locale
+   */
+  getLocale(): string
+
+  /**
    * Switchs platform locale
    * @param locale - VueI18n locale
    */

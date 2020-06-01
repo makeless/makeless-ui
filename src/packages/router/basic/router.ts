@@ -29,20 +29,20 @@ export default class Router {
     });
   }
 
-  public redirectToLogin(): void {
-    if (this.getRouter().currentRoute.name === 'login') {
+  public redirect(to: string): void {
+    if (this.getRouter().currentRoute.name === to) {
       return;
     }
 
-    this.getRouter().push({name: 'login'}).then();
+    this.getRouter().push({name: to}).then();
+  }
+
+  public redirectToLogin(): void {
+    this.redirect('login');
   }
 
   public redirectToDashboard(): void {
-    if (this.getRouter().currentRoute.name === 'dashboard') {
-      return;
-    }
-
-    this.getRouter().push({name: 'dashboard'}).then();
+    this.redirect('dashboard')
   }
 
   public getRouter(): VueRouter {

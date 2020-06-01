@@ -7,5 +7,5 @@ export default class PageNotFound {
   path: string = '*';
   component: any = PageNotFoundComponent;
   messages: LocaleMessageObject | null = messages;
-  meta: Object | null = null;
+  meta: any | null = null;
 }

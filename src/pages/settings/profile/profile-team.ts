@@ -7,7 +7,7 @@ export default class ProfileTeam {
   path: string = '/settings/team/profile';
   component: any = ProfileTeamComponent;
   messages: LocaleMessageObject | null = messages;
-  meta: Object | null = {
+  meta: any | null = {
     requiresAuth: true,
     requiresTeamOwner: true,
   };

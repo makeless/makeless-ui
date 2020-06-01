@@ -23,7 +23,7 @@ import Master from "@go-saas/go-saas-ui/src/components/layouts/Master.vue";
 // scss
 import '@go-saas/go-saas-ui/src/scss/app.scss'
 
-// config
+// configurations
 const host = "http://localhost:3000"
 const locale = "en"
 

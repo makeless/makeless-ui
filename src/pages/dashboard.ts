@@ -6,7 +6,7 @@ export default class Dashboard {
   path: string = '/dashboard';
   component: any = DashboardComponent;
   messages: LocaleMessageObject | null = null;
-  meta: Object | null = {
+  meta: any | null = {
     requiresAuth: true,
   };
 }

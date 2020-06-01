@@ -7,6 +7,7 @@ import {BootstrapVue, IconsPlugin} from 'bootstrap-vue';
 import SaasComponent from './Saas.vue';
 
 // interfaces
+import ConfigInterface from "./packages/config/config";
 import RouterInterface from './packages/router/router';
 import PageInterface from './packages/page/page';
 import HttpInterface from './packages/http/http';
@@ -34,7 +35,7 @@ Vue.use(VueRouter);
 Vue.use(VueI18n);
 
 export default class Saas {
-  private readonly name: string;
+  private readonly config: ConfigInterface;
   private readonly master: any;
   private readonly router: RouterInterface;
   private readonly http: HttpInterface;
@@ -43,7 +44,7 @@ export default class Saas {
   private readonly security: SecurityInterface;
 
   constructor(
-      name: string,
+      config: ConfigInterface,
       master: any,
       router: RouterInterface,
       http: HttpInterface,
@@ -51,7 +52,7 @@ export default class Saas {
       event: EventInterface,
       security: SecurityInterface,
   ) {
-    this.name = name;
+    this.config = config;
     this.master = master;
     this.router = router;
     this.http = http;
@@ -84,8 +85,8 @@ export default class Saas {
     return pages;
   }
 
-  public getName(): string {
-    return this.name;
+  public getConfig(): ConfigInterface {
+    return this.config;
   }
 
   public setPage(key: string, page: PageInterface) {

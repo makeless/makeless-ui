@@ -13,6 +13,11 @@ export default interface Router {
   create(pages: PageInterface[]): void;
 
   /**
+   * Redirect to route name
+   */
+  redirect(to: string): void
+
+  /**
    * Shorthand for login redirection
    */
   redirectToLogin(): void

@@ -7,7 +7,7 @@ export default class Profile {
   path: string = '/settings/profile';
   component: any = ProfileComponent;
   messages: LocaleMessageObject | null = messages;
-  meta: Object | null = {
+  meta: any | null = {
     requiresAuth: true,
   };
 }

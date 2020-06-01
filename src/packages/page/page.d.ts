@@ -5,5 +5,5 @@ export default interface Page {
   path: string;
   component: any;
   messages: LocaleMessageObject | null;
-  meta: Object | null;
+  meta: any | null;
 }

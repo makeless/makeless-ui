@@ -7,7 +7,7 @@ export default class Login {
   path: string = '/login';
   component: any = LoginComponent;
   messages: LocaleMessageObject | null = messages;
-  meta: Object | null = {
+  meta: any | null = {
     guest: true,
   };
 }
