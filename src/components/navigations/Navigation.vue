@@ -14,7 +14,7 @@
                     <b-nav-item v-if="!item.hasChildren()" @click="to(item)" :show="show(item)">{{ item.getLabel() }}</b-nav-item>
                     <b-nav-item-dropdown v-else>
                         <template slot="button-content">{{ item.getLabel() }}</template>
-                        <b-dropdown-item v-for="children in item.getChildren()" @click="to(children)" :show="show(children)">
+                        <b-dropdown-item v-for="children in item.getChildren()" :key="children.getTo()" @click="to(children)" :show="show(children)">
                             {{ children.getLabel() }}
                         </b-dropdown-item>
                     </b-nav-item-dropdown>
@@ -27,7 +27,7 @@
                         <b-nav-item v-if="!item.hasChildren()" @click="to(item)" :show="show(item)">{{ item.getLabel() }}</b-nav-item>
                         <b-nav-item-dropdown v-else>
                             <template slot="button-content">{{ item.getLabel() }}</template>
-                            <b-dropdown-item v-for="children in item.getChildren()" @click="to(children)" :show="show(children)">
+                            <b-dropdown-item v-for="children in item.getChildren()" :key="children.getTo()" @click="to(children)" :show="show(children)">
                                 {{ children.getLabel() }}
                             </b-dropdown-item>
                         </b-nav-item-dropdown>
