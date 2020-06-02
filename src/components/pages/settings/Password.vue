@@ -69,7 +69,7 @@ import SettingsNavigation from './../../navigations/SettingsNavigation.vue';
 import UserMixin from './../../../mixins/User.vue';
 import Form from '../../../packages/form/basic/form';
 import Validator from '../../../packages/validator/basic/validator';
-import PasswordReset from '../../../helper-models/password-reset';
+import PasswordReset from '../../../models/password-reset';
 
 @Component({
   components: {
