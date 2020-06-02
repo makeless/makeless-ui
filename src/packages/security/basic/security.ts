@@ -101,6 +101,11 @@ export default class Security {
         return;
       }
 
+      if (to.matched.some(record => record.meta.requiresTeamAuth) && !this.getTeam()) {
+        next({path: '/dashboard'});
+        return;
+      }
+
       if (to.matched.some(record => record.meta.guest) && this.isAuth()) {
         next({path: '/dashboard'});
         return;
