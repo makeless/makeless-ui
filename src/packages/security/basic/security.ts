@@ -161,21 +161,15 @@ export default class Security {
   }
 
   public getDisplayName(): string | null {
-    if (this.user === null) {
+    if (!this.isAuth()) {
       return null;
     }
 
-    if (this.team === null || this.team.id === null) {
-      return this.user.getName();
+    if (this.getTeam() !== null) {
+      return this.getTeam()!.name;
     }
 
-    const team = this.teamIndex[this.team.id];
-
-    if (!team) {
-      return null;
-    }
-
-    return team.name;
+    return this.getUser()!.name;
   }
 
   public getUser(): User | null {

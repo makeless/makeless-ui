@@ -21,7 +21,7 @@ export default interface Security {
   setup(): void
 
   /**
-   * Returns user full name or current team name if exists
+   * Returns user full name or current team name if authenticated or enabled
    * @returns string | null
    */
   getDisplayName(): string | null
