@@ -16,12 +16,11 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import UserDropdown from './../../components/navigations/UserDropdown.vue';
 import NavigationLeg from "./NavigationLeg.vue";
 import NavigationBrand from "./NavigationBrand.vue";
 
 @Component({
-  components: {NavigationBrand, NavigationLeg, UserDropdown},
+  components: {NavigationBrand, NavigationLeg},
 })
 export default class Navigation extends Vue {
 }

@@ -16,13 +16,10 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import UserDropdown from './../../components/navigations/UserDropdown.vue';
 import NavigationItemInterface from "../../packages/config/navigation-item";
 import NavigationLegInterface from "../../packages/config/navigation-leg";
 
-@Component({
-  components: {UserDropdown},
-})
+@Component
 export default class NavigationLeg extends Vue {
   @Prop(Object) leg!: NavigationLegInterface;
 

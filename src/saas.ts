@@ -32,6 +32,7 @@ import PageNotFoundPage from './pages/page-not-found';
 import MasterComponent from "./components/layouts/Master.vue";
 import NavigationComponent from "./components/navigations/Navigation.vue";
 import SettingsNavigationComponent from "./components/navigations/SettingsNavigation.vue";
+import UserDropdownComponent from "./components/navigations/UserDropdown.vue";
 
 // plugins
 Vue.use(BootstrapVue);
@@ -81,6 +82,7 @@ export default class Saas {
     'master': MasterComponent,
     'navigation': NavigationComponent,
     'settings-navigation': SettingsNavigationComponent,
+    'user-dropdown': UserDropdownComponent,
   }
 
   private getPages(): PageInterface[] {
