@@ -3,9 +3,10 @@ import RouterInterface from './../../../packages/router/router';
 import ResponseInterface from './../../../packages/http/response';
 import EventInterface from './../../../packages/event/event';
 import StorageInterface from './../../../packages/storage/storage';
+import DataInterface from '../../event/data';
+import PageInterface from "../../page/page";
 import User from './../../../models/user';
 import Team from './../../../models/team';
-import Data from '../../event/data';
 
 export default class Security {
   user: User | null = null;
@@ -104,11 +105,6 @@ export default class Security {
         return;
       }
 
-      // if (to.matched.some(record => record.meta.requiresTeamOwner) && this.isAuth() && !this.isTeamOwner()) {
-      //   next({path: '/dashboard'});
-      //   return;
-      // }
-
       next();
     });
   }
@@ -150,7 +146,7 @@ export default class Security {
       this.event.connect();
     }
 
-    this.event.subscribe('go-saas', (data: Data) => {
+    this.event.subscribe('go-saas', (data: DataInterface) => {
       console.log(data);
     });
   }
@@ -203,7 +199,6 @@ export default class Security {
     return expire > new Date().getTime();
   }
 
-  // bug: user not loaded on hard reload
   public isTeamOwner(): boolean {
     if (!this.isAuth() || this.getUser() === null || this.getTeam() === null) {
       return false;
@@ -247,6 +242,18 @@ export default class Security {
     this.team = this.teamIndex[id];
     this.storage.setItem(this.localStorageTeamKey, id.toString());
     this.router.redirectToDashboard();
+  }
+
+  public isPageAccessible(page: PageInterface): boolean {
+    if (page.meta === null) {
+      return true;
+    }
+
+    if (page.meta.requiresAuth !== undefined && page.meta.requiresAuth && !this.isAuth()) {
+      return false;
+    }
+
+    return !(page.meta.guest !== undefined && page.meta.guest && this.isAuth());
   }
 
   public login(response: ResponseInterface): void {

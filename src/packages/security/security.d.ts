@@ -5,6 +5,7 @@ import User from './../../models/user';
 import Team from './../../models/team';
 import EventInterface from '../event/event';
 import StorageInterface from '../storage/storage';
+import PageInterface from "../page/page";
 
 export default interface Security {
   router: RouterInterface;
@@ -70,6 +71,12 @@ export default interface Security {
    * @param id - team id
    */
   switchToTeam(id: number): void
+
+  /**
+   * Returns if an page is accessable by current state (f.e. login)
+   * @param page - page interface
+   */
+  isPageAccessible(page: PageInterface): boolean
 
   /**
    * Handles login and redirects to dashboard if successful
