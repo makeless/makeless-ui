@@ -4,7 +4,7 @@
         <b-dropdown-item @click="$saas.getSecurity().switchToUser()" :active="$saas.getSecurity().getTeam() === null">
             {{ $saas.getSecurity().getUser().getName() }}
         </b-dropdown-item>
-        <template v-if="$saas.getSecurity().getUser().hasTeams()">
+        <template v-if="$saas.getSecurity().getUser().hasTeams() && $saas.getConfig().getConfiguration().getTeams()">
             <b-dropdown-group :header="$saas.t('components.navigations.userDropdown.teams')">
                 <b-dropdown-item @click="$saas.getSecurity().switchToTeam(team.id)" v-for="team in $saas.getSecurity().getUser().teams" :key="team.id" :active="$saas.getSecurity().getTeam() !== null && $saas.getSecurity().getTeam().id === team.id">
                     {{ team.name }}

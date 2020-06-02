@@ -269,11 +269,14 @@ export default class Security {
       return true;
     }
 
-    if (page.getMeta().requiresAuth !== undefined && page.getMeta().requiresAuth && !this.isAuth()) {
+    const requiresAuth = page.getMeta().requiresAuth !== undefined && page.getMeta().requiresAuth;
+    const guest = page.getMeta().guest !== undefined && page.getMeta().guest;
+
+    if (requiresAuth && !this.isAuth()) {
       return false;
     }
 
-    return !(page.getMeta().guest !== undefined && page.getMeta().guest && this.isAuth());
+    return !(guest && this.isAuth());
   }
 
   public login(response: ResponseInterface): void {

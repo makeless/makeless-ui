@@ -10,7 +10,8 @@ export default class ProfileTeam extends Page {
   messages: LocaleMessageObject | null = messages;
   meta: any | null = {
     requiresAuth: true,
-    requiresTeam: true,
-    requiresTeamOwner: true,
+    requiresTeamAuth: true,
+    requiresTeamOwnerAuth: true,
+    requiresEnabledTeams: true,
   };
 }

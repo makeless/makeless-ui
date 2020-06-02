@@ -10,6 +10,6 @@ export default class Token extends Page {
   messages: LocaleMessageObject | null = messages;
   meta: any | null = {
     requiresAuth: true,
-    requiresToken: true,
+    requiresEnabledTokens: true,
   };
 }

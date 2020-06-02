@@ -10,8 +10,9 @@ export default class TokenTeam extends Page {
   messages: LocaleMessageObject | null = messages;
   meta: any | null = {
     requiresAuth: true,
-    requiresToken: true,
-    requiresTeam: true,
-    requiresTeamOwner: true,
+    requiresTeamAuth: true,
+    requiresTeamOwnerAuth: true,
+    requiresEnabledTokens: true,
+    requiresEnabledTeams: true,
   };
 }
