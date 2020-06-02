@@ -9,6 +9,7 @@ Go SaaS UI - SaaS TypeScript & Vue.js Framework
 - Super clean and small
 - Fully customizable and configurable
 - State of the art Authentication with JWT HttpOnly Cookies
+- User management
 - Team management
 - Token management for users and teams
 - Subscriptions and Per-Seat Payments out of the box (coming soon)
