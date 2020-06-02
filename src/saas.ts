@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue, {VueConstructor} from 'vue';
 import VueRouter from 'vue-router';
 import VueI18n from 'vue-i18n';
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue';
@@ -28,6 +28,11 @@ import TokenPage from './pages/settings/token/token';
 import TokenTeamPage from './pages/settings/token/token-team';
 import PageNotFoundPage from './pages/page-not-found';
 
+// components
+import MasterComponent from "./components/layouts/Master.vue";
+import NavigationComponent from "./components/navigations/Navigation.vue";
+import SettingsNavigationComponent from "./components/navigations/SettingsNavigation.vue";
+
 // plugins
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -36,7 +41,6 @@ Vue.use(VueI18n);
 
 export default class Saas {
   private readonly config: ConfigInterface;
-  private readonly master: any;
   private readonly router: RouterInterface;
   private readonly http: HttpInterface;
   private readonly i18n: I18nInterface;
@@ -45,7 +49,6 @@ export default class Saas {
 
   constructor(
       config: ConfigInterface,
-      master: any,
       router: RouterInterface,
       http: HttpInterface,
       i18n: I18nInterface,
@@ -53,7 +56,6 @@ export default class Saas {
       security: SecurityInterface,
   ) {
     this.config = config;
-    this.master = master;
     this.router = router;
     this.http = http;
     this.i18n = i18n;
@@ -75,6 +77,12 @@ export default class Saas {
     'page-not-found': new PageNotFoundPage(),
   };
 
+  private components: { [key: string]: VueConstructor } = {
+    'master': MasterComponent,
+    'navigation': NavigationComponent,
+    'settings-navigation': SettingsNavigationComponent,
+  }
+
   private getPages(): PageInterface[] {
     const pages: PageInterface[] = [];
 
@@ -95,6 +103,14 @@ export default class Saas {
 
   public getPage(key: string): PageInterface {
     return this.pages[key];
+  }
+
+  public setComponent(key: string, component: VueConstructor) {
+    this.components[key] = component;
+  }
+
+  public getComponent(key: string): VueConstructor {
+    return this.components[key];
   }
 
   public getRouter(): RouterInterface {
@@ -123,7 +139,9 @@ export default class Saas {
 
   public init(): Saas {
     // components
-    Vue.component('master', this.master);
+    for (const key in this.components) {
+      Vue.component(key, this.components[key]);
+    }
 
     // router
     this.getRouter().create(this.getPages());
