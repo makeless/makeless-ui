@@ -7,6 +7,7 @@ Go SaaS UI - SaaS TypeScript Vue Framework
 ## Usage
 
 ```javascript
+# main.ts
 import Saas from '@go-saas/go-saas-ui/src/saas';
 
 // packages
@@ -35,4 +36,32 @@ const security = new Security(router, http, event, storage);
 new Saas(config, router, http, i18n, event, security)
     .init()
     .run();
+```
+
+## Config
+
+```json
+# go-saas.json
+{
+  "name": "Go SaaS",
+  "logo": "https://images.prismic.io/www-static/49aa0a09-06d2-4bba-ad20-4bcbe56ac507_logo.png?auto=compress,format",
+  "locale": "en",
+  "host": "http://localhost:3000",
+  "tokens": true,
+  "teams": {
+    "tokens": false
+  },
+  "navigation": {
+    "left": {
+      "en": [
+        {"label": "Dashboard","to": "dashboard"}
+      ]
+    },
+    "right": {
+      "en": [
+        {"label": "Login","to": "login"}
+      ]
+    }
+  }
+}
 ```
