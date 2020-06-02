@@ -7,6 +7,7 @@ import DataInterface from '../../event/data';
 import PageInterface from "../../page/page";
 import User from './../../../models/user';
 import Team from './../../../models/team';
+import ConfigurationInterface from "../../config/configuration";
 
 export default class Security {
   user: User | null = null;
@@ -242,6 +243,10 @@ export default class Security {
     this.team = this.teamIndex[id];
     this.storage.setItem(this.localStorageTeamKey, id.toString());
     this.router.redirectToDashboard();
+  }
+
+  public isPageUsable(page: PageInterface, configuration: ConfigurationInterface): boolean {
+    return true;
   }
 
   public isPageAccessible(page: PageInterface): boolean {

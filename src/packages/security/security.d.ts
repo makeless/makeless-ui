@@ -6,6 +6,7 @@ import Team from './../../models/team';
 import EventInterface from '../event/event';
 import StorageInterface from '../storage/storage';
 import PageInterface from "../page/page";
+import ConfigurationInterface from "../config/configuration";
 
 export default interface Security {
   router: RouterInterface;
@@ -71,6 +72,13 @@ export default interface Security {
    * @param id - team id
    */
   switchToTeam(id: number): void
+
+  /**
+   * Returns if an page is usable by current config
+   * @param page - page interface
+   * @param configuration - configuration interface
+   */
+  isPageUsable(page: PageInterface, configuration: ConfigurationInterface): boolean
 
   /**
    * Returns if an page is accessable by current state (f.e. login)
