@@ -268,9 +268,14 @@ export default class Security {
     }
 
     const requiresAuth = page.getMeta().requiresAuth !== undefined && page.getMeta().requiresAuth;
+    const requiresTeamAuth = page.getMeta().requiresTeamAuth !== undefined && page.getMeta().requiresTeamAuth;
     const guest = page.getMeta().guest !== undefined && page.getMeta().guest;
 
     if (requiresAuth && !this.isAuth()) {
+      return false;
+    }
+
+    if (requiresTeamAuth && !this.getTeam()) {
       return false;
     }
 
