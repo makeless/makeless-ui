@@ -21,7 +21,7 @@ Go SaaS UI - SaaS TypeScript Vue Framework
 
 - Go: [https://github.com/go-saas/go-saas](https://github.com/go-saas/go-saas)
 
-## Demo:
+## Demo
 
 - Go + TypeScript & Vue.js: [https://github.com/go-saas/go-saas-demo](https://github.com/go-saas/go-saas-demo)
 
