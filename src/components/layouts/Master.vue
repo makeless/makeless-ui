@@ -8,11 +8,8 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import Navigation from './../../components/navigations/Navigation.vue';
 
-@Component({
-  components: {Navigation},
-})
+@Component
 export default class Master extends Vue {
 }
 </script>
