@@ -246,19 +246,34 @@ export default class Security {
   }
 
   public isPageUsable(page: PageInterface, configuration: ConfigurationInterface): boolean {
-    return true;
-  }
-
-  public isPageAccessible(page: PageInterface): boolean {
-    if (page.meta === null) {
+    if (page.getMeta() === null) {
       return true;
     }
 
-    if (page.meta.requiresAuth !== undefined && page.meta.requiresAuth && !this.isAuth()) {
+    const requiresTeam = page.getMeta().requiresTeam !== undefined && page.getMeta().requiresTeam === true;
+    const requiresToken = page.getMeta().requiresToken !== undefined && page.getMeta().requiresToken === true;
+
+    if (requiresToken && !requiresTeam && !configuration.getTokens()) {
       return false;
     }
 
-    return !(page.meta.guest !== undefined && page.meta.guest && this.isAuth());
+    if (requiresTeam && !configuration.getTeams()) {
+      return false;
+    }
+
+    return !(requiresToken && configuration.getTeams() && !configuration.getTeams()!.getTokens());
+  }
+
+  public isPageAccessible(page: PageInterface): boolean {
+    if (page.getMeta() === null) {
+      return true;
+    }
+
+    if (page.getMeta().requiresAuth !== undefined && page.getMeta().requiresAuth && !this.isAuth()) {
+      return false;
+    }
+
+    return !(page.getMeta().guest !== undefined && page.getMeta().guest && this.isAuth());
   }
 
   public login(response: ResponseInterface): void {
