@@ -22,7 +22,7 @@ import DashboardPage from './pages/dashboard';
 import ProfilePage from './pages/settings/profile/profile';
 import ProfileTeamPage from './pages/settings/profile/profile-team';
 import TeamPage from './pages/settings/team';
-import MemberPage from './pages/settings/member';
+import MemberTeamPage from './pages/settings/member/member-team';
 import PasswordPage from './pages/settings/password';
 import TokenPage from './pages/settings/token/token';
 import TokenTeamPage from './pages/settings/token/token-team';
@@ -69,13 +69,13 @@ export default class Saas {
     'login': new LoginPage(),
     'dashboard': new DashboardPage(),
     'profile': new ProfilePage(),
-    'profile-team': new ProfileTeamPage(),
-    'team': new TeamPage(),
-    'member': new MemberPage(),
     'password': new PasswordPage(),
-    'token': new TokenPage(),
-    'token-team': new TokenTeamPage(),
     'page-not-found': new PageNotFoundPage(),
+    'team': new TeamPage(),
+    'token': new TokenPage(),
+    'member-team': new MemberTeamPage(),
+    'profile-team': new ProfileTeamPage(),
+    'token-team': new TokenTeamPage(),
   };
 
   private components: { [key: string]: VueConstructor } = {

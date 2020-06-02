@@ -9,6 +9,7 @@ export default class ProfileTeam {
   messages: LocaleMessageObject | null = messages;
   meta: any | null = {
     requiresAuth: true,
+    requiresTeam: true,
     requiresTeamOwner: true,
   };
 }

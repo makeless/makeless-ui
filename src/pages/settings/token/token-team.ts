@@ -9,6 +9,8 @@ export default class TokenTeam {
   messages: LocaleMessageObject | null = messages;
   meta: any | null = {
     requiresAuth: true,
+    requiresToken: true,
+    requiresTeam: true,
     requiresTeamOwner: true,
   };
 }

@@ -10,7 +10,7 @@
                 </template>
                 <template v-else>
                     <b-list-group-item :to="{name: 'profile-team'}" :active="isActive('profile-team')">Profile</b-list-group-item>
-                    <b-list-group-item :to="{name: 'member'}" :active="isActive('member')">Members</b-list-group-item>
+                    <b-list-group-item :to="{name: 'member-team'}" :active="isActive('member-team')">Members</b-list-group-item>
                     <b-list-group-item :to="{name: 'token-team'}" :active="isActive('token-team')">Tokens</b-list-group-item>
                 </template>
             </b-list-group>

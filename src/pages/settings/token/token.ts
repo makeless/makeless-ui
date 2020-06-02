@@ -9,5 +9,6 @@ export default class Token {
   messages: LocaleMessageObject | null = messages;
   meta: any | null = {
     requiresAuth: true,
+    requiresToken: true,
   };
 }

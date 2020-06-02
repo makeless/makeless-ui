@@ -9,22 +9,22 @@
 
                     <b-col lg="9">
                         <h1 class="d-flex justify-content-between align-items-center">
-                            {{ $saas.t('pages.member.title') }}
-                            <b-button size="sm" variant="primary" v-b-modal.member-invite>{{ $saas.t('pages.member.actions.invite') }}</b-button>
+                            {{ $saas.t('pages.member-team.title') }}
+                            <b-button size="sm" variant="primary" v-b-modal.member-invite>{{ $saas.t('pages.member-team.actions.invite') }}</b-button>
                         </h1>
                         <hr>
                         <b-list-group v-if="$saas.getSecurity().isAuth() && userLoaded && response && users">
                             <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="user in users" :key="user.id">
                                 {{ user.name }}
-                                <b-button v-if="$saas.getSecurity().getUser().id !== user.id" size="sm" variant="danger" v-b-modal.member-remove @click="selectUser(user)">{{ $saas.t('pages.member.actions.remove') }}</b-button>
+                                <b-button v-if="$saas.getSecurity().getUser().id !== user.id" size="sm" variant="danger" v-b-modal.member-team-remove @click="selectUser(user)">{{ $saas.t('pages.member-team.actions.remove') }}</b-button>
                                 <div v-else>
                                     <b-icon-lock></b-icon-lock>
-                                    {{ $saas.t('pages.member.owner') }}
+                                    {{ $saas.t('pages.member-team.owner') }}
                                 </div>
                             </b-list-group-item>
                         </b-list-group>
                         <div v-else class="text-center">
-                            <b-spinner :label="$saas.t('pages.member.loading')"></b-spinner>
+                            <b-spinner :label="$saas.t('pages.member-team.loading')"></b-spinner>
                         </div>
                     </b-col>
                 </b-row>
@@ -39,17 +39,17 @@
 
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
-import UserMixin from './../../../mixins/User.vue';
-import ResponseInterface from '../../../packages/http/response';
-import User from '../../../models/user';
-import RemoveModal from '../../modals/settings/member/Remove.vue';
+import UserMixin from '../../../../mixins/User.vue';
+import ResponseInterface from '../../../../packages/http/response';
+import User from '../../../../models/user';
+import RemoveModal from '../../../modals/settings/member/Remove.vue';
 
 @Component({
   components: {
     RemoveModal,
   },
 })
-export default class Member extends Mixins(UserMixin) {
+export default class MemberTeam extends Mixins(UserMixin) {
   private selectedUser: User | null = null;
   private response: ResponseInterface | null = null;
   private users: User[] | null = null;
