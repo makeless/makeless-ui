@@ -1,6 +1,6 @@
-import {Handler, SubscribeHandler} from '../handler';
-import StdEvent from '../std';
-import Data from '../data';
+import {Handler as HandlerInterface, SubscribeHandler as SubscribeHandlerInterface} from '../handler';
+import StdEventInterface from '../std';
+import DataInterface from '../data';
 
 export default class Event {
   private readonly host: string;
@@ -13,7 +13,7 @@ export default class Event {
     this.eventSource = null;
   }
 
-  protected parseMessageEvent(event: MessageEvent): Data {
+  protected parseMessageEvent(event: MessageEvent): DataInterface {
     const obj = JSON.parse(event.data);
 
     return {
@@ -36,27 +36,27 @@ export default class Event {
     });
   }
 
-  public onOpen(handler: Handler): void {
+  public onOpen(handler: HandlerInterface): void {
     if (!this.isConnected()) {
       return;
     }
 
-    this.eventSource!.onopen = (event: StdEvent) => {
+    this.eventSource!.onopen = (event: StdEventInterface) => {
       handler(event);
     };
   }
 
-  public onError(handler: Handler): void {
+  public onError(handler: HandlerInterface): void {
     if (!this.isConnected()) {
       return;
     }
 
-    this.eventSource!.onerror = (event: StdEvent) => {
+    this.eventSource!.onerror = (event: StdEventInterface) => {
       handler(event);
     };
   }
 
-  public subscribe(channel: string, handler: SubscribeHandler): void {
+  public subscribe(channel: string, handler: SubscribeHandlerInterface): void {
     if (!this.isConnected()) {
       return;
     }

@@ -1,12 +1,12 @@
-import StdEvent from './std';
-import Data from './data';
+import StdEventInterface from './std';
+import DataInterface from './data';
 
 interface Handler {
-  (event: StdEvent): void
+  (event: StdEventInterface): void
 }
 
 interface SubscribeHandler {
-  (data: Data, event: MessageEvent): void
+  (data: DataInterface, event: MessageEvent): void
 }
 
 export {
