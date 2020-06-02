@@ -1,6 +1,6 @@
 # go-saas-ui
 
-Go SaaS UI - SaaS TypeScript Vue Framework
+Go SaaS UI - SaaS TypeScript & Vue.js Framework
 
 [![Build Status](https://ci.loeffel.io/api/badges/go-saas/go-saas-ui/status.svg)](https://ci.loeffel.io/go-saas/go-saas-ui)
 <a href="https://www.npmjs.com/package/@go-saas/go-saas-ui"><img src="https://img.shields.io/npm/v/@go-saas/go-saas-ui.svg?sanitize=true" alt="Version"></a>
