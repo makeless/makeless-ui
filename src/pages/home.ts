@@ -1,7 +1,8 @@
 import {LocaleMessageObject} from 'vue-i18n';
 import HomeComponent from './../components/pages/Home.vue';
+import Page from "./page";
 
-export default class Home {
+export default class Home extends Page {
   name: string = 'home';
   path: string = '/';
   component: any = HomeComponent;

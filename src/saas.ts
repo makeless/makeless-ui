@@ -87,9 +87,17 @@ export default class Saas {
 
   private getPages(): PageInterface[] {
     const pages: PageInterface[] = [];
+    const config = this.getConfig().getConfiguration();
 
     for (const key of Object.keys(this.pages)) {
-      pages.push(this.pages[key]);
+      const page = this.pages[key];
+
+      if (page.getMeta() === null) {
+        pages.push(page);
+        continue;
+      }
+
+      pages.push(page);
     }
 
     return pages;
