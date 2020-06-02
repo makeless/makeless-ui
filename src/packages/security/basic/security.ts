@@ -5,9 +5,9 @@ import EventInterface from './../../../packages/event/event';
 import StorageInterface from './../../../packages/storage/storage';
 import DataInterface from '../../event/data';
 import PageInterface from "../../page/page";
-import User from './../../../models/user';
-import Team from './../../../models/team';
 import ConfigurationInterface from "../../config/configuration";
+import Team from './../../../models/team';
+import User from './../../../models/user';
 
 export default class Security {
   user: User | null = null;
