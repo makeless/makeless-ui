@@ -90,7 +90,7 @@ export default class Saas {
 
     for (const key of Object.keys(this.pages)) {
       const page = this.pages[key];
-      if (!this.getSecurity().isPageUsable(page, configuration)) {
+      if (!this.getSecurity().isPageEnabled(page, configuration)) {
         delete this.pages[key]
       }
     }

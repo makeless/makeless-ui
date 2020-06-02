@@ -78,7 +78,7 @@ export default interface Security {
    * @param page - page interface
    * @param configuration - configuration interface
    */
-  isPageUsable(page: PageInterface, configuration: ConfigurationInterface): boolean
+  isPageEnabled(page: PageInterface, configuration: ConfigurationInterface): boolean
 
   /**
    * Returns if an page is accessable by current state (f.e. login)

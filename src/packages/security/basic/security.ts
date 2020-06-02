@@ -239,7 +239,7 @@ export default class Security {
     this.router.redirectToDashboard();
   }
 
-  public isPageUsable(page: PageInterface, configuration: ConfigurationInterface): boolean {
+  public isPageEnabled(page: PageInterface, configuration: ConfigurationInterface): boolean {
     if (page.getMeta() === null) {
       return true;
     }
@@ -247,15 +247,15 @@ export default class Security {
     const requiresEnabledTeams = page.getMeta().requiresEnabledTeams !== undefined && page.getMeta().requiresEnabledTeams === true;
     const requiresEnabledTokens = page.getMeta().requiresEnabledTokens !== undefined && page.getMeta().requiresEnabledTokens === true;
 
-    if (requiresEnabledTokens && !requiresEnabledTeams && !configuration.getTokens()) {
-      return false;
-    }
-
     if (requiresEnabledTeams && !configuration.getTeams()) {
       return false;
     }
 
-    return !(requiresEnabledTokens && configuration.getTeams() && !configuration.getTeams()!.getTokens());
+    if (requiresEnabledTokens && requiresEnabledTeams && configuration.getTeams() && !configuration.getTeams()!.getTokens()) {
+      return false;
+    }
+
+    return !(requiresEnabledTokens && !requiresEnabledTeams && !configuration.getTokens())
   }
 
   public isPageAccessible(page: PageInterface | null): boolean {
