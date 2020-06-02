@@ -244,21 +244,25 @@ export default class Security {
       return true;
     }
 
-    const requiresTeam = page.getMeta().requiresTeam !== undefined && page.getMeta().requiresTeam === true;
-    const requiresToken = page.getMeta().requiresToken !== undefined && page.getMeta().requiresToken === true;
+    const requiresEnabledTeams = page.getMeta().requiresEnabledTeams !== undefined && page.getMeta().requiresEnabledTeams === true;
+    const requiresEnabledTokens = page.getMeta().requiresEnabledTokens !== undefined && page.getMeta().requiresEnabledTokens === true;
 
-    if (requiresToken && !requiresTeam && !configuration.getTokens()) {
+    if (requiresEnabledTokens && !requiresEnabledTeams && !configuration.getTokens()) {
       return false;
     }
 
-    if (requiresTeam && !configuration.getTeams()) {
+    if (requiresEnabledTeams && !configuration.getTeams()) {
       return false;
     }
 
-    return !(requiresToken && configuration.getTeams() && !configuration.getTeams()!.getTokens());
+    return !(requiresEnabledTokens && configuration.getTeams() && !configuration.getTeams()!.getTokens());
   }
 
-  public isPageAccessible(page: PageInterface): boolean {
+  public isPageAccessible(page: PageInterface | null): boolean {
+    if (page === null) {
+      return false;
+    }
+
     if (page.getMeta() === null) {
       return true;
     }

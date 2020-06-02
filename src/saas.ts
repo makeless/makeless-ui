@@ -107,7 +107,11 @@ export default class Saas {
     this.pages[key] = page;
   }
 
-  public getPage(key: string): PageInterface {
+  public getPage(key: string): PageInterface | null {
+    if (this.pages[key] === undefined) {
+      return null;
+    }
+
     return this.pages[key];
   }
 

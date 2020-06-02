@@ -84,7 +84,7 @@ export default interface Security {
    * Returns if an page is accessable by current state (f.e. login)
    * @param page - page interface
    */
-  isPageAccessible(page: PageInterface): boolean
+  isPageAccessible(page: PageInterface | null): boolean
 
   /**
    * Handles login and redirects to dashboard if successful
