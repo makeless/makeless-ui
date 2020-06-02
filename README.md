@@ -11,10 +11,19 @@ Go SaaS UI - SaaS TypeScript Vue Framework
 - State of the art Authentication with JWT HttpOnly Cookies
 - Team management
 - Token management for users and teams
+- Subscriptions and Per-Seat Payments out of the box (coming soon)
 
 ## Preview
 
 <img src="https://raw.githubusercontent.com/go-saas/go-saas-ui/master/preview.png" alt="logo">
+
+## Backend
+
+- Go: [https://github.com/go-saas/go-saas](https://github.com/go-saas/go-saas)
+
+## Demo:
+
+- Go + TypeScript & Vue.js: [https://github.com/go-saas/go-saas-demo](https://github.com/go-saas/go-saas-demo)
 
 ## Usage
 
