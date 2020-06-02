@@ -10,6 +10,7 @@ Go SaaS UI - SaaS TypeScript Vue Framework
 import Saas from '@go-saas/go-saas-ui/src/saas';
 
 // packages
+import Config from "@go-saas/go-saas-ui/src/packages/config/basic/config";
 import Router from "@go-saas/go-saas-ui/src/packages/router/basic/router";
 import Axios from "@go-saas/go-saas-ui/src/packages/http/axios/axios";
 import I18n from "@go-saas/go-saas-ui/src/packages/i18n/basic/i18n";
@@ -21,20 +22,20 @@ import Security from "@go-saas/go-saas-ui/src/packages/security/basic/security";
 import Master from "@go-saas/go-saas-ui/src/components/layouts/Master.vue";
 
 // scss
-import '@go-saas/go-saas-ui/src/scss/app.scss'
+import './scss/app.scss'
 
-// configurations
-const host = "http://localhost:3000"
-const locale = "en"
+// config
+import configuration from './../../go-saas.json'
 
+const config = new Config(configuration);
 const router = new Router();
-const http = new Axios({baseURL: host});
-const i18n = new I18n(locale);
+const http = new Axios({baseURL: config.getConfiguration().getHost()});
+const i18n = new I18n(config.getConfiguration().getLocale());
 const storage = new LocalStorage();
-const event = new Event(host);
-const security = new Security(router, http, storage);
+const event = new Event(config.getConfiguration().getHost());
+const security = new Security(router, http, event, storage);
 
-new Saas('Go SaaS', Master, router, http, i18n, event, security)
+new Saas(config, Master, router, http, i18n, event, security)
     .init()
     .run();
 ```
