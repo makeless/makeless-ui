@@ -39,7 +39,6 @@
 
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
-import SettingsNavigation from './../../../components/navigations/SettingsNavigation.vue';
 import UserMixin from './../../../mixins/User.vue';
 import ResponseInterface from '../../../packages/http/response';
 import User from '../../../models/user';
@@ -47,7 +46,6 @@ import RemoveModal from '../../modals/settings/member/Remove.vue';
 
 @Component({
   components: {
-    SettingsNavigation,
     RemoveModal,
   },
 })

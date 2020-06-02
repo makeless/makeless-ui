@@ -37,7 +37,6 @@
 
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
-import SettingsNavigation from './../../../components/navigations/SettingsNavigation.vue';
 import CreateModal from './../../../components/modals/settings/team/Create.vue';
 import DeleteModal from './../../../components/modals/settings/team/Delete.vue';
 import LeaveModal from './../../../components/modals/settings/team/Leave.vue';
@@ -46,7 +45,6 @@ import TeamModel from '../../../models/team';
 
 @Component({
   components: {
-    SettingsNavigation,
     CreateModal,
     DeleteModal,
     LeaveModal,

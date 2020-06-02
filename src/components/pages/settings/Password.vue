@@ -65,17 +65,12 @@
 
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
-import SettingsNavigation from './../../navigations/SettingsNavigation.vue';
 import UserMixin from './../../../mixins/User.vue';
 import Form from '../../../packages/form/basic/form';
 import Validator from '../../../packages/validator/basic/validator';
 import PasswordReset from '../../../models/password-reset';
 
-@Component({
-  components: {
-    SettingsNavigation,
-  },
-})
+@Component
 export default class Password extends Mixins(UserMixin) {
   private passwordReset: PasswordReset = new PasswordReset();
   private form: Form = new Form();

@@ -37,7 +37,6 @@
 
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
-import SettingsNavigation from './../../../../components/navigations/SettingsNavigation.vue';
 import UserMixin from './../../../../mixins/User.vue';
 import ResponseInterface from '../../../../packages/http/response';
 import TokenModel from '../../../../models/token';
@@ -46,7 +45,6 @@ import DeleteModal from '../../../modals/settings/token/Delete.vue';
 
 @Component({
   components: {
-    SettingsNavigation,
     CreateModal,
     DeleteModal,
   },

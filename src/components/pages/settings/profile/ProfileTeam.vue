@@ -45,18 +45,13 @@
 
 <script lang="ts">
 import {Component, Mixins} from 'vue-property-decorator';
-import SettingsNavigation from './../../../../components/navigations/SettingsNavigation.vue';
 import UserMixin from './../../../../mixins/User.vue';
 import Team from './../../../../models/team';
 import UtilObject from '../../../../utils/object';
 import Form from '../../../../packages/form/basic/form';
 import Validator from '../../../../packages/validator/basic/validator';
 
-@Component({
-  components: {
-    SettingsNavigation,
-  },
-})
+@Component
 export default class ProfileTeam extends Mixins(UserMixin) {
   private team: Team | null = UtilObject.clone(this.$saas.getSecurity().getTeam());
   private form: Form = new Form();
