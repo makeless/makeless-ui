@@ -35,7 +35,7 @@ import {Component, Mixins, Prop} from 'vue-property-decorator';
 import UserMixin from '../../../../../mixins/User.vue';
 import Form from '../../../../../packages/form/basic/form';
 import Validator from '../../../../../packages/validator/basic/validator';
-import {BvModalEvent} from 'bootstrap-vue';
+import {BModal, BvModalEvent} from 'bootstrap-vue';
 import Token from '../../../../../models/token';
 
 @Component
@@ -96,7 +96,7 @@ export default class Delete extends Mixins(UserMixin) {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
       this.removeToken(this.token);
-      this.$refs[this.modalId].hide();
+      (this.$refs[this.modalId] as BModal).hide();
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
       this.form.setError(true);
