@@ -27,4 +27,6 @@ steps:
       email: lucas@loeffel.io
       access: public
     when:
-      event: tag
+      branch: master
+      event: push
+
