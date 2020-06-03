@@ -2,7 +2,6 @@
   "name": "@go-saas/go-saas-ui",
   "version": "0.4.1",
   "private": false,
-  "license": "MIT",
   "files": [
     "src"
   ],
