@@ -18,6 +18,8 @@ import EventInterface from './packages/event/event';
 // pages
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
+import PasswordRequest from "./pages/password-request";
+import PasswordReset from "./pages/password-reset";
 import DashboardPage from './pages/dashboard';
 import ProfilePage from './pages/settings/profile/profile';
 import ProfileTeamPage from './pages/settings/profile/profile-team';
@@ -33,7 +35,6 @@ import MasterComponent from "./components/layouts/Master.vue";
 import NavigationComponent from "./components/navigations/Navigation.vue";
 import SettingsNavigationComponent from "./components/navigations/SettingsNavigation.vue";
 import UserDropdownComponent from "./components/navigations/UserDropdown.vue";
-import PasswordRequest from "./pages/password-request";
 
 // plugins
 Vue.use(BootstrapVue);
@@ -69,6 +70,7 @@ export default class Saas {
     'home': new HomePage(),
     'login': new LoginPage(),
     'password-request': new PasswordRequest(),
+    'password-reset': new PasswordReset(),
     'dashboard': new DashboardPage(),
     'profile': new ProfilePage(),
     'password': new PasswordPage(),

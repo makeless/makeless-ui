@@ -77,6 +77,7 @@ export default class Password extends Mixins(UserMixin) {
   private validator: Validator = new Validator([
     this.validatePassword,
     this.validateNewPassword,
+    this.validateNewPasswordConfirmation,
   ]);
 
   public validatePassword(): boolean | null {

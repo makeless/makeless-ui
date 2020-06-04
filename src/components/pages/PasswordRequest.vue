@@ -17,7 +17,7 @@
                                 </b-alert>
 
                                 <b-alert v-if="form.getResponse() && form.getResponse().getCode() === 200" variant="success" dismissible :show="true">
-                                    {{ $saas.t('pages.profile.form.errors.2x') }}
+                                    {{ $saas.t('pages.password-request.form.errors.2x') }}
                                 </b-alert>
 
                                 <b-form-group :label="$saas.t('pages.password-request.form.fields.email.label')" label-for="email">
