@@ -3,7 +3,6 @@ import Team from './../models/team';
 
 export default class User extends Model {
   public name: string | null = null;
-  public username: string | null = null;
   public password: string | null = null;
   public email: string | null = null;
   public teams: Team[] = [];
