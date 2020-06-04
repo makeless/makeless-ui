@@ -17,7 +17,7 @@
                                 </b-alert>
 
                                 <b-form-group :label="$saas.t('pages.login.form.fields.email.label')" label-for="email">
-                                    <b-form-input id="email" v-model="user.email" type="email" required :placeholder="$saas.t('pages.login.form.fields.email.placeholder')"></b-form-input>
+                                    <b-form-input id="email" v-model="login.email" type="email" required :placeholder="$saas.t('pages.login.form.fields.email.placeholder')"></b-form-input>
                                     <b-form-invalid-feedback :state="validateEmail()">
                                         {{ $saas.t('pages.login.form.validations.email') }}
                                     </b-form-invalid-feedback>
@@ -32,7 +32,7 @@
                                             <b-link :to="{name: 'password-request'}">{{ $saas.t('pages.login.passwordRequest') }}</b-link>
                                         </b-col>
                                     </b-row>
-                                    <b-form-input id="password" v-model="user.password" type="password" required :placeholder="$saas.t('pages.login.form.fields.password.placeholder')" autocomplete="false"></b-form-input>
+                                    <b-form-input id="password" v-model="login.password" type="password" required :placeholder="$saas.t('pages.login.form.fields.password.placeholder')" autocomplete="false"></b-form-input>
                                     <b-form-invalid-feedback :state="validatePassword()">
                                         {{ $saas.t('pages.login.form.validations.password') }}
                                     </b-form-invalid-feedback>
@@ -52,13 +52,13 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import User from './../../models/user';
+import LoginModel from './../../models/login';
 import Form from '../../packages/form/basic/form';
 import Validator from '../../packages/validator/basic/validator';
 
 @Component
 export default class Login extends Vue {
-  private user: User = new User();
+  private login: LoginModel = new LoginModel();
   private form: Form = new Form();
   private validator: Validator = new Validator([
     this.validateEmail,
@@ -66,19 +66,19 @@ export default class Login extends Vue {
   ]);
 
   public validateEmail(): boolean | null {
-    if (this.user.email === null) {
+    if (this.login.email === null) {
       return null;
     }
 
-    return this.user.email.length > 0;
+    return this.login.email.length > 0;
   }
 
   public validatePassword(): boolean | null {
-    if (this.user.password === null) {
+    if (this.login.password === null) {
       return null;
     }
 
-    return this.user.password.length >= 3;
+    return this.login.password.length >= 3;
   }
 
   onSubmit($event: Event): void {
@@ -88,17 +88,17 @@ export default class Login extends Vue {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.$saas.getHttp().post('/api/login', this.user).then((data) => {
+    this.$saas.getHttp().post('/api/login', this.login).then((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
-      this.user = new User();
+      this.login = new LoginModel();
 
       this.$saas.getSecurity().login(this.form.getResponse()!);
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
-      this.user = new User();
+      this.login = new LoginModel();
 
       this.$saas.getSecurity().logout(false);
     });
