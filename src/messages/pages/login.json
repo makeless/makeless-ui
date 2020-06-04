@@ -1,6 +1,7 @@
 {
   "en": {
     "title": "Login",
+    "passwordRequest": "Forgot password?",
     "form": {
       "fields": {
         "email": {

@@ -33,6 +33,7 @@ import MasterComponent from "./components/layouts/Master.vue";
 import NavigationComponent from "./components/navigations/Navigation.vue";
 import SettingsNavigationComponent from "./components/navigations/SettingsNavigation.vue";
 import UserDropdownComponent from "./components/navigations/UserDropdown.vue";
+import PasswordRequest from "./pages/password-request";
 
 // plugins
 Vue.use(BootstrapVue);
@@ -67,6 +68,7 @@ export default class Saas {
   private pages: { [key: string]: PageInterface } = {
     'home': new HomePage(),
     'login': new LoginPage(),
+    'password-request': new PasswordRequest(),
     'dashboard': new DashboardPage(),
     'profile': new ProfilePage(),
     'password': new PasswordPage(),

@@ -23,8 +23,16 @@
                                     </b-form-invalid-feedback>
                                 </b-form-group>
 
-                                <b-form-group :label="$saas.t('pages.login.form.fields.password.label')" label-for="password">
-                                    <b-form-input v-model="user.password" type="password" required :placeholder="$saas.t('pages.login.form.fields.password.placeholder')" autocomplete="false"></b-form-input>
+                                <b-form-group>
+                                    <b-row>
+                                        <b-col cols="6">
+                                            <label for="password">{{ $saas.t('pages.login.form.fields.password.label') }}</label>
+                                        </b-col>
+                                        <b-col cols="6" class="text-right">
+                                            <b-link :to="{name: 'password-request'}">{{ $saas.t('pages.login.passwordRequest') }}</b-link>
+                                        </b-col>
+                                    </b-row>
+                                    <b-form-input id="password" v-model="user.password" type="password" required :placeholder="$saas.t('pages.login.form.fields.password.placeholder')" autocomplete="false"></b-form-input>
                                     <b-form-invalid-feedback :state="validatePassword()">
                                         {{ $saas.t('pages.login.form.validations.password') }}
                                     </b-form-invalid-feedback>
