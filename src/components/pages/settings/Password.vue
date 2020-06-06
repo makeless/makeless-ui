@@ -111,7 +111,7 @@ export default class Password extends Mixins(UserMixin) {
     this.form.setResponse(null);
     this.form.setDisabled(true);
 
-    this.$saas.getHttp().patch('/api/auth/password', this.passwordReset).then((data) => {
+    this.$saas.getHttp().patch('/api/auth/user/password', this.passwordReset).then((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
       this.passwordReset = new PasswordReset();
