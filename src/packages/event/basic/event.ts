@@ -7,7 +7,7 @@ export default class Event {
   private readonly path: string;
   private eventSource: EventSource | null;
 
-  constructor(host: string, path: string = '/api/auth/events') {
+  constructor(host: string, path: string = '/api/auth/event') {
     this.host = host;
     this.path = path;
     this.eventSource = null;
