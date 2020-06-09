@@ -78,7 +78,7 @@ export default class Login extends Vue {
       return null;
     }
 
-    return this.login.password.length >= 3;
+    return this.login.password.length >= 6;
   }
 
   onSubmit($event: Event): void {

@@ -86,7 +86,7 @@ export default class PasswordReset extends Vue {
       return null;
     }
 
-    return this.passwordReset.password.length >= 3;
+    return this.passwordReset.password.length >= 6;
   }
 
   public validateNewPassword(): boolean | null {
@@ -94,7 +94,7 @@ export default class PasswordReset extends Vue {
       return null;
     }
 
-    return this.passwordReset.newPassword.length >= 3;
+    return this.passwordReset.newPassword.length >= 6;
   }
 
   public validateNewPasswordConfirmation(): boolean | null {
@@ -102,7 +102,7 @@ export default class PasswordReset extends Vue {
       return null;
     }
 
-    return this.passwordReset.newPasswordConfirmation.length >= 3
+    return this.passwordReset.newPasswordConfirmation.length >= 6
         && this.passwordReset.newPassword === this.passwordReset.newPasswordConfirmation;
   }
 
