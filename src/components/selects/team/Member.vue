@@ -25,11 +25,12 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import VueMultiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
+import User from "../../../models/user";
 
 @Component({
   components: {VueMultiselect},
 })
-export default class User extends Vue {
+export default class Member extends Vue {
   @Prop(Object) obj!: Object;
 
   protected users: User[] = [];
@@ -41,7 +42,7 @@ export default class User extends Vue {
     }
 
     this.loading = true
-    this.$saas.getHttp().get(`/api/auth/team/user?search=${value}`, {
+    this.$saas.getHttp().get(`/api/auth/team/member?search=${value}`, {
       headers: {
         "Team": this.$saas.getSecurity().getTeam()!.id,
       }
