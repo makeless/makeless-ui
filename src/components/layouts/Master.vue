@@ -1,5 +1,5 @@
 <template>
-    <div class="mb-5">
+    <div id="master">
         <navigation></navigation>
         <slot name="page"></slot>
         <slot name="outside"></slot>
