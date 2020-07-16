@@ -26,7 +26,7 @@
                             </b-alert>
 
                             <b-form-group :label="$saas.t('pages.password.form.fields.password.label')" label-for="password">
-                                <b-form-input id="password" v-model="passwordReset.password" type="password" required :placeholder="$saas.t('pages.password.form.fields.password.placeholder')"></b-form-input>
+                                <b-form-input id="password" v-model="passwordReset.password" type="password" required :placeholder="$saas.t('pages.password.form.fields.password.placeholder')" autocomplete="off"></b-form-input>
                                 <b-form-invalid-feedback :state="validatePassword()">
                                     {{ $saas.t('pages.password.form.validations.password') }}
                                 </b-form-invalid-feedback>
@@ -35,7 +35,7 @@
                             <b-row>
                                 <b-col sm="6">
                                     <b-form-group :label="$saas.t('pages.password.form.fields.newPassword.label')" label-for="newPassword">
-                                        <b-form-input id="newPassword" v-model="passwordReset.newPassword" type="password" required :placeholder="$saas.t('pages.password.form.fields.newPassword.placeholder')"></b-form-input>
+                                        <b-form-input id="newPassword" v-model="passwordReset.newPassword" type="password" required :placeholder="$saas.t('pages.password.form.fields.newPassword.placeholder')" autocomplete="off"></b-form-input>
                                         <b-form-invalid-feedback :state="validateNewPassword()">
                                             {{ $saas.t('pages.password.form.validations.newPassword') }}
                                         </b-form-invalid-feedback>
@@ -44,7 +44,7 @@
 
                                 <b-col sm="6">
                                     <b-form-group :label="$saas.t('pages.password.form.fields.newPasswordConfirmation.label')" label-for="newPasswordConfirmation">
-                                        <b-form-input id="newPasswordConfirmation" v-model="passwordReset.newPasswordConfirmation" type="password" required :placeholder="$saas.t('pages.password.form.fields.newPasswordConfirmation.placeholder')"></b-form-input>
+                                        <b-form-input id="newPasswordConfirmation" v-model="passwordReset.newPasswordConfirmation" type="password" required :placeholder="$saas.t('pages.password.form.fields.newPasswordConfirmation.placeholder')" autocomplete="off"></b-form-input>
                                         <b-form-invalid-feedback :state="validateNewPasswordConfirmation()">
                                             {{ $saas.t('pages.password.form.validations.newPasswordConfirmation') }}
                                         </b-form-invalid-feedback>
