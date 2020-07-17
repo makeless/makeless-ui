@@ -58,21 +58,11 @@ export default class Token extends Mixins(UserMixin) {
     this.selectedToken = token;
   }
 
-  onUserLoaded() {
-    if (this.response === null) {
-      this.loadTokens();
-    }
-  }
-
   created() {
     this.loadTokens();
   }
 
   loadTokens(): void {
-    if (this.$saas.getSecurity().getUser() === null) {
-      return;
-    }
-
     this.$saas.getHttp().get('/api/auth/token').then((data) => {
       this.tokens = [];
       this.response = this.$saas.getHttp().response(data);

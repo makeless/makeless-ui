@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-card no-body header="Settings">
+        <b-card no-body header="Settings" class="mb-3 mb-lg-0">
             <b-list-group flush>
                 <template v-if="!$saas.getSecurity().getTeam()">
                     <b-list-group-item v-if="isAccessible('profile')" :to="{name: 'profile'}" :active="isActive('profile')">Profile</b-list-group-item>
