@@ -218,7 +218,7 @@ export default class Security {
     }
 
     for (let i = 0; i < this.user.teamUsers.length; i++) {
-      if (team.id !== this.user.teamUsers[i].id) {
+      if (team.id !== this.user.teamUsers[i].team!.id) {
         continue;
       }
 
