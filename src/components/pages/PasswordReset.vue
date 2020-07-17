@@ -67,7 +67,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import PasswordResetModel from './../../models/password-reset';
+import PasswordResetModel from '../../structs/password-reset';
 import Form from '../../packages/form/basic/form';
 import Validator from '../../packages/validator/basic/validator';
 

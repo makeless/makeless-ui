@@ -1,4 +1,4 @@
-import Model from './../models/model';
+import Model from '../models/model';
 
 export default class Login extends Model {
   public email: string | null = null;

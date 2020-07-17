@@ -1,6 +1,6 @@
 <template>
     <b-modal :id="modalId" no-fade :title="$saas.t('pages.team.forms.create.title')">
-        <b-form id="form-team-create" v-if="$saas.getSecurity().isAuth() && this.userLoaded && team" @submit="onSubmit">
+        <b-form id="form-team-create" v-if="this.userLoaded && teamCreate" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                     {{ $saas.t('pages.team.forms.create.errors.4x') }}
@@ -12,7 +12,7 @@
             </b-alert>
 
             <b-form-group :label="$saas.t('pages.team.forms.create.fields.name.label')" label-for="name">
-                <b-form-input id="name" type="text" v-model="team.name" required autocomplete="off" :placeholder="$saas.t('pages.team.forms.create.fields.name.placeholder')"></b-form-input>
+                <b-form-input id="name" type="text" v-model="teamCreate.name" required autocomplete="off" :placeholder="$saas.t('pages.team.forms.create.fields.name.placeholder')"></b-form-input>
                 <b-form-invalid-feedback :state="validateName()">
                     {{ $saas.t('pages.team.forms.create.validations.name') }}
                 </b-form-invalid-feedback>
@@ -35,24 +35,25 @@ import {Component, Mixins} from 'vue-property-decorator';
 import UserMixin from './../../../../mixins/User.vue';
 import Form from '../../../../packages/form/basic/form';
 import Validator from '../../../../packages/validator/basic/validator';
-import Team from '../../../../models/team';
 import {BvModalEvent} from 'bootstrap-vue';
+import TeamCreate from '../../../../structs/team-create';
+import Team from '../../../../models/team';
 
 @Component
 export default class Create extends Mixins(UserMixin) {
   private modalId: string = 'team-create';
-  private team: Team = new Team();
+  private teamCreate: TeamCreate = new TeamCreate();
   private form: Form = new Form();
   private validator: Validator = new Validator([
     this.validateName,
   ]);
 
   public validateName(): boolean | null {
-    if (this.team.name === null) {
+    if (this.teamCreate.name === null) {
       return null;
     }
 
-    return this.team.name.length >= 4;
+    return this.teamCreate.name.length >= 4 && this.teamCreate.name.length <= 50;
   }
 
   created() {
@@ -62,7 +63,7 @@ export default class Create extends Mixins(UserMixin) {
   public onModalHide(): void {
     this.$root.$on('bv::modal::hide', (bvEvent: BvModalEvent, modalId: string) => {
       if (this.modalId === modalId) {
-        this.team.name = null;
+        this.teamCreate = new TeamCreate();
       }
     });
   }
@@ -73,18 +74,12 @@ export default class Create extends Mixins(UserMixin) {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.$saas.getHttp().post('/api/auth/team', this.team).then((data) => {
+    this.$saas.getHttp().post('/api/auth/team', this.teamCreate).then((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
-      Object.assign(this.team, {
-        id: this.form.getResponse()!.getData().data.id,
-        createdAt: this.form.getResponse()!.getData().data.createdAt,
-        updatedAt: this.form.getResponse()!.getData().data.updatedAt,
-        name: this.form.getResponse()!.getData().data.name,
-        userId: this.form.getResponse()!.getData().data.userId,
-      });
-      this.$saas.getSecurity().addTeam(this.team);
-      this.$saas.getSecurity().switchToTeam(this.team.id!);
+      const team = Object.assign(new Team(), this.form.getResponse()!.getData().data);
+      this.$saas.getSecurity().addTeam(team);
+      this.$saas.getSecurity().switchToTeam(team.id!);
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
       this.form.setError(true);

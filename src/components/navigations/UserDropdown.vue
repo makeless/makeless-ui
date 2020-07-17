@@ -6,8 +6,8 @@
         </b-dropdown-item>
         <template v-if="$saas.getSecurity().getUser().hasTeams() && $saas.getConfig().getConfiguration().getTeams()">
             <b-dropdown-group :header="$saas.t('components.navigations.userDropdown.teams')">
-                <b-dropdown-item @click="$saas.getSecurity().switchToTeam(team.id)" v-for="team in $saas.getSecurity().getUser().teams" :key="team.id" :active="$saas.getSecurity().getTeam() !== null && $saas.getSecurity().getTeam().id === team.id">
-                    {{ team.name }}
+                <b-dropdown-item @click="$saas.getSecurity().switchToTeam(teamUser.teamId)" v-for="teamUser in $saas.getSecurity().getUser().teamUsers" :key="teamUser.id" :active="$saas.getSecurity().getTeam() !== null && $saas.getSecurity().getTeam().id === teamUser.teamId">
+                    {{ teamUser.team.name }}
                 </b-dropdown-item>
             </b-dropdown-group>
         </template>

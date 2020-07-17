@@ -68,7 +68,7 @@ import {Component, Mixins} from 'vue-property-decorator';
 import UserMixin from './../../../mixins/User.vue';
 import Form from '../../../packages/form/basic/form';
 import Validator from '../../../packages/validator/basic/validator';
-import PasswordReset from '../../../models/password-reset';
+import PasswordReset from '../../../structs/password-reset';
 
 @Component
 export default class Password extends Mixins(UserMixin) {

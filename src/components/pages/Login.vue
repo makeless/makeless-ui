@@ -52,7 +52,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import LoginModel from './../../models/login';
+import LoginModel from '../../structs/login';
 import Form from '../../packages/form/basic/form';
 import Validator from '../../packages/validator/basic/validator';
 

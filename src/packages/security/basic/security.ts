@@ -4,10 +4,11 @@ import ResponseInterface from './../../../packages/http/response';
 import EventInterface from './../../../packages/event/event';
 import StorageInterface from './../../../packages/storage/storage';
 import DataInterface from '../../event/data';
-import PageInterface from "../../page/page";
-import ConfigurationInterface from "../../config/configuration";
+import PageInterface from '../../page/page';
+import ConfigurationInterface from '../../config/configuration';
 import Team from './../../../models/team';
 import User from './../../../models/user';
+import TeamUser from '../../../models/team-user';
 
 export default class Security {
   user: User | null = null;
@@ -64,9 +65,9 @@ export default class Security {
       return;
     }
 
-    this.user.teams.forEach((team: Team) => {
-      if (team.id !== null) {
-        this.teamIndex[team.id] = team;
+    this.user.teamUsers.forEach((teamUser: TeamUser) => {
+      if (teamUser.team !== null && teamUser.team.id !== null) {
+        this.teamIndex[teamUser.team!.id!] = teamUser.team;
       }
     });
   }
@@ -207,7 +208,7 @@ export default class Security {
       return;
     }
 
-    this.user.teams.push(team);
+    this.user.teamUsers.push(team.teamUsers[0]);
     this.teamIndex[team.id] = team;
   }
 
@@ -216,13 +217,13 @@ export default class Security {
       return;
     }
 
-    for (let i = 0; i < this.user.teams.length; i++) {
-      if (team.id !== this.user.teams[i].id) {
+    for (let i = 0; i < this.user.teamUsers.length; i++) {
+      if (team.id !== this.user.teamUsers[i].id) {
         continue;
       }
 
       this.team = null;
-      this.user.teams.splice(i, 1);
+      this.user.teamUsers.splice(i, 1);
       delete this.teamIndex[team.id];
       return;
     }
@@ -255,7 +256,7 @@ export default class Security {
       return false;
     }
 
-    return !(requiresEnabledTokens && !requiresEnabledTeams && !configuration.getTokens())
+    return !(requiresEnabledTokens && !requiresEnabledTeams && !configuration.getTokens());
   }
 
   public isPageAccessible(page: PageInterface | null): boolean {
