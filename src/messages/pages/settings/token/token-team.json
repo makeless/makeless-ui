@@ -24,7 +24,7 @@
           "cancel": "Cancel"
         },
         "validations": {
-          "note": "Note is required and must me at least 4 characters long",
+          "note": "Note is required and must be 4 to 30 characters long",
           "user": "User is required"
         },
         "errors": {

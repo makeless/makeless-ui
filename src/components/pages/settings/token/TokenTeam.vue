@@ -13,7 +13,7 @@
                             <b-button size="sm" variant="primary" v-b-modal.token-team-create>{{ $saas.t('pages.token-team.actions.create') }}</b-button>
                         </h1>
                         <hr>
-                        <b-list-group v-if="$saas.getSecurity().isAuth() && userLoaded && response && tokens">
+                        <b-list-group v-if="$saas.getSecurity().isAuth() && response && tokens">
                             <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="token in tokens" :key="token.id" :variant="token.new ? 'success': null">
                                 <div>
                                     <template v-if="token.new">{{ token.token }}</template>
@@ -55,7 +55,7 @@ import DeleteModal from '../../../modals/settings/token/team/Delete.vue';
 export default class TokenTeam extends Mixins(UserMixin) {
   private selectedToken: TokenModel | null = null;
   private response: ResponseInterface | null = null;
-  private tokens: TokenModel[] | null = null;
+  private tokens: TokenModel[] = [];
 
   public selectToken(token: TokenModel) {
     this.selectedToken = token;
@@ -78,10 +78,9 @@ export default class TokenTeam extends Mixins(UserMixin) {
 
     this.$saas.getHttp().get('/api/auth/team/token', {
       headers: {
-        "Team": this.$saas.getSecurity().getTeam()!.id,
-      }
+        'Team': this.$saas.getSecurity().getTeam()!.id,
+      },
     }).then((data) => {
-      this.tokens = [];
       this.response = this.$saas.getHttp().response(data);
       this.response.getData().data.forEach((token: TokenModel) => {
         this.tokens!.push(token);

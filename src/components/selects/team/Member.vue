@@ -25,7 +25,7 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import VueMultiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
-import User from "../../../models/user";
+import User from '../../../models/user';
 
 @Component({
   components: {VueMultiselect},
@@ -37,17 +37,17 @@ export default class Member extends Vue {
   private loading: boolean = false;
 
   public onSearch(value: string): void {
-    if (!this.$saas.getSecurity().getUser() || !this.$saas.getSecurity().getTeam() || value === "") {
+    if (!this.$saas.getSecurity().getTeam() || value === '') {
       return;
     }
 
-    this.loading = true
+    this.loading = true;
     this.$saas.getHttp().get(`/api/auth/team/member?search=${value}`, {
       headers: {
-        "Team": this.$saas.getSecurity().getTeam()!.id,
-      }
+        'Team': this.$saas.getSecurity().getTeam()!.id,
+      },
     }).then((data) => {
-      this.users = this.$saas.getHttp().response(data).getData().data;
+      this.users = this.$saas.getHttp().response(data).getData().data || [];
       this.loading = false;
     });
   }

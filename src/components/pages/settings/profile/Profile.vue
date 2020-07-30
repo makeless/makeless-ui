@@ -82,7 +82,6 @@ export default class Profile extends Mixins(UserMixin) {
       this.form.setDisabled(false);
       Object.assign(this.$saas.getSecurity().getUser(), {
         name: this.form.getResponse()!.getData().data.name,
-        updatedAt: this.form.getResponse()!.getData().data.updatedAt,
       });
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
