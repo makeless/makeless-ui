@@ -200,6 +200,21 @@ export default class Security {
       return false;
     }
 
+    for (let i = 0; i < this.getUser()!.teamUsers.length; i++) {
+      const teamUser = this.getUser()!.teamUsers[i];
+      if (teamUser.teamId === this.getTeam()!.id && teamUser.role === 'owner') {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  public isTeamCreator(): boolean {
+    if (!this.isAuth() || this.getUser() === null || this.getTeam() === null) {
+      return false;
+    }
+
     return this.getTeam()!.userId === this.getUser()!.id;
   }
 

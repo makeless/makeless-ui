@@ -5,8 +5,8 @@ import User from './../../models/user';
 import Team from './../../models/team';
 import EventInterface from '../event/event';
 import StorageInterface from '../storage/storage';
-import PageInterface from "../page/page";
-import ConfigurationInterface from "../config/configuration";
+import PageInterface from '../page/page';
+import ConfigurationInterface from '../config/configuration';
 
 export default interface Security {
   router: RouterInterface;
@@ -49,6 +49,12 @@ export default interface Security {
    * @returns boolean
    */
   isTeamOwner(): boolean
+
+  /**
+   * Returns if user is current team creator
+   * @returns boolean
+   */
+  isTeamCreator(): boolean
 
   /**
    * Adds team to user
