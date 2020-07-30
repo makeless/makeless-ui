@@ -20,7 +20,7 @@
           "cancel": "Cancel"
         },
         "validations": {
-          "name": "Name is required and must me at least 4 characters long"
+          "name": "Name is required and must be 4 to 50 characters long"
         },
         "errors": {
           "4x": "Create team failed",

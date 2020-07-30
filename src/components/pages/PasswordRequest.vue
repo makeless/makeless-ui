@@ -45,7 +45,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import PasswordRequestModel from './../../models/password-request';
+import PasswordRequestModel from '../../structs/password-request';
 import Form from '../../packages/form/basic/form';
 import Validator from '../../packages/validator/basic/validator';
 

@@ -1,11 +1,11 @@
 import Model from './../models/model';
-import Team from './../models/team';
+import TeamUser from './team-user';
 
 export default class User extends Model {
   public name: string | null = null;
   public password: string | null = null;
   public email: string | null = null;
-  public teams: Team[] = [];
+  public teamUsers: TeamUser[] = [];
 
   public create(data: any): User {
     return Object.assign(new User(), data);
@@ -16,6 +16,6 @@ export default class User extends Model {
   }
 
   public hasTeams(): boolean {
-    return this.teams.length > 0;
+    return this.teamUsers.length > 0;
   }
 }

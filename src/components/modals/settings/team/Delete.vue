@@ -76,7 +76,9 @@ export default class Delete extends Mixins(UserMixin) {
     this.form.setResponse(null);
 
     this.$saas.getHttp().delete('/api/auth/team', {
-      data: this.team,
+      headers: {
+        'Team': this.team.id,
+      },
     }).then((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);

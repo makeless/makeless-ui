@@ -12,7 +12,7 @@
             </b-alert>
 
             <b-form-group :label="$saas.t('pages.token.forms.create.fields.note.label')" label-for="note">
-                <b-form-input id="note" type="text" v-model="token.note" required autocomplete="off" :placeholder="$saas.t('pages.token.forms.create.fields.note.placeholder')"></b-form-input>
+                <b-form-input id="note" type="text" v-model="tokenCreate.note" required autocomplete="off" :placeholder="$saas.t('pages.token.forms.create.fields.note.placeholder')"></b-form-input>
                 <b-form-invalid-feedback :state="validateNote()">
                     {{ $saas.t('pages.token.forms.create.validations.note') }}
                 </b-form-invalid-feedback>
@@ -38,24 +38,25 @@ import Validator from '../../../../packages/validator/basic/validator';
 import {BModal, BvModalEvent} from 'bootstrap-vue';
 import Token from '../../../../models/token';
 import TokenUtil from '../../../../utils/token';
+import TokenCreate from '../../../../structs/token-create';
 
 @Component
 export default class Create extends Mixins(UserMixin) {
   @Prop(Array) readonly tokens!: Token[];
 
   private modalId: string = 'token-create';
-  private token: Token = new Token();
+  private tokenCreate: TokenCreate = new TokenCreate();
   private form: Form = new Form();
   private validator: Validator = new Validator([
     this.validateNote,
   ]);
 
   public validateNote(): boolean | null {
-    if (this.token.note === null) {
+    if (this.tokenCreate.note === null) {
       return null;
     }
 
-    return this.token.note.length >= 4 && this.token.note.length <= 30;
+    return this.tokenCreate.note.length >= 4 && this.tokenCreate.note.length <= 30;
   }
 
   created() {
@@ -65,7 +66,7 @@ export default class Create extends Mixins(UserMixin) {
   public onModalHide(): void {
     this.$root.$on('bv::modal::hide', (bvEvent: BvModalEvent, modalId: string) => {
       if (this.modalId === modalId) {
-        this.token = new Token();
+        this.tokenCreate = new TokenCreate();
       }
     });
   }
@@ -76,27 +77,20 @@ export default class Create extends Mixins(UserMixin) {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.token.token = TokenUtil.generate();
-    this.$saas.getHttp().post('/api/auth/token', this.token).then((data) => {
+    this.tokenCreate.token = TokenUtil.generate();
+    this.$saas.getHttp().post('/api/auth/token', this.tokenCreate).then((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
-      Object.assign(this.token, {
-        id: this.form.getResponse()!.getData().data.id,
-        createdAt: this.form.getResponse()!.getData().data.createdAt,
-        updatedAt: this.form.getResponse()!.getData().data.updatedAt,
-        token: this.form.getResponse()!.getData().data.token,
-        note: this.form.getResponse()!.getData().data.note,
-        userId: this.form.getResponse()!.getData().data.userId,
-        teamId: this.form.getResponse()!.getData().data.teamId,
+      const token = Object.assign(new Token(), this.form.getResponse()!.getData().data, {
         new: true,
       });
-      this.tokens.unshift(this.token);
+      this.tokens.unshift(token);
       (this.$refs[this.modalId] as BModal).hide();
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
-      this.token = new Token();
+      this.tokenCreate = new TokenCreate();
     });
   }
 }

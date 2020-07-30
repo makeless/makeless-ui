@@ -10,7 +10,7 @@
       },
       "button": "Update profile",
       "validations": {
-        "name": "Name is required"
+        "name": "Name is required and must be 4 to 50 characters long"
       },
       "errors": {
         "2x": "Team profile updated successfully",
