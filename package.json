@@ -3,7 +3,8 @@
   "version": "0.7.1",
   "private": false,
   "files": [
-    "src"
+    "src",
+    "README.md"
   ],
   "dependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",
