@@ -89,13 +89,12 @@ export default class Security {
       this.user = new User().create(this.http.response(data).getData().data);
       this.createTeamIndex();
       this.initTeam();
-      window.dispatchEvent(new Event('user-loaded'));
     }).catch((_) => {
       this.logout(true);
     });
   }
 
-  private authMiddleware(): void {
+  private async authMiddleware() {
     this.router.getVueRouter().beforeEach((to, from, next) => {
       if (to.matched.some(record => record.meta.requiresAuth) && !this.isAuth()) {
         next({path: '/login'});
@@ -155,7 +154,7 @@ export default class Security {
 
   public async setup() {
     await this.loadUser();
-    this.authMiddleware();
+    await this.authMiddleware();
     this.refreshAuth();
     this.logoutHandler();
     this.handleEvents();

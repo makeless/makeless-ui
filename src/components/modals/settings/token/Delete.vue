@@ -1,6 +1,6 @@
 <template>
     <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.token.forms.delete.title')">
-        <b-form id="form-token-delete" v-if="$saas.getSecurity().isAuth() && this.userLoaded && token" @submit="onSubmit">
+        <b-form id="form-token-delete" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                     {{ $saas.t('pages.token.forms.delete.errors.4x') }}
@@ -31,15 +31,14 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins, Prop} from 'vue-property-decorator';
-import UserMixin from '../../../../mixins/User.vue';
+import {Component, Prop, Vue} from 'vue-property-decorator';
 import Form from '../../../../packages/form/basic/form';
 import Validator from '../../../../packages/validator/basic/validator';
 import {BModal, BvModalEvent} from 'bootstrap-vue';
 import Token from '../../../../models/token';
 
 @Component
-export default class Delete extends Mixins(UserMixin) {
+export default class Delete extends Vue {
   @Prop(Object) readonly token!: Token;
   @Prop(Array) readonly tokens!: Token[];
 

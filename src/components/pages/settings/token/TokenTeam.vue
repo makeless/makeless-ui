@@ -13,7 +13,7 @@
                             <b-button size="sm" variant="primary" v-b-modal.token-team-create>{{ $saas.t('pages.token-team.actions.create') }}</b-button>
                         </h1>
                         <hr>
-                        <b-list-group v-if="$saas.getSecurity().isAuth() && response && tokens">
+                        <b-list-group v-if="response && tokens">
                             <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="token in tokens" :key="token.id" :variant="token.new ? 'success': null">
                                 <div>
                                     <template v-if="token.new">{{ token.token }}</template>
@@ -39,8 +39,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins} from 'vue-property-decorator';
-import UserMixin from './../../../../mixins/User.vue';
+import {Component, Vue} from 'vue-property-decorator';
 import ResponseInterface from '../../../../packages/http/response';
 import TokenModel from '../../../../models/token';
 import CreateModal from '../../../modals/settings/token/team/Create.vue';
@@ -52,7 +51,7 @@ import DeleteModal from '../../../modals/settings/token/team/Delete.vue';
     DeleteModal,
   },
 })
-export default class TokenTeam extends Mixins(UserMixin) {
+export default class TokenTeam extends Vue {
   private selectedToken: TokenModel | null = null;
   private response: ResponseInterface | null = null;
   private tokens: TokenModel[] = [];
@@ -61,21 +60,11 @@ export default class TokenTeam extends Mixins(UserMixin) {
     this.selectedToken = token;
   }
 
-  onUserLoaded() {
-    if (this.response === null) {
-      this.loadTokens();
-    }
-  }
-
   created() {
     this.loadTokens();
   }
 
   loadTokens(): void {
-    if (this.$saas.getSecurity().getUser() === null) {
-      return;
-    }
-
     this.$saas.getHttp().get('/api/auth/team/token', {
       headers: {
         'Team': this.$saas.getSecurity().getTeam()!.id,

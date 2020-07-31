@@ -1,6 +1,6 @@
 <template>
     <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.member-team.forms.remove.title')">
-        <b-form id="form-member-team-remove" v-if="$saas.getSecurity().isAuth() && this.userLoaded && user" @submit="onSubmit">
+        <b-form id="form-member-team-remove" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                     {{ $saas.t('pages.member-team.forms.remove.errors.4x') }}
@@ -31,15 +31,14 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Mixins} from 'vue-property-decorator';
-import UserMixin from './../../../../mixins/User.vue';
+import {Component, Prop, Vue} from 'vue-property-decorator';
 import Form from '../../../../packages/form/basic/form';
 import Validator from '../../../../packages/validator/basic/validator';
-import {BModal, BvModal, BvModalEvent} from 'bootstrap-vue';
+import {BModal, BvModalEvent} from 'bootstrap-vue';
 import User from '../../../../models/user';
 
 @Component
-export default class Remove extends Mixins(UserMixin) {
+export default class Remove extends Vue {
   @Prop(Object) readonly user!: User;
   @Prop(Array) readonly users!: User[];
 

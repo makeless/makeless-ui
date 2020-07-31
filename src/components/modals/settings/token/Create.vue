@@ -1,6 +1,6 @@
 <template>
     <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.token.forms.create.title')">
-        <b-form id="form-token-create" v-if="$saas.getSecurity().isAuth() && this.userLoaded" @submit="onSubmit">
+        <b-form id="form-token-create" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                     {{ $saas.t('pages.token.forms.create.errors.4x') }}
@@ -31,8 +31,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins, Prop} from 'vue-property-decorator';
-import UserMixin from '../../../../mixins/User.vue';
+import {Component, Prop, Vue} from 'vue-property-decorator';
 import Form from '../../../../packages/form/basic/form';
 import Validator from '../../../../packages/validator/basic/validator';
 import {BModal, BvModalEvent} from 'bootstrap-vue';
@@ -41,7 +40,7 @@ import TokenUtil from '../../../../utils/token';
 import TokenCreate from '../../../../structs/token-create';
 
 @Component
-export default class Create extends Mixins(UserMixin) {
+export default class Create extends Vue {
   @Prop(Array) readonly tokens!: Token[];
 
   private modalId: string = 'token-create';

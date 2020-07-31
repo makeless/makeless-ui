@@ -8,7 +8,7 @@
 
             <b-navbar-nav class="ml-auto">
                 <navigation-leg :leg="$saas.getConfig().getConfiguration().getNavigation().getRight()"></navigation-leg>
-                <user-dropdown></user-dropdown>
+                <user-dropdown v-if="this.$saas.getSecurity().isAuth()"></user-dropdown>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>
@@ -16,8 +16,8 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import NavigationLeg from "./NavigationLeg.vue";
-import NavigationBrand from "./NavigationBrand.vue";
+import NavigationLeg from './NavigationLeg.vue';
+import NavigationBrand from './NavigationBrand.vue';
 
 @Component({
   components: {NavigationBrand, NavigationLeg},

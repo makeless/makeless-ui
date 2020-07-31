@@ -10,7 +10,7 @@
                     <b-col lg="9">
                         <h1>{{ $saas.t('pages.profile.title') }}</h1>
                         <hr>
-                        <b-form v-if="this.userLoaded && profile" @submit="onSubmit">
+                        <b-form @submit="onSubmit">
                             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                                     {{ $saas.t('pages.profile.form.errors.4x') }}
@@ -44,27 +44,22 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins} from 'vue-property-decorator';
-import UserMixin from './../../../../mixins/User.vue';
+import {Component, Vue} from 'vue-property-decorator';
 import ProfileStruct from '../../../../structs/profile';
 import UtilObject from './../../../../utils/object';
 import Form from '../../../../packages/form/basic/form';
 import Validator from '../../../../packages/validator/basic/validator';
 
 @Component
-export default class Profile extends Mixins(UserMixin) {
-  private profile: ProfileStruct | null = UtilObject.clone(this.$saas.getSecurity().getUser());
+export default class Profile extends Vue {
+  private profile: ProfileStruct = UtilObject.clone(this.$saas.getSecurity().getUser());
   private form: Form = new Form();
   private validator: Validator = new Validator([
     this.validateName,
   ]);
 
-  public onUserLoaded(): void {
-    this.profile = UtilObject.clone(this.$saas.getSecurity().getUser());
-  }
-
   public validateName(): boolean | null {
-    if (this.profile === null || this.profile.name === null) {
+    if (this.profile.name === null) {
       return null;
     }
 

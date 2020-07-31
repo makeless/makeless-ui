@@ -13,7 +13,7 @@
                             <b-button size="sm" variant="primary" v-b-modal.token-create>{{ $saas.t('pages.token.actions.create') }}</b-button>
                         </h1>
                         <hr>
-                        <b-list-group v-if="$saas.getSecurity().isAuth() && response && tokens">
+                        <b-list-group v-if="response && tokens">
                             <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="token in tokens" :key="token.id" :variant="token.new ? 'success': null">
                                 <template v-if="token.new">{{ token.token }}</template>
                                 <template v-else>{{ token.note }}</template>
@@ -36,8 +36,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins} from 'vue-property-decorator';
-import UserMixin from './../../../../mixins/User.vue';
+import {Component, Vue} from 'vue-property-decorator';
 import ResponseInterface from '../../../../packages/http/response';
 import TokenModel from '../../../../models/token';
 import CreateModal from '../../../modals/settings/token/Create.vue';
@@ -49,7 +48,7 @@ import DeleteModal from '../../../modals/settings/token/Delete.vue';
     DeleteModal,
   },
 })
-export default class Token extends Mixins(UserMixin) {
+export default class Token extends Vue {
   private selectedToken: TokenModel | null = null;
   private response: ResponseInterface | null = null;
   private tokens: TokenModel[] = [];

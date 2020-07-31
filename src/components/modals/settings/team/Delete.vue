@@ -1,6 +1,6 @@
 <template>
     <b-modal :id="modalId" no-fade :title="$saas.t('pages.team.forms.delete.title')">
-        <b-form id="form-team-delete" v-if="$saas.getSecurity().isAuth() && this.userLoaded && team" @submit="onSubmit">
+        <b-form id="form-team-delete" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                     {{ $saas.t('pages.team.forms.delete.errors.4x') }}
@@ -31,15 +31,14 @@
 </template>
 
 <script lang="ts">
-import {Component, Prop, Mixins} from 'vue-property-decorator';
-import UserMixin from './../../../../mixins/User.vue';
+import {Component, Prop, Vue} from 'vue-property-decorator';
 import Form from '../../../../packages/form/basic/form';
 import Validator from '../../../../packages/validator/basic/validator';
 import Team from '../../../../models/team';
 import {BvModalEvent} from 'bootstrap-vue';
 
 @Component
-export default class Delete extends Mixins(UserMixin) {
+export default class Delete extends Vue {
   @Prop(Object) readonly team!: Team;
 
   private modalId: string = 'team-delete';

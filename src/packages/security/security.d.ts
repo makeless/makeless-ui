@@ -17,6 +17,7 @@ export default interface Security {
   /**
    * Required method to init go-saas
    * Loads user, sets up auth middleware, starts silent auth refresh and sets up logout handler
+   * Awaits user and auth middleware for security reasons (!)
    */
   setup(): void
 

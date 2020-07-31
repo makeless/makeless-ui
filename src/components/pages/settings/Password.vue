@@ -10,7 +10,7 @@
                     <b-col lg="9">
                         <h1>{{ $saas.t('pages.password.title') }}</h1>
                         <hr>
-                        <b-form v-if="$saas.getSecurity().isAuth() && this.userLoaded" @submit="onSubmit">
+                        <b-form @submit="onSubmit">
                             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                                     {{ $saas.t('pages.password.form.errors.4x') }}
@@ -64,14 +64,13 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins} from 'vue-property-decorator';
-import UserMixin from './../../../mixins/User.vue';
+import {Component, Vue} from 'vue-property-decorator';
 import Form from '../../../packages/form/basic/form';
 import Validator from '../../../packages/validator/basic/validator';
 import PasswordReset from '../../../structs/password-reset';
 
 @Component
-export default class Password extends Mixins(UserMixin) {
+export default class Password extends Vue {
   private passwordReset: PasswordReset = new PasswordReset();
   private form: Form = new Form();
   private validator: Validator = new Validator([

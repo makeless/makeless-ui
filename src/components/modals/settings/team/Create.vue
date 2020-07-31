@@ -1,6 +1,6 @@
 <template>
     <b-modal :id="modalId" no-fade :title="$saas.t('pages.team.forms.create.title')">
-        <b-form id="form-team-create" v-if="this.userLoaded && teamCreate" @submit="onSubmit">
+        <b-form id="form-team-create" v-if="teamCreate" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                     {{ $saas.t('pages.team.forms.create.errors.4x') }}
@@ -31,8 +31,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins} from 'vue-property-decorator';
-import UserMixin from './../../../../mixins/User.vue';
+import {Component, Vue} from 'vue-property-decorator';
 import Form from '../../../../packages/form/basic/form';
 import Validator from '../../../../packages/validator/basic/validator';
 import {BvModalEvent} from 'bootstrap-vue';
@@ -40,7 +39,7 @@ import TeamCreate from '../../../../structs/team-create';
 import Team from '../../../../models/team';
 
 @Component
-export default class Create extends Mixins(UserMixin) {
+export default class Create extends Vue {
   private modalId: string = 'team-create';
   private teamCreate: TeamCreate = new TeamCreate();
   private form: Form = new Form();

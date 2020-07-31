@@ -13,8 +13,8 @@
                             <b-button size="sm" variant="primary" v-b-modal.team-create>{{ $saas.t('pages.team.actions.create') }}</b-button>
                         </h1>
                         <hr>
-                        <div v-if="$saas.getSecurity().isAuth() && userLoaded">
-                            <b-list-group v-if="$saas.getSecurity().isAuth() && userLoaded">
+                        <div>
+                            <b-list-group>
                                 <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="teamUser in $saas.getSecurity().getUser().teamUsers" :key="teamUser.id">
                                     {{ teamUser.team.name }}
                                     <b-button v-if="$saas.getSecurity().getUser().id === teamUser.team.userId" size="sm" variant="danger" v-b-modal.team-delete @click="selectTeam(teamUser.team)">{{ $saas.t('pages.team.actions.delete') }}</b-button>
@@ -36,11 +36,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins} from 'vue-property-decorator';
+import {Component, Vue} from 'vue-property-decorator';
 import CreateModal from './../../../components/modals/settings/team/Create.vue';
 import DeleteModal from './../../../components/modals/settings/team/Delete.vue';
 import LeaveModal from './../../../components/modals/settings/team/Leave.vue';
-import UserMixin from './../../../mixins/User.vue';
 import TeamModel from '../../../models/team';
 
 @Component({
@@ -50,7 +49,7 @@ import TeamModel from '../../../models/team';
     LeaveModal,
   },
 })
-export default class Team extends Mixins(UserMixin) {
+export default class Team extends Vue {
   private selectedTeam: TeamModel | null = null;
 
   public selectTeam(team: TeamModel) {

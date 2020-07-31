@@ -13,7 +13,7 @@
                             <b-button size="sm" variant="primary" v-b-modal.member-invite>{{ $saas.t('pages.member-team.actions.invite') }}</b-button>
                         </h1>
                         <hr>
-                        <b-list-group v-if="$saas.getSecurity().isAuth() && userLoaded && response && users">
+                        <b-list-group v-if="response && users">
                             <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="user in users" :key="user.id">
                                 {{ user.name }}
                                 <b-button v-if="$saas.getSecurity().getUser().id !== user.id" size="sm" variant="danger" v-b-modal.member-team-remove @click="selectUser(user)">{{ $saas.t('pages.member-team.actions.remove') }}</b-button>
@@ -38,8 +38,7 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins} from 'vue-property-decorator';
-import UserMixin from '../../../../mixins/User.vue';
+import {Component, Vue} from 'vue-property-decorator';
 import ResponseInterface from '../../../../packages/http/response';
 import User from '../../../../models/user';
 import RemoveModal from '../../../modals/settings/member/Remove.vue';
@@ -49,7 +48,7 @@ import RemoveModal from '../../../modals/settings/member/Remove.vue';
     RemoveModal,
   },
 })
-export default class MemberTeam extends Mixins(UserMixin) {
+export default class MemberTeam extends Vue {
   private selectedUser: User | null = null;
   private response: ResponseInterface | null = null;
   private users: User[] | null = null;
@@ -58,21 +57,11 @@ export default class MemberTeam extends Mixins(UserMixin) {
     this.selectedUser = user;
   }
 
-  onUserLoaded() {
-    if (this.response === null) {
-      this.loadTeamMembers();
-    }
-  }
-
   created() {
     this.loadTeamMembers();
   }
 
   loadTeamMembers(): void {
-    if (this.$saas.getSecurity().getTeam() === null) {
-      return;
-    }
-
     this.$saas.getHttp().get('/api/auth/team/member', {
       headers: {
         'Team': this.$saas.getSecurity().getTeam()!.id,

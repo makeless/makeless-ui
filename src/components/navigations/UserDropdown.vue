@@ -1,5 +1,5 @@
 <template>
-    <b-nav-item-dropdown v-if="$saas.getSecurity().isAuth() && this.userLoaded" right>
+    <b-nav-item-dropdown right>
         <template slot="button-content">{{ $saas.getSecurity().getDisplayName() }}</template>
         <b-dropdown-item @click="$saas.getSecurity().switchToUser()" :active="$saas.getSecurity().getTeam() === null">
             {{ $saas.getSecurity().getUser().getName() }}
@@ -20,11 +20,10 @@
 </template>
 
 <script lang="ts">
-import {Component, Mixins} from 'vue-property-decorator';
-import UserMixin from './../../mixins/User.vue';
+import {Component, Vue} from 'vue-property-decorator';
 
 @Component
-export default class UserDropdown extends Mixins(UserMixin) {
+export default class UserDropdown extends Vue {
   public get showAccount(): boolean {
     return !this.$saas.getSecurity().getTeam() || this.$saas.getSecurity().isTeamOwner();
   }
