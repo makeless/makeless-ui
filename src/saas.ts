@@ -7,7 +7,7 @@ import {BootstrapVue, IconsPlugin} from 'bootstrap-vue';
 import SaasComponent from './Saas.vue';
 
 // interfaces
-import ConfigInterface from "./packages/config/config";
+import ConfigInterface from './packages/config/config';
 import RouterInterface from './packages/router/router';
 import PageInterface from './packages/page/page';
 import HttpInterface from './packages/http/http';
@@ -18,8 +18,8 @@ import EventInterface from './packages/event/event';
 // pages
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
-import PasswordRequest from "./pages/password-request";
-import PasswordReset from "./pages/password-reset";
+import PasswordRequest from './pages/password-request';
+import PasswordReset from './pages/password-reset';
 import DashboardPage from './pages/dashboard';
 import ProfilePage from './pages/settings/profile/profile';
 import ProfileTeamPage from './pages/settings/profile/profile-team';
@@ -31,10 +31,10 @@ import TokenTeamPage from './pages/settings/token/token-team';
 import PageNotFoundPage from './pages/page-not-found';
 
 // components
-import MasterComponent from "./components/layouts/Master.vue";
-import NavigationComponent from "./components/navigations/Navigation.vue";
-import SettingsNavigationComponent from "./components/navigations/SettingsNavigation.vue";
-import UserDropdownComponent from "./components/navigations/UserDropdown.vue";
+import MasterComponent from './components/layouts/Master.vue';
+import NavigationComponent from './components/navigations/Navigation.vue';
+import SettingsNavigationComponent from './components/navigations/SettingsNavigation.vue';
+import UserDropdownComponent from './components/navigations/UserDropdown.vue';
 
 // plugins
 Vue.use(BootstrapVue);
@@ -87,7 +87,7 @@ export default class Saas {
     'navigation': NavigationComponent,
     'settings-navigation': SettingsNavigationComponent,
     'user-dropdown': UserDropdownComponent,
-  }
+  };
 
   private getPages(): PageInterface[] {
     const configuration = this.getConfig().getConfiguration();
@@ -95,7 +95,7 @@ export default class Saas {
     for (const key of Object.keys(this.pages)) {
       const page = this.pages[key];
       if (!this.getSecurity().isPageEnabled(page, configuration)) {
-        delete this.pages[key]
+        delete this.pages[key];
       }
     }
 
@@ -150,7 +150,7 @@ export default class Saas {
     return this.getI18n().getI18n().t(key, values);
   }
 
-  public init(): Saas {
+  public async init(): Promise<Saas> {
     // components
     for (const key in this.components) {
       Vue.component(key, this.components[key]);
@@ -163,18 +163,18 @@ export default class Saas {
     this.getI18n().mergePages(this.getPages());
 
     // setup security
-    this.getSecurity().setup();
+    await this.getSecurity().setup();
 
     // prototypes
     Vue.prototype.$saas = Vue.observable(this);
 
-    return this;
+    return new Promise<Saas>(resolve => resolve(this));
   }
 
   public run(): Vue {
     return new Vue({
       render: (h) => h(SaasComponent),
-      router: this.getRouter().getRouter(),
+      router: this.getRouter().getVueRouter(),
     }).$mount('#app');
   }
 }

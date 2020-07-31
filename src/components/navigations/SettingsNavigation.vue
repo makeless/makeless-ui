@@ -28,7 +28,7 @@ export default class SettingsNavigation extends Vue {
   }
 
   public isActive(name: string): boolean {
-    return this.$saas.getRouter().getRouter().currentRoute.name === name;
+    return this.$saas.getRouter().getVueRouter().currentRoute.name === name;
   }
 }
 </script>

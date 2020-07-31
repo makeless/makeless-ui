@@ -58,7 +58,7 @@ const security = new Security(router, http, event, storage);
 
 new Saas(config, router, http, i18n, event, security)
     .init()
-    .run();
+    .then(saas => saas.run());
 ```
 
 ## Config

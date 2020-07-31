@@ -80,12 +80,12 @@ export default class Security {
     }
   }
 
-  private loadUser(): void {
+  private async loadUser(): Promise<any> {
     if (!this.isAuth()) {
       return;
     }
 
-    this.http.get('/api/auth/user').then((data) => {
+    return this.http.get('/api/auth/user').then((data) => {
       this.user = new User().create(this.http.response(data).getData().data);
       this.createTeamIndex();
       this.initTeam();
@@ -96,7 +96,7 @@ export default class Security {
   }
 
   private authMiddleware(): void {
-    this.router.getRouter().beforeEach((to, from, next) => {
+    this.router.getVueRouter().beforeEach((to, from, next) => {
       if (to.matched.some(record => record.meta.requiresAuth) && !this.isAuth()) {
         next({path: '/login'});
         return;
@@ -131,7 +131,7 @@ export default class Security {
         return;
       }
 
-      if (!this.router.getRouter().currentRoute.meta.requiresAuth) {
+      if (!this.router.getVueRouter().currentRoute.meta.requiresAuth) {
         return;
       }
 
@@ -153,8 +153,8 @@ export default class Security {
     });
   }
 
-  public setup(): void {
-    this.loadUser();
+  public async setup() {
+    await this.loadUser();
     this.authMiddleware();
     this.refreshAuth();
     this.logoutHandler();

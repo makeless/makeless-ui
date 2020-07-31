@@ -30,11 +30,11 @@ export default class Router {
   }
 
   public redirect(to: string): void {
-    if (this.getRouter().currentRoute.name === to) {
+    if (this.getVueRouter().currentRoute.name === to) {
       return;
     }
 
-    this.getRouter().push({name: to}).then();
+    this.getVueRouter().push({name: to}).then();
   }
 
   public redirectToLogin(): void {
@@ -45,9 +45,9 @@ export default class Router {
     this.redirect('dashboard')
   }
 
-  public getRouter(): VueRouter {
+  public getVueRouter(): VueRouter {
     if (this.router === null) {
-      throw new Error('router not created');
+      throw new Error('vue router not created');
     }
 
     return this.router;

@@ -31,5 +31,5 @@ export default interface Router {
    * Returns VueRouter
    * @returns VueRouter
    */
-  getRouter(): VueRouter
+  getVueRouter(): VueRouter
 }

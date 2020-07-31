@@ -6,3 +6,6 @@ eslint:
 
 ls-lint:
 	npx @ls-lint/ls-lint
+
+publish:
+	~/go/bin/reflex -R '^node_modules/' yalc push
