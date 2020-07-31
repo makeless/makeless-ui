@@ -7,5 +7,5 @@ eslint:
 ls-lint:
 	npx @ls-lint/ls-lint
 
-publish:
+yalc-watch:
 	~/go/bin/reflex -R '^node_modules/' yalc push

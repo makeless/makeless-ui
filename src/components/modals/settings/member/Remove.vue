@@ -1,6 +1,6 @@
 <template>
     <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.member-team.forms.remove.title')">
-        <b-form id="form-member-team-remove" @submit="onSubmit">
+        <b-form v-if="user" id="form-member-team-remove" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                     {{ $saas.t('pages.member-team.forms.remove.errors.4x') }}
