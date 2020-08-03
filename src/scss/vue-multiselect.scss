@@ -1,4 +1,6 @@
+@import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
 
 .multiselect {
   color: $input-color;
@@ -7,19 +9,21 @@
     border-color: $input-border-color;
     border-radius: $input-border-radius;
     font-size: $input-font-size;
-    padding-left: $input-padding-x;
-    min-height: 40px;
+    padding: $input-padding-y $input-padding-x;
+    min-height: unset;
 
     .multiselect__tag {
       background-color: $primary;
-      padding: 4px 25px 4px 10px;
-      margin-bottom: 0;
+      margin-top: 3px;
+      margin-bottom: -3px;
+
       &-icon {
         &:after {
-          color:$light;
+          color: $light;
         }
+
         &:hover {
-          background: darken($primary, 10%);
+          background: darken($primary, 5%);
         }
       }
     }
@@ -33,7 +37,7 @@
     .multiselect__input, .multiselect__single {
       line-height: $input-line-height;
       padding: 0;
-      margin: 0;
+      margin-bottom: 0;
     }
   }
 
