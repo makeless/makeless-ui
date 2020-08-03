@@ -2,6 +2,8 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 
+$tag-margin: 3px;
+
 .multiselect {
   color: $input-color;
 
@@ -14,8 +16,8 @@
 
     .multiselect__tag {
       background-color: $primary;
-      margin-top: 3px;
-      margin-bottom: -3px;
+      margin-top: $tag-margin;
+      margin-bottom: -$tag-margin;
 
       &-icon {
         &:after {
