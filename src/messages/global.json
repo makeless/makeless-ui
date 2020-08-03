@@ -4,8 +4,16 @@
       "navigations": {
         "userDropdown": {
           "teams": "Teams",
-          "account": "Account",
+          "settings": "Settings",
           "logout": "Logout"
+        },
+        "settingsNavigation": {
+          "settings": "Settings",
+          "profile": "Profile",
+          "password": "Password",
+          "teams": "Teams",
+          "tokens": "Tokens",
+          "members": "Members"
         }
       },
       "selects": {
