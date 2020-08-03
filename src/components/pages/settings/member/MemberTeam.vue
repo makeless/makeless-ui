@@ -16,7 +16,7 @@
                         <b-list-group v-if="response && users">
                             <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="user in users" :key="user.id">
                                 {{ user.name }}
-                                <b-button v-if="$saas.getSecurity().getUser().id !== user.id" size="sm" variant="danger" v-b-modal.member-team-remove @click="selectUser(user)">{{ $saas.t('pages.member-team.actions.remove') }}</b-button>
+                                <b-button v-if="$saas.getSecurity().getTeam().userId !== user.id" size="sm" variant="danger" v-b-modal.member-team-remove @click="selectUser(user)">{{ $saas.t('pages.member-team.actions.remove') }}</b-button>
                                 <div v-else>
                                     <b-icon-lock></b-icon-lock>
                                     {{ $saas.t('pages.member-team.owner') }}
