@@ -19,7 +19,7 @@ export default interface Security {
    * Loads user, sets up auth middleware, starts silent auth refresh and sets up logout handler
    * Awaits user and auth middleware for security reasons (!)
    */
-  setup(): void
+  setup(): Promise<void>
 
   /**
    * Returns user full name or current team name if authenticated or enabled
@@ -97,7 +97,7 @@ export default interface Security {
    * Handles login and redirects to dashboard if successful
    * @param response - response interface from http package
    */
-  login(response: ResponseInterface): void
+  login(response: ResponseInterface): Promise<void>
 
   /**
    * Handles logout and redirects to login if set
