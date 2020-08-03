@@ -1,4 +1,8 @@
+@import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+$tag-margin: 3px;
 
 .multiselect {
   color: $input-color;
@@ -6,8 +10,25 @@
   .multiselect__tags {
     border-color: $input-border-color;
     border-radius: $input-border-radius;
-    padding: $input-padding-y $input-padding-x;
     font-size: $input-font-size;
+    padding: $input-padding-y $input-padding-x;
+    min-height: unset;
+
+    .multiselect__tag {
+      background-color: $primary;
+      margin-top: $tag-margin;
+      margin-bottom: -$tag-margin;
+
+      &-icon {
+        &:after {
+          color: $light;
+        }
+
+        &:hover {
+          background: darken($primary, 5%);
+        }
+      }
+    }
 
     .multiselect__placeholder {
       margin-bottom: 0;
