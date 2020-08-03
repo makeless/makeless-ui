@@ -6,8 +6,21 @@
   .multiselect__tags {
     border-color: $input-border-color;
     border-radius: $input-border-radius;
-    padding: $input-padding-y $input-padding-x;
     font-size: $input-font-size;
+
+    .multiselect__tag {
+      background-color: $primary;
+      padding: 5px 25px 5px 10px;
+      margin-bottom: 0;
+      &-icon {
+        &:after {
+          color:$light;
+        }
+        &:hover {
+          background: darken($primary, 5%);
+        }
+      }
+    }
 
     .multiselect__placeholder {
       margin-bottom: 0;
@@ -18,7 +31,7 @@
     .multiselect__input, .multiselect__single {
       line-height: $input-line-height;
       padding: 0;
-      margin-bottom: 0;
+      margin: 10px 0 0 0;
     }
   }
 
