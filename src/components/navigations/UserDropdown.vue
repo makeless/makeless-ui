@@ -13,7 +13,7 @@
         </template>
         <b-dropdown-divider></b-dropdown-divider>
         <b-dropdown-item v-if="showAccount" :to="{name: toAccount}">
-            {{ $saas.t('components.navigations.userDropdown.account') }}
+            {{ $saas.t('components.navigations.userDropdown.settings') }}
         </b-dropdown-item>
         <b-dropdown-item @click="logout">{{ $saas.t('components.navigations.userDropdown.logout') }}</b-dropdown-item>
     </b-nav-item-dropdown>
