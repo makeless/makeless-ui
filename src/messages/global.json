@@ -5,6 +5,7 @@
         "userDropdown": {
           "teams": "Teams",
           "settings": "Settings",
+          "account": "Account",
           "logout": "Logout"
         },
         "settingsNavigation": {
