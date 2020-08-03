@@ -12,8 +12,13 @@
             </b-dropdown-group>
         </template>
         <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item v-if="showAccount" :to="{name: toAccount}">
+        <b-dropdown-item :to="{name: toAccount}">
+            <template v-if="$saas.getSecurity().getTeam()">
+              {{ $saas.t('components.navigations.userDropdown.settings') }}
+            </template>
+            <template v-else>
             {{ $saas.t('components.navigations.userDropdown.account') }}
+            </template>
         </b-dropdown-item>
         <b-dropdown-item @click="logout">{{ $saas.t('components.navigations.userDropdown.logout') }}</b-dropdown-item>
     </b-nav-item-dropdown>

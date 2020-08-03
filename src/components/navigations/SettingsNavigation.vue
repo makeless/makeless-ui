@@ -1,17 +1,17 @@
 <template>
     <div>
-        <b-card no-body header="Settings" class="mb-3 mb-lg-0">
+        <b-card no-body :header="$saas.t('components.navigations.settingsNavigation.settings')" class="mb-3 mb-lg-0">
             <b-list-group flush>
                 <template v-if="!$saas.getSecurity().getTeam()">
-                    <b-list-group-item v-if="isAccessible('profile')" :to="{name: 'profile'}" :active="isActive('profile')">Profile</b-list-group-item>
-                    <b-list-group-item v-if="isAccessible('password')" :to="{name: 'password'}" :active="isActive('password')">Password</b-list-group-item>
-                    <b-list-group-item v-if="isAccessible('team')" :to="{name: 'team'}" :active="isActive('team')">Teams</b-list-group-item>
-                    <b-list-group-item v-if="isAccessible('token')" :to="{name: 'token'}" :active="isActive('token')">Tokens</b-list-group-item>
+                    <b-list-group-item v-if="isAccessible('profile')" :to="{name: 'profile'}" :active="isActive('profile')">{{ $saas.t('components.navigations.settingsNavigation.profile') }}</b-list-group-item>
+                    <b-list-group-item v-if="isAccessible('password')" :to="{name: 'password'}" :active="isActive('password')">{{ $saas.t('components.navigations.settingsNavigation.password') }}</b-list-group-item>
+                    <b-list-group-item v-if="isAccessible('team')" :to="{name: 'team'}" :active="isActive('team')">{{ $saas.t('components.navigations.settingsNavigation.teams') }}</b-list-group-item>
+                    <b-list-group-item v-if="isAccessible('token')" :to="{name: 'token'}" :active="isActive('token')">{{ $saas.t('components.navigations.settingsNavigation.tokens') }}</b-list-group-item>
                 </template>
                 <template v-else>
-                    <b-list-group-item v-if="isAccessible('profile-team')" :to="{name: 'profile-team'}" :active="isActive('profile-team')">Profile</b-list-group-item>
-                    <b-list-group-item v-if="isAccessible('member-team')" :to="{name: 'member-team'}" :active="isActive('member-team')">Members</b-list-group-item>
-                    <b-list-group-item v-if="isAccessible('token-team')" :to="{name: 'token-team'}" :active="isActive('token-team')">Tokens</b-list-group-item>
+                    <b-list-group-item v-if="isAccessible('profile-team')" :to="{name: 'profile-team'}" :active="isActive('profile-team')">{{ $saas.t('components.navigations.settingsNavigation.profile') }}</b-list-group-item>
+                    <b-list-group-item v-if="isAccessible('member-team')" :to="{name: 'member-team'}" :active="isActive('member-team')">{{ $saas.t('components.navigations.settingsNavigation.members') }}</b-list-group-item>
+                    <b-list-group-item v-if="isAccessible('token-team')" :to="{name: 'token-team'}" :active="isActive('token-team')">{{ $saas.t('components.navigations.settingsNavigation.tokens') }}</b-list-group-item>
                 </template>
             </b-list-group>
         </b-card>
