@@ -152,7 +152,7 @@ export default class Security {
     });
   }
 
-  public async setup() {
+  public async setup(): Promise<void> {
     await this.loadUser();
     await this.authMiddleware();
     this.refreshAuth();
@@ -297,9 +297,9 @@ export default class Security {
     return !(guest && this.isAuth());
   }
 
-  public login(response: ResponseInterface): void {
+  public async login(response: ResponseInterface): Promise<void> {
     this.setExpire(new Date(response.getData().expire));
-    this.loadUser();
+    await this.loadUser();
     this.handleEvents();
     this.router.redirectToDashboard();
   }
