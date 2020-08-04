@@ -11,7 +11,7 @@ export default class TokenTeam extends Page {
   meta: any | null = {
     requiresAuth: true,
     requiresTeamAuth: true,
-    requiresTeamOwnerAuth: true,
+    requiresTeamRoleAuth: 'owner',
     requiresEnabledTokens: true,
     requiresEnabledTeams: true,
   };

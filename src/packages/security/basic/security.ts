@@ -9,6 +9,7 @@ import ConfigurationInterface from '../../config/configuration';
 import Team from './../../../models/team';
 import User from './../../../models/user';
 import TeamUser from '../../../models/team-user';
+import {TeamRole} from '../../../enums/team-role';
 
 export default class Security {
   user: User | null = null;
@@ -101,12 +102,12 @@ export default class Security {
         return;
       }
 
-      if (to.matched.some(record => record.meta.requiresTeamAuth) && !this.getTeam()) {
+      if (to.matched.some(record => record.meta.requiresUserAuth) && !this.getUser()) {
         next({path: '/dashboard'});
         return;
       }
 
-      if (to.matched.some(record => record.meta.requiresUserAuth) && !this.getUser()) {
+      if (to.matched.some(record => record.meta.requiresTeamAuth) && !this.getTeam()) {
         next({path: '/dashboard'});
         return;
       }
@@ -209,7 +210,7 @@ export default class Security {
     return expire > new Date().getTime();
   }
 
-  public isTeamRole(role: string): boolean {
+  public isTeamRole(role: TeamRole): boolean {
     if (!this.isAuth() || this.getUser() === null || this.getTeam() === null) {
       return false;
     }
@@ -302,7 +303,6 @@ export default class Security {
     const requiresTeamAuth = page.getMeta().requiresTeamAuth !== undefined && page.getMeta().requiresTeamAuth;
     const requiresTeamRoleAuth = page.getMeta().requiresTeamRoleAuth !== undefined && page.getMeta().requiresTeamRoleAuth;
     const guest = page.getMeta().guest !== undefined && page.getMeta().guest;
-    console.log(requiresTeamRoleAuth);
 
     if (requiresAuth && !this.isAuth()) {
       return false;

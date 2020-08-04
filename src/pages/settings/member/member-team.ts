@@ -11,7 +11,7 @@ export default class MemberTeam extends Page {
   meta: any | null = {
     requiresAuth: true,
     requiresTeamAuth: true,
-    requiresTeamOwnerAuth: true,
+    requiresTeamRoleAuth: 'owner',
     requiresEnabledTeams: true,
   };
 }
