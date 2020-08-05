@@ -9,8 +9,6 @@ export default class MemberTeam extends Page {
   component: any = MemberComponent;
   messages: LocaleMessageObject | null = messages;
   meta: any | null = {
-    requiresAuth: true,
-    requiresTeamAuth: true,
     requiresTeamRoleAuth: 'owner',
     requiresEnabledTeams: true,
   };

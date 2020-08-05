@@ -9,8 +9,6 @@ export default class TokenTeam extends Page {
   component: any = TokenComponent;
   messages: LocaleMessageObject | null = messages;
   meta: any | null = {
-    requiresAuth: true,
-    requiresTeamAuth: true,
     requiresTeamRoleAuth: 'owner',
     requiresEnabledTokens: true,
     requiresEnabledTeams: true,
