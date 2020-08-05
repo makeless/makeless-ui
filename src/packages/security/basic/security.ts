@@ -301,7 +301,7 @@ export default class Security {
     const requiresAuth = page.getMeta().requiresAuth !== undefined && page.getMeta().requiresAuth;
     const requiresUserAuth = page.getMeta().requiresUserAuth !== undefined && page.getMeta().requiresUserAuth;
     const requiresTeamAuth = page.getMeta().requiresTeamAuth !== undefined && page.getMeta().requiresTeamAuth;
-    const requiresTeamRoleAuth = page.getMeta().requiresTeamRoleAuth !== undefined && page.getMeta().requiresTeamRoleAuth;
+    const requiresTeamRoleAuth = page.getMeta().requiresTeamRoleAuth;
     const guest = page.getMeta().guest !== undefined && page.getMeta().guest;
 
     if (requiresAuth && !this.isAuth()) {
@@ -316,7 +316,7 @@ export default class Security {
       return false;
     }
 
-    if (requiresTeamRoleAuth && !this.isTeamRole(requiresTeamRoleAuth)) {
+    if ((requiresTeamRoleAuth in TeamRole) && !this.isTeamRole(requiresTeamRoleAuth)) {
       return false;
     }
 
