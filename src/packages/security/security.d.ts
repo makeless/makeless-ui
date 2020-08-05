@@ -7,6 +7,7 @@ import EventInterface from '../event/event';
 import StorageInterface from '../storage/storage';
 import PageInterface from '../page/page';
 import ConfigurationInterface from '../config/configuration';
+import {TeamRole} from '../../enums/team-role';
 
 export default interface Security {
   router: RouterInterface;
@@ -46,10 +47,10 @@ export default interface Security {
   isAuth(): boolean
 
   /**
-   * Returns if user is current team owner
+   * Returns if user is given team role
    * @returns boolean
    */
-  isTeamOwner(): boolean
+  isTeamRole(role: TeamRole): boolean
 
   /**
    * Returns if user is current team creator

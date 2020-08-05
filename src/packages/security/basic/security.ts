@@ -9,6 +9,7 @@ import ConfigurationInterface from '../../config/configuration';
 import Team from './../../../models/team';
 import User from './../../../models/user';
 import TeamUser from '../../../models/team-user';
+import {TeamRole} from '../../../enums/team-role';
 
 export default class Security {
   user: User | null = null;
@@ -98,6 +99,21 @@ export default class Security {
     this.router.getVueRouter().beforeEach((to, from, next) => {
       if (to.matched.some(record => record.meta.requiresAuth) && !this.isAuth()) {
         next({path: '/login'});
+        return;
+      }
+
+      if (to.matched.some(record => record.meta.requiresUserAuth) && !this.getUser()) {
+        next({path: '/dashboard'});
+        return;
+      }
+
+      if (to.matched.some(record => record.meta.requiresTeamAuth) && !this.getTeam()) {
+        next({path: '/dashboard'});
+        return;
+      }
+
+      if (to.matched.some(record => record.meta.requiresTeamRoleAuth) && !this.isTeamRole(to.meta.requiresTeamRoleAuth)) {
+        next({path: '/dashboard'});
         return;
       }
 
@@ -194,14 +210,14 @@ export default class Security {
     return expire > new Date().getTime();
   }
 
-  public isTeamOwner(): boolean {
+  public isTeamRole(role: TeamRole): boolean {
     if (!this.isAuth() || this.getUser() === null || this.getTeam() === null) {
       return false;
     }
 
     for (let i = 0; i < this.getUser()!.teamUsers.length; i++) {
       const teamUser = this.getUser()!.teamUsers[i];
-      if (teamUser.teamId === this.getTeam()!.id && teamUser.role === 'owner') {
+      if (teamUser.teamId === this.getTeam()!.id && teamUser.role === role) {
         return true;
       }
     }
@@ -283,14 +299,24 @@ export default class Security {
     }
 
     const requiresAuth = page.getMeta().requiresAuth !== undefined && page.getMeta().requiresAuth;
+    const requiresUserAuth = page.getMeta().requiresUserAuth !== undefined && page.getMeta().requiresUserAuth;
     const requiresTeamAuth = page.getMeta().requiresTeamAuth !== undefined && page.getMeta().requiresTeamAuth;
+    const requiresTeamRoleAuth = page.getMeta().requiresTeamRoleAuth !== undefined;
     const guest = page.getMeta().guest !== undefined && page.getMeta().guest;
 
     if (requiresAuth && !this.isAuth()) {
       return false;
     }
 
+    if (requiresUserAuth && !this.getUser()) {
+      return false;
+    }
+
     if (requiresTeamAuth && !this.getTeam()) {
+      return false;
+    }
+
+    if (requiresTeamRoleAuth && !this.isTeamRole(page.getMeta().requiresTeamRoleAuth)) {
       return false;
     }
 
