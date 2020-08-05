@@ -12,13 +12,11 @@
             </b-dropdown-group>
         </template>
         <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item :to="{name: toAccount}">
-            <template v-if="$saas.getSecurity().getTeam()">
-              {{ $saas.t('components.navigations.userDropdown.settings') }}
-            </template>
-            <template v-else>
+        <b-dropdown-item v-if="isTeamOwner()" :to="{name: toAccount}">
+            {{ $saas.t('components.navigations.userDropdown.settings') }}
+        </b-dropdown-item>
+        <b-dropdown-item v-if="!$saas.getSecurity().getTeam()" :to="{name: toAccount}">
             {{ $saas.t('components.navigations.userDropdown.account') }}
-            </template>
         </b-dropdown-item>
         <b-dropdown-item @click="logout">{{ $saas.t('components.navigations.userDropdown.logout') }}</b-dropdown-item>
     </b-nav-item-dropdown>
@@ -26,11 +24,16 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
+import {TeamRole} from '../../enums/team-role';
 
 @Component
 export default class UserDropdown extends Vue {
   public get showAccount(): boolean {
-    return !this.$saas.getSecurity().getTeam() || this.$saas.getSecurity().isTeamOwner();
+    return !this.$saas.getSecurity().getTeam() || this.$saas.getSecurity().isTeamRole(TeamRole.Owner);
+  }
+
+  isTeamOwner(): boolean {
+    return this.$saas.getSecurity().isTeamRole(TeamRole.Owner);
   }
 
   public get toAccount(): string {
