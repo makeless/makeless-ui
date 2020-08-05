@@ -12,7 +12,7 @@
             </b-dropdown-group>
         </template>
         <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item v-if="$saas.getSecurity().getTeam() && isTeamOwner()" :to="{name: toAccount}">
+        <b-dropdown-item v-if="isTeamOwner()" :to="{name: toAccount}">
             {{ $saas.t('components.navigations.userDropdown.settings') }}
         </b-dropdown-item>
         <b-dropdown-item v-if="!$saas.getSecurity().getTeam()" :to="{name: toAccount}">
