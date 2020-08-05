@@ -47,7 +47,7 @@ export default interface Security {
   isAuth(): boolean
 
   /**
-   * Returns if user is current team owner
+   * Returns if user is given team role
    * @returns boolean
    */
   isTeamRole(role: TeamRole): boolean
