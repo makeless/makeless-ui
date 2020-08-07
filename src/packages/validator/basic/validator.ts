@@ -16,4 +16,8 @@ export default class Validator {
 
     return true;
   }
+
+  public getValidators(): ValidatorMethod[] {
+    return this.validators;
+  }
 }
