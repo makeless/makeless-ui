@@ -32,7 +32,7 @@
                                 </b-form-invalid-feedback>
                             </b-form-group>
 
-                            <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid">
+                            <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                                 {{ $saas.t('pages.profile-team.form.button') }}
                             </b-button>
                         </b-form>

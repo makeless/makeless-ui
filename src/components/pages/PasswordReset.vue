@@ -49,7 +49,7 @@
                                     </b-col>
                                 </b-row>
 
-                                <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid">
+                                <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                                     {{ $saas.t('pages.password-reset.form.button') }}
                                 </b-button>
 

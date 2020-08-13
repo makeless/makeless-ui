@@ -23,7 +23,7 @@
             <b-button @click="cancel()">
                 {{ $saas.t('pages.team.forms.leave.buttons.cancel') }}
             </b-button>
-            <b-button form="form-team-leave" type="submit" variant="danger" :disabled="form.isDisabled() || !validator.isValid">
+            <b-button form="form-team-leave" type="submit" variant="danger" :disabled="form.isDisabled() || !validator.isValid()">
                 {{ $saas.t('pages.team.forms.leave.buttons.leave') }}
             </b-button>
         </template>

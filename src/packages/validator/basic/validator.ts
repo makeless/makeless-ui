@@ -7,7 +7,7 @@ export default class Validator {
     this.validators = validators;
   }
 
-  public get isValid(): boolean {
+  public isValid(): boolean {
     for (let i = 0; i < this.validators.length; i++) {
       if (this.validators[i]() !== true) {
         return false;

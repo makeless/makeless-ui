@@ -23,7 +23,7 @@
             <b-button @click="cancel()">
                 {{ $saas.t('pages.token-team.forms.delete.buttons.cancel') }}
             </b-button>
-            <b-button form="form-token-team-delete" type="submit" variant="danger" :disabled="form.isDisabled() || !validator.isValid">
+            <b-button form="form-token-team-delete" type="submit" variant="danger" :disabled="form.isDisabled() || !validator.isValid()">
                 {{ $saas.t('pages.token-team.forms.delete.buttons.delete') }}
             </b-button>
         </template>
