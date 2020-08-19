@@ -24,6 +24,7 @@
                 {{ $saas.t('pages.team.forms.delete.buttons.cancel') }}
             </b-button>
             <b-button form="form-team-delete" type="submit" variant="danger" :disabled="form.isDisabled() || !validator.isValid()">
+                <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
                 {{ $saas.t('pages.team.forms.delete.buttons.delete') }}
             </b-button>
         </template>
@@ -64,6 +65,7 @@ export default class Delete extends Vue {
     this.$root.$on('bv::modal::hide', (bvEvent: BvModalEvent, modalId: string) => {
       if (this.modalId === modalId) {
         this.name = null;
+        this.form = new Form();
       }
     });
   }
