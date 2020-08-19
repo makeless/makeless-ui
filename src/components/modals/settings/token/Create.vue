@@ -24,6 +24,7 @@
                 {{ $saas.t('pages.token.forms.create.buttons.cancel') }}
             </b-button>
             <b-button form="form-token-create" type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
+                <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
                 {{ $saas.t('pages.token.forms.create.buttons.create') }}
             </b-button>
         </template>
@@ -66,6 +67,7 @@ export default class Create extends Vue {
     this.$root.$on('bv::modal::hide', (bvEvent: BvModalEvent, modalId: string) => {
       if (this.modalId === modalId) {
         this.tokenCreate = new TokenCreate();
+        this.form = new Form();
       }
     });
   }

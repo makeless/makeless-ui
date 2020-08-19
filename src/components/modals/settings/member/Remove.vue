@@ -24,6 +24,7 @@
                 {{ $saas.t('pages.member-team.forms.remove.buttons.cancel') }}
             </b-button>
             <b-button form="form-member-team-remove" type="submit" variant="danger" :disabled="form.isDisabled() || !validator.isValid()">
+                <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
                 {{ $saas.t('pages.member-team.forms.remove.buttons.remove') }}
             </b-button>
         </template>
@@ -65,6 +66,7 @@ export default class Remove extends Vue {
     this.$root.$on('bv::modal::hide', (bvEvent: BvModalEvent, modalId: string) => {
       if (this.modalId === modalId) {
         this.name = null;
+        this.form = new Form();
       }
     });
   }

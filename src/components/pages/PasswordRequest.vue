@@ -28,6 +28,7 @@
                                 </b-form-group>
 
                                 <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
+                                    <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
                                     {{ $saas.t('pages.password-request.form.button') }}
                                 </b-button>
 
