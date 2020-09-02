@@ -1,14 +1,15 @@
-import Navigation from "./navigation";
-import Team from "./team";
+import Navigation from './navigation';
+import Team from './team';
 
 export default class Configuration {
   name!: string;
   logo: string | null = null;
   locale!: string;
   host!: string;
-  navigation!: Navigation;
+  mail!: string;
   tokens: boolean | null = null;
   teams: Team | null = null;
+  navigation!: Navigation;
 
   public getName(): string {
     return this.name;
@@ -26,8 +27,8 @@ export default class Configuration {
     return this.host;
   }
 
-  public getNavigation(): Navigation {
-    return this.navigation;
+  public getMail(): string {
+    return this.mail;
   }
 
   public getTokens(): boolean | null {
@@ -36,5 +37,9 @@ export default class Configuration {
 
   public getTeams(): Team | null {
     return this.teams;
+  }
+
+  public getNavigation(): Navigation {
+    return this.navigation;
   }
 }
