@@ -3,6 +3,7 @@
 Go SaaS Framework - TypeScript & Vue.js Implementation
 
 [![Build Status](https://ci.loeffel.io/api/badges/go-saas/go-saas-ui/status.svg)](https://ci.loeffel.io/go-saas/go-saas-ui)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgo-saas%2Fgo-saas-ui.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgo-saas%2Fgo-saas-ui?ref=badge_shield)
 <a href="https://www.npmjs.com/package/@go-saas/go-saas-ui"><img src="https://img.shields.io/npm/v/@go-saas/go-saas-ui.svg?sanitize=true" alt="Version"></a>
 
 - Based on TypeScript, Vue.js & Bootstrap 4
@@ -89,3 +90,7 @@ go-saas.json
   }
 }
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgo-saas%2Fgo-saas-ui.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgo-saas%2Fgo-saas-ui?ref=badge_large)
