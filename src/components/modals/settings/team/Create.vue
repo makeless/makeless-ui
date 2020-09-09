@@ -17,6 +17,10 @@
                     {{ $saas.t('pages.team.forms.create.validations.name') }}
                 </b-form-invalid-feedback>
             </b-form-group>
+
+            <b-form-group :label="$saas.t('pages.team.forms.create.fields.invite.label')" label-for="memberInvite">
+                <member-invite :obj="teamCreate"></member-invite>
+            </b-form-group>
         </b-form>
 
         <template v-slot:modal-footer="{ cancel }">
@@ -38,8 +42,11 @@ import Validator from '../../../../packages/validator/basic/validator';
 import {BvModalEvent} from 'bootstrap-vue';
 import TeamCreate from '../../../../structs/team-create';
 import Team from '../../../../models/team';
+import MemberInvite from '../../../selects/team/MemberInvite.vue';
 
-@Component
+@Component({
+  components: {MemberInvite},
+})
 export default class Create extends Vue {
   private modalId: string = 'team-create';
   private teamCreate: TeamCreate = new TeamCreate();
@@ -70,6 +77,7 @@ export default class Create extends Vue {
   }
 
   public onSubmit($event: Event) {
+    console.log(this.teamCreate);
     $event.preventDefault();
     this.form.setError(false);
     this.form.setDisabled(true);
