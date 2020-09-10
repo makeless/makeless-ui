@@ -4,7 +4,7 @@
             id="member-emails"
             name="member-emails"
             :options="obj.emails"
-            :placeholder="$saas.t('components.selects.team.memberEmails.placeholder')"
+            :placeholder="$saas.t('components.selects.team.invitation.placeholder')"
             :multiple="true"
             label="email"
             track-by="email"
@@ -24,7 +24,7 @@ import {TeamCreate, TeamCreateEmail} from '../../../structs/team-create';
 @Component({
   components: {VueMultiselect},
 })
-export default class MemberEmails extends Vue {
+export default class TeamInvitation extends Vue {
   @Prop(Object) obj!: TeamCreate;
 
   private addTeamCreateEmail(email: string) {

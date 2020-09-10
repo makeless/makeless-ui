@@ -19,7 +19,7 @@
             </b-form-group>
 
             <b-form-group :label="$saas.t('pages.team.forms.create.fields.invite.label')" label-for="member-invite">
-                <member-emails :obj="teamCreate"></member-emails>
+                <team-invitation :obj="teamCreate"></team-invitation>
                 <b-form-invalid-feedback :state="validateEmails()">
                     {{ $saas.t('pages.team.forms.create.validations.email') }}
                 </b-form-invalid-feedback>
@@ -45,11 +45,11 @@ import Validator from '../../../../packages/validator/basic/validator';
 import {BvModalEvent} from 'bootstrap-vue';
 import {TeamCreate} from '../../../../structs/team-create';
 import Team from '../../../../models/team';
-import MemberEmails from '../../../selects/team/MemberEmails.vue';
+import TeamInvitation from '../../../selects/team/TeamInvitation.vue';
 import ValidatorUtil from '../../../../utils/validator';
 
 @Component({
-  components: {MemberEmails},
+  components: {TeamInvitation},
 })
 export default class Create extends Vue {
   private modalId: string = 'team-create';
@@ -75,8 +75,8 @@ export default class Create extends Vue {
       return null;
     }
 
-    for (let i = 0; i < this.teamCreate.emails!.length; i++) {
-      if (!ValidatorUtil.isValidEmail(this.teamCreate.emails![i].email)) {
+    for (let i = 0; i < this.teamCreate.emails.length; i++) {
+      if (!ValidatorUtil.isValidEmail(this.teamCreate.emails[i].email)) {
 
         return false;
       }
