@@ -28,10 +28,6 @@ import {TeamRole} from '../../enums/team-role';
 
 @Component
 export default class UserDropdown extends Vue {
-  public get showAccount(): boolean {
-    return !this.$saas.getSecurity().getTeam() || this.$saas.getSecurity().isTeamRole(TeamRole.Owner);
-  }
-
   isTeamOwner(): boolean {
     return this.$saas.getSecurity().isTeamRole(TeamRole.Owner);
   }

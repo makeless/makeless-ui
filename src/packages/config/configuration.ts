@@ -1,14 +1,15 @@
-import NavigationInterface from "./navigation";
-import TeamInterface from "./team";
+import NavigationInterface from './navigation';
+import TeamInterface from './team';
 
 export default interface Configuration {
   name: string;
   logo: string | null;
   locale: string;
   host: string;
-  navigation: NavigationInterface;
+  mail: string;
   tokens: boolean | null;
   teams: TeamInterface | null;
+  navigation: NavigationInterface;
 
   getName(): string;
 
@@ -18,9 +19,11 @@ export default interface Configuration {
 
   getHost(): string;
 
-  getNavigation(): NavigationInterface;
+  getMail(): string;
 
   getTokens(): boolean | null;
 
   getTeams(): TeamInterface | null;
+
+  getNavigation(): NavigationInterface;
 }

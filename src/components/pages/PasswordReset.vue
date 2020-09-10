@@ -125,8 +125,6 @@ export default class PasswordReset extends Vue {
       this.form.setError(true);
       this.form.setDisabled(false);
       this.passwordReset = new PasswordResetModel();
-
-      this.$saas.getSecurity().logout(false);
     });
   }
 }

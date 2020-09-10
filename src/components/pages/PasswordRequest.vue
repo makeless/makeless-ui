@@ -77,15 +77,11 @@ export default class PasswordRequest extends Vue {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
       this.passwordRequest = new PasswordRequestModel();
-
-      this.$saas.getSecurity().login(this.form.getResponse()!);
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
       this.passwordRequest = new PasswordRequestModel();
-
-      this.$saas.getSecurity().logout(false);
     });
   }
 }
