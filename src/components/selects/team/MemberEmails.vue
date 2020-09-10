@@ -1,16 +1,16 @@
 <template>
     <vue-multiselect
             v-model="obj.emails"
-            id="member-invite"
-            name="member-invite"
+            id="member-emails"
+            name="member-emails"
             :options="obj.emails"
-            :placeholder="$saas.t('components.selects.team.memberInvite.placeholder')"
+            :placeholder="$saas.t('components.selects.team.memberEmails.placeholder')"
             :multiple="true"
             label="email"
             track-by="email"
             :taggable="true"
             :close-on-select="false"
-            @tag="addTeamCreatEmail"
+            @tag="addTeamCreateEmail"
     >
     </vue-multiselect>
 </template>
@@ -24,10 +24,10 @@ import {TeamCreate, TeamCreateEmail} from '../../../structs/team-create';
 @Component({
   components: {VueMultiselect},
 })
-export default class MemberInvite extends Vue {
+export default class MemberEmails extends Vue {
   @Prop(Object) obj!: TeamCreate;
 
-  private addTeamCreatEmail(email: string) {
+  private addTeamCreateEmail(email: string) {
     this.obj.emails!.push(Object.assign(new TeamCreateEmail(), {
       email: email,
     }));
