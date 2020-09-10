@@ -10,7 +10,7 @@
             track-by="email"
             :taggable="true"
             :close-on-select="false"
-            @tag="addTeamCreateEmail"
+            @tag="addTeamInvitation"
     >
     </vue-multiselect>
 </template>
@@ -19,7 +19,8 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import VueMultiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
-import {TeamCreate, TeamCreateEmail} from '../../../structs/team-create';
+import TeamCreate from '../../../structs/team-create';
+import TeamInvitationStruct from '../../../structs/team-invitation';
 
 @Component({
   components: {VueMultiselect},
@@ -27,8 +28,8 @@ import {TeamCreate, TeamCreateEmail} from '../../../structs/team-create';
 export default class TeamInvitation extends Vue {
   @Prop(Object) obj!: TeamCreate;
 
-  private addTeamCreateEmail(email: string) {
-    this.obj.emails!.push(Object.assign(new TeamCreateEmail(), {
+  private addTeamInvitation(email: string) {
+    this.obj.emails!.push(Object.assign(new TeamInvitationStruct(), {
       email: email,
     }));
   }

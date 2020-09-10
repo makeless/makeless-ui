@@ -1,13 +1,6 @@
-class TeamCreateEmail {
-  email!: string;
-}
+import TeamInvitation from './team-invitation';
 
-class TeamCreate {
+export default class TeamCreate {
   name: string | null = null;
-  emails: TeamCreateEmail[] | null = [];
+  emails: TeamInvitation[] | null = [];
 }
-
-export {
-  TeamCreateEmail,
-  TeamCreate,
-};

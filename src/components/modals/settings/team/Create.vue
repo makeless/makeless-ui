@@ -43,7 +43,7 @@ import {Component, Vue} from 'vue-property-decorator';
 import Form from '../../../../packages/form/basic/form';
 import Validator from '../../../../packages/validator/basic/validator';
 import {BvModalEvent} from 'bootstrap-vue';
-import {TeamCreate} from '../../../../structs/team-create';
+import TeamCreate from '../../../../structs/team-create';
 import Team from '../../../../models/team';
 import TeamInvitation from '../../../selects/team/TeamInvitation.vue';
 import ValidatorUtil from '../../../../utils/validator';
