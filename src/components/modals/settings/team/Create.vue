@@ -74,8 +74,8 @@ export default class Create extends Vue {
     }
 
     let isAllEmailsValid: boolean = false;
-    for (let i = 0; i < this.teamCreate.emails.length; i++) {
-      if (EmailValidatorUtil.isValidEmail(this.teamCreate.emails[i].email)) {
+    for (let i = 0; i < this.teamCreate.emails!.length; i++) {
+      if (EmailValidatorUtil.isValidEmail(this.teamCreate.emails![i].email!)) {
         isAllEmailsValid = true;
       }
     }
