@@ -1,4 +1,13 @@
-export default class TeamCreate {
-  name: string | null = null;
-  memberInvites: Object[] | null = [];
+class TeamCreateEmail {
+  email!: string;
 }
+
+class TeamCreate {
+  name: string | null = null;
+  emails: TeamCreateEmail[] | null = [];
+}
+
+export {
+  TeamCreateEmail,
+  TeamCreate,
+};
