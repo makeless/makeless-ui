@@ -1,8 +1,8 @@
 <template>
     <vue-multiselect
             v-model="obj.emails"
-            id="member-emails"
-            name="member-emails"
+            id="team-invitation"
+            name="team-invitation"
             :options="obj.emails"
             :placeholder="$saas.t('components.selects.team.invitation.placeholder')"
             :multiple="true"
