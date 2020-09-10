@@ -70,13 +70,13 @@ export default class Create extends Vue {
   }
 
   public validateEmails(): boolean | null {
-    if (this.teamCreate.emails === null || this.teamCreate.emails.length === 0) {
+    if (this.teamCreate.invitations === null || this.teamCreate.invitations.length === 0) {
 
       return null;
     }
 
-    for (let i = 0; i < this.teamCreate.emails.length; i++) {
-      if (!ValidatorUtil.isValidEmail(this.teamCreate.emails[i].email)) {
+    for (let i = 0; i < this.teamCreate.invitations.length; i++) {
+      if (!ValidatorUtil.isValidEmail(this.teamCreate.invitations[i].email)) {
 
         return false;
       }

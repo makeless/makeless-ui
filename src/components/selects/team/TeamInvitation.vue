@@ -1,9 +1,9 @@
 <template>
     <vue-multiselect
-            v-model="obj.emails"
+            v-model="obj.invitations"
             id="team-invitation"
             name="team-invitation"
-            :options="obj.emails"
+            :options="obj.invitations"
             :placeholder="$saas.t('components.selects.team.invitation.placeholder')"
             :multiple="true"
             label="email"
@@ -29,7 +29,7 @@ export default class TeamInvitation extends Vue {
   @Prop(Object) obj!: TeamCreate;
 
   private addTeamInvitation(email: string) {
-    this.obj.emails!.push(Object.assign(new TeamInvitationStruct(), {
+    this.obj.invitations!.push(Object.assign(new TeamInvitationStruct(), {
       email: email,
     }));
   }
