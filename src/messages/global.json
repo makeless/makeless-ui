@@ -24,9 +24,9 @@
             "noOption": "Search user by name",
             "noResult": "No users found"
           },
-          "invite": {
+          "memberInvite": {
             "placeholder": "Invite team member",
-            "noOption": "Enter mail"
+            "noOption": "Enter email"
           }
         }
       }

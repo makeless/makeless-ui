@@ -4,7 +4,7 @@
             id="member-invite"
             name="member-invite"
             :options="obj.emails"
-            :placeholder="$saas.t('components.selects.team.invite.placeholder')"
+            :placeholder="$saas.t('components.selects.team.memberInvite.placeholder')"
             :multiple="true"
             label="email"
             track-by="email"
