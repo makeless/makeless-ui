@@ -11,10 +11,7 @@
             :taggable="true"
             :close-on-select="false"
             @tag="addTeamCreatEmail"
-            tag-placeholder="Add new mail"
     >
-
-        <template slot="noOptions">{{ $saas.t('components.selects.team.invite.noOption') }}</template>
     </vue-multiselect>
 </template>
 
