@@ -46,7 +46,7 @@ import {BvModalEvent} from 'bootstrap-vue';
 import {TeamCreate} from '../../../../structs/team-create';
 import Team from '../../../../models/team';
 import MemberInvite from '../../../selects/team/MemberInvite.vue';
-import EmailValidatorUtil from '../../../../utils/emailValidator';
+import EmailValidatorUtil from '../../../../utils/email-validator';
 
 @Component({
   components: {MemberInvite},
