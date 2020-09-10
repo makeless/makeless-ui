@@ -14,7 +14,7 @@
             "label": "Name",
             "placeholder": "Name"
           },
-          "invite": {
+          "invitation": {
             "label": "Invite new team member by mail"
           }
         },
