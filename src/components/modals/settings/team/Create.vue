@@ -69,7 +69,7 @@ export default class Create extends Vue {
   }
 
   public validateEmails(): boolean | null {
-    if (this.teamCreate.emails!.length === 0) {
+    if (this.teamCreate.emails === null || this.teamCreate.emails.length === 0) {
       return null;
     }
 
