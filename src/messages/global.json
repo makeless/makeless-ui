@@ -23,6 +23,10 @@
             "placeholder": "User",
             "noOption": "Search user by name",
             "noResult": "No users found"
+          },
+          "invitation": {
+            "placeholder": "Email",
+            "noOption": "Enter email"
           }
         }
       }

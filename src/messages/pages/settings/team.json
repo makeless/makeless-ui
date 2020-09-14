@@ -13,6 +13,9 @@
           "name": {
             "label": "Name",
             "placeholder": "Name"
+          },
+          "invitation": {
+            "label": "Invitations"
           }
         },
         "buttons": {
@@ -20,7 +23,10 @@
           "cancel": "Cancel"
         },
         "validations": {
-          "name": "Name is required and must be 4 to 50 characters long"
+          "name": "Name is required and must be 4 to 50 characters long",
+          "invitations": {
+            "email": "Email is required"
+          }
         },
         "errors": {
           "4x": "Create team failed",

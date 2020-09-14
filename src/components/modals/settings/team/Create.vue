@@ -17,6 +17,13 @@
                     {{ $saas.t('pages.team.forms.create.validations.name') }}
                 </b-form-invalid-feedback>
             </b-form-group>
+
+            <b-form-group :label="$saas.t('pages.team.forms.create.fields.invitation.label')" label-for="team-invitation">
+                <team-invitation :obj="teamCreate"></team-invitation>
+                <b-form-invalid-feedback :state="validateEmails()">
+                    {{ $saas.t('pages.team.forms.create.validations.invitations.email') }}
+                </b-form-invalid-feedback>
+            </b-form-group>
         </b-form>
 
         <template v-slot:modal-footer="{ cancel }">
@@ -38,22 +45,44 @@ import Validator from '../../../../packages/validator/basic/validator';
 import {BvModalEvent} from 'bootstrap-vue';
 import TeamCreate from '../../../../structs/team-create';
 import Team from '../../../../models/team';
+import TeamInvitation from '../../../selects/team/TeamInvitation.vue';
+import ValidatorUtil from '../../../../utils/validator';
 
-@Component
+@Component({
+  components: {TeamInvitation},
+})
 export default class Create extends Vue {
   private modalId: string = 'team-create';
   private teamCreate: TeamCreate = new TeamCreate();
   private form: Form = new Form();
   private validator: Validator = new Validator([
     this.validateName,
+    this.validateEmails,
   ]);
 
   public validateName(): boolean | null {
     if (this.teamCreate.name === null) {
+
       return null;
     }
 
     return this.teamCreate.name.length >= 4 && this.teamCreate.name.length <= 50;
+  }
+
+  public validateEmails(): boolean | null {
+    if (this.teamCreate.invitations === null || this.teamCreate.invitations.length === 0) {
+
+      return null;
+    }
+
+    for (let i = 0; i < this.teamCreate.invitations.length; i++) {
+      if (!ValidatorUtil.isValidEmail(this.teamCreate.invitations[i].email)) {
+
+        return false;
+      }
+    }
+
+    return true;
   }
 
   created() {
