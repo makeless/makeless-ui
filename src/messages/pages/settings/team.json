@@ -15,7 +15,7 @@
             "placeholder": "Name"
           },
           "invitation": {
-            "label": "Invite new team member by mail"
+            "label": "Invitations"
           }
         },
         "buttons": {
@@ -25,7 +25,7 @@
         "validations": {
           "name": "Name is required and must be 4 to 50 characters long",
           "invitations": {
-            "email": "All emails have to be valid"
+            "email": "Email is required"
           }
         },
         "errors": {
