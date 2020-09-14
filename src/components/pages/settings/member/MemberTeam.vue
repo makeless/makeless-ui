@@ -10,7 +10,7 @@
                     <b-col lg="9">
                         <h1 class="d-flex justify-content-between align-items-center">
                             {{ $saas.t('pages.member-team.title') }}
-                            <b-button size="sm" variant="primary" v-b-modal.member-invite>{{ $saas.t('pages.member-team.actions.invite') }}</b-button>
+                            <b-button size="sm" variant="primary" v-b-modal.member-team-invite>{{ $saas.t('pages.member-team.actions.invite') }}</b-button>
                         </h1>
                         <hr>
                         <b-list-group v-if="response && users">
@@ -33,6 +33,7 @@
 
         <template slot="outside">
             <remove-modal :user="selectedUser" :users="users"></remove-modal>
+            <invite-modal></invite-modal>
         </template>
     </master>
 </template>
@@ -42,10 +43,12 @@ import {Component, Vue} from 'vue-property-decorator';
 import ResponseInterface from '../../../../packages/http/response';
 import User from '../../../../models/user';
 import RemoveModal from '../../../modals/settings/member/Remove.vue';
+import InviteModal from '../../../modals/settings/member/Invite.vue';
 
 @Component({
   components: {
     RemoveModal,
+    InviteModal
   },
 })
 export default class MemberTeam extends Vue {
