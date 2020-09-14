@@ -7,6 +7,7 @@
             :placeholder="$saas.t('components.selects.team.invitation.placeholder')"
             :multiple="true"
             label="email"
+            :showLabels="false"
             tagPlaceholder=""
             track-by="email"
             :taggable="true"
