@@ -29,8 +29,12 @@ import TeamInvitationStruct from '../../../structs/team-invitation';
 export default class TeamInvitation extends Vue {
   @Prop(Object) obj!: Object;
 
-  private addTeamInvitation(email: string) {
-    this.obj.invitations!.push(Object.assign(new TeamInvitationStruct(), {
+  private addTeamInvitation(email: string): void {
+    if (!this.obj.hasOwnProperty('invitations')) {
+      return;
+    }
+
+    this.obj['invitations'].push(Object.assign(new TeamInvitationStruct(), {
       email: email,
     }));
   }
