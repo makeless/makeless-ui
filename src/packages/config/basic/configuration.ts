@@ -6,7 +6,6 @@ export default class Configuration {
   logo: string | null = null;
   locale!: string;
   host!: string;
-  mail!: string;
   tokens: boolean | null = null;
   teams: Team | null = null;
   navigation!: Navigation;
@@ -25,10 +24,6 @@ export default class Configuration {
 
   public getHost(): string {
     return this.host;
-  }
-
-  public getMail(): string {
-    return this.mail;
   }
 
   public getTokens(): boolean | null {
