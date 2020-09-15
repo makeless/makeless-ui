@@ -48,7 +48,7 @@ export default class Invite extends Vue {
   private teamInvite: TeamInvite = new TeamInvite();
   private form: Form = new Form();
   private validator: Validator = new Validator([
-    this.validateEmails
+    this.validateEmails,
   ]);
 
   public validateEmails(): boolean | null {
@@ -81,22 +81,6 @@ export default class Invite extends Vue {
   }
 
   public onSubmit($event: Event) {
-/*    $event.preventDefault();
-    this.form.setError(false);
-    this.form.setDisabled(true);
-    this.form.setResponse(null);
-
-    this.$saas.getHttp().post('/api/auth/team', this.teamCreate).then((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data));
-      this.form.setDisabled(false);
-      const team = Object.assign(new Team(), this.form.getResponse()!.getData().data);
-      this.$saas.getSecurity().addTeam(team);
-      this.$saas.getSecurity().switchToTeam(team.id!);
-    }).catch((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data.response));
-      this.form.setError(true);
-      this.form.setDisabled(false);
-    });*/
   }
 }
 </script>
