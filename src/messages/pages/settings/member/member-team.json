@@ -12,7 +12,7 @@
         "title": "Invite member",
         "fields": {
           "email": {
-            "label": "Email",
+            "label": "Invitations",
             "placeholder": "Email"
           }
         },

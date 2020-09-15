@@ -21,17 +21,16 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import VueMultiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
-import TeamCreate from '../../../structs/team-create';
 import TeamInvitationStruct from '../../../structs/team-invitation';
 
 @Component({
   components: {VueMultiselect},
 })
 export default class TeamInvitation extends Vue {
-  @Prop(Object) obj!: TeamCreate;
+  @Prop(Object) obj!: Object;
 
-  private addTeamInvitation(email: string) {
-    this.obj.invitations!.push(Object.assign(new TeamInvitationStruct(), {
+  private addTeamInvitation(email: string): void {
+    this.obj['invitations'].push(Object.assign(new TeamInvitationStruct(), {
       email: email,
     }));
   }
