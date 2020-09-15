@@ -1,6 +1,6 @@
 <template>
     <b-modal :id="modalId" no-fade :title="$saas.t('pages.member-team.forms.invite.title')">
-        <b-form id="form-member-invite" v-if="teamInvite" @submit="onSubmit">
+        <b-form id="form-member-team-invite" v-if="teamInvite" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
                     {{ $saas.t('pages.member-team.forms.invite.errors.4x') }}
@@ -53,7 +53,6 @@ export default class Invite extends Vue {
 
   public validateEmails(): boolean | null {
     if (this.teamInvite.invitations === null || this.teamInvite.invitations.length === 0) {
-
       return null;
     }
 
