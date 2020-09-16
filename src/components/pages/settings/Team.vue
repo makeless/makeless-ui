@@ -74,9 +74,5 @@ export default class Team extends Vue {
   public selectTeam(team: TeamModel) {
     this.selectedTeam = team;
   }
-
-  mounted() {
-    console.log(this.$saas.getSecurity().getUser()?.teamUsers);
-  }
 }
 </script>
