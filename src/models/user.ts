@@ -15,6 +15,10 @@ export default class User extends Model {
     return this.name;
   }
 
+  public getEmail(): string | null {
+    return this.email;
+  }
+
   public hasTeams(): boolean {
     return this.teamUsers.length > 0;
   }
