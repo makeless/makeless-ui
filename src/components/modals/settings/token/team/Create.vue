@@ -48,6 +48,7 @@ import TokenUtil from '../../../../../utils/token';
 import User from '../../../../selects/team/Member.vue';
 import Member from '../../../../selects/team/Member.vue';
 import TokenTeamCreate from '../../../../../structs/token-team-create';
+import DomUtil from '../../../../../utils/dom';
 
 @Component({
   components: {Member, User},
@@ -94,6 +95,8 @@ export default class Create extends Vue {
 
   public onSubmit($event: Event): void {
     $event.preventDefault();
+    DomUtil.removeFocus();
+
     this.form.setError(false);
     this.form.setDisabled(true);
     this.form.setResponse(null);

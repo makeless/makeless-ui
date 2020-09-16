@@ -39,6 +39,7 @@ import {BModal, BvModalEvent} from 'bootstrap-vue';
 import Token from '../../../../models/token';
 import TokenUtil from '../../../../utils/token';
 import TokenCreate from '../../../../structs/token-create';
+import DomUtil from '../../../../utils/dom';
 
 @Component
 export default class Create extends Vue {
@@ -74,6 +75,8 @@ export default class Create extends Vue {
 
   public onSubmit($event: Event) {
     $event.preventDefault();
+    DomUtil.removeFocus();
+
     this.form.setError(false);
     this.form.setDisabled(true);
     this.form.setResponse(null);
