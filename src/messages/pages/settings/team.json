@@ -1,7 +1,7 @@
 {
   "en": {
     "title": "Teams",
-    "noTeam": "You haven't created a team yet",
+    "noTeam": "You're not part of a team yet",
     "actions": {
       "create": "Create",
       "delete": "Delete",
