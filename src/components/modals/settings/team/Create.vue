@@ -47,6 +47,7 @@ import TeamCreate from '../../../../structs/team-create';
 import Team from '../../../../models/team';
 import TeamInvitation from '../../../selects/team/TeamInvitation.vue';
 import ValidatorUtil from '../../../../utils/validator';
+import DomUtil from '../../../../utils/dom';
 
 @Component({
   components: {TeamInvitation},
@@ -99,6 +100,8 @@ export default class Create extends Vue {
 
   public onSubmit($event: Event) {
     $event.preventDefault();
+    DomUtil.removeFocus();
+
     this.form.setError(false);
     this.form.setDisabled(true);
     this.form.setResponse(null);

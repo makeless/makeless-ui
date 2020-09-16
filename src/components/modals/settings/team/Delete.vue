@@ -37,6 +37,7 @@ import Form from '../../../../packages/form/basic/form';
 import Validator from '../../../../packages/validator/basic/validator';
 import Team from '../../../../models/team';
 import {BvModalEvent} from 'bootstrap-vue';
+import DomUtil from '../../../../utils/dom';
 
 @Component
 export default class Delete extends Vue {
@@ -72,6 +73,8 @@ export default class Delete extends Vue {
 
   public onSubmit($event: Event) {
     $event.preventDefault();
+    DomUtil.removeFocus();
+
     this.form.setError(false);
     this.form.setDisabled(true);
     this.form.setResponse(null);

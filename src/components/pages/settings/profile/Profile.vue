@@ -50,6 +50,7 @@ import ProfileStruct from '../../../../structs/profile';
 import UtilObject from './../../../../utils/object';
 import Form from '../../../../packages/form/basic/form';
 import Validator from '../../../../packages/validator/basic/validator';
+import DomUtil from '../../../../utils/dom';
 
 @Component
 export default class Profile extends Vue {
@@ -69,6 +70,8 @@ export default class Profile extends Vue {
 
   public onSubmit($event: Event) {
     $event.preventDefault();
+    DomUtil.removeFocus();
+
     this.form.setError(false);
     this.form.setResponse(null);
     this.form.setDisabled(true);

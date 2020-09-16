@@ -49,6 +49,7 @@ import {Component, Vue} from 'vue-property-decorator';
 import PasswordRequestModel from '../../structs/password-request';
 import Form from '../../packages/form/basic/form';
 import Validator from '../../packages/validator/basic/validator';
+import DomUtil from '../../utils/dom';
 
 @Component
 export default class PasswordRequest extends Vue {
@@ -68,6 +69,7 @@ export default class PasswordRequest extends Vue {
 
   onSubmit($event: Event): void {
     $event.preventDefault();
+    DomUtil.removeFocus();
 
     this.form.setError(false);
     this.form.setDisabled(true);
