@@ -31,7 +31,7 @@ import User from '../../../models/user';
   components: {VueMultiselect},
 })
 export default class Member extends Vue {
-  @Prop(Object) obj!: Object;
+  @Prop(Object) obj!: any;
 
   protected users: User[] = [];
   private loading: boolean = false;

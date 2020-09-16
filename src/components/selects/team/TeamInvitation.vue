@@ -27,7 +27,7 @@ import TeamInvitationStruct from '../../../structs/team-invitation';
   components: {VueMultiselect},
 })
 export default class TeamInvitation extends Vue {
-  @Prop(Object) obj!: Object;
+  @Prop(Object) obj!: any;
 
   private addTeamInvitation(email: string): void {
     this.obj['invitations'].push(Object.assign(new TeamInvitationStruct(), {
