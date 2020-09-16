@@ -14,6 +14,8 @@
             :close-on-select="false"
             @tag="addTeamInvitation"
     >
+
+        <template slot="noOptions">{{ $saas.t('components.selects.team.invitation.noOption') }}</template>
     </vue-multiselect>
 </template>
 
