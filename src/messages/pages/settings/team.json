@@ -1,6 +1,7 @@
 {
   "en": {
     "title": "Teams",
+    "noTeam": "You haven't created a team yet",
     "actions": {
       "create": "Create",
       "delete": "Delete",

@@ -13,7 +13,26 @@
                             <b-button size="sm" variant="primary" v-b-modal.team-create>{{ $saas.t('pages.team.actions.create') }}</b-button>
                         </h1>
                         <hr>
-                        <div>
+
+                        <div v-if="!$saas.getSecurity().getUser().teamUsers.length">
+                            <b-row class="mt-5">
+                                <b-col class="d-flex justify-content-center">
+                                    <b-icon-people-fill variant="primary" :font-scale="3"/>
+                                </b-col>
+                            </b-row>
+                            <b-row class="mt-3">
+                                <b-col class="d-flex justify-content-center">
+                                    <h2>{{ $saas.t('pages.team.noTeam') }}</h2>
+                                </b-col>
+                            </b-row>
+                            <b-row class="mt-4">
+                                <b-col class="d-flex justify-content-center">
+                                    <b-button size="sm" variant="primary" v-b-modal.team-create>{{ $saas.t('pages.team.actions.create') }}</b-button>
+                                </b-col>
+                            </b-row>
+                        </div>
+
+                        <div v-if="$saas.getSecurity().getUser().teamUsers.length">
                             <b-list-group>
                                 <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="teamUser in $saas.getSecurity().getUser().teamUsers" :key="teamUser.id">
                                     {{ teamUser.team.name }}
@@ -54,6 +73,10 @@ export default class Team extends Vue {
 
   public selectTeam(team: TeamModel) {
     this.selectedTeam = team;
+  }
+
+  mounted() {
+    console.log(this.$saas.getSecurity().getUser()?.teamUsers);
   }
 }
 </script>
