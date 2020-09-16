@@ -114,12 +114,10 @@ export default class PasswordReset extends Vue {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.$saas.getHttp().post('/api/password-reset', this.passwordReset).then((data) => {
+    this.$saas.getHttp().post(`/api/password-reset?token=${this.$route.query.token}`, this.passwordReset).then((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
       this.passwordReset = new PasswordResetModel();
-
-      this.$saas.getSecurity().login(this.form.getResponse()!);
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
       this.form.setError(true);
