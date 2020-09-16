@@ -4,6 +4,7 @@
     "noTeam": "You're not part of a team yet",
     "actions": {
       "create": "Create",
+      "createNewTeam": "Create new team",
       "delete": "Delete",
       "leave": "Leave"
     },

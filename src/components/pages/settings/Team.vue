@@ -14,22 +14,16 @@
                         </h1>
                         <hr>
 
-                        <div v-if="!$saas.getSecurity().getUser().teamUsers.length">
-                            <b-row class="mt-5">
-                                <b-col class="d-flex justify-content-center">
-                                    <b-icon-people-fill variant="primary" :font-scale="3"/>
-                                </b-col>
-                            </b-row>
-                            <b-row class="mt-3">
-                                <b-col class="d-flex justify-content-center">
-                                    <h2>{{ $saas.t('pages.team.noTeam') }}</h2>
-                                </b-col>
-                            </b-row>
-                            <b-row class="mt-4">
-                                <b-col class="d-flex justify-content-center">
-                                    <b-button size="sm" variant="primary" v-b-modal.team-create>{{ $saas.t('pages.team.actions.create') }}</b-button>
-                                </b-col>
-                            </b-row>
+                        <div v-if="!$saas.getSecurity().getUser().teamUsers.length" class="text-center">
+                            <b-col class="mt-2 mt-sm-5">
+                                <b-icon :icon="icon" variant="primary" :font-scale="3"/>
+                            </b-col>
+                            <b-col class="mt-3 mt-sm-3">
+                                <h2>{{ $saas.t('pages.team.noTeam') }}</h2>
+                            </b-col>
+                            <b-col class="mt-4 mt-sm-4">
+                                <b-button size="sm" variant="primary" v-b-modal.team-create>{{ $saas.t('pages.team.actions.createNewTeam') }}</b-button>
+                            </b-col>
                         </div>
 
                         <div v-if="$saas.getSecurity().getUser().teamUsers.length">
@@ -69,6 +63,7 @@ import TeamModel from '../../../models/team';
   },
 })
 export default class Team extends Vue {
+  public icon: string = 'people';
   private selectedTeam: TeamModel | null = null;
 
   public selectTeam(team: TeamModel) {
