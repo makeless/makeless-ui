@@ -27,7 +27,7 @@
         "validations": {
           "name": "Name is required and must be 4 to 50 characters long",
           "invitations": {
-            "email": "Email is required"
+            "email": "Emails required and a maximum of 5 emails allowed"
           }
         },
         "errors": {

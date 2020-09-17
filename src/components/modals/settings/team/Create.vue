@@ -75,6 +75,10 @@ export default class Create extends Vue {
       return true;
     }
 
+    if (this.teamCreate.invitations.length > 5) {
+      return false;
+    }
+
     for (let i = 0; i < this.teamCreate.invitations.length; i++) {
       const invitation = this.teamCreate.invitations[i];
       if (!ValidatorUtil.isValidEmail(invitation.email) || invitation.email === this.$saas.getSecurity().getUser()!.getEmail()) {
