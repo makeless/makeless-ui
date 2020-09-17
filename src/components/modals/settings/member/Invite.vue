@@ -69,9 +69,8 @@ export default class Invite extends Vue {
     }
 
     for (let i = 0; i < this.teamInvite.invitations.length; i++) {
-      const invitation = this.teamInvite.invitations[i].email;
-      if (!ValidatorUtil.isValidEmail(invitation) || invitation in index) {
-
+      const invitation = this.teamInvite.invitations[i];
+      if (!ValidatorUtil.isValidEmail(invitation.email) || invitation.email in index) {
         return false;
       }
     }
