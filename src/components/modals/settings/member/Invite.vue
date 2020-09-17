@@ -14,7 +14,7 @@
             <b-form-group :label="$saas.t('pages.member-team.forms.invite.fields.email.label')" label-for="team-invitation">
                 <team-invitation :obj="teamInvite"></team-invitation>
                 <b-form-invalid-feedback :state="validateEmails()">
-                    {{ $saas.t('pages.member-team.forms.invite.validations.invite') }}
+                    {{ $saas.t('pages.member-team.forms.invite.validations.invitations.email') }}
                 </b-form-invalid-feedback>
             </b-form-group>
         </b-form>
