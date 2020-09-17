@@ -65,7 +65,7 @@ export default class Invite extends Vue {
 
     let index: { [key: string]: boolean } = {};
     for (let i = 0; i < this.users.length; i++) {
-      index[this.users[i].email] = true;
+      index[this.users[i].email!] = true;
     }
 
     for (let i = 0; i < this.teamInvite.invitations.length; i++) {
