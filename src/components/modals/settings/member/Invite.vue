@@ -59,18 +59,18 @@ export default class Invite extends Vue {
       return null;
     }
 
-    if (this.teamInvite.invitations.length === 5) {
+    if (this.teamInvite.invitations.length > 5) {
       return false;
     }
 
-    let teamMember: { [key: string]: boolean } = {};
+    let index: { [key: string]: boolean } = {};
     for (let i = 0; i < this.users.length; i++) {
-      teamMember[this.users[i].email] = true;
+      index[this.users[i].email] = true;
     }
 
     for (let i = 0; i < this.teamInvite.invitations.length; i++) {
       const invitation = this.teamInvite.invitations[i].email;
-      if (!ValidatorUtil.isValidEmail(invitation) || invitation in emails) {
+      if (!ValidatorUtil.isValidEmail(invitation) || invitation in index) {
 
         return false;
       }

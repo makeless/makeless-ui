@@ -74,7 +74,7 @@ export default class Create extends Vue {
       return true;
     }
 
-    if (this.teamCreate.invitations.length === 5) {
+    if (this.teamCreate.invitations.length > 5) {
       return false;
     }
 
