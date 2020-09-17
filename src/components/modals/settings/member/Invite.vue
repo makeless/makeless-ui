@@ -32,18 +32,21 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
+import {Component, Prop, Vue} from 'vue-property-decorator';
 import Form from '../../../../packages/form/basic/form';
 import Validator from '../../../../packages/validator/basic/validator';
 import {BvModalEvent} from 'bootstrap-vue';
 import TeamInvite from '../../../../structs/team-invite';
 import ValidatorUtil from '../../../../utils/validator';
 import TeamInvitation from '../../../selects/team/TeamInvitation.vue';
+import User from '../../../../models/user';
 
 @Component({
   components: {TeamInvitation},
 })
 export default class Invite extends Vue {
+  @Prop(Array) readonly users!: User[];
+
   private modalId: string = 'member-team-invite';
   private teamInvite: TeamInvite = new TeamInvite();
   private form: Form = new Form();
@@ -56,8 +59,18 @@ export default class Invite extends Vue {
       return null;
     }
 
+    if (this.teamInvite.invitations.length === 5) {
+      return false;
+    }
+
+    let teamMember: { [key: string]: boolean } = {};
+    for (let i = 0; i < this.users.length; i++) {
+      teamMember[this.users[i].email] = true;
+    }
+
     for (let i = 0; i < this.teamInvite.invitations.length; i++) {
-      if (!ValidatorUtil.isValidEmail(this.teamInvite.invitations[i].email)) {
+      const invitation = this.teamInvite.invitations[i].email;
+      if (!ValidatorUtil.isValidEmail(invitation) || invitation in emails) {
 
         return false;
       }

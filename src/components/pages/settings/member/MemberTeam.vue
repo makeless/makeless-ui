@@ -33,7 +33,7 @@
 
         <template slot="outside">
             <remove-modal :user="selectedUser" :users="users"></remove-modal>
-            <invite-modal></invite-modal>
+            <invite-modal :users="users"></invite-modal>
         </template>
     </master>
 </template>

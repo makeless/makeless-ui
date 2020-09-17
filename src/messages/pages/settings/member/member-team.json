@@ -21,7 +21,7 @@
           "cancel": "Cancel"
         },
         "validations": {
-          "invite": "Email is required"
+          "invite": "Email is required and must be unique. Maximum count of 5 emails."
         },
         "errors": {
           "4x": "Invite member failed",
