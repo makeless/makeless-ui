@@ -328,10 +328,12 @@ export default class Security {
     await this.loadUser();
     this.handleEvents();
 
+    if (!this.isReturnToUrl()) {
+      this.router.redirectToDashboard();
+    }
+
     if (this.isReturnToUrl()) {
       this.router.redirectToUrl(this.router.getVueRouter().currentRoute.query.redirect as string);
-    } else {
-      this.router.redirectToDashboard();
     }
   }
 
@@ -348,6 +350,6 @@ export default class Security {
   }
 
   public isReturnToUrl(): boolean {
-    return Object.keys(this.router.getVueRouter().currentRoute.query).length !== 0;
+    return Object.keys(this.router.getVueRouter().currentRoute.query).includes('redirect');
   }
 }
