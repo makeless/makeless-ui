@@ -22,28 +22,21 @@
                                     <b-link :to="{name: 'login'}">{{ $saas.t('pages.password-reset.login') }}</b-link>
                                 </b-alert>
 
-                                <b-form-group :label="$saas.t('pages.password.form.fields.password.label')" label-for="password">
-                                    <b-form-input id="password" v-model="passwordReset.password" type="password" required :placeholder="$saas.t('pages.password.form.fields.password.placeholder')"></b-form-input>
-                                    <b-form-invalid-feedback :state="validatePassword()">
-                                        {{ $saas.t('pages.password.form.validations.password') }}
-                                    </b-form-invalid-feedback>
-                                </b-form-group>
-
                                 <b-row>
                                     <b-col sm="6">
-                                        <b-form-group :label="$saas.t('pages.password-reset.form.fields.newPassword.label')" label-for="newPassword">
-                                            <b-form-input id="newPassword" v-model="passwordReset.newPassword" type="password" required :placeholder="$saas.t('pages.password-reset.form.fields.newPassword.placeholder')"></b-form-input>
-                                            <b-form-invalid-feedback :state="validateNewPassword()">
-                                                {{ $saas.t('pages.password-reset.form.validations.newPassword') }}
+                                        <b-form-group :label="$saas.t('pages.password-reset.form.fields.password.label')" label-for="password">
+                                            <b-form-input id="password" v-model="passwordReset.password" type="password" required :placeholder="$saas.t('pages.password-reset.form.fields.password.placeholder')"></b-form-input>
+                                            <b-form-invalid-feedback :state="validatePassword()">
+                                                {{ $saas.t('pages.password-reset.form.validations.password') }}
                                             </b-form-invalid-feedback>
                                         </b-form-group>
                                     </b-col>
 
                                     <b-col sm="6">
-                                        <b-form-group :label="$saas.t('pages.password-reset.form.fields.newPasswordConfirmation.label')" label-for="newPasswordConfirmation">
-                                            <b-form-input id="newPasswordConfirmation" v-model="passwordReset.newPasswordConfirmation" type="password" required :placeholder="$saas.t('pages.password-reset.form.fields.newPasswordConfirmation.placeholder')"></b-form-input>
-                                            <b-form-invalid-feedback :state="validateNewPasswordConfirmation()">
-                                                {{ $saas.t('pages.password-reset.form.validations.newPasswordConfirmation') }}
+                                        <b-form-group :label="$saas.t('pages.password-reset.form.fields.passwordConfirmation.label')" label-for="passwordConfirmation">
+                                            <b-form-input id="passwordConfirmation" v-model="passwordReset.passwordConfirmation" type="password" required :placeholder="$saas.t('pages.password-reset.form.fields.passwordConfirmation.placeholder')"></b-form-input>
+                                            <b-form-invalid-feedback :state="validatePasswordConfirmation()">
+                                                {{ $saas.t('pages.password-reset.form.validations.passwordConfirmation') }}
                                             </b-form-invalid-feedback>
                                         </b-form-group>
                                     </b-col>
@@ -79,8 +72,7 @@ export default class PasswordReset extends Vue {
   private form: Form = new Form();
   private validator: Validator = new Validator([
     this.validatePassword,
-    this.validateNewPassword,
-    this.validateNewPasswordConfirmation,
+    this.validatePasswordConfirmation,
   ]);
 
   public validatePassword(): boolean | null {
@@ -91,21 +83,12 @@ export default class PasswordReset extends Vue {
     return this.passwordReset.password.length >= 6;
   }
 
-  public validateNewPassword(): boolean | null {
-    if (this.passwordReset.newPassword === null) {
+  public validatePasswordConfirmation(): boolean | null {
+    if (this.passwordReset.passwordConfirmation === null) {
       return null;
     }
 
-    return this.passwordReset.newPassword.length >= 6;
-  }
-
-  public validateNewPasswordConfirmation(): boolean | null {
-    if (this.passwordReset.newPasswordConfirmation === null) {
-      return null;
-    }
-
-    return this.passwordReset.newPasswordConfirmation.length >= 6
-        && this.passwordReset.newPassword === this.passwordReset.newPasswordConfirmation;
+    return this.passwordReset.passwordConfirmation.length >= 6 && this.passwordReset.password === this.passwordReset.passwordConfirmation;
   }
 
   onSubmit($event: Event): void {

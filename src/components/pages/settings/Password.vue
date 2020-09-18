@@ -26,7 +26,7 @@
                             </b-alert>
 
                             <b-form-group :label="$saas.t('pages.password.form.fields.password.label')" label-for="password">
-                                <b-form-input id="password" v-model="passwordReset.password" type="password" required :placeholder="$saas.t('pages.password.form.fields.password.placeholder')" autocomplete="off"></b-form-input>
+                                <b-form-input id="password" v-model="passwordUpdate.password" type="password" required :placeholder="$saas.t('pages.password.form.fields.password.placeholder')" autocomplete="off"></b-form-input>
                                 <b-form-invalid-feedback :state="validatePassword()">
                                     {{ $saas.t('pages.password.form.validations.password') }}
                                 </b-form-invalid-feedback>
@@ -35,7 +35,7 @@
                             <b-row>
                                 <b-col sm="6">
                                     <b-form-group :label="$saas.t('pages.password.form.fields.newPassword.label')" label-for="newPassword">
-                                        <b-form-input id="newPassword" v-model="passwordReset.newPassword" type="password" required :placeholder="$saas.t('pages.password.form.fields.newPassword.placeholder')" autocomplete="off"></b-form-input>
+                                        <b-form-input id="newPassword" v-model="passwordUpdate.newPassword" type="password" required :placeholder="$saas.t('pages.password.form.fields.newPassword.placeholder')" autocomplete="off"></b-form-input>
                                         <b-form-invalid-feedback :state="validateNewPassword()">
                                             {{ $saas.t('pages.password.form.validations.newPassword') }}
                                         </b-form-invalid-feedback>
@@ -44,7 +44,7 @@
 
                                 <b-col sm="6">
                                     <b-form-group :label="$saas.t('pages.password.form.fields.newPasswordConfirmation.label')" label-for="newPasswordConfirmation">
-                                        <b-form-input id="newPasswordConfirmation" v-model="passwordReset.newPasswordConfirmation" type="password" required :placeholder="$saas.t('pages.password.form.fields.newPasswordConfirmation.placeholder')" autocomplete="off"></b-form-input>
+                                        <b-form-input id="newPasswordConfirmation" v-model="passwordUpdate.newPasswordConfirmation" type="password" required :placeholder="$saas.t('pages.password.form.fields.newPasswordConfirmation.placeholder')" autocomplete="off"></b-form-input>
                                         <b-form-invalid-feedback :state="validateNewPasswordConfirmation()">
                                             {{ $saas.t('pages.password.form.validations.newPasswordConfirmation') }}
                                         </b-form-invalid-feedback>
@@ -68,12 +68,12 @@
 import {Component, Vue} from 'vue-property-decorator';
 import Form from '../../../packages/form/basic/form';
 import Validator from '../../../packages/validator/basic/validator';
-import PasswordReset from '../../../structs/password-reset';
 import DomUtil from '../../../utils/dom';
+import PasswordUpdate from '../../../structs/password-update';
 
 @Component
 export default class Password extends Vue {
-  private passwordReset: PasswordReset = new PasswordReset();
+  private passwordUpdate: PasswordUpdate = new PasswordUpdate();
   private form: Form = new Form();
   private validator: Validator = new Validator([
     this.validatePassword,
@@ -82,28 +82,28 @@ export default class Password extends Vue {
   ]);
 
   public validatePassword(): boolean | null {
-    if (this.passwordReset.password === null) {
+    if (this.passwordUpdate.password === null) {
       return null;
     }
 
-    return this.passwordReset.password.length >= 6;
+    return this.passwordUpdate.password.length >= 6;
   }
 
   public validateNewPassword(): boolean | null {
-    if (this.passwordReset.newPassword === null) {
+    if (this.passwordUpdate.newPassword === null) {
       return null;
     }
 
-    return this.passwordReset.newPassword.length >= 6;
+    return this.passwordUpdate.newPassword.length >= 6;
   }
 
   public validateNewPasswordConfirmation(): boolean | null {
-    if (this.passwordReset.newPasswordConfirmation === null) {
+    if (this.passwordUpdate.newPasswordConfirmation === null) {
       return null;
     }
 
-    return this.passwordReset.newPasswordConfirmation.length >= 6
-        && this.passwordReset.newPassword === this.passwordReset.newPasswordConfirmation;
+    return this.passwordUpdate.newPasswordConfirmation.length >= 6
+        && this.passwordUpdate.newPassword === this.passwordUpdate.newPasswordConfirmation;
   }
 
   public onSubmit($event: Event) {
@@ -114,10 +114,10 @@ export default class Password extends Vue {
     this.form.setResponse(null);
     this.form.setDisabled(true);
 
-    this.$saas.getHttp().patch('/api/auth/password', this.passwordReset).then((data) => {
+    this.$saas.getHttp().patch('/api/auth/password', this.passwordUpdate).then((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
-      this.passwordReset = new PasswordReset();
+      this.passwordUpdate = new PasswordUpdate();
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
       this.form.setError(true);
