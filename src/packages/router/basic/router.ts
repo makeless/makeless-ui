@@ -29,28 +29,28 @@ export default class Router {
     });
   }
 
-  public redirect(to: string): void {
-    if (this.getVueRouter().currentRoute.name === to) {
+  public redirectToName(name: string): void {
+    if (this.getVueRouter().currentRoute.name === name) {
       return;
     }
 
-    this.getVueRouter().push({name: to}).then();
+    this.getVueRouter().push({name: name}).then();
   }
 
   public redirectToLogin(): void {
-    this.redirect('login');
+    this.redirectToName('login');
   }
 
   public redirectToDashboard(): void {
-    this.redirect('dashboard');
+    this.redirectToName('dashboard');
   }
 
-  public redirectToUrl(to: string): void {
-    if (this.getVueRouter().currentRoute.fullPath === to) {
+  public redirectToPath(path: string): void {
+    if (this.getVueRouter().currentRoute.fullPath === path) {
       return;
     }
 
-    this.getVueRouter().push({path: to}).then();
+    this.getVueRouter().push({path: path}).then();
   }
 
   public getVueRouter(): VueRouter {

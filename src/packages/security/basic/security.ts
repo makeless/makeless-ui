@@ -328,8 +328,8 @@ export default class Security {
     await this.loadUser();
     this.handleEvents();
 
-    if (this.isRedirectToUrl()) {
-      this.router.redirectToUrl(this.router.getVueRouter().currentRoute.query.redirect as string);
+    if (this.isRedirectToPath()) {
+      this.router.redirectToPath(this.router.getVueRouter().currentRoute.query.redirect as string);
       return;
     }
 
@@ -348,7 +348,7 @@ export default class Security {
     }
   }
 
-  private isRedirectToUrl(): boolean {
+  private isRedirectToPath(): boolean {
     return Object.keys(this.router.getVueRouter().currentRoute.query).includes('redirect');
   }
 }

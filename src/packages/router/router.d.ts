@@ -28,9 +28,9 @@ export default interface Router {
   redirectToDashboard(): void
 
   /**
-   * Shorthand for return to url redirection
+   * Redirect to path
    */
-  redirectToUrl(to: string): void
+  redirectToPath(path: string): void
 
   /**
    * Returns VueRouter
