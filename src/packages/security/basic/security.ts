@@ -98,7 +98,7 @@ export default class Security {
   private async authMiddleware() {
     this.router.getVueRouter().beforeEach((to, from, next) => {
       if (to.matched.some(record => record.meta.requiresAuth) && !this.isAuth()) {
-        next({path: '/login', query: {redirect: `${to.fullPath}`}});
+        next({path: '/login', query: {redirect: to.fullPath}});
         return;
       }
 
