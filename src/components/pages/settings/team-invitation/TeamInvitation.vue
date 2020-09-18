@@ -58,7 +58,7 @@ export default class TeamInvitation extends Vue {
   public icon: string = 'box-seam';
   private response: ResponseInterface | null = null;
   private teamInvitations: TeamInvitationModel[] | null = [];
-  private dateFormat: DateTimeFormatOptions = {
+  private dateFormat = {
     weekday: 'long',
     month: 'long',
     day: '2-digit',
