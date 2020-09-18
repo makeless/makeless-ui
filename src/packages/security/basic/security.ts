@@ -328,7 +328,11 @@ export default class Security {
     await this.loadUser();
     this.handleEvents();
 
-    this.router.redirectToUrl(this.router.getVueRouter().currentRoute.query.redirect as string);
+    if (this.isReturnToUrl()) {
+      this.router.redirectToUrl(this.router.getVueRouter().currentRoute.query.redirect as string);
+    } else {
+      this.router.redirectToDashboard();
+    }
   }
 
   public logout(redirect: boolean): void {
@@ -341,5 +345,9 @@ export default class Security {
     if (redirect) {
       this.router.redirectToLogin();
     }
+  }
+
+  public isReturnToUrl(): boolean {
+    return Object.keys(this.router.getVueRouter().currentRoute.query).length !== 0;
   }
 }
