@@ -46,7 +46,7 @@ export default class Router {
   }
 
   public redirectToUrl(to: string): void {
-    if (this.getVueRouter().currentRoute.name === to) {
+    if (this.getVueRouter().currentRoute.fullPath === to) {
       return;
     }
 
