@@ -1,6 +1,6 @@
 enum TeamRole {
   Owner = 'owner',
-  Member = 'member',
+  User = 'user',
 }
 
 export {

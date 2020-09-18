@@ -25,15 +25,15 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import VueMultiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
-import User from '../../../models/user';
+import UserModel from '../../../models/user';
 
 @Component({
   components: {VueMultiselect},
 })
-export default class Member extends Vue {
+export default class User extends Vue {
   @Prop(Object) obj!: any;
 
-  protected users: User[] = [];
+  protected users: UserModel[] = [];
   private loading: boolean = false;
 
   public onSearch(value: string): void {
@@ -42,7 +42,7 @@ export default class Member extends Vue {
     }
 
     this.loading = true;
-    this.$saas.getHttp().get(`/api/auth/team/member?search=${value}`, {
+    this.$saas.getHttp().get(`/api/auth/team/user?search=${value}`, {
       headers: {
         'Team': this.$saas.getSecurity().getTeam()!.id,
       },

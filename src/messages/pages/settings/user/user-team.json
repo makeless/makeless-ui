@@ -1,6 +1,6 @@
 {
   "en": {
-    "title": "Members",
+    "title": "Users",
     "actions": {
       "invite": "Invite",
       "remove": "Remove"
@@ -9,7 +9,7 @@
     "owner": "Owner",
     "forms": {
       "invite": {
-        "title": "Invite member",
+        "title": "Invite user",
         "fields": {
           "email": {
             "label": "Invitations",
@@ -26,12 +26,12 @@
           }
         },
         "errors": {
-          "4x": "Invite member failed",
+          "4x": "Invite user failed",
           "5x": "Server error - Please try again later"
         }
       },
       "remove": {
-        "title": "Remove member",
+        "title": "Remove user",
         "fields": {
           "name": {
             "label": "Please type {name} to confirm",
@@ -39,14 +39,14 @@
           }
         },
         "buttons": {
-          "remove": "Remove member",
+          "remove": "Remove user",
           "cancel": "Cancel"
         },
         "validations": {
-          "name": "Input must match member name"
+          "name": "Input must match user name"
         },
         "errors": {
-          "4x": "Remove member failed",
+          "4x": "Remove user failed",
           "5x": "Server error - Please try again later"
         }
       }

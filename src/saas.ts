@@ -24,7 +24,7 @@ import DashboardPage from './pages/dashboard';
 import ProfilePage from './pages/settings/profile/profile';
 import ProfileTeamPage from './pages/settings/profile/profile-team';
 import TeamPage from './pages/settings/team';
-import MemberTeamPage from './pages/settings/member/member-team';
+import UserTeamPage from './pages/settings/user/user-team';
 import PasswordPage from './pages/settings/password';
 import TokenPage from './pages/settings/token/token';
 import TokenTeamPage from './pages/settings/token/token-team';
@@ -77,7 +77,7 @@ export default class Saas {
     'page-not-found': new PageNotFoundPage(),
     'team': new TeamPage(),
     'token': new TokenPage(),
-    'member-team': new MemberTeamPage(),
+    'user-team': new UserTeamPage(),
     'profile-team': new ProfileTeamPage(),
     'token-team': new TokenTeamPage(),
   };
