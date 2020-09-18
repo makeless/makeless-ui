@@ -8,9 +8,8 @@
                     </b-col>
 
                     <b-col lg="9">
-                        <h1 class="d-flex justify-content-between align-items-center">
-                            {{ $saas.t('pages.team.title') }}
-                            <b-button size="sm" variant="primary" v-b-modal.team-create>{{ $saas.t('pages.team.actions.create') }}</b-button>
+                        <h1>
+                            {{ $saas.t('pages.invitation.title') }}
                         </h1>
                         <hr>
 
@@ -19,19 +18,20 @@
                                 <b-icon :icon="icon" variant="primary" :font-scale="3"/>
                             </b-col>
                             <b-col class="mt-3 mt-sm-3">
-                                <h2>{{ $saas.t('pages.team.noTeam') }}</h2>
-                            </b-col>
-                            <b-col class="mt-4 mt-sm-4">
-                                <b-button size="sm" variant="primary" v-b-modal.team-create>{{ $saas.t('pages.team.actions.createNewTeam') }}</b-button>
+                                <h2>{{ $saas.t('pages.invitation.noInvitations') }}</h2>
                             </b-col>
                         </div>
 
                         <div v-if="$saas.getSecurity().getUser().teamUsers.length">
                             <b-list-group>
                                 <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="teamUser in $saas.getSecurity().getUser().teamUsers" :key="teamUser.id">
-                                    {{ teamUser.team.name }}
-                                    <b-button v-if="$saas.getSecurity().getUser().id === teamUser.team.userId" size="sm" variant="danger" v-b-modal.team-delete @click="selectTeam(teamUser.team)">{{ $saas.t('pages.team.actions.delete') }}</b-button>
-                                    <b-button v-else size="sm" v-b-modal.team-leave @click="selectTeam(teamUser.team)">{{ $saas.t('pages.team.actions.leave') }}</b-button>
+                                    <div>
+                                        {{ teamUser.team.name }}
+                                    </div>
+                                    <div>
+                                        <b-button size="sm" variant="primary" class="mr-2" v-b-modal.team-leave @click="selectTeam(teamUser.team)">{{ $saas.t('pages.invitation.actions.accept') }}</b-button>
+                                        <b-button size="sm" variant="danger" v-b-modal.team-delete @click="selectTeam(teamUser.team)">{{ $saas.t('pages.invitation.actions.decline') }}</b-button>
+                                    </div>
                                 </b-list-group-item>
                             </b-list-group>
                         </div>
@@ -63,7 +63,7 @@ import TeamModel from '../../../models/team';
   },
 })
 export default class Team extends Vue {
-  public icon: string = 'people';
+  public icon: string = 'box-seam';
   private selectedTeam: TeamModel | null = null;
 
   public selectTeam(team: TeamModel) {

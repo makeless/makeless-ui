@@ -1,4 +1,10 @@
 {
   "en": {
+    "title": "Invitations",
+    "noInvitations": "You don't have an invitation",
+    "actions": {
+      "accept": "Accept",
+      "decline": "Decline"
+    }
   }
 }
