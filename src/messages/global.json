@@ -13,6 +13,7 @@
           "profile": "Profile",
           "password": "Password",
           "teams": "Teams",
+          "invitations": "Invitations",
           "tokens": "Tokens",
           "members": "Members"
         }
