@@ -28,7 +28,7 @@ export default interface Router {
   redirectToDashboard(): void
 
   /**
-   * Redirect to path
+   * Redirect to route path
    */
   redirectToPath(path: string): void
 
