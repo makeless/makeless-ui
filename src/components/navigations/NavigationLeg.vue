@@ -29,7 +29,7 @@ export default class NavigationLeg extends Vue {
       return;
     }
 
-    this.$saas.getRouter().redirect(item.getTo());
+    this.$saas.getRouter().redirectToName(item.getTo());
   }
 
   public show(item: NavigationItemInterface): boolean {
