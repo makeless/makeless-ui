@@ -30,7 +30,7 @@
                                     </div>
                                     <div>
                                         <b-button size="sm" variant="primary" class="mr-2" v-b-modal.team-leave @click="selectTeam(teamUser.team)">{{ $saas.t('pages.invitation.actions.accept') }}</b-button>
-                                        <b-button size="sm" variant="danger" v-b-modal.team-delete @click="selectTeam(teamUser.team)">{{ $saas.t('pages.invitation.actions.decline') }}</b-button>
+                                        <b-button size="sm" v-b-modal.team-delete @click="selectTeam(teamUser.team)">{{ $saas.t('pages.invitation.actions.decline') }}</b-button>
                                     </div>
                                 </b-list-group-item>
                             </b-list-group>
