@@ -105,9 +105,4 @@ export default interface Security {
    * @param redirect - defines redirection
    */
   logout(redirect: boolean): void
-
-  /**
-   * Returns if redirect query is set
-   */
-  isReturnToUrl(): boolean
 }
