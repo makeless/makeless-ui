@@ -13,7 +13,7 @@
                         </h1>
                         <hr>
 
-                        <div v-if="!$saas.getSecurity().getUser().teamUsers.length" class="text-center">
+                        <div v-if="!teamInvitations.length" class="text-center">
                             <b-col class="mt-2 mt-sm-5">
                                 <b-icon :icon="icon" variant="primary" :font-scale="3"/>
                             </b-col>
@@ -22,15 +22,19 @@
                             </b-col>
                         </div>
 
-                        <div v-if="$saas.getSecurity().getUser().teamUsers.length">
+                        <div v-if="teamInvitations.length">
                             <b-list-group>
-                                <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="teamUser in $saas.getSecurity().getUser().teamUsers" :key="teamUser.id">
+                                <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
                                     <div>
-                                        {{ teamUser.team.name }}
+                                        <b-col class="pl-0">{{ teamInvitation.team.name }}</b-col>
+                                        <b-col class="pl-0"><small>{{ teamInvitation.user.name }}</small></b-col>
+                                        <b-col class="pl-0">
+                                            <small>{{ $saas.t('pages.team-invitation.expiresOn') }}</small>
+                                            <small>{{ teamInvitation.expire.toLocaleString('en-US', dateFormat) }}</small></b-col>
                                     </div>
                                     <div>
-                                        <b-button size="sm" variant="primary" class="mr-2" v-b-modal.team-leave @click="selectTeam(teamUser.team)">{{ $saas.t('pages.team-invitation.actions.accept') }}</b-button>
-                                        <b-button size="sm" v-b-modal.team-delete @click="selectTeam(teamUser.team)">{{ $saas.t('pages.team-invitation.actions.decline') }}</b-button>
+                                        <b-button size="sm" variant="primary" class="mr-2">{{ $saas.t('pages.team-invitation.actions.accept') }}</b-button>
+                                        <b-button size="sm">{{ $saas.t('pages.team-invitation.actions.decline') }}</b-button>
                                     </div>
                                 </b-list-group-item>
                             </b-list-group>
@@ -39,35 +43,41 @@
                 </b-row>
             </b-container>
         </template>
-
-        <template slot="outside">
-            <create-modal></create-modal>
-            <delete-modal :team="selectedTeam"></delete-modal>
-            <leave-modal :team="selectedTeam"></leave-modal>
-        </template>
     </master>
 </template>
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import CreateModal from '../../../modals/settings/team/Create.vue';
-import DeleteModal from '../../../modals/settings/team/Delete.vue';
-import LeaveModal from '../../../modals/settings/team/Leave.vue';
-import TeamModel from '../../../../models/team';
+import TeamInvitationModel from '../../../../models/team-invitation';
+import ResponseInterface from '../../../../packages/http/response';
 
 @Component({
-  components: {
-    CreateModal,
-    DeleteModal,
-    LeaveModal,
-  },
+  components: {},
 })
 export default class TeamInvitation extends Vue {
   public icon: string = 'box-seam';
-  private selectedTeam: TeamModel | null = null;
+  private response: ResponseInterface | null = null;
+  private teamInvitations: TeamInvitationModel[] | null = [];
+  private dateFormat: DateTimeFormatOptions = {
+    weekday: 'long',
+    month: 'long',
+    day: '2-digit',
+    year: 'numeric',
+  };
 
-  public selectTeam(team: TeamModel) {
-    this.selectedTeam = team;
+  created() {
+    this.loadTeamInvitations();
+  }
+
+  loadTeamInvitations(): void {
+    this.$saas.getHttp().get('/api/auth/team-invitation').then((data) => {
+      this.teamInvitations = [];
+      this.response = this.$saas.getHttp().response(data);
+      this.response.getData().data.forEach((teamInvitation: TeamInvitationModel) => {
+        console.log(teamInvitation.expire = new Date());
+        this.teamInvitations!.push(teamInvitation);
+      });
+    });
   }
 }
 </script>
