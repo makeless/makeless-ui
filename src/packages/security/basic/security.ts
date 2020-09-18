@@ -98,7 +98,7 @@ export default class Security {
   private async authMiddleware() {
     this.router.getVueRouter().beforeEach((to, from, next) => {
       if (to.matched.some(record => record.meta.requiresAuth) && !this.isAuth()) {
-        next({path: '/login'});
+        next({path: '/login', query: {redirect: to.fullPath}});
         return;
       }
 
@@ -327,6 +327,12 @@ export default class Security {
     this.setExpire(new Date(response.getData().expire));
     await this.loadUser();
     this.handleEvents();
+
+    if (this.isRedirectToPath()) {
+      this.router.redirectToPath(this.router.getVueRouter().currentRoute.query.redirect as string);
+      return;
+    }
+
     this.router.redirectToDashboard();
   }
 
@@ -340,5 +346,9 @@ export default class Security {
     if (redirect) {
       this.router.redirectToLogin();
     }
+  }
+
+  private isRedirectToPath(): boolean {
+    return Object.keys(this.router.getVueRouter().currentRoute.query).includes('redirect');
   }
 }

@@ -15,7 +15,7 @@ export default interface Router {
   /**
    * Redirect to route name
    */
-  redirect(to: string): void
+  redirectToName(name: string): void
 
   /**
    * Shorthand for login redirection
@@ -26,6 +26,11 @@ export default interface Router {
    * Shorthand for dashboard redirection
    */
   redirectToDashboard(): void
+
+  /**
+   * Redirect to route path
+   */
+  redirectToPath(path: string): void
 
   /**
    * Returns VueRouter
