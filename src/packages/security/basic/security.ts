@@ -328,13 +328,12 @@ export default class Security {
     await this.loadUser();
     this.handleEvents();
 
-    if (!this.isReturnToUrl()) {
-      this.router.redirectToDashboard();
-    }
-
     if (this.isReturnToUrl()) {
       this.router.redirectToUrl(this.router.getVueRouter().currentRoute.query.redirect as string);
+      return;
     }
+
+    this.router.redirectToDashboard();
   }
 
   public logout(redirect: boolean): void {
