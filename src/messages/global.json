@@ -14,7 +14,7 @@
           "password": "Password",
           "teams": "Teams",
           "tokens": "Tokens",
-          "members": "Members"
+          "users": "Users"
         }
       },
       "selects": {

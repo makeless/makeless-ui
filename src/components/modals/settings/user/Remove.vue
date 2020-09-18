@@ -1,31 +1,31 @@
 <template>
-    <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.member-team.forms.remove.title')">
-        <b-form v-if="user" id="form-member-team-remove" @submit="onSubmit">
+    <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.user-team.forms.remove.title')">
+        <b-form v-if="user" id="form-user-team-remove" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
-                    {{ $saas.t('pages.member-team.forms.remove.errors.4x') }}
+                    {{ $saas.t('pages.user-team.forms.remove.errors.4x') }}
                 </template>
 
                 <template v-if="form.getResponse().getCode() >= 500">
-                    {{ $saas.t('pages.member-team.forms.remove.errors.5x') }}
+                    {{ $saas.t('pages.user-team.forms.remove.errors.5x') }}
                 </template>
             </b-alert>
 
-            <b-form-group :label="$saas.t('pages.member-team.forms.remove.fields.name.label', {name: this.user.name})" label-for="name">
-                <b-form-input id="name" type="text" v-model="name" autocomplete="off" required :placeholder="$saas.t('pages.member-team.forms.remove.fields.name.placeholder')"></b-form-input>
+            <b-form-group :label="$saas.t('pages.user-team.forms.remove.fields.name.label', {name: this.user.name})" label-for="name">
+                <b-form-input id="name" type="text" v-model="name" autocomplete="off" required :placeholder="$saas.t('pages.user-team.forms.remove.fields.name.placeholder')"></b-form-input>
                 <b-form-invalid-feedback :state="validateName()">
-                    {{ $saas.t('pages.member-team.forms.remove.validations.name') }}
+                    {{ $saas.t('pages.user-team.forms.remove.validations.name') }}
                 </b-form-invalid-feedback>
             </b-form-group>
         </b-form>
 
         <template v-slot:modal-footer="{ cancel }">
             <b-button @click="cancel()">
-                {{ $saas.t('pages.member-team.forms.remove.buttons.cancel') }}
+                {{ $saas.t('pages.user-team.forms.remove.buttons.cancel') }}
             </b-button>
-            <b-button form="form-member-team-remove" type="submit" variant="danger" :disabled="form.isDisabled() || !validator.isValid()">
+            <b-button form="form-user-team-remove" type="submit" variant="danger" :disabled="form.isDisabled() || !validator.isValid()">
                 <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
-                {{ $saas.t('pages.member-team.forms.remove.buttons.remove') }}
+                {{ $saas.t('pages.user-team.forms.remove.buttons.remove') }}
             </b-button>
         </template>
     </b-modal>
@@ -44,7 +44,7 @@ export default class Remove extends Vue {
   @Prop(Object) readonly user!: User;
   @Prop(Array) readonly users!: User[];
 
-  private modalId: string = 'member-team-remove';
+  private modalId: string = 'user-team-remove';
   private name: string | null = null;
   private form: Form = new Form();
   private validator: Validator = new Validator([
@@ -91,7 +91,7 @@ export default class Remove extends Vue {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.$saas.getHttp().delete('/api/auth/team/member', {
+    this.$saas.getHttp().delete('/api/auth/team/user', {
       data: this.user,
       headers: {
         'Team': this.$saas.getSecurity().getTeam()!.id,
