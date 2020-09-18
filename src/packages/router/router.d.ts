@@ -15,7 +15,7 @@ export default interface Router {
   /**
    * Redirect to route name
    */
-  redirect(to: string): void
+  redirectToName(name: string): void
 
   /**
    * Shorthand for login redirection
