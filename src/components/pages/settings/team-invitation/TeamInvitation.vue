@@ -9,7 +9,7 @@
 
                     <b-col lg="9">
                         <h1>
-                            {{ $saas.t('pages.invitation.title') }}
+                            {{ $saas.t('pages.team-invitation.title') }}
                         </h1>
                         <hr>
 
@@ -18,7 +18,7 @@
                                 <b-icon :icon="icon" variant="primary" :font-scale="3"/>
                             </b-col>
                             <b-col class="mt-3 mt-sm-3">
-                                <h2>{{ $saas.t('pages.invitation.noInvitations') }}</h2>
+                                <h2>{{ $saas.t('pages.team-invitation.noInvitations') }}</h2>
                             </b-col>
                         </div>
 
@@ -29,8 +29,8 @@
                                         {{ teamUser.team.name }}
                                     </div>
                                     <div>
-                                        <b-button size="sm" variant="primary" class="mr-2" v-b-modal.team-leave @click="selectTeam(teamUser.team)">{{ $saas.t('pages.invitation.actions.accept') }}</b-button>
-                                        <b-button size="sm" v-b-modal.team-delete @click="selectTeam(teamUser.team)">{{ $saas.t('pages.invitation.actions.decline') }}</b-button>
+                                        <b-button size="sm" variant="primary" class="mr-2" v-b-modal.team-leave @click="selectTeam(teamUser.team)">{{ $saas.t('pages.team-invitation.actions.accept') }}</b-button>
+                                        <b-button size="sm" v-b-modal.team-delete @click="selectTeam(teamUser.team)">{{ $saas.t('pages.team-invitation.actions.decline') }}</b-button>
                                     </div>
                                 </b-list-group-item>
                             </b-list-group>
@@ -50,10 +50,10 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import CreateModal from './../../../components/modals/settings/team/Create.vue';
-import DeleteModal from './../../../components/modals/settings/team/Delete.vue';
-import LeaveModal from './../../../components/modals/settings/team/Leave.vue';
-import TeamModel from '../../../models/team';
+import CreateModal from '../../../modals/settings/team/Create.vue';
+import DeleteModal from '../../../modals/settings/team/Delete.vue';
+import LeaveModal from '../../../modals/settings/team/Leave.vue';
+import TeamModel from '../../../../models/team';
 
 @Component({
   components: {
@@ -62,7 +62,7 @@ import TeamModel from '../../../models/team';
     LeaveModal,
   },
 })
-export default class Team extends Vue {
+export default class TeamInvitation extends Vue {
   public icon: string = 'box-seam';
   private selectedTeam: TeamModel | null = null;
 

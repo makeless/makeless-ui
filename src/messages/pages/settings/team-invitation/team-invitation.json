@@ -1,7 +1,7 @@
 {
   "en": {
-    "title": "Invitations",
-    "noInvitations": "You don't have an invitation",
+    "title": "Team invitations",
+    "noInvitations": "You haven't got any team invitations",
     "actions": {
       "accept": "Accept",
       "decline": "Decline"
