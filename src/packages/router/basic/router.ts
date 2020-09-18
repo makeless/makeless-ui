@@ -42,7 +42,15 @@ export default class Router {
   }
 
   public redirectToDashboard(): void {
-    this.redirect('dashboard')
+    this.redirect('dashboard');
+  }
+
+  public redirectToUrl(to: string): void {
+    if (this.getVueRouter().currentRoute.name === to) {
+      return;
+    }
+
+    this.getVueRouter().push({path: to}).then();
   }
 
   public getVueRouter(): VueRouter {
