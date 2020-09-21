@@ -25,13 +25,9 @@
                                 <b-row class="d-flex align-items-center">
                                     <b-col cols="7">
                                         <b-row>
-                                            <b-col>{{ teamInvitation.team.name }}</b-col>
-                                        </b-row>
-                                        <b-row>
-                                            <b-col><small>{{ teamInvitation.user.name }}</small></b-col>
-                                        </b-row>
-                                        <b-row class="mt-2">
-                                            <b-col><small>{{ `${$saas.t('pages.team-invitation.expire')} ${teamInvitation.expire.toLocaleString()}` }}</small></b-col>
+                                            <b-col cols="12">{{ teamInvitation.team.name }}</b-col>
+                                            <b-col cols="12"><small>{{ teamInvitation.user.name }}</small></b-col>
+                                            <b-col cols="12" class="mt-2"><small>{{ `${$saas.t('pages.team-invitation.expire')} ${teamInvitation.expire.toLocaleString()}` }}</small></b-col>
                                         </b-row>
                                     </b-col>
                                     <b-col cols="5">
