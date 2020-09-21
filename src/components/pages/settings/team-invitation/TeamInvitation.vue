@@ -8,9 +8,7 @@
                     </b-col>
 
                     <b-col lg="9">
-                        <h1>
-                            {{ $saas.t('pages.team-invitation.title') }}
-                        </h1>
+                        <h1>{{ $saas.t('pages.team-invitation.title') }}</h1>
                         <hr>
 
                         <div v-if="!teamInvitations.length" class="text-center">
@@ -34,9 +32,7 @@
                                                 <b-col><small>{{ teamInvitation.user.name }}</small></b-col>
                                             </b-row>
                                             <b-row class="mt-2">
-                                                <b-col>
-                                                    <small>{{ `${$saas.t('pages.team-invitation.expire')} ${teamInvitation.expire.toLocaleString()}` }}</small>
-                                                </b-col>
+                                                <b-col><small>{{ `${$saas.t('pages.team-invitation.expire')} ${teamInvitation.expire.toLocaleString()}` }}</small></b-col>
                                             </b-row>
                                         </b-col>
                                         <b-col cols="5">
