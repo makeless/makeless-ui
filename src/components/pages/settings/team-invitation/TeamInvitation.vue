@@ -23,13 +23,13 @@
                                             </b-row>
                                         </b-col>
                                         <b-col cols="5" class="text-right">
-                                            <b-button size="sm" variant="primary" class="mr-0 mr-sm-2 mb-2 mb-sm-0">{{ $saas.t('pages.team-invitation.actions.accept') }}</b-button>
-                                            <b-button size="sm">{{ $saas.t('pages.team-invitation.actions.decline') }}</b-button>
+                                            <b-button size="sm" variant="primary" @click="acceptTeamInvitation(teamInvitation)" class="mr-0 mr-sm-2 mb-2 mb-sm-0">{{ $saas.t('pages.team-invitation.actions.accept') }}</b-button>
+                                            <b-button size="sm" @click="declineTeamInvitation(teamInvitation)">{{ $saas.t('pages.team-invitation.actions.decline') }}</b-button>
                                         </b-col>
                                     </b-row>
                                 </b-list-group-item>
                             </b-list-group>
-                            
+
                             <div v-else class="text-center">
                                 <b-col class="mt-2 mt-sm-5">
                                     <b-icon :icon="icon" variant="primary" :font-scale="3"/>
@@ -53,6 +53,8 @@
 import {Component, Vue} from 'vue-property-decorator';
 import TeamInvitationModel from '../../../../models/team-invitation';
 import ResponseInterface from '../../../../packages/http/response';
+import TeamInvitationDelete from '../../../../structs/team-invitation-delete';
+import TeamInvitationAccept from '../../../../structs/team-invitation-accept';
 
 @Component({
   components: {},
@@ -74,6 +76,39 @@ export default class TeamInvitation extends Vue {
         teamInvitation.expire = new Date(teamInvitation.expire);
         this.teamInvitations!.push(teamInvitation);
       });
+    });
+  }
+
+  acceptTeamInvitation(teamInvitation: TeamInvitationModel): void {
+    const teamInvitationAccept: TeamInvitationAccept = Object.assign(new TeamInvitationAccept(), {
+      id: teamInvitation.id,
+      token: teamInvitation.token,
+      teamId: teamInvitation.teamId,
+    });
+
+    this.$saas.getHttp().patch('/api/auth/team-invitation/accept', {
+      data: teamInvitationAccept,
+    }).then((data) => {
+      this.response = this.$saas.getHttp().response(data);
+      this.$saas.getSecurity().addTeam(teamInvitation.team);
+    }).catch((data) => {
+      this.form.setResponse(this.$saas.getHttp().response(data.response));
+    });
+  }
+
+  declineTeamInvitation(teamInvitation: TeamInvitationModel): void {
+    const teamInvitationDelete: TeamInvitationDelete = Object.assign(new TeamInvitationDelete(), {
+      id: teamInvitation.id,
+      token: teamInvitation.token,
+      teamId: teamInvitation.teamId,
+    });
+
+    this.$saas.getHttp().delete('/api/auth/team-invitation', {
+      data: teamInvitationDelete,
+    }).then((data) => {
+      this.response = this.$saas.getHttp().response(data);
+    }).catch((data) => {
+      this.form.setResponse(this.$saas.getHttp().response(data.response));
     });
   }
 }
