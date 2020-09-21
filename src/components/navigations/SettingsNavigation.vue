@@ -13,6 +13,7 @@
                     <b-list-group-item v-if="isAccessible('profile-team')" :to="{name: 'profile-team'}" :active="isActive('profile-team')">{{ $saas.t('components.navigations.settingsNavigation.profile') }}</b-list-group-item>
                     <b-list-group-item v-if="isAccessible('user-team')" :to="{name: 'user-team'}" :active="isActive('user-team')">{{ $saas.t('components.navigations.settingsNavigation.users') }}</b-list-group-item>
                     <b-list-group-item v-if="isAccessible('token-team')" :to="{name: 'token-team'}" :active="isActive('token-team')">{{ $saas.t('components.navigations.settingsNavigation.tokens') }}</b-list-group-item>
+                    <b-list-group-item v-if="isAccessible('team-invitation-team')" :to="{name: 'team-invitation-team'}" :active="isActive('team-invitation-team')">{{ $saas.t('components.navigations.settingsNavigation.team-invitations-team') }}</b-list-group-item>
                 </template>
             </b-list-group>
         </b-card>

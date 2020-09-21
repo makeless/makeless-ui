@@ -2,7 +2,7 @@
   "en": {
     "title": "Team invitations",
     "noInvitations": "You haven't got any team invitations",
-    "expire": "Expire",
+    "expires": "Expires",
     "actions": {
       "accept": "Accept",
       "decline": "Decline"

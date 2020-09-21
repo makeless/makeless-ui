@@ -8,7 +8,7 @@
                     </b-col>
 
                     <b-col lg="9">
-                        <h1>{{ $saas.t('pages.team-invitation.title') }}</h1>
+                        <h1>{{ $saas.t('pages.team-invitation-team.title') }}</h1>
                         <hr>
 
                         <div v-if="response && teamInvitations">
@@ -17,30 +17,30 @@
                                     <b-row class="d-flex align-items-center">
                                         <b-col cols="7">
                                             <b-row>
-                                                <b-col cols="12">{{ teamInvitation.team.name }}</b-col>
-                                                <b-col cols="12"><small>{{ teamInvitation.user.name }}</small></b-col>
-                                                <b-col cols="12" class="mt-2"><small>{{ `${$saas.t('pages.team-invitation.expires')} ${teamInvitation.expire.toLocaleString()}` }}</small></b-col>
+                                                <b-col cols="12">{{ teamInvitation.email }}</b-col>
+                                                <b-col cols="12"><small>{{ `${$saas.t('pages.team-invitation-team.invitedBy')} ${teamInvitation.user.name}` }}</small></b-col>
+                                                <b-col cols="12" class="mt-2"><small>{{ teamInvitation.createdAt.toLocaleString() }}</small></b-col>
                                             </b-row>
                                         </b-col>
                                         <b-col cols="5" class="text-right">
-                                            <b-button size="sm" variant="primary" class="mr-0 mr-sm-2 mb-2 mb-sm-0">{{ $saas.t('pages.team-invitation.actions.accept') }}</b-button>
-                                            <b-button size="sm">{{ $saas.t('pages.team-invitation.actions.decline') }}</b-button>
+                                            <b-button size="sm" variant="primary" class="mr-0 mr-sm-2 mb-2 mb-sm-0">{{ $saas.t('pages.team-invitation-team.actions.resend') }}</b-button>
+                                            <b-button size="sm">{{ $saas.t('pages.team-invitation-team.actions.cancel') }}</b-button>
                                         </b-col>
                                     </b-row>
                                 </b-list-group-item>
                             </b-list-group>
-                            
+
                             <div v-else class="text-center">
                                 <b-col class="mt-2 mt-sm-5">
                                     <b-icon :icon="icon" variant="primary" :font-scale="3"/>
                                 </b-col>
                                 <b-col class="mt-3 mt-sm-3">
-                                    <h2>{{ $saas.t('pages.team-invitation.noInvitations') }}</h2>
+                                    <h2>{{ $saas.t('pages.team-invitation-team.noInvitations') }}</h2>
                                 </b-col>
                             </div>
                         </div>
                         <div v-else class="text-center">
-                            <b-spinner :label="$saas.t('pages.team-invitation.loading')"></b-spinner>
+                            <b-spinner :label="$saas.t('pages.team-invitation-team.loading')"></b-spinner>
                         </div>
                     </b-col>
                 </b-row>
@@ -51,27 +51,31 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import TeamInvitationModel from '../../../../models/team-invitation';
+import TeamInvitation from '../../../../models/team-invitation';
 import ResponseInterface from '../../../../packages/http/response';
 
 @Component({
   components: {},
 })
-export default class TeamInvitation extends Vue {
-  public icon: string = 'box-seam';
+export default class TeamInvitationTeam extends Vue {
+  public icon: string = 'people';
   private response: ResponseInterface | null = null;
-  private teamInvitations: TeamInvitationModel[] | null = [];
+  private teamInvitations: TeamInvitation[] | null = [];
 
   created() {
     this.loadTeamInvitations();
   }
 
   loadTeamInvitations(): void {
-    this.$saas.getHttp().get('/api/auth/team-invitation').then((data) => {
+    this.$saas.getHttp().get('/api/auth/team/team-invitation', {
+      headers: {
+        'Team': this.$saas.getSecurity().getTeam()!.id,
+      },
+    }).then((data) => {
       this.teamInvitations = [];
       this.response = this.$saas.getHttp().response(data);
-      this.response.getData().data.forEach((teamInvitation: TeamInvitationModel) => {
-        teamInvitation.expire = new Date(teamInvitation.expire);
+      this.response.getData().data.forEach((teamInvitation: TeamInvitation) => {
+        teamInvitation.createdAt = new Date(teamInvitation.createdAt);
         this.teamInvitations!.push(teamInvitation);
       });
     });
