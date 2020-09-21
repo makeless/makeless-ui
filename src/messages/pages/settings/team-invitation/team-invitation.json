@@ -1,0 +1,12 @@
+{
+  "en": {
+    "title": "Team invitations",
+    "noInvitations": "You haven't got any team invitations",
+    "expire": "Expire",
+    "actions": {
+      "accept": "Accept",
+      "decline": "Decline"
+    },
+    "loading": "Loading ..."
+  }
+}

@@ -26,6 +26,7 @@ import ProfileTeamPage from './pages/settings/profile/profile-team';
 import TeamPage from './pages/settings/team';
 import UserTeamPage from './pages/settings/user/user-team';
 import PasswordPage from './pages/settings/password';
+import TeamInvitationPage from './pages/settings/team-invitation/team-invitation';
 import TokenPage from './pages/settings/token/token';
 import TokenTeamPage from './pages/settings/token/token-team';
 import PageNotFoundPage from './pages/page-not-found';
@@ -74,6 +75,7 @@ export default class Saas {
     'dashboard': new DashboardPage(),
     'profile': new ProfilePage(),
     'password': new PasswordPage(),
+    'team-invitation': new TeamInvitationPage(),
     'page-not-found': new PageNotFoundPage(),
     'team': new TeamPage(),
     'token': new TokenPage(),

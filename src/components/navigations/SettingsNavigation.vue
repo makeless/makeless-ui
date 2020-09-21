@@ -6,6 +6,7 @@
                     <b-list-group-item v-if="isAccessible('profile')" :to="{name: 'profile'}" :active="isActive('profile')">{{ $saas.t('components.navigations.settingsNavigation.profile') }}</b-list-group-item>
                     <b-list-group-item v-if="isAccessible('password')" :to="{name: 'password'}" :active="isActive('password')">{{ $saas.t('components.navigations.settingsNavigation.password') }}</b-list-group-item>
                     <b-list-group-item v-if="isAccessible('team')" :to="{name: 'team'}" :active="isActive('team')">{{ $saas.t('components.navigations.settingsNavigation.teams') }}</b-list-group-item>
+                    <b-list-group-item v-if="isAccessible('team-invitation')" :to="{name: 'team-invitation'}" :active="isActive('team-invitation')">{{ $saas.t('components.navigations.settingsNavigation.team-invitations') }}</b-list-group-item>
                     <b-list-group-item v-if="isAccessible('token')" :to="{name: 'token'}" :active="isActive('token')">{{ $saas.t('components.navigations.settingsNavigation.tokens') }}</b-list-group-item>
                 </template>
                 <template v-else>
