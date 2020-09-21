@@ -24,18 +24,30 @@
 
                         <div v-if="teamInvitations.length">
                             <b-list-group>
-                                <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
-                                    <div>
-                                        <b-col class="pl-0">{{ teamInvitation.team.name }}</b-col>
-                                        <b-col class="pl-0"><small>{{ teamInvitation.user.name }}</small></b-col>
-                                        <b-col class="pl-0">
-                                            <small>{{ $saas.t('pages.team-invitation.expiresOn') }}</small>
-                                            <small>{{ teamInvitation.expire.toLocaleString('en-US', dateFormat) }}</small></b-col>
-                                    </div>
-                                    <div>
-                                        <b-button size="sm" variant="primary" class="mr-2">{{ $saas.t('pages.team-invitation.actions.accept') }}</b-button>
-                                        <b-button size="sm">{{ $saas.t('pages.team-invitation.actions.decline') }}</b-button>
-                                    </div>
+                                <b-list-group-item v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
+                                    <b-row class="d-flex align-items-center">
+                                        <b-col cols="7">
+                                            <b-row>
+                                                <b-col>{{ teamInvitation.team.name }}</b-col>
+                                            </b-row>
+                                            <b-row>
+                                                <b-col><small>{{ teamInvitation.user.name }}</small></b-col>
+                                            </b-row>
+                                            <b-row class="mt-2">
+                                                <b-col>
+                                                    <small>{{ `${$saas.t('pages.team-invitation.expiresOn')} ${teamInvitation.expire.toLocaleString('de')}` }}</small>
+                                                </b-col>
+                                            </b-row>
+                                        </b-col>
+                                        <b-col cols="5">
+                                            <b-row class="text-right">
+                                                <b-col>
+                                                    <b-button size="sm" variant="primary" class="mr-0 mr-sm-2 mb-2 mb-sm-0">{{ $saas.t('pages.team-invitation.actions.accept') }}</b-button>
+                                                    <b-button size="sm">{{ $saas.t('pages.team-invitation.actions.decline') }}</b-button>
+                                                </b-col>
+                                            </b-row>
+                                        </b-col>
+                                    </b-row>
                                 </b-list-group-item>
                             </b-list-group>
                         </div>
@@ -58,12 +70,6 @@ export default class TeamInvitation extends Vue {
   public icon: string = 'box-seam';
   private response: ResponseInterface | null = null;
   private teamInvitations: TeamInvitationModel[] | null = [];
-  private dateFormat = {
-    weekday: 'long',
-    month: 'long',
-    day: '2-digit',
-    year: 'numeric',
-  };
 
   created() {
     this.loadTeamInvitations();
@@ -74,7 +80,7 @@ export default class TeamInvitation extends Vue {
       this.teamInvitations = [];
       this.response = this.$saas.getHttp().response(data);
       this.response.getData().data.forEach((teamInvitation: TeamInvitationModel) => {
-        console.log(teamInvitation.expire = new Date());
+        teamInvitation.expire = new Date(teamInvitation.expire);
         this.teamInvitations!.push(teamInvitation);
       });
     });
