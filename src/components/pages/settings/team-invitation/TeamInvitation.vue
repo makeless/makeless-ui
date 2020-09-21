@@ -11,7 +11,7 @@
                         <h1>{{ $saas.t('pages.team-invitation.title') }}</h1>
                         <hr>
 
-                        <div v-if="!teamInvitations.length" class="text-center">
+                        <div v-if="response && !teamInvitations.length" class="text-center">
                             <b-col class="mt-2 mt-sm-5">
                                 <b-icon :icon="icon" variant="primary" :font-scale="3"/>
                             </b-col>
@@ -20,32 +20,33 @@
                             </b-col>
                         </div>
 
-                        <div v-if="teamInvitations.length">
-                            <b-list-group>
-                                <b-list-group-item v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
-                                    <b-row class="d-flex align-items-center">
-                                        <b-col cols="7">
-                                            <b-row>
-                                                <b-col>{{ teamInvitation.team.name }}</b-col>
-                                            </b-row>
-                                            <b-row>
-                                                <b-col><small>{{ teamInvitation.user.name }}</small></b-col>
-                                            </b-row>
-                                            <b-row class="mt-2">
-                                                <b-col><small>{{ `${$saas.t('pages.team-invitation.expire')} ${teamInvitation.expire.toLocaleString()}` }}</small></b-col>
-                                            </b-row>
-                                        </b-col>
-                                        <b-col cols="5">
-                                            <b-row class="text-right">
-                                                <b-col>
-                                                    <b-button size="sm" variant="primary" class="mr-0 mr-sm-2 mb-2 mb-sm-0">{{ $saas.t('pages.team-invitation.actions.accept') }}</b-button>
-                                                    <b-button size="sm">{{ $saas.t('pages.team-invitation.actions.decline') }}</b-button>
-                                                </b-col>
-                                            </b-row>
-                                        </b-col>
-                                    </b-row>
-                                </b-list-group-item>
-                            </b-list-group>
+                        <b-list-group v-if="response && teamInvitations">
+                            <b-list-group-item v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
+                                <b-row class="d-flex align-items-center">
+                                    <b-col cols="7">
+                                        <b-row>
+                                            <b-col>{{ teamInvitation.team.name }}</b-col>
+                                        </b-row>
+                                        <b-row>
+                                            <b-col><small>{{ teamInvitation.user.name }}</small></b-col>
+                                        </b-row>
+                                        <b-row class="mt-2">
+                                            <b-col><small>{{ `${$saas.t('pages.team-invitation.expire')} ${teamInvitation.expire.toLocaleString()}` }}</small></b-col>
+                                        </b-row>
+                                    </b-col>
+                                    <b-col cols="5">
+                                        <b-row class="text-right">
+                                            <b-col>
+                                                <b-button size="sm" variant="primary" class="mr-0 mr-sm-2 mb-2 mb-sm-0">{{ $saas.t('pages.team-invitation.actions.accept') }}</b-button>
+                                                <b-button size="sm">{{ $saas.t('pages.team-invitation.actions.decline') }}</b-button>
+                                            </b-col>
+                                        </b-row>
+                                    </b-col>
+                                </b-row>
+                            </b-list-group-item>
+                        </b-list-group>
+                        <div v-else class="text-center">
+                            <b-spinner :label="$saas.t('pages.team-invitation.loading')"></b-spinner>
                         </div>
                     </b-col>
                 </b-row>
