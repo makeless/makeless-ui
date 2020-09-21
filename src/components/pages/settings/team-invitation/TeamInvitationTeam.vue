@@ -58,7 +58,7 @@ import ResponseInterface from '../../../../packages/http/response';
   components: {},
 })
 export default class TeamInvitationTeam extends Vue {
-  public icon: string = 'box-seam';
+  public icon: string = 'people';
   private response: ResponseInterface | null = null;
   private teamInvitations: TeamInvitation[] | null = [];
 

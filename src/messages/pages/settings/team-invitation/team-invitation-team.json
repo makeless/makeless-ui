@@ -1,7 +1,7 @@
 {
   "en": {
     "title": "Pending invitations",
-    "noInvitations": "You haven't sent any team invitations",
+    "noInvitations": "Your team haven't sent any invitations",
     "invitedBy": "Invited by",
     "actions": {
       "resend": "Resend",
