@@ -35,7 +35,7 @@
                                             </b-row>
                                             <b-row class="mt-2">
                                                 <b-col>
-                                                    <small>{{ `${$saas.t('pages.team-invitation.expiresOn')} ${teamInvitation.expire.toLocaleString('de')}` }}</small>
+                                                    <small>{{ `${$saas.t('pages.team-invitation.expiresOn')} ${teamInvitation.expire.toLocaleString()}` }}</small>
                                                 </b-col>
                                             </b-row>
                                         </b-col>
