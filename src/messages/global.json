@@ -14,6 +14,7 @@
           "password": "Password",
           "teams": "Teams",
           "team-invitations": "Team invitations",
+          "team-invitations-team": "Pending invitations",
           "tokens": "Tokens",
           "users": "Users"
         }
