@@ -73,7 +73,7 @@ export default class TeamInvitation extends Vue {
       this.teamInvitations = [];
       this.response = this.$saas.getHttp().response(data);
       this.response.getData().data.forEach((teamInvitation: TeamInvitationModel) => {
-        teamInvitation.expire = new Date(teamInvitation.expire);
+        teamInvitation.expire = new Date(teamInvitation.expire!);
         this.teamInvitations!.push(teamInvitation);
       });
     });
@@ -90,26 +90,36 @@ export default class TeamInvitation extends Vue {
       data: teamInvitationAccept,
     }).then((data) => {
       this.response = this.$saas.getHttp().response(data);
-      this.$saas.getSecurity().addTeam(teamInvitation.team);
+      /*this.$saas.getSecurity().addTeam(teamInvitation!.team);*/
     }).catch((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data.response));
+      this.response = this.$saas.getHttp().response(data.response);
     });
   }
 
   declineTeamInvitation(teamInvitation: TeamInvitationModel): void {
     const teamInvitationDelete: TeamInvitationDelete = Object.assign(new TeamInvitationDelete(), {
       id: teamInvitation.id,
-      token: teamInvitation.token,
-      teamId: teamInvitation.teamId,
     });
 
     this.$saas.getHttp().delete('/api/auth/team-invitation', {
       data: teamInvitationDelete,
     }).then((data) => {
       this.response = this.$saas.getHttp().response(data);
+      this.removeTeamInvitation(teamInvitation);
     }).catch((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data.response));
+      this.response = this.$saas.getHttp().response(data.response);
     });
+  }
+
+  public removeTeamInvitation(teamInvitation: TeamInvitationModel): void {
+    for (let i = 0; i < this.teamInvitations!.length; i++) {
+      if (this.teamInvitations![i].id !== teamInvitation.id) {
+        continue;
+      }
+
+      this.teamInvitations!.splice(i, 1);
+      return;
+    }
   }
 }
 </script>
