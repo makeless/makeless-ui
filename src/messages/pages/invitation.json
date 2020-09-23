@@ -7,17 +7,17 @@
     },
     "instruction": {
       "newTo": "New to",
-      "createAccount": "Create your account to accept this invitation",
+      "createAccount": "Create account to accept this invitation",
       "questionMark": "?"
     },
     "form": {
       "fields": {
         "name": {
-          "label": "Your name",
+          "label": "Name",
           "placeholder": "Name"
         },
         "email": {
-          "label": "Your Email",
+          "label": "Email",
           "placeholder": "Email"
         },
         "password": {

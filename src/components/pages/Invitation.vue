@@ -3,21 +3,15 @@
         <template slot="page">
             <b-container>
                 <b-row class="justify-content-md-center">
-                    <b-col lg="6">
-                        <div class="text-center mb-3 mb-sm-4 mt-0 mt-sm-3">
-                            <template v-if="$saas.getConfig().getConfiguration().getLogo()">
-                                <img :src="$saas.getConfig().getConfiguration().getLogo()" alt="logo">
-                            </template>
-                            <template v-else>
-                                <h1>{{ $saas.getConfig().getConfiguration().getName() }}</h1>
-                            </template>
-                        </div>
+                    <b-col lg="4">
                         <b-card class="text-center">
+                            <b-col class="mb-2 mb-sm-3"><b-icon :icon="icon" variant="primary" :font-scale="3"/></b-col>
                             <b-col><h2>{{ $saas.t('pages.invitation.information.invitedTo') }}</h2></b-col>
                             <b-col><small>{{ $saas.t('pages.invitation.information.invitedBy') }}</small></b-col>
                             <hr>
                             <b-col>{{ `${$saas.t('pages.invitation.instruction.newTo')} ${$saas.getConfig().getConfiguration().getName()}${$saas.t('pages.invitation.instruction.questionMark')}` }}</b-col>
-                            <b-col class="mb-3">{{ $saas.t('pages.invitation.instruction.createAccount') }}</b-col>
+                            <b-col class="mb-1 mb-sm-3">{{ $saas.t('pages.invitation.instruction.createAccount') }}</b-col>
+
                             <b-form @submit="onSubmit">
                                 <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                                     <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
@@ -50,7 +44,7 @@
                                     </b-form-invalid-feedback>
                                 </b-form-group>
 
-                                <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
+                                <b-button type="submit" variant="primary" class="btn-block" :disabled="form.isDisabled() || !validator.isValid()">
                                     <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
                                     {{ $saas.t('pages.invitation.form.button') }}
                                 </b-button>
@@ -74,6 +68,7 @@ import DomUtil from '../../utils/dom';
 export default class Invitation extends Vue {
   private invitation: InvitationModel = new InvitationModel();
   private form: Form = new Form();
+  private icon: string = "people";
   private validator: Validator = new Validator([
     this.validateName,
     this.validateEmail,
