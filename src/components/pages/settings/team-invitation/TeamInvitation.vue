@@ -55,6 +55,7 @@ import TeamInvitationModel from '../../../../models/team-invitation';
 import ResponseInterface from '../../../../packages/http/response';
 import TeamInvitationDelete from '../../../../structs/team-invitation-delete';
 import TeamInvitationAccept from '../../../../structs/team-invitation-accept';
+import Team from '../../../../models/team';
 
 @Component({
   components: {},
@@ -82,17 +83,13 @@ export default class TeamInvitation extends Vue {
   acceptTeamInvitation(teamInvitation: TeamInvitationModel): void {
     const teamInvitationAccept: TeamInvitationAccept = Object.assign(new TeamInvitationAccept(), {
       id: teamInvitation.id,
-      token: teamInvitation.token,
-      teamId: teamInvitation.teamId,
     });
 
-    this.$saas.getHttp().patch('/api/auth/team-invitation/accept', {
-      data: teamInvitationAccept,
-    }).then((data) => {
+    this.$saas.getHttp().patch('/api/auth/team-invitation/accept', teamInvitationAccept).then((data) => {
       this.response = this.$saas.getHttp().response(data);
-      /*this.$saas.getSecurity().addTeam(teamInvitation!.team);*/
-    }).catch((data) => {
-      this.response = this.$saas.getHttp().response(data.response);
+      const team: Team = this.response.getData().data;
+      this.$saas.getSecurity().addTeam(team);
+      this.$saas.getSecurity().switchToTeam(team.id!);
     });
   }
 
