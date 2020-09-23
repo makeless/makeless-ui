@@ -24,7 +24,7 @@
                                         </b-col>
                                         <b-col cols="5" class="text-right">
                                             <b-button size="sm" variant="primary" class="mr-0 mr-sm-2 mb-2 mb-sm-0">{{ $saas.t('pages.team-invitation-team.actions.resend') }}</b-button>
-                                            <b-button size="sm">{{ $saas.t('pages.team-invitation-team.actions.cancel') }}</b-button>
+                                            <b-button size="sm" @click="cancelTeamInvitation(teamInvitation)">{{ $saas.t('pages.team-invitation-team.actions.cancel') }}</b-button>
                                         </b-col>
                                     </b-row>
                                 </b-list-group-item>
@@ -51,8 +51,9 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import TeamInvitation from '../../../../models/team-invitation';
 import ResponseInterface from '../../../../packages/http/response';
+import TeamInvitation from '../../../../models/team-invitation';
+import TeamInvitationTeamCancel from '../../../../structs/team-invitation-team-cancel';
 
 @Component({
   components: {},
@@ -75,14 +76,39 @@ export default class TeamInvitationTeam extends Vue {
       this.teamInvitations = [];
       this.response = this.$saas.getHttp().response(data);
       this.response.getData().data.forEach((teamInvitation: TeamInvitation) => {
-        teamInvitation.createdAt = new Date(teamInvitation.createdAt);
+        teamInvitation.createdAt = new Date(teamInvitation.createdAt!);
         this.teamInvitations!.push(teamInvitation);
       });
     });
   }
 
-  cancelTeamInvitation(): void {
-    
+  cancelTeamInvitation(teamInvitation: TeamInvitation): void {
+    const teamInvitationTeamCancel: TeamInvitationTeamCancel = Object.assign(new TeamInvitationTeamCancel(), {
+      id: teamInvitation.id,
+    });
+
+    this.$saas.getHttp().delete('/api/auth/team/team-invitation', {
+      data: teamInvitationTeamCancel,
+      headers: {
+        'Team': this.$saas.getSecurity().getTeam()!.id,
+      },
+    }).then((data) => {
+      this.response = this.$saas.getHttp().response(data);
+      this.removeTeamInvitation(teamInvitation);
+    }).catch((data) => {
+      this.response = this.$saas.getHttp().response(data.response);
+    });
+  }
+
+  public removeTeamInvitation(teamInvitation: TeamInvitation): void {
+    for (let i = 0; i < this.teamInvitations!.length; i++) {
+      if (this.teamInvitations![i].id !== teamInvitation.id) {
+        continue;
+      }
+
+      this.teamInvitations!.splice(i, 1);
+      return;
+    }
   }
 }
 </script>
