@@ -90,6 +90,8 @@ export default class TeamInvitation extends Vue {
       const team: Team = this.response.getData().data;
       this.$saas.getSecurity().addTeam(team);
       this.$saas.getSecurity().switchToTeam(team.id!);
+    }).catch((data) => {
+      this.response = this.$saas.getHttp().response(data.response);
     });
   }
 
