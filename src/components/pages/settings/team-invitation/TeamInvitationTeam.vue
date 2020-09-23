@@ -98,12 +98,10 @@ export default class TeamInvitationTeam extends Vue {
       headers: {
         'Team': this.$saas.getSecurity().getTeam()!.id,
       },
-    }).then((data) => {
-      this.response = this.$saas.getHttp().response(data);
+    }).then(() => {
       this.removeTeamInvitation(teamInvitation);
       teamInvitation.isLoadingTeamInvitationDelete = false;
-    }).catch((data) => {
-      this.response = this.$saas.getHttp().response(data.response);
+    }).catch(() => {
       teamInvitation.isLoadingTeamInvitationDelete = false;
     });
   }
