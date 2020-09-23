@@ -24,8 +24,8 @@
                                         </b-col>
                                         <b-col cols="5" class="text-right">
                                             <b-button size="sm" variant="primary" class="mr-0 mr-sm-2 mb-2 mb-sm-0">{{ $saas.t('pages.team-invitation-team.actions.resend') }}</b-button>
-                                            <b-button size="sm" @click="cancelTeamInvitation(teamInvitation)">
-                                                <b-spinner small v-if="teamInvitation.isLoadingTeamInvitationCancel" class="mr-1"></b-spinner>
+                                            <b-button size="sm" @click="deleteTeamInvitation(teamInvitation)">
+                                                <b-spinner small v-if="teamInvitation.isLoadingTeamInvitationDelete" class="mr-1"></b-spinner>
                                                 <span>{{ $saas.t('pages.team-invitation-team.actions.cancel') }}</span>
                                             </b-button>
                                         </b-col>
@@ -85,8 +85,8 @@ export default class TeamInvitationTeam extends Vue {
     });
   }
 
-  cancelTeamInvitation(teamInvitation: TeamInvitation): void {
-    teamInvitation.isLoadingTeamInvitationCancel = true;
+  deleteTeamInvitation(teamInvitation: TeamInvitation): void {
+    teamInvitation.isLoadingTeamInvitationDelete = true;
 
     const teamInvitationTeamDelete: TeamInvitationTeamDelete = Object.assign(new TeamInvitationTeamDelete(), {
       id: teamInvitation.id,
@@ -100,10 +100,10 @@ export default class TeamInvitationTeam extends Vue {
     }).then((data) => {
       this.response = this.$saas.getHttp().response(data);
       this.removeTeamInvitation(teamInvitation);
-      teamInvitation.isLoadingTeamInvitationCancel = false;
+      teamInvitation.isLoadingTeamInvitationDelete = false;
     }).catch((data) => {
       this.response = this.$saas.getHttp().response(data.response);
-      teamInvitation.isLoadingTeamInvitationCancel = false;
+      teamInvitation.isLoadingTeamInvitationDelete = false;
     });
   }
 

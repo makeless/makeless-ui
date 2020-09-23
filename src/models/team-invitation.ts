@@ -15,6 +15,5 @@ export default class TeamInvitation extends Model {
   accepted: boolean | null = null;
 
   isLoadingTeamInvitationAccept: boolean | null = false;
-  isLoadingTeamInvitationDecline: boolean | null = false;
-  isLoadingTeamInvitationCancel: boolean | null = false;
+  isLoadingTeamInvitationDelete: boolean | null = false;
 }
