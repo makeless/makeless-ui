@@ -13,4 +13,7 @@ export default class TeamInvitation extends Model {
   token: string | null = null;
   expire: Date | null = null;
   accepted: boolean | null = null;
+
+  isLoadingTeamInvitationAccept: boolean | null = false;
+  isLoadingTeamInvitationDelete: boolean | null = false;
 }

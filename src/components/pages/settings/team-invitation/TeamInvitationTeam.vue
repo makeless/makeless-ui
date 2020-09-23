@@ -24,7 +24,10 @@
                                         </b-col>
                                         <b-col cols="5" class="text-right">
                                             <b-button size="sm" variant="primary" class="mr-0 mr-sm-2 mb-2 mb-sm-0">{{ $saas.t('pages.team-invitation-team.actions.resend') }}</b-button>
-                                            <b-button size="sm">{{ $saas.t('pages.team-invitation-team.actions.cancel') }}</b-button>
+                                            <b-button size="sm" @click="deleteTeamInvitation(teamInvitation)">
+                                                <b-spinner small v-if="teamInvitation.isLoadingTeamInvitationDelete" class="mr-1"></b-spinner>
+                                                <span>{{ $saas.t('pages.team-invitation-team.actions.cancel') }}</span>
+                                            </b-button>
                                         </b-col>
                                     </b-row>
                                 </b-list-group-item>
@@ -51,8 +54,9 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import TeamInvitation from '../../../../models/team-invitation';
 import ResponseInterface from '../../../../packages/http/response';
+import TeamInvitation from '../../../../models/team-invitation';
+import TeamInvitationTeamDelete from '../../../../structs/team-invitation-team-delete';
 
 @Component({
   components: {},
@@ -75,10 +79,42 @@ export default class TeamInvitationTeam extends Vue {
       this.teamInvitations = [];
       this.response = this.$saas.getHttp().response(data);
       this.response.getData().data.forEach((teamInvitation: TeamInvitation) => {
-        teamInvitation.createdAt = new Date(teamInvitation.createdAt);
-        this.teamInvitations!.push(teamInvitation);
+        this.teamInvitations!.push(Object.assign(new TeamInvitation(), teamInvitation, {
+          createdAt: new Date(teamInvitation.createdAt!),
+        }));
       });
     });
+  }
+
+  deleteTeamInvitation(teamInvitation: TeamInvitation): void {
+    teamInvitation.isLoadingTeamInvitationDelete = true;
+
+    const teamInvitationTeamDelete: TeamInvitationTeamDelete = Object.assign(new TeamInvitationTeamDelete(), {
+      id: teamInvitation.id,
+    });
+
+    this.$saas.getHttp().delete('/api/auth/team/team-invitation', {
+      data: teamInvitationTeamDelete,
+      headers: {
+        'Team': this.$saas.getSecurity().getTeam()!.id,
+      },
+    }).then(() => {
+      this.removeTeamInvitation(teamInvitation);
+      teamInvitation.isLoadingTeamInvitationDelete = false;
+    }).catch(() => {
+      teamInvitation.isLoadingTeamInvitationDelete = false;
+    });
+  }
+
+  public removeTeamInvitation(teamInvitation: TeamInvitation): void {
+    for (let i = 0; i < this.teamInvitations!.length; i++) {
+      if (this.teamInvitations![i].id !== teamInvitation.id) {
+        continue;
+      }
+
+      this.teamInvitations!.splice(i, 1);
+      return;
+    }
   }
 }
 </script>
