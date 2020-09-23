@@ -95,13 +95,12 @@ export default class TeamInvitation extends Vue {
     });
 
     this.$saas.getHttp().patch('/api/auth/team-invitation/accept', teamInvitationAccept).then((data) => {
-      this.response = this.$saas.getHttp().response(data);
-      const team: Team = this.response.getData().data;
+      const response: ResponseInterface = this.$saas.getHttp().response(data);
+      const team: Team = response.getData().data;
       this.$saas.getSecurity().addTeam(team);
       this.$saas.getSecurity().switchToTeam(team.id!);
       teamInvitation.isLoadingTeamInvitationAccept = false;
-    }).catch((data) => {
-      this.response = this.$saas.getHttp().response(data.response);
+    }).catch(() => {
       teamInvitation.isLoadingTeamInvitationAccept = false;
     });
   }
@@ -115,12 +114,10 @@ export default class TeamInvitation extends Vue {
 
     this.$saas.getHttp().delete('/api/auth/team-invitation', {
       data: teamInvitationDelete,
-    }).then((data) => {
-      this.response = this.$saas.getHttp().response(data);
+    }).then(() => {
       this.removeTeamInvitation(teamInvitation);
       teamInvitation.isLoadingTeamInvitationDelete = false;
-    }).catch((data) => {
-      this.response = this.$saas.getHttp().response(data.response);
+    }).catch(() => {
       teamInvitation.isLoadingTeamInvitationDelete = false;
     });
   }
