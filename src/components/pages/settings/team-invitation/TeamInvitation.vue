@@ -23,8 +23,14 @@
                                             </b-row>
                                         </b-col>
                                         <b-col cols="5" class="text-right">
-                                            <b-button size="sm" variant="primary" @click="acceptTeamInvitation(teamInvitation)" class="mr-0 mr-sm-2 mb-2 mb-sm-0">{{ $saas.t('pages.team-invitation.actions.accept') }}</b-button>
-                                            <b-button size="sm" @click="declineTeamInvitation(teamInvitation)">{{ $saas.t('pages.team-invitation.actions.decline') }}</b-button>
+                                            <b-button size="sm" variant="primary" @click="acceptTeamInvitation(teamInvitation)" class="mr-0 mr-sm-2 mb-2 mb-sm-0">
+
+                                                <span>{{ $saas.t('pages.team-invitation.actions.accept') }}</span>
+                                            </b-button>
+                                            <b-button size="sm" @click="declineTeamInvitation(teamInvitation)">
+
+                                                <span>{{ $saas.t('pages.team-invitation.actions.decline') }}</span>
+                                            </b-button>
                                         </b-col>
                                     </b-row>
                                 </b-list-group-item>
@@ -81,6 +87,8 @@ export default class TeamInvitation extends Vue {
   }
 
   acceptTeamInvitation(teamInvitation: TeamInvitationModel): void {
+    teamInvitation.isLoadingTeamInvitationAccept = true;
+
     const teamInvitationAccept: TeamInvitationAccept = Object.assign(new TeamInvitationAccept(), {
       id: teamInvitation.id,
     });
@@ -90,12 +98,16 @@ export default class TeamInvitation extends Vue {
       const team: Team = this.response.getData().data;
       this.$saas.getSecurity().addTeam(team);
       this.$saas.getSecurity().switchToTeam(team.id!);
+      teamInvitation.isLoadingTeamInvitationAccept = false;
     }).catch((data) => {
       this.response = this.$saas.getHttp().response(data.response);
+      teamInvitation.isLoadingTeamInvitationAccept = false;
     });
   }
 
   declineTeamInvitation(teamInvitation: TeamInvitationModel): void {
+    teamInvitation.isLoadingTeamInvitationDecline = true;
+
     const teamInvitationDelete: TeamInvitationDelete = Object.assign(new TeamInvitationDelete(), {
       id: teamInvitation.id,
     });
@@ -105,8 +117,10 @@ export default class TeamInvitation extends Vue {
     }).then((data) => {
       this.response = this.$saas.getHttp().response(data);
       this.removeTeamInvitation(teamInvitation);
+      teamInvitation.isLoadingTeamInvitationDecline = false;
     }).catch((data) => {
       this.response = this.$saas.getHttp().response(data.response);
+      teamInvitation.isLoadingTeamInvitationDecline = false;
     });
   }
 
