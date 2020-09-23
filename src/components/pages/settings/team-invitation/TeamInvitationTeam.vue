@@ -80,5 +80,9 @@ export default class TeamInvitationTeam extends Vue {
       });
     });
   }
+
+  cancelTeamInvitation(): void {
+    
+  }
 }
 </script>
