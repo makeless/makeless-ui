@@ -24,11 +24,11 @@
                                         </b-col>
                                         <b-col cols="5" class="text-right">
                                             <b-button size="sm" variant="primary" @click="acceptTeamInvitation(teamInvitation)" class="mr-0 mr-sm-2 mb-2 mb-sm-0">
-
+                                                <b-spinner small v-if="teamInvitation.isLoadingTeamInvitationAccept" class="mr-1"></b-spinner>
                                                 <span>{{ $saas.t('pages.team-invitation.actions.accept') }}</span>
                                             </b-button>
                                             <b-button size="sm" @click="declineTeamInvitation(teamInvitation)">
-
+                                                <b-spinner small v-if="teamInvitation.isLoadingTeamInvitationDecline" class="mr-1"></b-spinner>
                                                 <span>{{ $saas.t('pages.team-invitation.actions.decline') }}</span>
                                             </b-button>
                                         </b-col>
