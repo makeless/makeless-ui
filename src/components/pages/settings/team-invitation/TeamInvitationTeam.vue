@@ -56,7 +56,7 @@
 import {Component, Vue} from 'vue-property-decorator';
 import ResponseInterface from '../../../../packages/http/response';
 import TeamInvitation from '../../../../models/team-invitation';
-import TeamInvitationTeamCancel from '../../../../structs/team-invitation-team-cancel';
+import TeamInvitationTeamDelete from '../../../../structs/team-invitation-team-delete';
 
 @Component({
   components: {},
@@ -88,12 +88,12 @@ export default class TeamInvitationTeam extends Vue {
   cancelTeamInvitation(teamInvitation: TeamInvitation): void {
     teamInvitation.isLoadingTeamInvitationCancel = true;
 
-    const teamInvitationTeamCancel: TeamInvitationTeamCancel = Object.assign(new TeamInvitationTeamCancel(), {
+    const teamInvitationTeamDelete: TeamInvitationTeamDelete = Object.assign(new TeamInvitationTeamDelete(), {
       id: teamInvitation.id,
     });
 
     this.$saas.getHttp().delete('/api/auth/team/team-invitation', {
-      data: teamInvitationTeamCancel,
+      data: teamInvitationTeamDelete,
       headers: {
         'Team': this.$saas.getSecurity().getTeam()!.id,
       },
