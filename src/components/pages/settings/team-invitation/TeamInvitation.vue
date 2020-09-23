@@ -23,13 +23,19 @@
                                             </b-row>
                                         </b-col>
                                         <b-col cols="5" class="text-right">
-                                            <b-button size="sm" variant="primary" class="mr-0 mr-sm-2 mb-2 mb-sm-0">{{ $saas.t('pages.team-invitation.actions.accept') }}</b-button>
-                                            <b-button size="sm">{{ $saas.t('pages.team-invitation.actions.decline') }}</b-button>
+                                            <b-button size="sm" variant="primary" @click="acceptTeamInvitation(teamInvitation)" class="mr-0 mr-sm-2 mb-2 mb-sm-0">
+                                                <b-spinner small v-if="teamInvitation.isLoadingTeamInvitationAccept" class="mr-1"></b-spinner>
+                                                <span>{{ $saas.t('pages.team-invitation.actions.accept') }}</span>
+                                            </b-button>
+                                            <b-button size="sm" @click="deleteTeamInvitation(teamInvitation)">
+                                                <b-spinner small v-if="teamInvitation.isLoadingTeamInvitationDelete" class="mr-1"></b-spinner>
+                                                <span>{{ $saas.t('pages.team-invitation.actions.decline') }}</span>
+                                            </b-button>
                                         </b-col>
                                     </b-row>
                                 </b-list-group-item>
                             </b-list-group>
-                            
+
                             <div v-else class="text-center">
                                 <b-col class="mt-2 mt-sm-5">
                                     <b-icon :icon="icon" variant="primary" :font-scale="3"/>
@@ -53,6 +59,9 @@
 import {Component, Vue} from 'vue-property-decorator';
 import TeamInvitationModel from '../../../../models/team-invitation';
 import ResponseInterface from '../../../../packages/http/response';
+import TeamInvitationDelete from '../../../../structs/team-invitation-delete';
+import TeamInvitationAccept from '../../../../structs/team-invitation-accept';
+import Team from '../../../../models/team';
 
 @Component({
   components: {},
@@ -71,10 +80,57 @@ export default class TeamInvitation extends Vue {
       this.teamInvitations = [];
       this.response = this.$saas.getHttp().response(data);
       this.response.getData().data.forEach((teamInvitation: TeamInvitationModel) => {
-        teamInvitation.expire = new Date(teamInvitation.expire);
-        this.teamInvitations!.push(teamInvitation);
+        this.teamInvitations!.push(Object.assign(new TeamInvitationModel(), teamInvitation, {
+          expire: new Date(teamInvitation.expire!),
+        }));
       });
     });
+  }
+
+  acceptTeamInvitation(teamInvitation: TeamInvitationModel): void {
+    teamInvitation.isLoadingTeamInvitationAccept = true;
+
+    const teamInvitationAccept: TeamInvitationAccept = Object.assign(new TeamInvitationAccept(), {
+      id: teamInvitation.id,
+    });
+
+    this.$saas.getHttp().patch('/api/auth/team-invitation/accept', teamInvitationAccept).then((data) => {
+      const response: ResponseInterface = this.$saas.getHttp().response(data);
+      const team: Team = response.getData().data;
+      teamInvitation.isLoadingTeamInvitationAccept = false;
+      this.$saas.getSecurity().addTeam(team);
+      this.$saas.getSecurity().switchToTeam(team.id!);
+    }).catch(() => {
+      teamInvitation.isLoadingTeamInvitationAccept = false;
+    });
+  }
+
+  deleteTeamInvitation(teamInvitation: TeamInvitationModel): void {
+    teamInvitation.isLoadingTeamInvitationDelete = true;
+
+    const teamInvitationDelete: TeamInvitationDelete = Object.assign(new TeamInvitationDelete(), {
+      id: teamInvitation.id,
+    });
+
+    this.$saas.getHttp().delete('/api/auth/team-invitation', {
+      data: teamInvitationDelete,
+    }).then(() => {
+      this.removeTeamInvitation(teamInvitation);
+      teamInvitation.isLoadingTeamInvitationDelete = false;
+    }).catch(() => {
+      teamInvitation.isLoadingTeamInvitationDelete = false;
+    });
+  }
+
+  public removeTeamInvitation(teamInvitation: TeamInvitationModel): void {
+    for (let i = 0; i < this.teamInvitations!.length; i++) {
+      if (this.teamInvitations![i].id !== teamInvitation.id) {
+        continue;
+      }
+
+      this.teamInvitations!.splice(i, 1);
+      return;
+    }
   }
 }
 </script>

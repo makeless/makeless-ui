@@ -75,7 +75,7 @@ export default class TeamInvitationTeam extends Vue {
       this.teamInvitations = [];
       this.response = this.$saas.getHttp().response(data);
       this.response.getData().data.forEach((teamInvitation: TeamInvitation) => {
-        teamInvitation.createdAt = new Date(teamInvitation.createdAt);
+        teamInvitation.createdAt = new Date(teamInvitation.createdAt!);
         this.teamInvitations!.push(teamInvitation);
       });
     });
