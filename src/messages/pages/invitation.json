@@ -1,0 +1,40 @@
+{
+  "en": {
+    "title": "Login",
+    "information": {
+      "invitedTo": "You've been invited to join",
+      "invitedBy": "Invited by"
+    },
+    "instruction": {
+      "newTo": "New to",
+      "createAccount": "Create your account to accept this invitation",
+      "questionMark": "?"
+    },
+    "form": {
+      "fields": {
+        "name": {
+          "label": "Your name",
+          "placeholder": "Name"
+        },
+        "email": {
+          "label": "Your Email",
+          "placeholder": "Email"
+        },
+        "password": {
+          "label": "Password",
+          "placeholder": "Password"
+        }
+      },
+      "button": "Create account and join",
+      "validations": {
+        "email": "Email is required",
+        "password": "Password is required and must me at least 6 characters long",
+        "name": "Name is required"
+      },
+      "errors": {
+        "4x": "Registration failed",
+        "5x": "Server error - Please try again later"
+      }
+    }
+  }
+}
