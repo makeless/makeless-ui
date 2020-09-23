@@ -97,9 +97,9 @@ export default class TeamInvitation extends Vue {
     this.$saas.getHttp().patch('/api/auth/team-invitation/accept', teamInvitationAccept).then((data) => {
       const response: ResponseInterface = this.$saas.getHttp().response(data);
       const team: Team = response.getData().data;
+      teamInvitation.isLoadingTeamInvitationAccept = false;
       this.$saas.getSecurity().addTeam(team);
       this.$saas.getSecurity().switchToTeam(team.id!);
-      teamInvitation.isLoadingTeamInvitationAccept = false;
     }).catch(() => {
       teamInvitation.isLoadingTeamInvitationAccept = false;
     });
