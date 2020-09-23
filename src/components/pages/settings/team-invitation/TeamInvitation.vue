@@ -79,15 +79,17 @@ export default class TeamInvitation extends Vue {
     this.$saas.getHttp().get('/api/auth/team-invitation').then((data) => {
       this.teamInvitations = [];
       this.response = this.$saas.getHttp().response(data);
-      this.response.getData().data.forEach((teamInvitation: TeamInvitationModel) => {
+      this.response.getData().data.teamInvitations.forEach((teamInvitation: TeamInvitationModel) => {
         teamInvitation.expire = new Date(teamInvitation.expire!);
-        this.teamInvitations!.push(teamInvitation);
+        this.teamInvitations!.push(Object.assign(new TeamInvitationModel(), teamInvitation));
       });
     });
   }
 
   acceptTeamInvitation(teamInvitation: TeamInvitationModel): void {
     teamInvitation.isLoadingTeamInvitationAccept = true;
+
+    console.log(teamInvitation);
 
     const teamInvitationAccept: TeamInvitationAccept = Object.assign(new TeamInvitationAccept(), {
       id: teamInvitation.id,
