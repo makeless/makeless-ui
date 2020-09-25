@@ -2,8 +2,8 @@
     <master>
         <template slot="page">
             <b-container>
-                <b-row class="justify-content-md-center">
-                    <b-col lg="4">
+                <b-row class="justify-content-center">
+                    <b-col sm="8" md="6" lg="4">
                         <b-card class="text-center">
                             <b-col class="mb-2 mb-sm-3"><b-icon :icon="icon" variant="primary" :font-scale="3"/></b-col>
                             <b-col><h2>{{ $saas.t('pages.invitation.information.invitedTo') }}</h2></b-col>
