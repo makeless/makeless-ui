@@ -63,6 +63,7 @@ import InvitationModel from '../../structs/invitation';
 import Form from '../../packages/form/basic/form';
 import Validator from '../../packages/validator/basic/validator';
 import DomUtil from '../../utils/dom';
+import ValidatorUtil from '../../utils/validator';
 
 @Component
 export default class Invitation extends Vue {
@@ -80,7 +81,7 @@ export default class Invitation extends Vue {
       return null;
     }
 
-    return this.invitation.email.length > 0;
+    return ValidatorUtil.isValidEmail(this.invitation.email);
   }
 
   public validateName(): boolean | null {
