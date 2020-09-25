@@ -15,15 +15,15 @@
                             <b-list-group v-if="teamInvitations.length">
                                 <b-list-group-item v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
                                     <b-row class="d-flex align-items-center">
-                                        <b-col cols="7">
+                                        <b-col cols="9">
                                             <b-row>
                                                 <b-col cols="12">{{ teamInvitation.team.name }}</b-col>
                                                 <b-col cols="12"><small>{{ teamInvitation.user.name }}</small></b-col>
                                                 <b-col cols="12" class="mt-2"><small>{{ `${$saas.t('pages.team-invitation.expires')} ${teamInvitation.expire.toLocaleString()}` }}</small></b-col>
                                             </b-row>
                                         </b-col>
-                                        <b-col cols="5" class="text-right">
-                                            <b-button size="sm" variant="primary" @click="acceptTeamInvitation(teamInvitation)" class="mr-0 mr-sm-2 mb-2 mb-sm-0">
+                                        <b-col cols="3" class="text-right">
+                                            <b-button size="sm" variant="primary" @click="acceptTeamInvitation(teamInvitation)" class="mr-0 mr-md-2 mb-2 mb-md-0">
                                                 <b-spinner small v-if="teamInvitation.isLoadingTeamInvitationAccept" class="mr-1"></b-spinner>
                                                 <span>{{ $saas.t('pages.team-invitation.actions.accept') }}</span>
                                             </b-button>
