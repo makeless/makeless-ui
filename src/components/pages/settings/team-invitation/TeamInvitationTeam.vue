@@ -15,19 +15,28 @@
                             <b-list-group v-if="teamInvitations.length">
                                 <b-list-group-item v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
                                     <b-row class="d-flex align-items-center">
-                                        <b-col cols="7">
+                                        <b-col cols="7" sm="6">
                                             <b-row>
                                                 <b-col cols="12">{{ teamInvitation.email }}</b-col>
                                                 <b-col cols="12"><small>{{ `${$saas.t('pages.team-invitation-team.invitedBy')} ${teamInvitation.user.name}` }}</small></b-col>
                                                 <b-col cols="12" class="mt-2"><small>{{ teamInvitation.createdAt.toLocaleString() }}</small></b-col>
                                             </b-row>
                                         </b-col>
-                                        <b-col cols="5" class="text-right">
-                                            <b-button size="sm" variant="primary" class="mr-0 mr-sm-2 mb-2 mb-sm-0">{{ $saas.t('pages.team-invitation-team.actions.resend') }}</b-button>
-                                            <b-button size="sm" @click="deleteTeamInvitation(teamInvitation)">
-                                                <b-spinner small v-if="teamInvitation.isLoadingTeamInvitationDelete" class="mr-1"></b-spinner>
-                                                <span>{{ $saas.t('pages.team-invitation-team.actions.cancel') }}</span>
-                                            </b-button>
+                                        <b-col cols="5" sm="6">
+                                            <b-row class="d-flex justify-content-end align-items-center">
+                                                <b-col md="auto" class="mb-2 mb-md-0 pr-md-0 text-right" v-if="teamInvitation.isTeamInvitationDeleteFailed">
+                                                    <span class="text-danger" v-if="teamInvitation.isTeamInvitationDeleteFailed">{{ $saas.t('pages.team-invitation-team.errors.cancelFailed') }}</span>
+                                                </b-col>
+                                                <b-col sm="auto" class="mb-2 mb-sm-0 pr-sm-0 text-right">
+                                                    <b-button size="sm" variant="primary">{{ $saas.t('pages.team-invitation-team.actions.resend') }}</b-button>
+                                                </b-col>
+                                                <b-col sm="auto" class="pl-2 text-right">
+                                                    <b-button size="sm" @click="deleteTeamInvitation(teamInvitation)">
+                                                        <b-spinner small v-if="teamInvitation.isLoadingTeamInvitationDelete" class="mr-1"></b-spinner>
+                                                        <span>{{ $saas.t('pages.team-invitation-team.actions.cancel') }}</span>
+                                                    </b-button>
+                                                </b-col>
+                                            </b-row>
                                         </b-col>
                                     </b-row>
                                 </b-list-group-item>
@@ -88,6 +97,7 @@ export default class TeamInvitationTeam extends Vue {
 
   deleteTeamInvitation(teamInvitation: TeamInvitation): void {
     teamInvitation.isLoadingTeamInvitationDelete = true;
+    teamInvitation.isTeamInvitationDeleteFailed = false;
 
     const teamInvitationTeamDelete: TeamInvitationTeamDelete = Object.assign(new TeamInvitationTeamDelete(), {
       id: teamInvitation.id,
@@ -103,6 +113,7 @@ export default class TeamInvitationTeam extends Vue {
       teamInvitation.isLoadingTeamInvitationDelete = false;
     }).catch(() => {
       teamInvitation.isLoadingTeamInvitationDelete = false;
+      teamInvitation.isTeamInvitationDeleteFailed = true;
     });
   }
 

@@ -7,6 +7,10 @@
       "accept": "Accept",
       "decline": "Decline"
     },
-    "loading": "Loading ..."
+    "loading": "Loading ...",
+    "errors": {
+      "acceptFailed": "Accept failed",
+      "declineFailed": "Decline failed"
+    }
   }
 }

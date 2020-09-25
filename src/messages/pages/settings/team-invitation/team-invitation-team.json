@@ -7,6 +7,9 @@
       "resend": "Resend",
       "cancel": "Cancel"
     },
-    "loading": "Loading ..."
+    "loading": "Loading ...",
+    "errors": {
+      "cancelFailed": "Cancel failed"
+    }
   }
 }
