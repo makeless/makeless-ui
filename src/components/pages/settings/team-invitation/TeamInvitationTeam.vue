@@ -25,7 +25,7 @@
                                         <b-col cols="5" sm="6">
                                             <b-row class="d-flex justify-content-end align-items-center">
                                                 <b-col md="auto" class="mb-2 mb-md-0 pr-md-0 text-right" v-if="teamInvitation.isTeamInvitationDeleteFailed">
-                                                    <span class="text-danger" v-if="teamInvitation.isTeamInvitationDeleteFailed">{{ $saas.t('pages.team-invitation-team.errors.cancelFailed') }}</span>
+                                                    <span class="text-danger" v-if="teamInvitation.isTeamInvitationDeleteFailed">{{ $saas.t('pages.team-invitation-team.errors.delete.4x') }}</span>
                                                 </b-col>
                                                 <b-col sm="auto" class="mb-2 mb-sm-0 pr-sm-0 text-right">
                                                     <b-button size="sm" variant="primary">{{ $saas.t('pages.team-invitation-team.actions.resend') }}</b-button>
@@ -33,7 +33,7 @@
                                                 <b-col sm="auto" class="pl-2 text-right">
                                                     <b-button size="sm" @click="deleteTeamInvitation(teamInvitation)">
                                                         <b-spinner small v-if="teamInvitation.isLoadingTeamInvitationDelete" class="mr-1"></b-spinner>
-                                                        <span>{{ $saas.t('pages.team-invitation-team.actions.cancel') }}</span>
+                                                        <span>{{ $saas.t('pages.team-invitation-team.actions.delete') }}</span>
                                                     </b-button>
                                                 </b-col>
                                             </b-row>

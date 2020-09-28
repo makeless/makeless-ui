@@ -25,8 +25,8 @@
                                         <b-col cols="5" sm="6">
                                             <b-row class="d-flex justify-content-end align-items-center">
                                                 <b-col md="auto" class="mb-2 mb-md-0 pr-md-0 text-right" v-if="teamInvitation.isTeamInvitationAcceptFailed || teamInvitation.isTeamInvitationDeleteFailed">
-                                                    <span class="text-danger" v-if="teamInvitation.isTeamInvitationAcceptFailed">{{ $saas.t('pages.team-invitation.errors.acceptFailed') }}</span>
-                                                    <span class="text-danger" v-if="teamInvitation.isTeamInvitationDeleteFailed">{{ $saas.t('pages.team-invitation.errors.declineFailed') }}</span>
+                                                    <span class="text-danger" v-if="teamInvitation.isTeamInvitationAcceptFailed">{{ $saas.t('pages.team-invitation.errors.accept.4x') }}</span>
+                                                    <span class="text-danger" v-if="teamInvitation.isTeamInvitationDeleteFailed">{{ $saas.t('pages.team-invitation.errors.delete.4x') }}</span>
                                                 </b-col>
                                                 <b-col sm="auto" class="mb-2 mb-sm-0 pr-sm-0 text-right">
                                                     <b-button size="sm" variant="primary" @click="acceptTeamInvitation(teamInvitation)">
@@ -37,7 +37,7 @@
                                                 <b-col sm="auto" class="pl-2 text-right">
                                                     <b-button size="sm" @click="deleteTeamInvitation(teamInvitation)">
                                                         <b-spinner small v-if="teamInvitation.isLoadingTeamInvitationDelete" class="mr-1"></b-spinner>
-                                                        <span>{{ $saas.t('pages.team-invitation.actions.decline') }}</span>
+                                                        <span>{{ $saas.t('pages.team-invitation.actions.delete') }}</span>
                                                     </b-button>
                                                 </b-col>
                                             </b-row>
