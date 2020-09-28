@@ -61,13 +61,17 @@
 import {Component, Vue} from 'vue-property-decorator';
 import InvitationModel from '../../structs/invitation';
 import Form from '../../packages/form/basic/form';
+import ResponseInterface from '../../packages/http/response';
 import Validator from '../../packages/validator/basic/validator';
 import DomUtil from '../../utils/dom';
 import ValidatorUtil from '../../utils/validator';
+import TeamInvitation from '../../models/team-invitation';
 
 @Component
 export default class Invitation extends Vue {
   private invitation: InvitationModel = new InvitationModel();
+  private teamInvitation: TeamInvitation | null = null;
+  private response: ResponseInterface | null = null;
   private form: Form = new Form();
   private icon: string = "people";
   private validator: Validator = new Validator([
@@ -75,6 +79,10 @@ export default class Invitation extends Vue {
     this.validateEmail,
     this.validatePassword,
   ]);
+
+  created() {
+    this.loadTeamInvitation();
+  }
 
   public validateEmail(): boolean | null {
     if (this.invitation.email === null) {
@@ -98,6 +106,14 @@ export default class Invitation extends Vue {
     }
 
     return this.invitation.password.length >= 6;
+  }
+
+  loadTeamInvitation(): void {
+    this.$saas.getHttp().get('/api/team-invitation').then((data) => {
+      this.response = this.$saas.getHttp().response(data);
+      this.teamInvitation = this.response.getData().data;
+      console.log(this.teamInvitation);
+    });
   }
 
   onSubmit($event: Event): void {
