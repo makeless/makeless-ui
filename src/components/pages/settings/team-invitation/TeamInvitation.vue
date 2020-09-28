@@ -126,7 +126,7 @@ export default class TeamInvitation extends Vue {
       id: teamInvitation.id,
     });
 
-    this.$saas.getHttp().patch('/api/auth/team-invitation/acceptgg', teamInvitationAccept).then((data) => {
+    this.$saas.getHttp().patch('/api/auth/team-invitation/accept', teamInvitationAccept).then((data) => {
       this.responseAcceptTeamInvitation = this.$saas.getHttp().response(data);
       const team: Team = this.responseAcceptTeamInvitation.getData().data;
       teamInvitation.isLoadingTeamInvitationAccept = false;
@@ -148,7 +148,7 @@ export default class TeamInvitation extends Vue {
       id: teamInvitation.id,
     });
 
-    this.$saas.getHttp().delete('/api/auth/team-invitationgg', {
+    this.$saas.getHttp().delete('/api/auth/team-invitation', {
       data: teamInvitationDelete,
     }).then((data) => {
       this.responseDeleteTeamInvitation = this.$saas.getHttp().response(data);
