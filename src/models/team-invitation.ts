@@ -16,4 +16,5 @@ export default class TeamInvitation extends Model {
 
   isLoadingAccept: boolean | null = false;
   isLoadingDelete: boolean | null = false;
+  isLoadingResend: boolean | null = false;
 }
