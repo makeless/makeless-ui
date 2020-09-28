@@ -8,8 +8,7 @@
     },
     "instruction": {
       "newTo": "New to",
-      "createAccount": "Create account to accept this invitation",
-      "questionMark": "?"
+      "createAccount": "Create account to accept this invitation"
     },
     "form": {
       "fields": {
@@ -30,7 +29,7 @@
           "placeholder": "Confirm password"
         },
         "legalConfirmation": {
-          "iAcceptThe": "I accept the",
+          "accept": "I accept the",
           "termsOfService": "Terms of Service",
           "and": "and",
           "privacyPolicy": "Privacy Policy"
@@ -45,6 +44,7 @@
         "legalConfirmation": "Terms must be accepted"
       },
       "errors": {
+        "2x": "Registration was successful",
         "4x": "Registration failed",
         "5x": "Server error - Please try again later"
       }

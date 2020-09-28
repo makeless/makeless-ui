@@ -5,14 +5,14 @@
                 <b-row class="justify-content-center">
                     <b-col sm="8" md="6" lg="5">
                         <b-card class="text-center">
-                            <div v-if="teamInvitation">
+                            <div v-if="response && teamInvitation">
                                 <b-col class="mb-2 mb-sm-3">
                                     <b-icon :icon="icon" variant="primary" :font-scale="3"/>
                                 </b-col>
                                 <b-col><h2>{{ `${$saas.t('pages.invitation.information.invitedTo')} ${teamInvitation.team.name}` }}</h2></b-col>
                                 <b-col><small>{{ `${$saas.t('pages.invitation.information.invitedBy')} ${teamInvitation.user.name}` }}</small></b-col>
                                 <hr>
-                                <b-col>{{ `${$saas.t('pages.invitation.instruction.newTo')} ${$saas.getConfig().getConfiguration().getName()}${$saas.t('pages.invitation.instruction.questionMark')}` }}</b-col>
+                                <b-col>{{ `${$saas.t('pages.invitation.instruction.newTo')} ${$saas.getConfig().getConfiguration().getName()}?` }}</b-col>
                                 <b-col class="mb-1 mb-sm-3">{{ $saas.t('pages.invitation.instruction.createAccount') }}</b-col>
 
                                 <b-form @submit="onSubmit">
@@ -24,6 +24,12 @@
                                         <template v-if="form.getResponse().getCode() >= 500">
                                             {{ $saas.t('pages.invitation.form.errors.5x') }}
                                         </template>
+                                    </b-alert>
+
+                                    <b-alert v-if="form.getResponse() && form.getResponse().getCode() === 200" variant="success" dismissible :show="true">
+                                        {{ $saas.t('pages.invitation.form.errors.2x') }}
+                                        -
+                                        <b-link :to="{name: 'login'}">{{ $saas.t('pages.invitation.login') }}</b-link>
                                     </b-alert>
 
                                     <b-form-group :label="$saas.t('pages.invitation.form.fields.name.label')" class="text-left" label-for="name">
@@ -57,7 +63,7 @@
                                     <b-form-group class="text-left">
                                         <b-form-checkbox id="legalConfirmation" v-model="register.legalConfirmation" required>
                                             <small>
-                                                {{ $saas.t('pages.invitation.form.fields.legalConfirmation.iAcceptThe') }}
+                                                {{ $saas.t('pages.invitation.form.fields.legalConfirmation.accept') }}
                                                 <b-link :to="{name: 'terms'}">{{ $saas.t('pages.invitation.form.fields.legalConfirmation.termsOfService') }}</b-link>
                                                 {{ $saas.t('pages.invitation.form.fields.legalConfirmation.and') }}
                                                 <b-link :to="{name: 'privacy-policy'}">{{ $saas.t('pages.invitation.form.fields.legalConfirmation.privacyPolicy') }}</b-link>
@@ -151,6 +157,8 @@ export default class Invitation extends Vue {
   }
 
   loadTeamInvitation(): void {
+    this.form.setResponse(null);
+
     this.$saas.getHttp().get(`/api/team-invitation?token=${this.$saas.getRouter().getVueRouter().currentRoute.query['token']}`).then((data) => {
       this.response = this.$saas.getHttp().response(data);
       this.teamInvitation = this.response.getData().data;
@@ -169,15 +177,11 @@ export default class Invitation extends Vue {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
       this.register = new Register();
-
-      this.$saas.getSecurity().login(this.form.getResponse()!);
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
       this.register = new Register();
-
-      this.$saas.getSecurity().logout(false);
     });
   }
 }
