@@ -11,7 +11,7 @@
                         <h1>{{ $saas.t('pages.team-invitation-team.title') }}</h1>
                         <hr>
 
-                        <div v-if="response && teamInvitations">
+                        <div v-if="responseLoadTeamInvitations && teamInvitations">
                             <b-list-group v-if="teamInvitations.length">
                                 <b-list-group-item v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
                                     <b-row class="d-flex align-items-center">
@@ -24,8 +24,14 @@
                                         </b-col>
                                         <b-col cols="5" sm="6">
                                             <b-row class="d-flex justify-content-end align-items-center">
-                                                <b-col md="auto" class="mb-2 mb-md-0 pr-md-0 text-right" v-if="teamInvitation.isTeamInvitationDeleteFailed">
-                                                    <span class="text-danger" v-if="teamInvitation.isTeamInvitationDeleteFailed">{{ $saas.t('pages.team-invitation-team.errors.delete.4x') }}</span>
+                                                <b-col md="auto" class="mb-2 mb-md-0 pr-md-0 text-right" v-if="responseTeamInvitationDelete && responseTeamInvitationDelete.getCode() >= 400">
+                                                    <template v-if="responseTeamInvitationDelete.getCode() >= 400 && responseTeamInvitationDelete.getCode() < 500">
+                                                        <span class="text-danger">{{ $saas.t('pages.team-invitation-team.errors.delete.4x') }}</span>
+                                                    </template>
+
+                                                    <template v-if="responseTeamInvitationDelete.getCode() >= 500">
+                                                        <span class="text-danger">{{ $saas.t('pages.team-invitation-team.errors.delete.5x') }}</span>
+                                                    </template>
                                                 </b-col>
                                                 <b-col sm="auto" class="mb-2 mb-sm-0 pr-sm-0 text-right">
                                                     <b-button size="sm" variant="primary">{{ $saas.t('pages.team-invitation-team.actions.resend') }}</b-button>
@@ -72,7 +78,8 @@ import TeamInvitationTeamDelete from '../../../../structs/team-invitation-team-d
 })
 export default class TeamInvitationTeam extends Vue {
   public icon: string = 'people';
-  private response: ResponseInterface | null = null;
+  private responseLoadTeamInvitations: ResponseInterface | null = null;
+  private responseTeamInvitationDelete: ResponseInterface | null = null;
   private teamInvitations: TeamInvitation[] | null = [];
 
   created() {
@@ -86,8 +93,8 @@ export default class TeamInvitationTeam extends Vue {
       },
     }).then((data) => {
       this.teamInvitations = [];
-      this.response = this.$saas.getHttp().response(data);
-      this.response.getData().data.forEach((teamInvitation: TeamInvitation) => {
+      this.responseLoadTeamInvitations = this.$saas.getHttp().response(data);
+      this.responseLoadTeamInvitations.getData().data.forEach((teamInvitation: TeamInvitation) => {
         this.teamInvitations!.push(Object.assign(new TeamInvitation(), teamInvitation, {
           createdAt: new Date(teamInvitation.createdAt!),
         }));
@@ -96,8 +103,8 @@ export default class TeamInvitationTeam extends Vue {
   }
 
   deleteTeamInvitation(teamInvitation: TeamInvitation): void {
+    this.responseTeamInvitationDelete = null;
     teamInvitation.isLoadingTeamInvitationDelete = true;
-    teamInvitation.isTeamInvitationDeleteFailed = false;
 
     const teamInvitationTeamDelete: TeamInvitationTeamDelete = Object.assign(new TeamInvitationTeamDelete(), {
       id: teamInvitation.id,
@@ -108,12 +115,13 @@ export default class TeamInvitationTeam extends Vue {
       headers: {
         'Team': this.$saas.getSecurity().getTeam()!.id,
       },
-    }).then(() => {
+    }).then((data) => {
+      this.responseTeamInvitationDelete = this.$saas.getHttp().response(data);
       this.removeTeamInvitation(teamInvitation);
       teamInvitation.isLoadingTeamInvitationDelete = false;
-    }).catch(() => {
+    }).catch((data) => {
+      this.responseTeamInvitationDelete = this.$saas.getHttp().response(data.response);
       teamInvitation.isLoadingTeamInvitationDelete = false;
-      teamInvitation.isTeamInvitationDeleteFailed = true;
     });
   }
 
