@@ -23,12 +23,17 @@
         "password": {
           "label": "Password",
           "placeholder": "Password"
+        },
+        "passwordConfirmation": {
+          "label": "Confirm password",
+          "placeholder": "Confirm password"
         }
       },
       "button": "Create account and join",
       "validations": {
         "email": "Email is required",
         "password": "Password is required and must me at least 6 characters long",
+        "passwordConfirmation": "Password confirmation is required and must match password",
         "name": "Name is required"
       },
       "errors": {

@@ -5,7 +5,9 @@
                 <b-row class="justify-content-center">
                     <b-col sm="8" md="6" lg="4">
                         <b-card class="text-center">
-                            <b-col class="mb-2 mb-sm-3"><b-icon :icon="icon" variant="primary" :font-scale="3"/></b-col>
+                            <b-col class="mb-2 mb-sm-3">
+                                <b-icon :icon="icon" variant="primary" :font-scale="3"/>
+                            </b-col>
                             <b-col><h2>{{ $saas.t('pages.invitation.information.invitedTo') }}</h2></b-col>
                             <b-col><small>{{ $saas.t('pages.invitation.information.invitedBy') }}</small></b-col>
                             <hr>
@@ -44,6 +46,13 @@
                                     </b-form-invalid-feedback>
                                 </b-form-group>
 
+                                <b-form-group :label="$saas.t('pages.invitation.form.fields.passwordConfirmation.label')" class="text-left" label-for="passwordConfirmation">
+                                    <b-form-input id="passwordConfirmation" v-model="invitation.passwordConfirmation" type="password" required :placeholder="$saas.t('pages.invitation.form.fields.passwordConfirmation.placeholder')" autocomplete="false"></b-form-input>
+                                    <b-form-invalid-feedback :state="validatePasswordConfirmation()">
+                                        {{ $saas.t('pages.invitation.form.validations.passwordConfirmation') }}
+                                    </b-form-invalid-feedback>
+                                </b-form-group>
+
                                 <b-button type="submit" variant="primary" class="btn-block" :disabled="form.isDisabled() || !validator.isValid()">
                                     <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
                                     {{ $saas.t('pages.invitation.form.button') }}
@@ -73,11 +82,12 @@ export default class Invitation extends Vue {
   private teamInvitation: TeamInvitation | null = null;
   private response: ResponseInterface | null = null;
   private form: Form = new Form();
-  private icon: string = "people";
+  private icon: string = 'people';
   private validator: Validator = new Validator([
     this.validateName,
     this.validateEmail,
     this.validatePassword,
+    this.validatePasswordConfirmation,
   ]);
 
   created() {
@@ -106,6 +116,14 @@ export default class Invitation extends Vue {
     }
 
     return this.invitation.password.length >= 6;
+  }
+
+  public validatePasswordConfirmation(): boolean | null {
+    if (this.invitation.passwordConfirmation === null) {
+      return null;
+    }
+
+    return this.invitation.passwordConfirmation.length >= 6 && this.invitation.password === this.invitation.passwordConfirmation;
   }
 
   loadTeamInvitation(): void {
