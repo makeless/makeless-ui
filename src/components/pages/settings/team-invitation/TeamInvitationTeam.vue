@@ -11,7 +11,7 @@
                         <h1>{{ $saas.t('pages.team-invitation-team.title') }}</h1>
                         <hr>
 
-                        <div v-if="responseLoadTeamInvitations && teamInvitations">
+                        <div v-if="response && teamInvitations">
                             <b-list-group v-if="teamInvitations.length">
                                 <b-list-group-item v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
                                     <b-row class="d-flex align-items-center">
@@ -78,7 +78,7 @@ import TeamInvitationTeamDelete from '../../../../structs/team-invitation-team-d
 })
 export default class TeamInvitationTeam extends Vue {
   public icon: string = 'people';
-  private responseLoadTeamInvitations: ResponseInterface | null = null;
+  private response: ResponseInterface | null = null;
   private responseDeleteTeamInvitation: ResponseInterface | null = null;
   private teamInvitations: TeamInvitation[] | null = [];
 
@@ -93,8 +93,8 @@ export default class TeamInvitationTeam extends Vue {
       },
     }).then((data) => {
       this.teamInvitations = [];
-      this.responseLoadTeamInvitations = this.$saas.getHttp().response(data);
-      this.responseLoadTeamInvitations.getData().data.forEach((teamInvitation: TeamInvitation) => {
+      this.response = this.$saas.getHttp().response(data);
+      this.response.getData().data.forEach((teamInvitation: TeamInvitation) => {
         this.teamInvitations!.push(Object.assign(new TeamInvitation(), teamInvitation, {
           createdAt: new Date(teamInvitation.createdAt!),
         }));

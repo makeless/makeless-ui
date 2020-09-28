@@ -11,7 +11,7 @@
                         <h1>{{ $saas.t('pages.team-invitation.title') }}</h1>
                         <hr>
 
-                        <div v-if="responseLoadTeamInvitations && teamInvitations">
+                        <div v-if="response && teamInvitations">
                             <b-list-group v-if="teamInvitations.length">
                                 <b-list-group-item v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
                                     <b-row class="d-flex align-items-center">
@@ -30,7 +30,7 @@
                                                             <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.accept.4x') }}</span>
                                                         </template>
 
-                                                        <template v-if="(responseAcceptTeamInvitation).getCode() >= 500">
+                                                        <template v-if="responseAcceptTeamInvitation.getCode() >= 500">
                                                             <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.accept.5x') }}</span>
                                                         </template>
                                                     </template>
@@ -95,7 +95,7 @@ import Team from '../../../../models/team';
 })
 export default class TeamInvitation extends Vue {
   public icon: string = 'box-seam';
-  private responseLoadTeamInvitations: ResponseInterface | null = null;
+  private response: ResponseInterface | null = null;
   private responseAcceptTeamInvitation: ResponseInterface | null = null;
   private responseDeleteTeamInvitation: ResponseInterface | null = null;
   private teamInvitations: TeamInvitationModel[] | null = [];
@@ -107,8 +107,8 @@ export default class TeamInvitation extends Vue {
   loadTeamInvitations(): void {
     this.$saas.getHttp().get('/api/auth/team-invitation').then((data) => {
       this.teamInvitations = [];
-      this.responseLoadTeamInvitations = this.$saas.getHttp().response(data);
-      this.responseLoadTeamInvitations.getData().data.forEach((teamInvitation: TeamInvitationModel) => {
+      this.response = this.$saas.getHttp().response(data);
+      this.response.getData().data.forEach((teamInvitation: TeamInvitationModel) => {
         this.teamInvitations!.push(Object.assign(new TeamInvitationModel(), teamInvitation, {
           expire: new Date(teamInvitation.expire!),
         }));
