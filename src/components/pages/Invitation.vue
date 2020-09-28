@@ -27,35 +27,35 @@
                                     </b-alert>
 
                                     <b-form-group :label="$saas.t('pages.invitation.form.fields.name.label')" class="text-left" label-for="name">
-                                        <b-form-input id="name" v-model="invitation.name" type="text" required :placeholder="$saas.t('pages.invitation.form.fields.name.placeholder')"></b-form-input>
+                                        <b-form-input id="name" v-model="register.name" type="text" required :placeholder="$saas.t('pages.invitation.form.fields.name.placeholder')"></b-form-input>
                                         <b-form-invalid-feedback :state="validateName()">
                                             {{ $saas.t('pages.invitation.form.validations.name') }}
                                         </b-form-invalid-feedback>
                                     </b-form-group>
 
                                     <b-form-group :label="$saas.t('pages.invitation.form.fields.email.label')" class="text-left" label-for="email">
-                                        <b-form-input id="email" v-model="invitation.email" type="email" required :placeholder="$saas.t('pages.invitation.form.fields.email.placeholder')"></b-form-input>
+                                        <b-form-input id="email" v-model="register.email" type="email" required :placeholder="$saas.t('pages.invitation.form.fields.email.placeholder')"></b-form-input>
                                         <b-form-invalid-feedback :state="validateEmail()">
                                             {{ $saas.t('pages.invitation.form.validations.email') }}
                                         </b-form-invalid-feedback>
                                     </b-form-group>
 
                                     <b-form-group :label="$saas.t('pages.invitation.form.fields.password.label')" class="text-left" label-for="password">
-                                        <b-form-input id="password" v-model="invitation.password" type="password" required :placeholder="$saas.t('pages.invitation.form.fields.password.placeholder')" autocomplete="false"></b-form-input>
+                                        <b-form-input id="password" v-model="register.password" type="password" required :placeholder="$saas.t('pages.invitation.form.fields.password.placeholder')" autocomplete="false"></b-form-input>
                                         <b-form-invalid-feedback :state="validatePassword()">
                                             {{ $saas.t('pages.invitation.form.validations.password') }}
                                         </b-form-invalid-feedback>
                                     </b-form-group>
 
                                     <b-form-group :label="$saas.t('pages.invitation.form.fields.passwordConfirmation.label')" class="text-left" label-for="passwordConfirmation">
-                                        <b-form-input id="passwordConfirmation" v-model="invitation.passwordConfirmation" type="password" required :placeholder="$saas.t('pages.invitation.form.fields.passwordConfirmation.placeholder')" autocomplete="false"></b-form-input>
+                                        <b-form-input id="passwordConfirmation" v-model="register.passwordConfirmation" type="password" required :placeholder="$saas.t('pages.invitation.form.fields.passwordConfirmation.placeholder')" autocomplete="false"></b-form-input>
                                         <b-form-invalid-feedback :state="validatePasswordConfirmation()">
                                             {{ $saas.t('pages.invitation.form.validations.passwordConfirmation') }}
                                         </b-form-invalid-feedback>
                                     </b-form-group>
 
                                     <b-form-group class="text-left">
-                                        <b-form-checkbox id="legalConfirmation" v-model="invitation.legalConfirmation" required>
+                                        <b-form-checkbox id="legalConfirmation" v-model="register.legalConfirmation" required>
                                             <small>
                                                 {{ $saas.t('pages.invitation.form.fields.legalConfirmation.iAcceptThe') }}
                                                 <b-link :to="{name: 'terms'}">{{ $saas.t('pages.invitation.form.fields.legalConfirmation.termsOfService') }}</b-link>
@@ -87,7 +87,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import InvitationModel from '../../structs/invitation';
+import Register from '../../structs/register';
 import Form from '../../packages/form/basic/form';
 import ResponseInterface from '../../packages/http/response';
 import Validator from '../../packages/validator/basic/validator';
@@ -97,7 +97,7 @@ import TeamInvitation from '../../models/team-invitation';
 
 @Component
 export default class Invitation extends Vue {
-  private invitation: InvitationModel = new InvitationModel();
+  private register: Register = new Register();
   private teamInvitation: TeamInvitation | null = null;
   private response: ResponseInterface | null = null;
   private form: Form = new Form();
@@ -115,39 +115,39 @@ export default class Invitation extends Vue {
   }
 
   public validateEmail(): boolean | null {
-    if (this.invitation.email === null) {
+    if (this.register.email === null) {
       return null;
     }
 
-    return ValidatorUtil.isValidEmail(this.invitation.email);
+    return ValidatorUtil.isValidEmail(this.register.email);
   }
 
   public validateName(): boolean | null {
-    if (this.invitation.name === null) {
+    if (this.register.name === null) {
       return null;
     }
 
-    return this.invitation.name.length > 0;
+    return this.register.name.length > 0;
   }
 
   public validatePassword(): boolean | null {
-    if (this.invitation.password === null) {
+    if (this.register.password === null) {
       return null;
     }
 
-    return this.invitation.password.length >= 6;
+    return this.register.password.length >= 6;
   }
 
   public validatePasswordConfirmation(): boolean | null {
-    if (this.invitation.passwordConfirmation === null) {
+    if (this.register.passwordConfirmation === null) {
       return null;
     }
 
-    return this.invitation.passwordConfirmation.length >= 6 && this.invitation.password === this.invitation.passwordConfirmation;
+    return this.register.passwordConfirmation.length >= 6 && this.register.password === this.register.passwordConfirmation;
   }
 
   public validateLegalConfirmation(): boolean | null {
-    return this.invitation.legalConfirmation;
+    return this.register.legalConfirmation;
   }
 
   loadTeamInvitation(): void {
@@ -165,17 +165,17 @@ export default class Invitation extends Vue {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.$saas.getHttp().post('/api/login', this.invitation).then((data) => {
+    this.$saas.getHttp().post(`/api/team-invitation/register?token=${this.$saas.getRouter().getVueRouter().currentRoute.query['token']}`, this.register).then((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
-      this.invitation = new InvitationModel();
+      this.register = new Register();
 
       this.$saas.getSecurity().login(this.form.getResponse()!);
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
-      this.invitation = new InvitationModel();
+      this.register = new Register();
 
       this.$saas.getSecurity().logout(false);
     });
