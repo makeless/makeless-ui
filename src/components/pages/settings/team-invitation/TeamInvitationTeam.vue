@@ -30,7 +30,7 @@
                                                             <span class="text-danger">{{ $saas.t('pages.team-invitation-team.errors.resend.4x') }}</span>
                                                         </template>
 
-                                                        <template v-if="responseDeleteTeamInvitation.getCode() >= 500">
+                                                        <template v-if="responseResendTeamInvitation.getCode() >= 500">
                                                             <span class="text-danger">{{ $saas.t('pages.team-invitation-team.errors.resend.5x') }}</span>
                                                         </template>
                                                     </template>
