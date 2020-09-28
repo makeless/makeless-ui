@@ -11,7 +11,7 @@
                         <h1>{{ $saas.t('pages.team-invitation.title') }}</h1>
                         <hr>
 
-                        <div v-if="response && teamInvitations">
+                        <div v-if="responseLoadTeamInvitations && teamInvitations">
                             <b-list-group v-if="teamInvitations.length">
                                 <b-list-group-item v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
                                     <b-row class="d-flex align-items-center">
@@ -24,9 +24,26 @@
                                         </b-col>
                                         <b-col cols="5" sm="6">
                                             <b-row class="d-flex justify-content-end align-items-center">
-                                                <b-col md="auto" class="mb-2 mb-md-0 pr-md-0 text-right" v-if="teamInvitation.isTeamInvitationAcceptFailed || teamInvitation.isTeamInvitationDeleteFailed">
-                                                    <span class="text-danger" v-if="teamInvitation.isTeamInvitationAcceptFailed">{{ $saas.t('pages.team-invitation.errors.accept.4x') }}</span>
-                                                    <span class="text-danger" v-if="teamInvitation.isTeamInvitationDeleteFailed">{{ $saas.t('pages.team-invitation.errors.delete.4x') }}</span>
+                                                <b-col md="auto" class="mb-2 mb-md-0 pr-md-0 text-right" v-if="responseAcceptTeamInvitation || responseDeleteTeamInvitation">
+                                                    <template v-if="responseAcceptTeamInvitation">
+                                                        <template v-if="responseAcceptTeamInvitation.getCode() >= 400 && responseAcceptTeamInvitation.getCode() < 500">
+                                                            <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.accept.4x') }}</span>
+                                                        </template>
+
+                                                        <template v-if="(responseAcceptTeamInvitation).getCode() >= 500">
+                                                            <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.accept.5x') }}</span>
+                                                        </template>
+                                                    </template>
+
+                                                    <template v-if="responseDeleteTeamInvitation">
+                                                        <template v-if="responseDeleteTeamInvitation.getCode() >= 400 && responseDeleteTeamInvitation.getCode() < 500">
+                                                            <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.delete.4x') }}</span>
+                                                        </template>
+
+                                                        <template v-if="responseDeleteTeamInvitation.getCode() >= 500">
+                                                            <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.delete.5x') }}</span>
+                                                        </template>
+                                                    </template>
                                                 </b-col>
                                                 <b-col sm="auto" class="mb-2 mb-sm-0 pr-sm-0 text-right">
                                                     <b-button size="sm" variant="primary" @click="acceptTeamInvitation(teamInvitation)">
@@ -78,7 +95,9 @@ import Team from '../../../../models/team';
 })
 export default class TeamInvitation extends Vue {
   public icon: string = 'box-seam';
-  private response: ResponseInterface | null = null;
+  private responseLoadTeamInvitations: ResponseInterface | null = null;
+  private responseAcceptTeamInvitation: ResponseInterface | null = null;
+  private responseDeleteTeamInvitation: ResponseInterface | null = null;
   private teamInvitations: TeamInvitationModel[] | null = [];
 
   created() {
@@ -88,8 +107,8 @@ export default class TeamInvitation extends Vue {
   loadTeamInvitations(): void {
     this.$saas.getHttp().get('/api/auth/team-invitation').then((data) => {
       this.teamInvitations = [];
-      this.response = this.$saas.getHttp().response(data);
-      this.response.getData().data.forEach((teamInvitation: TeamInvitationModel) => {
+      this.responseLoadTeamInvitations = this.$saas.getHttp().response(data);
+      this.responseLoadTeamInvitations.getData().data.forEach((teamInvitation: TeamInvitationModel) => {
         this.teamInvitations!.push(Object.assign(new TeamInvitationModel(), teamInvitation, {
           expire: new Date(teamInvitation.expire!),
         }));
@@ -98,43 +117,46 @@ export default class TeamInvitation extends Vue {
   }
 
   acceptTeamInvitation(teamInvitation: TeamInvitationModel): void {
+    this.responseAcceptTeamInvitation = null;
+    this.responseDeleteTeamInvitation = null;
+    teamInvitation.isLoadingTeamInvitationDelete = false;
     teamInvitation.isLoadingTeamInvitationAccept = true;
-    teamInvitation.isTeamInvitationAcceptFailed = false;
-    teamInvitation.isTeamInvitationDeleteFailed = false;
 
     const teamInvitationAccept: TeamInvitationAccept = Object.assign(new TeamInvitationAccept(), {
       id: teamInvitation.id,
     });
 
-    this.$saas.getHttp().patch('/api/auth/team-invitation/accept', teamInvitationAccept).then((data) => {
-      const response: ResponseInterface = this.$saas.getHttp().response(data);
-      const team: Team = response.getData().data;
+    this.$saas.getHttp().patch('/api/auth/team-invitation/acceptgg', teamInvitationAccept).then((data) => {
+      this.responseAcceptTeamInvitation = this.$saas.getHttp().response(data);
+      const team: Team = this.responseAcceptTeamInvitation.getData().data;
       teamInvitation.isLoadingTeamInvitationAccept = false;
       this.$saas.getSecurity().addTeam(team);
       this.$saas.getSecurity().switchToTeam(team.id!);
-    }).catch(() => {
+    }).catch((data) => {
+      this.responseAcceptTeamInvitation = this.$saas.getHttp().response(data.response);
       teamInvitation.isLoadingTeamInvitationAccept = false;
-      teamInvitation.isTeamInvitationAcceptFailed = true;
     });
   }
 
   deleteTeamInvitation(teamInvitation: TeamInvitationModel): void {
+    this.responseDeleteTeamInvitation = null;
+    this.responseAcceptTeamInvitation = null;
+    teamInvitation.isLoadingTeamInvitationAccept = false;
     teamInvitation.isLoadingTeamInvitationDelete = true;
-    teamInvitation.isTeamInvitationDeleteFailed = false;
-    teamInvitation.isTeamInvitationAcceptFailed = false;
 
     const teamInvitationDelete: TeamInvitationDelete = Object.assign(new TeamInvitationDelete(), {
       id: teamInvitation.id,
     });
 
-    this.$saas.getHttp().delete('/api/auth/team-invitation', {
+    this.$saas.getHttp().delete('/api/auth/team-invitationgg', {
       data: teamInvitationDelete,
-    }).then(() => {
+    }).then((data) => {
+      this.responseDeleteTeamInvitation = this.$saas.getHttp().response(data);
       this.removeTeamInvitation(teamInvitation);
       teamInvitation.isLoadingTeamInvitationDelete = false;
-    }).catch(() => {
+    }).catch((data) => {
+      this.responseDeleteTeamInvitation = this.$saas.getHttp().response(data.response);
       teamInvitation.isLoadingTeamInvitationDelete = false;
-      teamInvitation.isTeamInvitationDeleteFailed = true;
     });
   }
 

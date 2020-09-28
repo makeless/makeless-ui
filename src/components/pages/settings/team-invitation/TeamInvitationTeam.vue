@@ -24,12 +24,12 @@
                                         </b-col>
                                         <b-col cols="5" sm="6">
                                             <b-row class="d-flex justify-content-end align-items-center">
-                                                <b-col md="auto" class="mb-2 mb-md-0 pr-md-0 text-right" v-if="responseTeamInvitationDelete && responseTeamInvitationDelete.getCode() >= 400">
-                                                    <template v-if="responseTeamInvitationDelete.getCode() >= 400 && responseTeamInvitationDelete.getCode() < 500">
+                                                <b-col md="auto" class="mb-2 mb-md-0 pr-md-0 text-right" v-if="responseDeleteTeamInvitation && responseDeleteTeamInvitation.getCode() >= 400">
+                                                    <template v-if="responseDeleteTeamInvitation.getCode() >= 400 && responseDeleteTeamInvitation.getCode() < 500">
                                                         <span class="text-danger">{{ $saas.t('pages.team-invitation-team.errors.delete.4x') }}</span>
                                                     </template>
 
-                                                    <template v-if="responseTeamInvitationDelete.getCode() >= 500">
+                                                    <template v-if="responseDeleteTeamInvitation.getCode() >= 500">
                                                         <span class="text-danger">{{ $saas.t('pages.team-invitation-team.errors.delete.5x') }}</span>
                                                     </template>
                                                 </b-col>
@@ -79,7 +79,7 @@ import TeamInvitationTeamDelete from '../../../../structs/team-invitation-team-d
 export default class TeamInvitationTeam extends Vue {
   public icon: string = 'people';
   private responseLoadTeamInvitations: ResponseInterface | null = null;
-  private responseTeamInvitationDelete: ResponseInterface | null = null;
+  private responseDeleteTeamInvitation: ResponseInterface | null = null;
   private teamInvitations: TeamInvitation[] | null = [];
 
   created() {
@@ -103,7 +103,7 @@ export default class TeamInvitationTeam extends Vue {
   }
 
   deleteTeamInvitation(teamInvitation: TeamInvitation): void {
-    this.responseTeamInvitationDelete = null;
+    this.responseDeleteTeamInvitation = null;
     teamInvitation.isLoadingTeamInvitationDelete = true;
 
     const teamInvitationTeamDelete: TeamInvitationTeamDelete = Object.assign(new TeamInvitationTeamDelete(), {
@@ -116,11 +116,11 @@ export default class TeamInvitationTeam extends Vue {
         'Team': this.$saas.getSecurity().getTeam()!.id,
       },
     }).then((data) => {
-      this.responseTeamInvitationDelete = this.$saas.getHttp().response(data);
+      this.responseDeleteTeamInvitation = this.$saas.getHttp().response(data);
       this.removeTeamInvitation(teamInvitation);
       teamInvitation.isLoadingTeamInvitationDelete = false;
     }).catch((data) => {
-      this.responseTeamInvitationDelete = this.$saas.getHttp().response(data.response);
+      this.responseDeleteTeamInvitation = this.$saas.getHttp().response(data.response);
       teamInvitation.isLoadingTeamInvitationDelete = false;
     });
   }
