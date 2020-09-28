@@ -3,7 +3,7 @@ import InvitationComponent from './../components/pages/Invitation.vue';
 import messages from './../messages/pages/invitation.json';
 import Page from "./page";
 
-export default class Login extends Page {
+export default class Invitation extends Page {
   name: string = 'invitation';
   path: string = '/invitation';
   component: any = InvitationComponent;
