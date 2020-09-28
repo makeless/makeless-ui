@@ -2,6 +2,7 @@
   "en": {
     "title": "Login",
     "loading": "Loading ...",
+    "login": "Login",
     "information": {
       "invitedTo": "You've been invited to join",
       "invitedBy": "Invited by"
