@@ -14,6 +14,6 @@ export default class TeamInvitation extends Model {
   expire: Date | null = null;
   accepted: boolean | null = null;
 
-  isLoadingTeamInvitationAccept: boolean | null = false;
-  isLoadingTeamInvitationDelete: boolean | null = false;
+  isLoadingAccept: boolean | null = false;
+  isLoadingDelete: boolean | null = false;
 }
