@@ -105,6 +105,7 @@ export default class TeamInvitationTeam extends Vue {
 
   loadTeamInvitations(): void {
     this.responseDeleteTeamInvitation = null;
+    this.responseResendTeamInvitation = null;
 
     this.$saas.getHttp().get('/api/auth/team/team-invitation', {
       headers: {
@@ -136,7 +137,7 @@ export default class TeamInvitationTeam extends Vue {
         'Team': this.$saas.getSecurity().getTeam()!.id,
       },
     }).then((data) => {
-      this.responseResendTeamInvitationTeamInvitation = this.$saas.getHttp().response(data);
+      this.responseResendTeamInvitation = this.$saas.getHttp().response(data);
       teamInvitation.isLoadingResend = false;
     }).catch((data) => {
       this.responseResendTeamInvitation = this.$saas.getHttp().response(data.response);
