@@ -1,6 +1,7 @@
 {
   "en": {
     "title": "Login",
+    "loading": "Loading ...",
     "information": {
       "invitedTo": "You've been invited to join",
       "invitedBy": "Invited by"
@@ -27,14 +28,21 @@
         "passwordConfirmation": {
           "label": "Confirm password",
           "placeholder": "Confirm password"
+        },
+        "legalConfirmation": {
+          "iAcceptThe": "I accept the",
+          "termsOfService": "Terms of Service",
+          "and": "and",
+          "privacyPolicy": "Privacy Policy"
         }
       },
       "button": "Create account and join",
       "validations": {
+        "name": "Name is required",
         "email": "Email is required",
         "password": "Password is required and must me at least 6 characters long",
         "passwordConfirmation": "Password confirmation is required and must match password",
-        "name": "Name is required"
+        "legalConfirmation": "Terms must be accepted"
       },
       "errors": {
         "4x": "Registration failed",

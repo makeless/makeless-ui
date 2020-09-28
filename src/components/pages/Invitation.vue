@@ -3,61 +3,80 @@
         <template slot="page">
             <b-container>
                 <b-row class="justify-content-center">
-                    <b-col sm="8" md="6" lg="4">
+                    <b-col sm="8" md="6" lg="5">
                         <b-card class="text-center">
-                            <b-col class="mb-2 mb-sm-3">
-                                <b-icon :icon="icon" variant="primary" :font-scale="3"/>
-                            </b-col>
-                            <b-col><h2>{{ $saas.t('pages.invitation.information.invitedTo') }}</h2></b-col>
-                            <b-col><small>{{ $saas.t('pages.invitation.information.invitedBy') }}</small></b-col>
-                            <hr>
-                            <b-col>{{ `${$saas.t('pages.invitation.instruction.newTo')} ${$saas.getConfig().getConfiguration().getName()}${$saas.t('pages.invitation.instruction.questionMark')}` }}</b-col>
-                            <b-col class="mb-1 mb-sm-3">{{ $saas.t('pages.invitation.instruction.createAccount') }}</b-col>
+                            <div v-if="teamInvitation">
+                                <b-col class="mb-2 mb-sm-3">
+                                    <b-icon :icon="icon" variant="primary" :font-scale="3"/>
+                                </b-col>
+                                <b-col><h2>{{ `${$saas.t('pages.invitation.information.invitedTo')} ${teamInvitation.team.name}` }}</h2></b-col>
+                                <b-col><small>{{ `${$saas.t('pages.invitation.information.invitedBy')} ${teamInvitation.user.name}` }}</small></b-col>
+                                <hr>
+                                <b-col>{{ `${$saas.t('pages.invitation.instruction.newTo')} ${$saas.getConfig().getConfiguration().getName()}${$saas.t('pages.invitation.instruction.questionMark')}` }}</b-col>
+                                <b-col class="mb-1 mb-sm-3">{{ $saas.t('pages.invitation.instruction.createAccount') }}</b-col>
 
-                            <b-form @submit="onSubmit">
-                                <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
-                                    <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
-                                        {{ $saas.t('pages.invitation.form.errors.4x') }}
-                                    </template>
+                                <b-form @submit="onSubmit">
+                                    <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
+                                        <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
+                                            {{ $saas.t('pages.invitation.form.errors.4x') }}
+                                        </template>
 
-                                    <template v-if="form.getResponse().getCode() >= 500">
-                                        {{ $saas.t('pages.invitation.form.errors.5x') }}
-                                    </template>
-                                </b-alert>
+                                        <template v-if="form.getResponse().getCode() >= 500">
+                                            {{ $saas.t('pages.invitation.form.errors.5x') }}
+                                        </template>
+                                    </b-alert>
 
-                                <b-form-group :label="$saas.t('pages.invitation.form.fields.name.label')" class="text-left" label-for="name">
-                                    <b-form-input id="name" v-model="invitation.name" type="text" required :placeholder="$saas.t('pages.invitation.form.fields.name.placeholder')"></b-form-input>
-                                    <b-form-invalid-feedback :state="validateName()">
-                                        {{ $saas.t('pages.invitation.form.validations.name') }}
-                                    </b-form-invalid-feedback>
-                                </b-form-group>
+                                    <b-form-group :label="$saas.t('pages.invitation.form.fields.name.label')" class="text-left" label-for="name">
+                                        <b-form-input id="name" v-model="invitation.name" type="text" required :placeholder="$saas.t('pages.invitation.form.fields.name.placeholder')"></b-form-input>
+                                        <b-form-invalid-feedback :state="validateName()">
+                                            {{ $saas.t('pages.invitation.form.validations.name') }}
+                                        </b-form-invalid-feedback>
+                                    </b-form-group>
 
-                                <b-form-group :label="$saas.t('pages.invitation.form.fields.email.label')" class="text-left" label-for="email">
-                                    <b-form-input id="email" v-model="invitation.email" type="email" required :placeholder="$saas.t('pages.invitation.form.fields.email.placeholder')"></b-form-input>
-                                    <b-form-invalid-feedback :state="validateEmail()">
-                                        {{ $saas.t('pages.invitation.form.validations.email') }}
-                                    </b-form-invalid-feedback>
-                                </b-form-group>
+                                    <b-form-group :label="$saas.t('pages.invitation.form.fields.email.label')" class="text-left" label-for="email">
+                                        <b-form-input id="email" v-model="invitation.email" type="email" required :placeholder="$saas.t('pages.invitation.form.fields.email.placeholder')"></b-form-input>
+                                        <b-form-invalid-feedback :state="validateEmail()">
+                                            {{ $saas.t('pages.invitation.form.validations.email') }}
+                                        </b-form-invalid-feedback>
+                                    </b-form-group>
 
-                                <b-form-group :label="$saas.t('pages.invitation.form.fields.password.label')" class="text-left" label-for="password">
-                                    <b-form-input id="password" v-model="invitation.password" type="password" required :placeholder="$saas.t('pages.invitation.form.fields.password.placeholder')" autocomplete="false"></b-form-input>
-                                    <b-form-invalid-feedback :state="validatePassword()">
-                                        {{ $saas.t('pages.invitation.form.validations.password') }}
-                                    </b-form-invalid-feedback>
-                                </b-form-group>
+                                    <b-form-group :label="$saas.t('pages.invitation.form.fields.password.label')" class="text-left" label-for="password">
+                                        <b-form-input id="password" v-model="invitation.password" type="password" required :placeholder="$saas.t('pages.invitation.form.fields.password.placeholder')" autocomplete="false"></b-form-input>
+                                        <b-form-invalid-feedback :state="validatePassword()">
+                                            {{ $saas.t('pages.invitation.form.validations.password') }}
+                                        </b-form-invalid-feedback>
+                                    </b-form-group>
 
-                                <b-form-group :label="$saas.t('pages.invitation.form.fields.passwordConfirmation.label')" class="text-left" label-for="passwordConfirmation">
-                                    <b-form-input id="passwordConfirmation" v-model="invitation.passwordConfirmation" type="password" required :placeholder="$saas.t('pages.invitation.form.fields.passwordConfirmation.placeholder')" autocomplete="false"></b-form-input>
-                                    <b-form-invalid-feedback :state="validatePasswordConfirmation()">
-                                        {{ $saas.t('pages.invitation.form.validations.passwordConfirmation') }}
-                                    </b-form-invalid-feedback>
-                                </b-form-group>
+                                    <b-form-group :label="$saas.t('pages.invitation.form.fields.passwordConfirmation.label')" class="text-left" label-for="passwordConfirmation">
+                                        <b-form-input id="passwordConfirmation" v-model="invitation.passwordConfirmation" type="password" required :placeholder="$saas.t('pages.invitation.form.fields.passwordConfirmation.placeholder')" autocomplete="false"></b-form-input>
+                                        <b-form-invalid-feedback :state="validatePasswordConfirmation()">
+                                            {{ $saas.t('pages.invitation.form.validations.passwordConfirmation') }}
+                                        </b-form-invalid-feedback>
+                                    </b-form-group>
 
-                                <b-button type="submit" variant="primary" class="btn-block" :disabled="form.isDisabled() || !validator.isValid()">
-                                    <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
-                                    {{ $saas.t('pages.invitation.form.button') }}
-                                </b-button>
-                            </b-form>
+                                    <b-form-group class="text-left">
+                                        <b-form-checkbox id="legalConfirmation" v-model="invitation.legalConfirmation" required>
+                                            <small>
+                                                {{ $saas.t('pages.invitation.form.fields.legalConfirmation.iAcceptThe') }}
+                                                <b-link :to="{name: 'terms'}">{{ $saas.t('pages.invitation.form.fields.legalConfirmation.termsOfService') }}</b-link>
+                                                {{ $saas.t('pages.invitation.form.fields.legalConfirmation.and') }}
+                                                <b-link :to="{name: 'privacy-policy'}">{{ $saas.t('pages.invitation.form.fields.legalConfirmation.privacyPolicy') }}</b-link>
+                                            </small>
+                                        </b-form-checkbox>
+                                        <b-form-invalid-feedback :state="validateLegalConfirmation()">
+                                            {{ $saas.t('pages.invitation.form.validations.legalConfirmation') }}
+                                        </b-form-invalid-feedback>
+                                    </b-form-group>
+
+                                    <b-button type="submit" variant="primary" class="btn-block mt-4" :disabled="form.isDisabled() || !validator.isValid()">
+                                        <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
+                                        {{ $saas.t('pages.invitation.form.button') }}
+                                    </b-button>
+                                </b-form>
+                            </div>
+                            <div v-else class="text-center">
+                                <b-spinner :label="$saas.t('pages.invitation.loading')"></b-spinner>
+                            </div>
                         </b-card>
                     </b-col>
                 </b-row>
@@ -88,6 +107,7 @@ export default class Invitation extends Vue {
     this.validateEmail,
     this.validatePassword,
     this.validatePasswordConfirmation,
+    this.validateLegalConfirmation,
   ]);
 
   created() {
@@ -126,11 +146,14 @@ export default class Invitation extends Vue {
     return this.invitation.passwordConfirmation.length >= 6 && this.invitation.password === this.invitation.passwordConfirmation;
   }
 
+  public validateLegalConfirmation(): boolean | null {
+    return this.invitation.legalConfirmation;
+  }
+
   loadTeamInvitation(): void {
-    this.$saas.getHttp().get('/api/team-invitation').then((data) => {
+    this.$saas.getHttp().get(`/api/team-invitation?token=${this.$saas.getRouter().getVueRouter().currentRoute.query['token']}`).then((data) => {
       this.response = this.$saas.getHttp().response(data);
       this.teamInvitation = this.response.getData().data;
-      console.log(this.teamInvitation);
     });
   }
 

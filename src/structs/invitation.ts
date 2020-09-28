@@ -5,4 +5,5 @@ export default class Invitation extends Model {
   public email: string | null = null;
   public password: string | null = null;
   public passwordConfirmation: string | null = null;
+  public legalConfirmation: boolean | null = null;
 }
