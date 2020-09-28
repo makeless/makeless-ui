@@ -9,6 +9,10 @@
     },
     "loading": "Loading ...",
     "errors": {
+      "resend": {
+        "4x": "Resend failed",
+        "5x": "Server error - Please try again later"
+      },
       "delete": {
         "4x": "Cancel failed",
         "5x": "Server error - Please try again later"

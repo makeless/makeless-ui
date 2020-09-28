@@ -24,17 +24,32 @@
                                         </b-col>
                                         <b-col cols="5" sm="6">
                                             <b-row class="d-flex justify-content-end align-items-center">
-                                                <b-col md="auto" class="mb-2 mb-md-0 pr-md-0 text-right" v-if="responseDeleteTeamInvitation">
-                                                    <template v-if="responseDeleteTeamInvitation.getCode() >= 400 && responseDeleteTeamInvitation.getCode() < 500">
-                                                        <span class="text-danger">{{ $saas.t('pages.team-invitation-team.errors.delete.4x') }}</span>
+                                                <b-col md="auto" class="mb-2 mb-md-0 pr-md-0 text-right" v-if="responseResendTeamInvitation || responseDeleteTeamInvitation">
+                                                    <template v-if="responseResendTeamInvitation">
+                                                        <template v-if="responseResendTeamInvitation.getCode() >= 400 && responseResendTeamInvitation.getCode() < 500">
+                                                            <span class="text-danger">{{ $saas.t('pages.team-invitation-team.errors.resend.4x') }}</span>
+                                                        </template>
+
+                                                        <template v-if="responseResendTeamInvitation.getCode() >= 500">
+                                                            <span class="text-danger">{{ $saas.t('pages.team-invitation-team.errors.resend.5x') }}</span>
+                                                        </template>
                                                     </template>
 
-                                                    <template v-if="responseDeleteTeamInvitation.getCode() >= 500">
-                                                        <span class="text-danger">{{ $saas.t('pages.team-invitation-team.errors.delete.5x') }}</span>
+                                                    <template v-if="responseDeleteTeamInvitation">
+                                                        <template v-if="responseDeleteTeamInvitation.getCode() >= 400 && responseDeleteTeamInvitation.getCode() < 500">
+                                                            <span class="text-danger">{{ $saas.t('pages.team-invitation-team.errors.delete.4x') }}</span>
+                                                        </template>
+
+                                                        <template v-if="responseDeleteTeamInvitation.getCode() >= 500">
+                                                            <span class="text-danger">{{ $saas.t('pages.team-invitation-team.errors.delete.5x') }}</span>
+                                                        </template>
                                                     </template>
                                                 </b-col>
                                                 <b-col sm="auto" class="mb-2 mb-sm-0 pr-sm-0 text-right">
-                                                    <b-button size="sm" variant="primary">{{ $saas.t('pages.team-invitation-team.actions.resend') }}</b-button>
+                                                    <b-button size="sm" @click="resendTeamInvitation(teamInvitation)" variant="primary">
+                                                        <b-spinner small v-if="teamInvitation.isLoadingResend" class="mr-1"></b-spinner>
+                                                        <span>{{ $saas.t('pages.team-invitation-team.actions.resend') }}</span>
+                                                    </b-button>
                                                 </b-col>
                                                 <b-col sm="auto" class="pl-2 text-right">
                                                     <b-button size="sm" @click="deleteTeamInvitation(teamInvitation)">
@@ -72,6 +87,7 @@ import {Component, Vue} from 'vue-property-decorator';
 import ResponseInterface from '../../../../packages/http/response';
 import TeamInvitation from '../../../../models/team-invitation';
 import TeamInvitationTeamDelete from '../../../../structs/team-invitation-team-delete';
+import TeamInvitationTeamResend from '../../../../structs/team-invitation-team-resend';
 
 @Component({
   components: {},
@@ -79,6 +95,7 @@ import TeamInvitationTeamDelete from '../../../../structs/team-invitation-team-d
 export default class TeamInvitationTeam extends Vue {
   public icon: string = 'people';
   private response: ResponseInterface | null = null;
+  private responseResendTeamInvitation: ResponseInterface | null = null;
   private responseDeleteTeamInvitation: ResponseInterface | null = null;
   private teamInvitations: TeamInvitation[] | null = [];
 
@@ -88,6 +105,7 @@ export default class TeamInvitationTeam extends Vue {
 
   loadTeamInvitations(): void {
     this.responseDeleteTeamInvitation = null;
+    this.responseResendTeamInvitation = null;
 
     this.$saas.getHttp().get('/api/auth/team/team-invitation', {
       headers: {
@@ -104,8 +122,33 @@ export default class TeamInvitationTeam extends Vue {
     });
   }
 
+  resendTeamInvitation(teamInvitation: TeamInvitation): void {
+    this.responseResendTeamInvitation = null;
+    this.responseDeleteTeamInvitation = null;
+    teamInvitation.isLoadingDelete = false;
+    teamInvitation.isLoadingResend = true;
+
+    const teamInvitationTeamResend: TeamInvitationTeamResend = Object.assign(new TeamInvitationTeamResend(), {
+      id: teamInvitation.id,
+    });
+
+    this.$saas.getHttp().post('/api/auth/team/team-invitation/resend', teamInvitationTeamResend, {
+      headers: {
+        'Team': this.$saas.getSecurity().getTeam()!.id,
+      },
+    }).then((data) => {
+      this.responseResendTeamInvitation = this.$saas.getHttp().response(data);
+      teamInvitation.isLoadingResend = false;
+    }).catch((data) => {
+      this.responseResendTeamInvitation = this.$saas.getHttp().response(data.response);
+      teamInvitation.isLoadingResend = false;
+    });
+  }
+
   deleteTeamInvitation(teamInvitation: TeamInvitation): void {
     this.responseDeleteTeamInvitation = null;
+    this.responseResendTeamInvitation = null;
+    teamInvitation.isLoadingResend = false;
     teamInvitation.isLoadingDelete = true;
 
     const teamInvitationTeamDelete: TeamInvitationTeamDelete = Object.assign(new TeamInvitationTeamDelete(), {
