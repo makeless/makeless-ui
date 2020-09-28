@@ -33,13 +33,13 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import Form from '../../../../packages/form/basic/form';
-import Validator from '../../../../packages/validator/basic/validator';
+import Form from '../../../../../packages/form/basic/form';
+import Validator from '../../../../../packages/validator/basic/validator';
 import {BvModalEvent} from 'bootstrap-vue';
-import TeamInvite from '../../../../structs/team-invite';
-import ValidatorUtil from '../../../../utils/validator';
-import TeamInvitation from '../../../selects/team/TeamInvitation.vue';
-import User from '../../../../models/user';
+import TeamInvite from '../../../../../structs/team-invite';
+import ValidatorUtil from '../../../../../utils/validator';
+import TeamInvitation from '../../../../selects/team/TeamInvitation.vue';
+import User from '../../../../../models/user';
 
 @Component({
   components: {TeamInvitation},
