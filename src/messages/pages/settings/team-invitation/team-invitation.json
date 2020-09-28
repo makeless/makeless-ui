@@ -5,8 +5,18 @@
     "expires": "Expires",
     "actions": {
       "accept": "Accept",
-      "decline": "Decline"
+      "delete": "Decline"
     },
-    "loading": "Loading ..."
+    "loading": "Loading ...",
+    "errors": {
+      "accept": {
+        "4x": "Accept failed",
+        "5x": "Server error - Please try again later"
+      },
+      "delete": {
+        "4x": "Decline failed",
+        "5x": "Server error - Please try again later"
+      }
+    }
   }
 }

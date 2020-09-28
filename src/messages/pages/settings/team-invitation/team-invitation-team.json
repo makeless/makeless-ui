@@ -5,8 +5,14 @@
     "invitedBy": "Invited by",
     "actions": {
       "resend": "Resend",
-      "cancel": "Cancel"
+      "delete": "Cancel"
     },
-    "loading": "Loading ..."
+    "loading": "Loading ...",
+    "errors": {
+      "delete": {
+        "4x": "Cancel failed",
+        "5x": "Server error - Please try again later"
+      }
+    }
   }
 }
