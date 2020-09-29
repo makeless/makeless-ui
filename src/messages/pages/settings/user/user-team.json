@@ -3,7 +3,7 @@
     "title": "Users",
     "actions": {
       "invite": "Invite",
-      "remove": "Remove"
+      "delete": "Remove"
     },
     "loading": "Loading ...",
     "owner": "Owner",
@@ -30,7 +30,7 @@
           "5x": "Server error - Please try again later"
         }
       },
-      "remove": {
+      "delete": {
         "title": "Remove user",
         "fields": {
           "name": {
@@ -39,7 +39,7 @@
           }
         },
         "buttons": {
-          "remove": "Remove user",
+          "delete": "Remove user",
           "cancel": "Cancel"
         },
         "validations": {

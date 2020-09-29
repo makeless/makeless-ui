@@ -16,7 +16,7 @@
                         <b-list-group v-if="response && users">
                             <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="user in users" :key="user.id">
                                 {{ user.name }}
-                                <b-button v-if="$saas.getSecurity().getTeam().userId !== user.id" size="sm" variant="danger" v-b-modal.user-team-remove @click="selectUser(user)">{{ $saas.t('pages.user-team.actions.remove') }}</b-button>
+                                <b-button v-if="$saas.getSecurity().getTeam().userId !== user.id" size="sm" variant="danger" v-b-modal.user-team-delete @click="selectUser(user)">{{ $saas.t('pages.user-team.actions.delete') }}</b-button>
                                 <div v-else>
                                     <b-icon-lock></b-icon-lock>
                                     {{ $saas.t('pages.user-team.owner') }}
@@ -32,7 +32,7 @@
         </template>
 
         <template slot="outside">
-            <remove-modal :user="selectedUser" :users="users"></remove-modal>
+            <delete-modal :user="selectedUser" :users="users"></delete-modal>
             <invite-modal :users="users"></invite-modal>
         </template>
     </master>
@@ -42,12 +42,12 @@
 import {Component, Vue} from 'vue-property-decorator';
 import ResponseInterface from '../../../../packages/http/response';
 import User from '../../../../models/user';
-import RemoveModal from '../../../modals/settings/user/team/Remove.vue';
+import DeleteModal from '../../../modals/settings/user/team/Delete.vue';
 import InviteModal from '../../../modals/settings/user/team/Invite.vue';
 
 @Component({
   components: {
-    RemoveModal,
+    DeleteModal,
     InviteModal
   },
 })
