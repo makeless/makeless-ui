@@ -18,6 +18,7 @@ import EventInterface from './packages/event/event';
 // pages
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
+import InvitationPage from './pages/invitation';
 import PasswordRequest from './pages/password-request';
 import PasswordReset from './pages/password-reset';
 import DashboardPage from './pages/dashboard';
@@ -71,6 +72,7 @@ export default class Saas {
   private pages: { [key: string]: PageInterface } = {
     'home': new HomePage(),
     'login': new LoginPage(),
+    'invitation': new InvitationPage(),
     'password-request': new PasswordRequest(),
     'password-reset': new PasswordReset(),
     'dashboard': new DashboardPage(),
