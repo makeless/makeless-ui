@@ -157,9 +157,9 @@ export default class Invitation extends Vue {
   }
 
   loadTeamInvitation(): void {
-    this.form.setResponse(null);
+    this.form = new Form();
 
-    this.$saas.getHttp().get(`/api/team-invitation?token=${this.$saas.getRouter().getVueRouter().currentRoute.query['token']}`).then((data) => {
+    this.$saas.getHttp().get(`/api/team-invitation?token=${this.$route.query.token}`).then((data) => {
       this.response = this.$saas.getHttp().response(data);
       this.teamInvitation = this.response.getData().data;
     });
@@ -173,7 +173,7 @@ export default class Invitation extends Vue {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.$saas.getHttp().post(`/api/team-invitation/register?token=${this.$saas.getRouter().getVueRouter().currentRoute.query['token']}`, this.register).then((data) => {
+    this.$saas.getHttp().post(`/api/team-invitation/register?token=${this.$route.query.token}`, this.register).then((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
       this.register = new Register();
