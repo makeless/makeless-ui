@@ -4,73 +4,73 @@
             <b-container>
                 <b-row class="justify-content-md-center">
                     <b-col lg="6">
-                        <b-card :title="$saas.t('pages.registration.title')">
+                        <b-card :title="$saas.t('pages.register.title')">
                             <b-form @submit="onSubmit">
                                 <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                                     <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
-                                        {{ $saas.t('pages.registration.form.errors.4x') }}
+                                        {{ $saas.t('pages.register.form.errors.4x') }}
                                     </template>
 
                                     <template v-if="form.getResponse().getCode() >= 500">
-                                        {{ $saas.t('pages.registration.form.errors.5x') }}
+                                        {{ $saas.t('pages.register.form.errors.5x') }}
                                     </template>
                                 </b-alert>
 
                                 <b-alert v-if="form.getResponse() && form.getResponse().getCode() === 200" variant="success" dismissible :show="true">
-                                    {{ $saas.t('pages.registration.form.errors.2x') }}
+                                    {{ $saas.t('pages.register.form.errors.2x') }}
                                     -
-                                    <b-link :to="{name: 'login'}">{{ $saas.t('pages.registration.login') }}</b-link>
+                                    <b-link :to="{name: 'login'}">{{ $saas.t('pages.register.login') }}</b-link>
                                 </b-alert>
 
-                                <b-form-group :label="$saas.t('pages.registration.form.fields.name.label')" label-for="name">
-                                    <b-form-input id="name" v-model="register.name" type="text" required :placeholder="$saas.t('pages.registration.form.fields.name.placeholder')"></b-form-input>
+                                <b-form-group :label="$saas.t('pages.register.form.fields.name.label')" label-for="name">
+                                    <b-form-input id="name" v-model="register.name" type="text" required :placeholder="$saas.t('pages.register.form.fields.name.placeholder')"></b-form-input>
                                     <b-form-invalid-feedback :state="validateName()">
-                                        {{ $saas.t('pages.registration.form.validations.name') }}
+                                        {{ $saas.t('pages.register.form.validations.name') }}
                                     </b-form-invalid-feedback>
                                 </b-form-group>
 
-                                <b-form-group :label="$saas.t('pages.registration.form.fields.email.label')" label-for="email">
-                                    <b-form-input id="email" v-model="register.email" type="email" required :placeholder="$saas.t('pages.registration.form.fields.email.placeholder')"></b-form-input>
+                                <b-form-group :label="$saas.t('pages.register.form.fields.email.label')" label-for="email">
+                                    <b-form-input id="email" v-model="register.email" type="email" required :placeholder="$saas.t('pages.register.form.fields.email.placeholder')"></b-form-input>
                                     <b-form-invalid-feedback :state="validateEmail()">
-                                        {{ $saas.t('pages.registration.form.validations.email') }}
+                                        {{ $saas.t('pages.register.form.validations.email') }}
                                     </b-form-invalid-feedback>
                                 </b-form-group>
 
-                                <b-form-group :label="$saas.t('pages.registration.form.fields.password.label')" label-for="password">
-                                    <b-form-input id="password" v-model="register.password" type="password" required :placeholder="$saas.t('pages.registration.form.fields.password.placeholder')"></b-form-input>
+                                <b-form-group :label="$saas.t('pages.register.form.fields.password.label')" label-for="password">
+                                    <b-form-input id="password" v-model="register.password" type="password" required :placeholder="$saas.t('pages.register.form.fields.password.placeholder')"></b-form-input>
                                     <b-form-invalid-feedback :state="validatePassword()">
-                                        {{ $saas.t('pages.registration.form.validations.password') }}
+                                        {{ $saas.t('pages.register.form.validations.password') }}
                                     </b-form-invalid-feedback>
                                 </b-form-group>
 
-                                <b-form-group :label="$saas.t('pages.registration.form.fields.passwordConfirmation.label')" label-for="passwordConfirmation">
-                                    <b-form-input id="passwordConfirmation" v-model="register.passwordConfirmation" type="password" required :placeholder="$saas.t('pages.registration.form.fields.passwordConfirmation.placeholder')"></b-form-input>
+                                <b-form-group :label="$saas.t('pages.register.form.fields.passwordConfirmation.label')" label-for="passwordConfirmation">
+                                    <b-form-input id="passwordConfirmation" v-model="register.passwordConfirmation" type="password" required :placeholder="$saas.t('pages.register.form.fields.passwordConfirmation.placeholder')"></b-form-input>
                                     <b-form-invalid-feedback :state="validatePasswordConfirmation()">
-                                        {{ $saas.t('pages.registration.form.validations.passwordConfirmation') }}
+                                        {{ $saas.t('pages.register.form.validations.passwordConfirmation') }}
                                     </b-form-invalid-feedback>
                                 </b-form-group>
 
                                 <b-form-group>
                                     <b-form-checkbox id="legalConfirmation" v-model="register.legalConfirmation" required>
                                         <small>
-                                            {{ $saas.t('pages.registration.form.fields.legalConfirmation.accept') }}
-                                            <b-link :to="{name: 'terms'}">{{ $saas.t('pages.registration.form.fields.legalConfirmation.termsOfService') }}</b-link>
-                                            {{ $saas.t('pages.registration.form.fields.legalConfirmation.and') }}
-                                            <b-link :to="{name: 'privacy-policy'}">{{ $saas.t('pages.registration.form.fields.legalConfirmation.privacyPolicy') }}</b-link>
+                                            {{ $saas.t('pages.register.form.fields.legalConfirmation.accept') }}
+                                            <b-link :to="{name: 'terms'}">{{ $saas.t('pages.register.form.fields.legalConfirmation.termsOfService') }}</b-link>
+                                            {{ $saas.t('pages.register.form.fields.legalConfirmation.and') }}
+                                            <b-link :to="{name: 'privacy-policy'}">{{ $saas.t('pages.register.form.fields.legalConfirmation.privacyPolicy') }}</b-link>
                                         </small>
                                     </b-form-checkbox>
                                     <b-form-invalid-feedback :state="validateLegalConfirmation()">
-                                        {{ $saas.t('pages.registration.form.validations.legalConfirmation') }}
+                                        {{ $saas.t('pages.register.form.validations.legalConfirmation') }}
                                     </b-form-invalid-feedback>
                                 </b-form-group>
 
                                 <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                                     <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
-                                    {{ $saas.t('pages.registration.form.button') }}
+                                    {{ $saas.t('pages.register.form.button') }}
                                 </b-button>
 
                                 <b-button variant="link" :to="{name: 'login'}" class="ml-1">
-                                    {{ $saas.t('pages.registration.login') }}
+                                    {{ $saas.t('pages.register.login') }}
                                 </b-button>
                             </b-form>
                         </b-card>
@@ -83,16 +83,15 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
-import PasswordResetModel from '../../structs/password-reset';
 import Form from '../../packages/form/basic/form';
 import Validator from '../../packages/validator/basic/validator';
 import DomUtil from '../../utils/dom';
 import ValidatorUtil from '../../utils/validator';
-import Register from '../../structs/register';
+import RegisterModel from '../../structs/register';
 
 @Component
-export default class Registration extends Vue {
-  private register: Register = new Register();
+export default class Register extends Vue {
+  private register: RegisterModel = new RegisterModel();
   private form: Form = new Form();
   private validator: Validator = new Validator([
     this.validateName,
@@ -149,12 +148,12 @@ export default class Registration extends Vue {
     this.$saas.getHttp().post('/api/register', this.register).then((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
-      this.register = new Register();
+      this.register = new RegisterModel();
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
-      this.register = new Register();
+      this.register = new RegisterModel();
     });
   }
 }
