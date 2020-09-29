@@ -13,53 +13,49 @@
 
                         <div v-if="response && teamInvitations">
                             <b-list-group v-if="teamInvitations.length">
-                                <b-list-group-item v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
-                                    <b-row class="d-flex align-items-center">
-                                        <b-col cols="7" sm="6">
-                                            <b-row>
-                                                <b-col cols="12">{{ teamInvitation.team.name }}</b-col>
-                                                <b-col cols="12"><small>{{ teamInvitation.user.name }}</small></b-col>
-                                                <b-col cols="12" class="mt-2"><small>{{ `${$saas.t('pages.team-invitation.expires')} ${teamInvitation.expire.toLocaleString()}` }}</small></b-col>
-                                            </b-row>
-                                        </b-col>
-                                        <b-col cols="5" sm="6">
-                                            <b-row class="d-flex justify-content-end align-items-center">
-                                                <b-col md="auto" class="mb-2 mb-md-0 pr-md-0 text-right" v-if="responseAcceptTeamInvitation || responseDeleteTeamInvitation">
-                                                    <template v-if="responseAcceptTeamInvitation">
-                                                        <template v-if="responseAcceptTeamInvitation.getCode() >= 400 && responseAcceptTeamInvitation.getCode() < 500">
-                                                            <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.accept.4x') }}</span>
-                                                        </template>
-
-                                                        <template v-if="responseAcceptTeamInvitation.getCode() >= 500">
-                                                            <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.accept.5x') }}</span>
-                                                        </template>
+                                <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
+                                    <div>
+                                        <div>{{ teamInvitation.team.name }}</div>
+                                        <div><small>{{ teamInvitation.user.name }}</small></div>
+                                        <div class="mt-2"><small>{{ `${$saas.t('pages.team-invitation.expires')} ${teamInvitation.expire.toLocaleString()}` }}</small></div>
+                                    </div>
+                                    <div>
+                                        <div class="d-flex flex-column flex-sm-row align-items-sm-center flex-wrap text-right">
+                                            <div class="pt-1 pb-1" v-if="responseAcceptTeamInvitation || responseDeleteTeamInvitation">
+                                                <template v-if="responseAcceptTeamInvitation">
+                                                    <template v-if="responseAcceptTeamInvitation.getCode() >= 400 && responseAcceptTeamInvitation.getCode() < 500">
+                                                        <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.accept.4x') }}</span>
                                                     </template>
 
-                                                    <template v-if="responseDeleteTeamInvitation">
-                                                        <template v-if="responseDeleteTeamInvitation.getCode() >= 400 && responseDeleteTeamInvitation.getCode() < 500">
-                                                            <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.delete.4x') }}</span>
-                                                        </template>
-
-                                                        <template v-if="responseDeleteTeamInvitation.getCode() >= 500">
-                                                            <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.delete.5x') }}</span>
-                                                        </template>
+                                                    <template v-if="responseAcceptTeamInvitation.getCode() >= 500">
+                                                        <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.accept.5x') }}</span>
                                                     </template>
-                                                </b-col>
-                                                <b-col sm="auto" class="mb-2 mb-sm-0 pr-sm-0 text-right">
-                                                    <b-button size="sm" variant="primary" @click="acceptTeamInvitation(teamInvitation)">
-                                                        <b-spinner small v-if="teamInvitation.isLoadingAccept" class="mr-1"></b-spinner>
-                                                        <span>{{ $saas.t('pages.team-invitation.actions.accept') }}</span>
-                                                    </b-button>
-                                                </b-col>
-                                                <b-col sm="auto" class="pl-2 text-right">
-                                                    <b-button size="sm" @click="deleteTeamInvitation(teamInvitation)">
-                                                        <b-spinner small v-if="teamInvitation.isLoadingDelete" class="mr-1"></b-spinner>
-                                                        <span>{{ $saas.t('pages.team-invitation.actions.delete') }}</span>
-                                                    </b-button>
-                                                </b-col>
-                                            </b-row>
-                                        </b-col>
-                                    </b-row>
+                                                </template>
+
+                                                <template v-if="responseDeleteTeamInvitation">
+                                                    <template v-if="responseDeleteTeamInvitation.getCode() >= 400 && responseDeleteTeamInvitation.getCode() < 500">
+                                                        <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.delete.4x') }}</span>
+                                                    </template>
+
+                                                    <template v-if="responseDeleteTeamInvitation.getCode() >= 500">
+                                                        <span class="text-danger">{{ $saas.t('pages.team-invitation.errors.delete.5x') }}</span>
+                                                    </template>
+                                                </template>
+                                            </div>
+                                            <div class="ml-2 pt-1 pb-1">
+                                                <b-button size="sm" variant="primary" @click="acceptTeamInvitation(teamInvitation)">
+                                                    <b-spinner small v-if="teamInvitation.isLoadingAccept" class="mr-1"></b-spinner>
+                                                    <span>{{ $saas.t('pages.team-invitation.actions.accept') }}</span>
+                                                </b-button>
+                                            </div>
+                                            <div class="ml-2 pt-1 pb-1">
+                                                <b-button size="sm" @click="deleteTeamInvitation(teamInvitation)">
+                                                    <b-spinner small v-if="teamInvitation.isLoadingDelete" class="mr-1"></b-spinner>
+                                                    <span>{{ $saas.t('pages.team-invitation.actions.delete') }}</span>
+                                                </b-button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </b-list-group-item>
                             </b-list-group>
 
