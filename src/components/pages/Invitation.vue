@@ -61,13 +61,11 @@
                                     </b-form-group>
 
                                     <b-form-group class="text-left">
-                                        <b-form-checkbox id="legalConfirmation" v-model="register.legalConfirmation" required>
-                                            <small>
-                                                {{ $saas.t('pages.invitation.form.fields.legalConfirmation.accept') }}
-                                                <b-link :to="{name: 'terms'}">{{ $saas.t('pages.invitation.form.fields.legalConfirmation.termsOfService') }}</b-link>
-                                                {{ $saas.t('pages.invitation.form.fields.legalConfirmation.and') }}
-                                                <b-link :to="{name: 'privacy-policy'}">{{ $saas.t('pages.invitation.form.fields.legalConfirmation.privacyPolicy') }}</b-link>
-                                            </small>
+                                        <b-form-checkbox size="sm" id="legalConfirmation" v-model="register.legalConfirmation" required>
+                                            {{ $saas.t('pages.invitation.form.fields.legalConfirmation.accept') }}
+                                            <b-link :to="{name: 'terms'}">{{ $saas.t('pages.invitation.form.fields.legalConfirmation.termsOfService') }}</b-link>
+                                            {{ $saas.t('pages.invitation.form.fields.legalConfirmation.and') }}
+                                            <b-link :to="{name: 'privacy-policy'}">{{ $saas.t('pages.invitation.form.fields.legalConfirmation.privacyPolicy') }}</b-link>
                                         </b-form-checkbox>
                                         <b-form-invalid-feedback :state="validateLegalConfirmation()">
                                             {{ $saas.t('pages.invitation.form.validations.legalConfirmation') }}
