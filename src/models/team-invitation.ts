@@ -1,6 +1,7 @@
 import Model from './model';
 import User from './user';
 import Team from './team';
+import ResponseInterface from '../packages/http/response';
 
 export default class TeamInvitation extends Model {
   teamId: number | null = null;
@@ -14,7 +15,12 @@ export default class TeamInvitation extends Model {
   expire: Date | null = null;
   accepted: boolean | null = null;
 
+  responseAccept: ResponseInterface | null = null;
   isLoadingAccept: boolean | null = false;
+
+  responseDelete: ResponseInterface | null = null;
   isLoadingDelete: boolean | null = false;
+
+  responseResend: ResponseInterface | null = null;
   isLoadingResend: boolean | null = false;
 }
