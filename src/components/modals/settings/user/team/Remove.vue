@@ -33,11 +33,11 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import Form from '../../../../packages/form/basic/form';
-import Validator from '../../../../packages/validator/basic/validator';
+import Form from '../../../../../packages/form/basic/form';
+import Validator from '../../../../../packages/validator/basic/validator';
 import {BModal, BvModalEvent} from 'bootstrap-vue';
-import User from '../../../../models/user';
-import DomUtil from '../../../../utils/dom';
+import User from '../../../../../models/user';
+import DomUtil from '../../../../../utils/dom';
 
 @Component
 export default class Remove extends Vue {

@@ -42,8 +42,8 @@
 import {Component, Vue} from 'vue-property-decorator';
 import ResponseInterface from '../../../../packages/http/response';
 import User from '../../../../models/user';
-import RemoveModal from '../../../modals/settings/user/Remove.vue';
-import InviteModal from '../../../modals/settings/user/Invite.vue';
+import RemoveModal from '../../../modals/settings/user/team/Remove.vue';
+import InviteModal from '../../../modals/settings/user/team/Invite.vue';
 
 @Component({
   components: {
