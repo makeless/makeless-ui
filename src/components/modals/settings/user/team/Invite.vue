@@ -1,5 +1,5 @@
 <template>
-    <b-modal :id="modalId" no-fade :title="$saas.t('pages.user-team.forms.invite.title')">
+    <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.user-team.forms.invite.title')">
         <b-form id="form-user-team-invite" v-if="userTeamInvite" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
@@ -35,11 +35,12 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import Form from '../../../../../packages/form/basic/form';
 import Validator from '../../../../../packages/validator/basic/validator';
-import {BvModalEvent} from 'bootstrap-vue';
+import {BModal, BvModalEvent} from 'bootstrap-vue';
 import ValidatorUtil from '../../../../../utils/validator';
 import TeamInvitation from '../../../../selects/team/TeamInvitation.vue';
 import User from '../../../../../models/user';
 import UserTeamInvite from '../../../../../structs/user-team-invite';
+import DomUtil from '../../../../../utils/dom';
 
 @Component({
   components: {TeamInvitation},
@@ -92,6 +93,26 @@ export default class Invite extends Vue {
   }
 
   public onSubmit($event: Event) {
+    $event.preventDefault();
+    DomUtil.removeFocus();
+
+    this.form.setError(false);
+    this.form.setDisabled(true);
+    this.form.setResponse(null);
+
+    this.$saas.getHttp().patch('/api/auth/team/user/invite', this.userTeamInvite, {
+      headers: {
+        'Team': this.$saas.getSecurity().getTeam()!.id,
+      },
+    }).then((data) => {
+      this.form.setResponse(this.$saas.getHttp().response(data));
+      this.form.setDisabled(false);
+      (this.$refs[this.modalId] as BModal).hide();
+    }).catch((data) => {
+      this.form.setResponse(this.$saas.getHttp().response(data.response));
+      this.form.setError(true);
+      this.form.setDisabled(false);
+    });
   }
 }
 </script>
