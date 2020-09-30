@@ -16,7 +16,7 @@
                                     </div>
 
                                     <div class="mt-4">
-                                        <b-button size="lg" variant="primary" :to="{name: 'login'}">
+                                        <b-button class="btn-block" variant="primary" :to="{name: 'login'}">
                                             {{ $saas.t('pages.email-verification.button.login') }}
                                         </b-button>
                                     </div>
