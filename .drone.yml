@@ -26,6 +26,9 @@ steps:
       - codeql database create --language=javascript /opt/results/source_db -s .
       - codeql database upgrade /opt/results/source_db
       - codeql database analyze /opt/results/source_db --format=sarif-latest --output=/opt/results/issues.sarif javascript-security-and-quality.qls
+    when:
+      branch: master
+      event: push
 
   - name: npm
     image: plugins/npm
