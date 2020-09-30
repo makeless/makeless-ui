@@ -2,38 +2,38 @@
     <master>
         <template slot="page">
             <b-container>
-                <b-row class="justify-content-md-center">
-                    <b-col lg="6">
+                <b-row class="justify-content-center">
+                    <b-col sm="8" md="6" lg="5">
                         <b-card class="text-center">
                             <div v-if="response">
                                 <template v-if="response && response.getCode() === 200">
-                                    <b-col class="mt-2 mt-sm-3">
+                                    <div class="mt-2 mt-sm-3">
                                         <b-icon :icon="iconVerifySuccess" variant="primary" :font-scale="3"/>
-                                    </b-col>
+                                    </div>
 
-                                    <b-col class="mt-3">
+                                    <div class="mt-3">
                                         <h2>{{ $saas.t('pages.email-verification.response.errors.2x') }}</h2>
-                                    </b-col>
+                                    </div>
 
-                                    <b-col class="mt-4">
-                                        <b-button variant="primary" :to="{name: 'login'}" size="sm">
+                                    <div class="mt-4">
+                                        <b-button class="btn-block" variant="primary" :to="{name: 'login'}">
                                             {{ $saas.t('pages.email-verification.button.login') }}
                                         </b-button>
-                                    </b-col>
+                                    </div>
                                 </template>
 
                                 <template v-if="response && response.getCode() >= 400">
-                                    <b-col class="mt-2 mt-sm-3">
+                                    <div class="mt-2 mt-sm-3">
                                         <b-icon class="text-danger" :icon="iconVerifyFailed" :font-scale="3"/>
-                                    </b-col>
+                                    </div>
 
-                                    <b-col v-if="response.getCode() >= 400 && response.getCode() < 500" class="mt-3">
+                                    <div v-if="response.getCode() >= 400 && response.getCode() < 500" class="mt-3">
                                         <h2>{{ $saas.t('pages.email-verification.response.errors.4x') }}</h2>
-                                    </b-col>
+                                    </div>
 
-                                    <b-col v-if="response.getCode() >= 500" class="mt-3">
+                                    <div v-if="response.getCode() >= 500" class="mt-3">
                                         <h2>{{ $saas.t('pages.email-verification.response.errors.5x') }}</h2>
-                                    </b-col>
+                                    </div>
                                 </template>
                             </div>
                             <div v-else>
