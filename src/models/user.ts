@@ -26,6 +26,10 @@ export default class User extends Model {
   }
 
   public isVerified(): boolean | null {
+    if (this.emailVerification === null) {
+      return null;
+    }
+
     return this.emailVerification!.verified;
   }
 }
