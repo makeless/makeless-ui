@@ -62,7 +62,6 @@ export default class Login extends Vue {
   private iconVerifySuccess: string = 'check-circle';
   private iconVerifyFailed: string = 'exclamation-circle';
   private response: ResponseInterface | null = null;
-  private isLoadingVerify: boolean | null = null;
 
   created() {
     this.verifyEmailVerification();
@@ -70,14 +69,11 @@ export default class Login extends Vue {
 
   verifyEmailVerification(): void {
     this.response = null;
-    this.isLoadingVerify = true;
 
     this.$saas.getHttp().patch(`/api/email-verification/verify?token=${this.$route.query.token}`).then((data) => {
       this.response = this.$saas.getHttp().response(data);
-      this.isLoadingVerify = false;
     }).catch((data) => {
       this.response = this.$saas.getHttp().response(data.response);
-      this.isLoadingVerify = false;
     });
   }
 }

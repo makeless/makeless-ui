@@ -2,7 +2,7 @@
   "en": {
     "response": {
       "errors": {
-        "2x": "Email verification was successfull",
+        "2x": "Email verification was successful",
         "4x": "Email verification failed",
         "5x": "Server error - Please try again later"
       }
