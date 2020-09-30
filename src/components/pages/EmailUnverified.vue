@@ -2,10 +2,22 @@
     <master>
         <template slot="page">
             <b-container>
-                <b-row class="justify-content-md-center">
-                    <b-col lg="7">
+                <b-row class="justify-content-center">
+                    <b-col sm="8" md="6" lg="5">
                         <b-card class="text-center">
-                            <b-alert v-if="response && response.getCode() >= 400" variant="danger" dismissible :show="true" class="text-left">
+                            <div class="mt-2 mt-sm-3">
+                                <b-icon :icon="icon" variant="primary" :font-scale="3"/>
+                            </div>
+
+                            <div class="mt-3">
+                                <h2>{{ $saas.t('pages.email-unverified.title') }}</h2>
+                            </div>
+
+                            <div class="mt-4">
+                                <span>{{ $saas.t('pages.email-unverified.hint', {name: $saas.getConfig().getConfiguration().getName(), email: $saas.getSecurity().getUser().email}) }}</span>
+                            </div>
+
+                            <b-alert v-if="response && response.getCode() >= 400" variant="danger" dismissible :show="true" class="text-left mt-3 mb-n2">
                                 <template v-if="response.getCode() >= 400 && response.getCode() < 500">
                                     {{ $saas.t('pages.email-unverified.response.errors.4x') }}
                                 </template>
@@ -15,28 +27,16 @@
                                 </template>
                             </b-alert>
 
-                            <b-alert v-if="response && response.getCode() === 200" variant="success" dismissible :show="true" class="text-left">
+                            <b-alert v-if="response && response.getCode() === 200" variant="success" dismissible :show="true" class="text-left mt-3 mb-n2">
                                 {{ $saas.t('pages.email-unverified.response.errors.2x') }}
                             </b-alert>
 
-                            <b-col class="mt-2 mt-sm-3">
-                                <b-icon :icon="icon" variant="primary" :font-scale="3"/>
-                            </b-col>
-                            <b-col class="mt-3">
-                                <h2>{{ $saas.t('pages.email-unverified.pleaseVerify') }}</h2>
-                            </b-col>
-                            <b-col class="mt-4">
-                                <span>{{ `${$saas.t('pages.email-unverified.hint.before')} ${$saas.getConfig().getConfiguration().getName()} ${$saas.t('pages.email-unverified.hint.weNeed')}` }}</span>
-                            </b-col>
-                            <b-col class="mt-1">
-                                <span>{{ `${$saas.t('pages.email-unverified.hint.emailSent')} ${$saas.getSecurity().getUser().email}` }}</span>
-                            </b-col>
-                            <b-col class="mt-4">
-                                <b-button size="sm" @click="resendEmailVerification()">
+                            <div class="mt-4">
+                                <b-button class="btn-block" @click="resendEmailVerification()">
                                     <b-spinner v-if="isLoadingResend" small class="mr-1"></b-spinner>
                                     <span>{{ $saas.t('pages.email-unverified.button.resend') }}</span>
                                 </b-button>
-                            </b-col>
+                            </div>
                         </b-card>
                     </b-col>
                 </b-row>
