@@ -2,7 +2,7 @@
     <master>
         <template slot="page">
             <b-container>
-                <b-row class="justify-content-md-center">
+                <b-row class="justify-content-center">
                     <b-col sm="8" md="6" lg="5">
                         <b-card class="text-center">
                             <div v-if="response">
