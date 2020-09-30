@@ -34,12 +34,6 @@
                                     <b-col v-if="response.getCode() >= 500" class="mt-3">
                                         <h2>{{ $saas.t('pages.email-verification.response.errors.5x') }}</h2>
                                     </b-col>
-
-                                    <b-col class="mt-4">
-                                        <b-button size="sm" @click="verifyEmailVerification()">
-                                            <span>{{ $saas.t('pages.email-verification.button.verify') }}</span>
-                                        </b-button>
-                                    </b-col>
                                 </template>
                             </div>
                             <div v-else>

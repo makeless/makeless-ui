@@ -8,7 +8,6 @@
       }
     },
     "button": {
-      "verify": "Retry email verification",
       "login": "Login"
     },
     "loading": "Loading ..."
