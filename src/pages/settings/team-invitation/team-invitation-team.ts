@@ -5,7 +5,7 @@ import Page from "../../page";
 
 export default class TeamInvitation extends Page {
   name: string = 'team-invitation-team';
-  path: string = '/settings/team-invitation-team';
+  path: string = '/settings/team/team-invitation';
   component: any = TeamInvitationTeamComponent;
   messages: LocaleMessageObject | null = messages;
   meta: any | null = {
