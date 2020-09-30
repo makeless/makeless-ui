@@ -1,0 +1,20 @@
+{
+  "en": {
+    "pleaseVerify": "Please verify email",
+    "hint": {
+      "before": "Before you can contribute on",
+      "weNeed": "we need you to verify your email",
+      "emailSent": "An email containing verification instructions was sent to"
+    },
+    "button": {
+      "resend": "Resend verification email"
+    },
+    "response": {
+      "errors": {
+        "2x": "Email was sent",
+        "4x": "Resend failed",
+        "5x": "Server error - Please try again later"
+      }
+    }
+  }
+}
