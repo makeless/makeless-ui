@@ -10,6 +10,7 @@ import Team from './../../../models/team';
 import User from './../../../models/user';
 import TeamUser from '../../../models/team-user';
 import {TeamRole} from '../../../enums/team-role';
+import {Route} from 'vue-router';
 
 export default class Security {
   user: User | null = null;
@@ -96,7 +97,7 @@ export default class Security {
   }
 
   private async authMiddleware() {
-    this.router.getVueRouter().beforeEach((to, from, next) => {
+    this.router.getVueRouter().beforeEach((to: Route, from: Route, next) => {
       if (to.matched.some(record => record.meta.requiresAuth) && !this.isAuth()) {
         next({name: 'login', query: {redirect: to.fullPath}});
         return;
