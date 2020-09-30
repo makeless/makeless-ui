@@ -102,6 +102,11 @@ export default class Security {
         return;
       }
 
+      if (to.path === '/email-unverified' && this.isAuth() && this.getUser()!.isVerified()) {
+        next({path: '/dashboard'});
+        return;
+      }
+
       if (to.matched.some(record => record.meta.requiresAuth) && this.isAuth() && !this.getUser()!.isVerified()) {
         next({path: '/email-unverified'});
         return;
