@@ -97,38 +97,41 @@ export default class Security {
 
   private async authMiddleware() {
     this.router.getVueRouter().beforeEach((to, from, next) => {
+      console.log(to);
+
       if (to.matched.some(record => record.meta.requiresAuth) && !this.isAuth()) {
-        next({path: '/login', query: {redirect: to.fullPath}});
+        next({name: 'login', query: {redirect: to.fullPath}});
         return;
       }
 
-      if (to.path === '/email-unverified' && this.isAuth() && this.getUser()!.isVerified()) {
-        next({path: '/dashboard'});
-        return;
-      }
-
-      if (to.matched.some(record => record.meta.requiresAuth) && this.isAuth() && !this.getUser()!.isVerified()) {
-        next({path: '/email-unverified'});
-        return;
+      if (to.matched.some(record => record.meta.requiresAuth) && this.isAuth()) {
+        if (!this.getUser()!.isVerified()) {
+          next({name: 'email-unverified'});
+          return;
+        }
+        if (to.name === 'email-unverified' && this.getUser()!.isVerified()) {
+          next({name: 'dashboard'});
+          return;
+        }
       }
 
       if (to.matched.some(record => record.meta.requiresUserAuth) && !this.getUser()) {
-        next({path: '/dashboard'});
+        next({name: 'dashboard'});
         return;
       }
 
       if (to.matched.some(record => record.meta.requiresTeamAuth) && !this.getTeam()) {
-        next({path: '/dashboard'});
+        next({name: 'dashboard'});
         return;
       }
 
       if (to.matched.some(record => record.meta.requiresTeamRoleAuth) && !this.isTeamRole(to.meta.requiresTeamRoleAuth)) {
-        next({path: '/dashboard'});
+        next({name: 'dashboard'});
         return;
       }
 
       if (to.matched.some(record => record.meta.guest) && this.isAuth()) {
-        next({path: '/dashboard'});
+        next({name: 'dashboard'});
         return;
       }
 
