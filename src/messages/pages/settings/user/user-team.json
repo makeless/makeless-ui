@@ -9,7 +9,7 @@
     "owner": "Owner",
     "forms": {
       "invite": {
-        "title": "Invite user",
+        "title": "Invite users",
         "fields": {
           "email": {
             "label": "Invitations",
