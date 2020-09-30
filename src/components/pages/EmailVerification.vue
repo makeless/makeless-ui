@@ -64,7 +64,7 @@ export default class EmailVerification extends Vue {
   verifyEmailVerification(): void {
     this.response = null;
 
-    this.$saas.getHttp().patch(`/api/email-verification/verify?token=${this.$route.query.token}`).then((data) => {
+    this.$saas.getHttp().patch(`/api/email-verification/verify?token=${this.$route.query.token}`, null).then((data) => {
       this.response = this.$saas.getHttp().response(data);
     }).catch((data) => {
       this.response = this.$saas.getHttp().response(data.response);

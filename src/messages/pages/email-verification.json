@@ -1,5 +1,6 @@
 {
   "en": {
+    "title": "Email verification",
     "response": {
       "errors": {
         "2x": "Email verification was successful",
