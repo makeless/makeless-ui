@@ -50,7 +50,7 @@ import {Component, Vue} from 'vue-property-decorator';
 import ResponseInterface from '../../packages/http/response';
 
 @Component
-export default class Login extends Vue {
+export default class EmailUnverified extends Vue {
   private icon: string = 'inbox';
   private response: ResponseInterface | null = null;
   private isLoadingResend: boolean | null = null;

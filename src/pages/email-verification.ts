@@ -3,7 +3,7 @@ import EmailVerificationComponent from './../components/pages/EmailVerification.
 import Page from './page';
 import messages from './../messages/pages/email-verification.json';
 
-export default class Dashboard extends Page {
+export default class EmailVerification extends Page {
   name: string = 'email-verification';
   path: string = '/email-verification';
   component: any = EmailVerificationComponent;
