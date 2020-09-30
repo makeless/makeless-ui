@@ -105,7 +105,7 @@ export default class Security {
       }
 
       if (to.matched.some(record => record.meta.requiresAuth) && this.isAuth()) {
-        if (!this.getUser()!.isVerified()) {
+        if (to.name !== 'email-unverified' && !this.getUser()!.isVerified()) {
           next({name: 'email-unverified'});
           return;
         }
