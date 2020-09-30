@@ -1,0 +1,16 @@
+{
+  "en": {
+    "response": {
+      "errors": {
+        "2x": "Email verification was successfull",
+        "4x": "Email verification failed",
+        "5x": "Server error - Please try again later"
+      }
+    },
+    "button": {
+      "verify": "Retry email verification",
+      "login": "Login"
+    },
+    "loading": "Loading ..."
+  }
+}
