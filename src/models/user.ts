@@ -30,6 +30,6 @@ export default class User extends Model {
       return null;
     }
 
-    return this.emailVerification!.verified;
+    return this.emailVerification.verified;
   }
 }
