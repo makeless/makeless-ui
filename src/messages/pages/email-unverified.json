@@ -1,7 +1,7 @@
 {
   "en": {
     "title": "Please verify your email",
-    "hint": "Before you can join {name} we need you to verify your email {email}",
+    "hint": "Before you can join {name} we need you to verify your email address {email}",
     "button": {
       "resend": "Resend verification email"
     },
