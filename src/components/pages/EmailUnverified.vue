@@ -19,16 +19,16 @@
 
                             <b-alert v-if="response && response.getCode() >= 400" variant="danger" dismissible :show="true" class="text-left mt-3 mb-n2">
                                 <template v-if="response.getCode() >= 400 && response.getCode() < 500">
-                                    {{ $saas.t('pages.email-unverified.response.errors.4x') }}
+                                    {{ $saas.t('pages.email-unverified.errors.4x') }}
                                 </template>
 
                                 <template v-if="response.getCode() >= 500">
-                                    {{ $saas.t('pages.email-unverified.response.errors.5x') }}
+                                    {{ $saas.t('pages.email-unverified.errors.5x') }}
                                 </template>
                             </b-alert>
 
                             <b-alert v-if="response && response.getCode() === 200" variant="success" dismissible :show="true" class="text-left mt-3 mb-n2">
-                                {{ $saas.t('pages.email-unverified.response.errors.2x') }}
+                                {{ $saas.t('pages.email-unverified.errors.2x') }}
                             </b-alert>
 
                             <div class="mt-4">
