@@ -8,7 +8,5 @@ export default class EmailVerification extends Page {
   path: string = '/email-verification';
   component: any = EmailVerificationComponent;
   messages: LocaleMessageObject | null = messages;
-  meta: any | null = {
-    guest: true,
-  };
+  meta: any | null = {};
 }
