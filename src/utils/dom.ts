@@ -1,7 +1,8 @@
 export default {
   removeFocus(): void {
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
+    if (document.activeElement !== undefined) {
+      const element = document.activeElement as HTMLElement;
+      element.blur();
     }
   },
 };
