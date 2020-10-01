@@ -79,7 +79,7 @@ export default class Leave extends Vue {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.$saas.getHttp().delete('/api/auth/team', {
+    this.$saas.getHttp().delete('/api/auth/team-user', {
       headers: {
         'Team': this.team.id,
       },

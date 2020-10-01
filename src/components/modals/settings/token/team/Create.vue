@@ -19,7 +19,7 @@
             </b-form-group>
 
             <b-form-group :label="$saas.t('pages.token-team.forms.create.fields.user.label')" label-for="user">
-                <user :obj="token"></user>
+                <team-user :obj="token"></team-user>
                 <b-form-invalid-feedback :state="validateUser()">
                     {{ $saas.t('pages.token-team.forms.create.validations.user') }}
                 </b-form-invalid-feedback>
@@ -45,12 +45,12 @@ import Validator from '../../../../../packages/validator/basic/validator';
 import {BModal, BvModalEvent} from 'bootstrap-vue';
 import Token from '../../../../../models/token';
 import TokenUtil from '../../../../../utils/token';
-import User from '../../../../selects/team/User.vue';
+import TeamUser from '../../../../selects/team/TeamUser.vue';
 import TokenTeamCreate from '../../../../../structs/token-team-create';
 import DomUtil from '../../../../../utils/dom';
 
 @Component({
-  components: {User},
+  components: {TeamUser},
 })
 export default class Create extends Vue {
   @Prop(Array) readonly tokens!: Token[];

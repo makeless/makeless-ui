@@ -16,15 +16,15 @@
           "team-invitations": "Team invitations",
           "team-invitations-team": "Pending invitations",
           "tokens": "Tokens",
-          "users": "Users"
+          "team-users": "Team users"
         }
       },
       "selects": {
         "team": {
-          "user": {
-            "placeholder": "User",
-            "noOption": "Search user by name",
-            "noResult": "No users found"
+          "team-user": {
+            "placeholder": "Team user",
+            "noOption": "Search team user by name",
+            "noResult": "No team users found"
           },
           "invitation": {
             "placeholder": "Email",

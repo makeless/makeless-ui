@@ -1,10 +1,10 @@
 <template>
     <vue-multiselect
             v-model="obj.user"
-            id="user"
-            name="user"
-            :options="users"
-            :placeholder="$saas.t('components.selects.team.user.placeholder')"
+            id="teamUser"
+            name="teamUser"
+            :options="teamUsers"
+            :placeholder="$saas.t('components.selects.team.team-user.placeholder')"
             :multiple="false"
             :loading="loading"
             :showLabels="false"
@@ -16,8 +16,8 @@
             <div>{{ props.option.name }}<br><small>{{ props.option.email }}</small></div>
         </template>
 
-        <template slot="noOptions">{{ $saas.t('components.selects.team.user.noOption') }}</template>
-        <template slot="noResult">{{ $saas.t('components.selects.team.user.noResult') }}</template>
+        <template slot="noOptions">{{ $saas.t('components.selects.team.team-user.noOption') }}</template>
+        <template slot="noResult">{{ $saas.t('components.selects.team.team-user.noResult') }}</template>
     </vue-multiselect>
 </template>
 
@@ -25,15 +25,15 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import VueMultiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
-import UserModel from '../../../models/user';
+import TeamUserModel from '../../../models/team-user';
 
 @Component({
   components: {VueMultiselect},
 })
-export default class User extends Vue {
+export default class TeamUser extends Vue {
   @Prop(Object) obj!: any;
 
-  protected users: UserModel[] = [];
+  protected teamUsers: TeamUserModel[] = [];
   private loading: boolean = false;
 
   public onSearch(value: string): void {
@@ -42,12 +42,12 @@ export default class User extends Vue {
     }
 
     this.loading = true;
-    this.$saas.getHttp().get(`/api/auth/team/user?search=${value}`, {
+    this.$saas.getHttp().get(`/api/auth/team/team-user?search=${value}`, {
       headers: {
         'Team': this.$saas.getSecurity().getTeam()!.id,
       },
     }).then((data) => {
-      this.users = this.$saas.getHttp().response(data).getData().data || [];
+      this.teamUsers = this.$saas.getHttp().response(data).getData().data || [];
       this.loading = false;
     });
   }

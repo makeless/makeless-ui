@@ -1,31 +1,31 @@
 <template>
-    <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.user-team.forms.invite.title')">
-        <b-form id="form-user-team-invite" v-if="userTeamInvite" @submit="onSubmit">
+    <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.team-user-team.forms.invite.title')">
+        <b-form id="form-team-invitation-team-create" v-if="teamInvitationTeamCreate" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
-                    {{ $saas.t('pages.user-team.forms.invite.errors.4x') }}
+                    {{ $saas.t('pages.team-user-team.forms.invite.errors.4x') }}
                 </template>
 
                 <template v-if="form.getResponse().getCode() >= 500">
-                    {{ $saas.t('pages.user-team.forms.invite.errors.5x') }}
+                    {{ $saas.t('pages.team-user-team.forms.invite.errors.5x') }}
                 </template>
             </b-alert>
 
-            <b-form-group :label="$saas.t('pages.user-team.forms.invite.fields.email.label')" label-for="team-invitation">
-                <team-invitation :obj="userTeamInvite"></team-invitation>
+            <b-form-group :label="$saas.t('pages.team-user-team.forms.invite.fields.email.label')" label-for="team-invitation">
+                <team-invitation :obj="teamInvitationTeamCreate"></team-invitation>
                 <b-form-invalid-feedback :state="validateEmails()">
-                    {{ $saas.t('pages.user-team.forms.invite.validations.invitations.email') }}
+                    {{ $saas.t('pages.team-user-team.forms.invite.validations.invitations.email') }}
                 </b-form-invalid-feedback>
             </b-form-group>
         </b-form>
 
         <template v-slot:modal-footer="{ cancel }">
             <b-button @click="cancel()">
-                {{ $saas.t('pages.user-team.forms.invite.buttons.cancel') }}
+                {{ $saas.t('pages.team-user-team.forms.invite.buttons.cancel') }}
             </b-button>
             <b-button form="form-user-team-invite" type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                 <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
-                {{ $saas.t('pages.user-team.forms.invite.buttons.invite') }}
+                {{ $saas.t('pages.team-user-team.forms.invite.buttons.invite') }}
             </b-button>
         </template>
     </b-modal>
@@ -39,38 +39,38 @@ import {BModal, BvModalEvent} from 'bootstrap-vue';
 import ValidatorUtil from '../../../../../utils/validator';
 import TeamInvitation from '../../../../selects/team/TeamInvitation.vue';
 import User from '../../../../../models/user';
-import UserTeamInvite from '../../../../../structs/user-team-invite';
+import TeamInvitationTeamCreate from '../../../../../structs/team-invitation-team-create';
 import DomUtil from '../../../../../utils/dom';
 
 @Component({
   components: {TeamInvitation},
 })
-export default class Invite extends Vue {
-  @Prop(Array) readonly users!: User[];
+export default class Create extends Vue {
+  @Prop(Array) readonly teamUsers!: User[];
 
-  private modalId: string = 'user-team-invite';
-  private userTeamInvite: UserTeamInvite = new UserTeamInvite();
+  private modalId: string = 'team-invitation-team-create';
+  private teamInvitationTeamCreate: TeamInvitationTeamCreate = new TeamInvitationTeamCreate();
   private form: Form = new Form();
   private validator: Validator = new Validator([
     this.validateEmails,
   ]);
 
   public validateEmails(): boolean | null {
-    if (this.userTeamInvite.invitations === null || this.userTeamInvite.invitations.length === 0) {
+    if (this.teamInvitationTeamCreate.invitations === null || this.teamInvitationTeamCreate.invitations.length === 0) {
       return null;
     }
 
-    if (this.userTeamInvite.invitations.length > 5) {
+    if (this.teamInvitationTeamCreate.invitations.length > 5) {
       return false;
     }
 
     let index: { [key: string]: boolean } = {};
-    for (let i = 0; i < this.users.length; i++) {
-      index[this.users[i].email!] = true;
+    for (let i = 0; i < this.teamUsers.length; i++) {
+      index[this.teamUsers[i].email!] = true;
     }
 
-    for (let i = 0; i < this.userTeamInvite.invitations.length; i++) {
-      const invitation = this.userTeamInvite.invitations[i];
+    for (let i = 0; i < this.teamInvitationTeamCreate.invitations.length; i++) {
+      const invitation = this.teamInvitationTeamCreate.invitations[i];
       if (!ValidatorUtil.isValidEmail(invitation.email) || invitation.email in index) {
         return false;
       }
@@ -86,7 +86,7 @@ export default class Invite extends Vue {
   public onModalHide(): void {
     this.$root.$on('bv::modal::hide', (bvEvent: BvModalEvent, modalId: string) => {
       if (this.modalId === modalId) {
-        this.userTeamInvite = new UserTeamInvite();
+        this.teamInvitationTeamCreate = new TeamInvitationTeamCreate();
         this.form = new Form();
       }
     });
@@ -100,7 +100,7 @@ export default class Invite extends Vue {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.$saas.getHttp().patch('/api/auth/team/user/invite', this.userTeamInvite, {
+    this.$saas.getHttp().patch('/api/auth/team/team-invitation', this.teamInvitationTeamCreate, {
       headers: {
         'Team': this.$saas.getSecurity().getTeam()!.id,
       },
