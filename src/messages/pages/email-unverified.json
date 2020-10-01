@@ -1,0 +1,14 @@
+{
+  "en": {
+    "title": "Please verify your email",
+    "hint": "Before you can join {name} we need you to verify your email address {email}",
+    "button": {
+      "resend": "Resend verification email"
+    },
+    "errors": {
+      "2x": "Email was sent",
+      "4x": "Resend failed",
+      "5x": "Server error - Please try again later"
+    }
+  }
+}

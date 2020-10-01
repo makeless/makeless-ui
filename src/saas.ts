@@ -22,6 +22,8 @@ import InvitationPage from './pages/invitation';
 import PasswordRequest from './pages/password-request';
 import PasswordReset from './pages/password-reset';
 import RegisterPage from './pages/register';
+import EmailUnverifiedPage from './pages/email-unverified';
+import EmailVerificationPage from './pages/email-verification';
 import DashboardPage from './pages/dashboard';
 import ProfilePage from './pages/settings/profile/profile';
 import ProfileTeamPage from './pages/settings/profile/profile-team';
@@ -77,6 +79,8 @@ export default class Saas {
     'password-request': new PasswordRequest(),
     'password-reset': new PasswordReset(),
     'register': new RegisterPage(),
+    'email-unverified': new EmailUnverifiedPage(),
+    'email-verification': new EmailVerificationPage(),
     'dashboard': new DashboardPage(),
     'profile': new ProfilePage(),
     'password': new PasswordPage(),
