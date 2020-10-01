@@ -6,14 +6,14 @@
                     <b-col sm="8" md="6" lg="5">
                         <b-card class="text-center">
                             <div v-if="response && teamInvitation">
-                                <b-col class="mb-2 mb-sm-3">
+                                <div class="mb-2 mb-sm-3">
                                     <b-icon :icon="icon" variant="primary" :font-scale="3"/>
-                                </b-col>
-                                <b-col><h2>{{ `${$saas.t('pages.invitation.information.invitedTo')} ${teamInvitation.team.name}` }}</h2></b-col>
-                                <b-col><small>{{ `${$saas.t('pages.invitation.information.invitedBy')} ${teamInvitation.user.name}` }}</small></b-col>
+                                </div>
+                                <div><h2>{{ $saas.t('pages.invitation.information.invitedTo', {team: teamInvitation.team.name}) }}</h2></div>
+                                <div><small>{{ $saas.t('pages.invitation.information.invitedBy', {user: teamInvitation.user.name}) }}</small></div>
                                 <hr>
-                                <b-col>{{ `${$saas.t('pages.invitation.instruction.newTo')} ${$saas.getConfig().getConfiguration().getName()}?` }}</b-col>
-                                <b-col class="mb-1 mb-sm-3">{{ $saas.t('pages.invitation.instruction.createAccount') }}</b-col>
+                                <div>{{ `${$saas.t('pages.invitation.instruction.newTo', {name: $saas.getConfig().getConfiguration().getName()})}?` }}</div>
+                                <div class="mb-1 mb-sm-3">{{ $saas.t('pages.invitation.instruction.createAccount') }}</div>
 
                                 <b-form @submit="onSubmit">
                                     <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
