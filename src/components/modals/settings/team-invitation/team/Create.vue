@@ -100,7 +100,7 @@ export default class Create extends Vue {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.$saas.getHttp().patch('/api/auth/team/team-invitation', this.teamInvitationTeamCreate, {
+    this.$saas.getHttp().post('/api/auth/team/team-invitation', this.teamInvitationTeamCreate, {
       headers: {
         'Team': this.$saas.getSecurity().getTeam()!.id,
       },

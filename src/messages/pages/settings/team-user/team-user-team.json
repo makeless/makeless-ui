@@ -6,7 +6,7 @@
       "delete": "Remove"
     },
     "loading": "Loading ...",
-    "creator": "Creator",
+    "owner": "Owner",
     "forms": {
       "invite": {
         "title": "Invite team users",
