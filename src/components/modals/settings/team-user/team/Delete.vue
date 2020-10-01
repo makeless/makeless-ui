@@ -73,7 +73,7 @@ export default class Delete extends Vue {
     });
   }
 
-  public removeUser(teamUser: TeamUser): void {
+  public removeTeamUser(teamUser: TeamUser): void {
     for (let i = 0; i < this.teamUsers.length; i++) {
       if (this.teamUsers[i].id !== teamUser.id) {
         continue;
@@ -104,7 +104,7 @@ export default class Delete extends Vue {
     }).then((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data));
       this.form.setDisabled(false);
-      this.removeUser(this.teamUser);
+      this.removeTeamUser(this.teamUser);
       (this.$refs[this.modalId] as BModal).hide();
     }).catch((data) => {
       this.form.setResponse(this.$saas.getHttp().response(data.response));
