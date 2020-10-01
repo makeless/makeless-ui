@@ -10,6 +10,6 @@
       "2x": "Email verification was successful",
       "4x": "Email verification failed",
       "5x": "Server error - Please try again later"
-    },
+    }
   }
 }

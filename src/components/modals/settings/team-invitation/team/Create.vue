@@ -14,7 +14,7 @@
             <b-form-group :label="$saas.t('pages.team-user-team.forms.create.fields.email.label')" label-for="team-invitation">
                 <team-invitation :obj="teamInvitationTeamCreate"></team-invitation>
                 <b-form-invalid-feedback :state="validateEmails()">
-                    {{ $saas.t('pages.team-user-team.forms.invite.validations.invitations.email') }}
+                    {{ $saas.t('pages.team-user-team.forms.create.validations.invitations.email') }}
                 </b-form-invalid-feedback>
             </b-form-group>
         </b-form>
@@ -25,7 +25,7 @@
             </b-button>
             <b-button form="form-team-invitation-team-create" type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                 <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
-                {{ $saas.t('pages.team-user-team.forms.create.buttons.invite') }}
+                {{ $saas.t('pages.team-user-team.forms.create.buttons.create') }}
             </b-button>
         </template>
     </b-modal>

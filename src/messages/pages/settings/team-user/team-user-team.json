@@ -1,6 +1,6 @@
 {
   "en": {
-    "title": "Team users",
+    "title": "Users",
     "actions": {
       "create": "Invite",
       "delete": "Remove"
@@ -9,7 +9,7 @@
     "owner": "Owner",
     "forms": {
       "create": {
-        "title": "Invite team users",
+        "title": "Invite users",
         "fields": {
           "email": {
             "label": "Invitations",
@@ -26,12 +26,12 @@
           }
         },
         "errors": {
-          "4x": "Invite team users failed",
+          "4x": "Invite users failed",
           "5x": "Server error - Please try again later"
         }
       },
       "delete": {
-        "title": "Remove team user",
+        "title": "Remove user",
         "fields": {
           "name": {
             "label": "Please type {name} to confirm",
@@ -39,14 +39,14 @@
           }
         },
         "buttons": {
-          "delete": "Remove team user",
+          "delete": "Remove user",
           "cancel": "Cancel"
         },
         "validations": {
           "name": "Input must match user name"
         },
         "errors": {
-          "4x": "Remove team user failed",
+          "4x": "Remove user failed",
           "5x": "Server error - Please try again later"
         }
       }
