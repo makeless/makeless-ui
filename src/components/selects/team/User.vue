@@ -1,10 +1,10 @@
 <template>
     <vue-multiselect
             v-model="obj.user"
-            id="teamUser"
-            name="teamUser"
-            :options="teamUsers"
-            :placeholder="$saas.t('components.selects.team.teamUser.placeholder')"
+            id="user"
+            name="user"
+            :options="users"
+            :placeholder="$saas.t('components.selects.team.user.placeholder')"
             :multiple="false"
             :loading="loading"
             :showLabels="false"
@@ -16,8 +16,8 @@
             <div>{{ props.option.name }}<br><small>{{ props.option.email }}</small></div>
         </template>
 
-        <template slot="noOptions">{{ $saas.t('components.selects.team.teamUser.noOption') }}</template>
-        <template slot="noResult">{{ $saas.t('components.selects.team.teamUser.noResult') }}</template>
+        <template slot="noOptions">{{ $saas.t('components.selects.team.user.noOption') }}</template>
+        <template slot="noResult">{{ $saas.t('components.selects.team.user.noResult') }}</template>
     </vue-multiselect>
 </template>
 
@@ -25,15 +25,16 @@
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import VueMultiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
+import UserModel from '../../../models/user';
 import TeamUserModel from '../../../models/team-user';
 
 @Component({
   components: {VueMultiselect},
 })
-export default class TeamUser extends Vue {
+export default class User extends Vue {
   @Prop(Object) obj!: any;
 
-  protected teamUsers: TeamUserModel[] = [];
+  protected users: UserModel[] = [];
   private loading: boolean = false;
 
   public onSearch(value: string): void {
@@ -47,7 +48,10 @@ export default class TeamUser extends Vue {
         'Team': this.$saas.getSecurity().getTeam()!.id,
       },
     }).then((data) => {
-      this.teamUsers = this.$saas.getHttp().response(data).getData().data || [];
+      this.users = [];
+      this.$saas.getHttp().response(data).getData().data.forEach((teamUser: TeamUserModel) => {
+        this.users!.push(Object.assign(new UserModel(), teamUser.user));
+      });
       this.loading = false;
     });
   }

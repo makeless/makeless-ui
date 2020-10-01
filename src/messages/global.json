@@ -21,10 +21,10 @@
       },
       "selects": {
         "team": {
-          "teamUser": {
-            "placeholder": "Team user",
-            "noOption": "Search team user by name",
-            "noResult": "No team users found"
+          "user": {
+            "placeholder": "User",
+            "noOption": "Search user by name",
+            "noResult": "No users found"
           },
           "invitation": {
             "placeholder": "Email",

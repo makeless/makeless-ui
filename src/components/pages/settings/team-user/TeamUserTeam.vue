@@ -16,7 +16,7 @@
                         <b-list-group v-if="response && teamUsers">
                             <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="teamUser in teamUsers" :key="teamUser.userId">
                                 {{ teamUser.user.name }}
-                                <b-button v-if="$saas.getSecurity().getTeam().userId !== teamUser.user.id" size="sm" variant="danger" v-b-modal.team-user-team-delete @click="selectTeamUser(teamUser)">{{ $saas.t('pages.team-user-team.actions.delete') }}</b-button>
+                                <b-button v-if="$saas.getSecurity().getTeam().userId !== teamUser.userId" size="sm" variant="danger" v-b-modal.team-user-team-delete @click="selectTeamUser(teamUser)">{{ $saas.t('pages.team-user-team.actions.delete') }}</b-button>
                                 <div v-else>
                                     <b-icon-lock></b-icon-lock>
                                     {{ $saas.t('pages.team-user-team.owner') }}
@@ -62,7 +62,6 @@ export default class TeamUserTeam extends Vue {
 
   created() {
     this.loadTeamUsers();
-    console.log(this.$saas.getSecurity().getTeam());
   }
 
   loadTeamUsers(): void {
