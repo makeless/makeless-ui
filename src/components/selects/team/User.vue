@@ -26,6 +26,7 @@ import {Component, Prop, Vue} from 'vue-property-decorator';
 import VueMultiselect from 'vue-multiselect';
 import 'vue-multiselect/dist/vue-multiselect.min.css';
 import UserModel from '../../../models/user';
+import TeamUserModel from '../../../models/team-user';
 
 @Component({
   components: {VueMultiselect},
@@ -42,12 +43,15 @@ export default class User extends Vue {
     }
 
     this.loading = true;
-    this.$saas.getHttp().get(`/api/auth/team/user?search=${value}`, {
+    this.$saas.getHttp().get(`/api/auth/team/team-user?search=${value}`, {
       headers: {
         'Team': this.$saas.getSecurity().getTeam()!.id,
       },
     }).then((data) => {
-      this.users = this.$saas.getHttp().response(data).getData().data || [];
+      this.users = [];
+      this.$saas.getHttp().response(data).getData().data.forEach((teamUser: TeamUserModel) => {
+        this.users!.push(Object.assign(new UserModel(), teamUser.user));
+      });
       this.loading = false;
     });
   }

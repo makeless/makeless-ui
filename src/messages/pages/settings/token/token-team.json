@@ -14,9 +14,9 @@
             "label": "Note",
             "placeholder": "Note"
           },
-          "user": {
-            "label": "User",
-            "placeholder": "Select user"
+          "teamUser": {
+            "label": "Team user",
+            "placeholder": "Select team user"
           }
         },
         "buttons": {

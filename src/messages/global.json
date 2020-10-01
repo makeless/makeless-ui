@@ -13,10 +13,10 @@
           "profile": "Profile",
           "password": "Password",
           "teams": "Teams",
-          "team-invitations": "Team invitations",
-          "team-invitations-team": "Pending invitations",
+          "teamInvitations": "Team invitations",
+          "teamInvitationsTeam": "Pending invitations",
           "tokens": "Tokens",
-          "users": "Users"
+          "teamUsers": "Users"
         }
       },
       "selects": {

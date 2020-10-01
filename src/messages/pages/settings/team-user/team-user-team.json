@@ -2,13 +2,13 @@
   "en": {
     "title": "Users",
     "actions": {
-      "invite": "Invite",
+      "create": "Invite",
       "delete": "Remove"
     },
     "loading": "Loading ...",
     "owner": "Owner",
     "forms": {
-      "invite": {
+      "create": {
         "title": "Invite users",
         "fields": {
           "email": {
@@ -17,7 +17,7 @@
           }
         },
         "buttons": {
-          "invite": "Invite",
+          "create": "Invite",
           "cancel": "Cancel"
         },
         "validations": {
@@ -26,7 +26,7 @@
           }
         },
         "errors": {
-          "4x": "Invite user failed",
+          "4x": "Invite users failed",
           "5x": "Server error - Please try again later"
         }
       },
