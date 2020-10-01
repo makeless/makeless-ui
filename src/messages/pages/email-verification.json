@@ -2,6 +2,7 @@
   "en": {
     "title": "Email verification",
     "response": {
+      "access": "You have now access to {name}",
       "errors": {
         "2x": "Email verification was successful",
         "4x": "Email verification failed",

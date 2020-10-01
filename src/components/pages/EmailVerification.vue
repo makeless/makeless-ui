@@ -11,8 +11,10 @@
                                         <b-icon :icon="iconVerifySuccess" variant="primary" :font-scale="3"/>
                                     </div>
 
-                                    <div class="mt-3">
-                                        <h2>{{ $saas.t('pages.email-verification.response.errors.2x') }}</h2>
+                                    <h2 class="mt-3">{{ $saas.t('pages.email-verification.response.errors.2x') }}</h2>
+
+                                    <div class="mt-2">
+                                        {{ $saas.t('pages.email-verification.response.access', {name: $saas.getConfig().getConfiguration().getName()}) }}
                                     </div>
 
                                     <div class="mt-4">
@@ -27,13 +29,13 @@
                                         <b-icon class="text-danger" :icon="iconVerifyFailed" :font-scale="3"/>
                                     </div>
 
-                                    <div v-if="response.getCode() >= 400 && response.getCode() < 500" class="mt-3">
-                                        <h2>{{ $saas.t('pages.email-verification.response.errors.4x') }}</h2>
-                                    </div>
+                                    <template v-if="response.getCode() >= 400 && response.getCode() < 500">
+                                        <h2 class="mt-3">{{ $saas.t('pages.email-verification.response.errors.4x') }}</h2>
+                                    </template>
 
-                                    <div v-if="response.getCode() >= 500" class="mt-3">
-                                        <h2>{{ $saas.t('pages.email-verification.response.errors.5x') }}</h2>
-                                    </div>
+                                    <template v-if="response.getCode() >= 500">
+                                        <h2 class="mt-3">{{ $saas.t('pages.email-verification.response.errors.5x') }}</h2>
+                                    </template>
                                 </template>
                             </div>
                             <div v-else>
