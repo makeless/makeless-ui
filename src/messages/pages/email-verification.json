@@ -1,0 +1,15 @@
+{
+  "en": {
+    "title": "Email verification",
+    "access": "You have now access to {name}",
+    "loading": "Loading ...",
+    "button": {
+      "login": "Login"
+    },
+    "errors": {
+      "2x": "Email verification was successful",
+      "4x": "Email verification failed",
+      "5x": "Server error - Please try again later"
+    },
+  }
+}
