@@ -23,7 +23,7 @@
             <b-button @click="cancel()">
                 {{ $saas.t('pages.team-user-team.forms.delete.buttons.cancel') }}
             </b-button>
-            <b-button form="form-user-team-delete" type="submit" variant="danger" :disabled="form.isDisabled() || !validator.isValid()">
+            <b-button form="form-team-user-team-delete" type="submit" variant="danger" :disabled="form.isDisabled() || !validator.isValid()">
                 <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
                 {{ $saas.t('pages.team-user-team.forms.delete.buttons.delete') }}
             </b-button>

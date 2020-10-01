@@ -23,7 +23,7 @@
             <b-button @click="cancel()">
                 {{ $saas.t('pages.team-user-team.forms.invite.buttons.cancel') }}
             </b-button>
-            <b-button form="form-user-team-invite" type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
+            <b-button form="form-team-invitation-team-create" type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                 <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
                 {{ $saas.t('pages.team-user-team.forms.invite.buttons.invite') }}
             </b-button>
@@ -38,7 +38,7 @@ import Validator from '../../../../../packages/validator/basic/validator';
 import {BModal, BvModalEvent} from 'bootstrap-vue';
 import ValidatorUtil from '../../../../../utils/validator';
 import TeamInvitation from '../../../../selects/team/TeamInvitation.vue';
-import User from '../../../../../models/user';
+import TeamUser from '../../../../../models/team-user';
 import TeamInvitationTeamCreate from '../../../../../structs/team-invitation-team-create';
 import DomUtil from '../../../../../utils/dom';
 
@@ -46,7 +46,7 @@ import DomUtil from '../../../../../utils/dom';
   components: {TeamInvitation},
 })
 export default class Create extends Vue {
-  @Prop(Array) readonly teamUsers!: User[];
+  @Prop(Array) readonly teamUsers!: TeamUser[];
 
   private modalId: string = 'team-invitation-team-create';
   private teamInvitationTeamCreate: TeamInvitationTeamCreate = new TeamInvitationTeamCreate();
@@ -66,7 +66,7 @@ export default class Create extends Vue {
 
     let index: { [key: string]: boolean } = {};
     for (let i = 0; i < this.teamUsers.length; i++) {
-      index[this.teamUsers[i].email!] = true;
+      index[this.teamUsers[i].user!.email!] = true;
     }
 
     for (let i = 0; i < this.teamInvitationTeamCreate.invitations.length; i++) {

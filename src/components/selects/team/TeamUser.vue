@@ -4,7 +4,7 @@
             id="teamUser"
             name="teamUser"
             :options="teamUsers"
-            :placeholder="$saas.t('components.selects.team.team-user.placeholder')"
+            :placeholder="$saas.t('components.selects.team.teamUser.placeholder')"
             :multiple="false"
             :loading="loading"
             :showLabels="false"
@@ -16,8 +16,8 @@
             <div>{{ props.option.name }}<br><small>{{ props.option.email }}</small></div>
         </template>
 
-        <template slot="noOptions">{{ $saas.t('components.selects.team.team-user.noOption') }}</template>
-        <template slot="noResult">{{ $saas.t('components.selects.team.team-user.noResult') }}</template>
+        <template slot="noOptions">{{ $saas.t('components.selects.team.teamUser.noOption') }}</template>
+        <template slot="noResult">{{ $saas.t('components.selects.team.teamUser.noResult') }}</template>
     </vue-multiselect>
 </template>
 

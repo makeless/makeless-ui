@@ -13,15 +13,15 @@
           "profile": "Profile",
           "password": "Password",
           "teams": "Teams",
-          "team-invitations": "Team invitations",
-          "team-invitations-team": "Pending invitations",
+          "teamInvitations": "Team invitations",
+          "teamInvitationsTeam": "Pending invitations",
           "tokens": "Tokens",
-          "team-users": "Team users"
+          "teamUsers": "Team users"
         }
       },
       "selects": {
         "team": {
-          "team-user": {
+          "teamUser": {
             "placeholder": "Team user",
             "noOption": "Search team user by name",
             "noResult": "No team users found"
