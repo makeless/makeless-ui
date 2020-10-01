@@ -9,7 +9,7 @@
                                 <div class="mb-2 mb-sm-3">
                                     <b-icon :icon="icon" variant="primary" :font-scale="3"/>
                                 </div>
-                                <div><h2>{{ $saas.t('pages.invitation.information.invitedTo', {team: teamInvitation.team.name}) }}</h2></div>
+                                <h2>{{ $saas.t('pages.invitation.information.invitedTo', {team: teamInvitation.team.name}) }}</h2>
                                 <div><small>{{ $saas.t('pages.invitation.information.invitedBy', {user: teamInvitation.user.name}) }}</small></div>
                                 <hr>
                                 <div>{{ `${$saas.t('pages.invitation.instruction.newTo', {name: $saas.getConfig().getConfiguration().getName()})}?` }}</div>
