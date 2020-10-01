@@ -2,13 +2,13 @@
   "en": {
     "title": "Team users",
     "actions": {
-      "invite": "Invite",
+      "create": "Invite",
       "delete": "Remove"
     },
     "loading": "Loading ...",
     "owner": "Owner",
     "forms": {
-      "invite": {
+      "create": {
         "title": "Invite team users",
         "fields": {
           "email": {
@@ -17,7 +17,7 @@
           }
         },
         "buttons": {
-          "invite": "Invite",
+          "create": "Invite",
           "cancel": "Cancel"
         },
         "validations": {

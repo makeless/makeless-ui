@@ -1,17 +1,17 @@
 <template>
-    <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.team-user-team.forms.invite.title')">
+    <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.team-user-team.forms.create.title')">
         <b-form id="form-team-invitation-team-create" v-if="teamInvitationTeamCreate" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
-                    {{ $saas.t('pages.team-user-team.forms.invite.errors.4x') }}
+                    {{ $saas.t('pages.team-user-team.forms.create.errors.4x') }}
                 </template>
 
                 <template v-if="form.getResponse().getCode() >= 500">
-                    {{ $saas.t('pages.team-user-team.forms.invite.errors.5x') }}
+                    {{ $saas.t('pages.team-user-team.forms.create.errors.5x') }}
                 </template>
             </b-alert>
 
-            <b-form-group :label="$saas.t('pages.team-user-team.forms.invite.fields.email.label')" label-for="team-invitation">
+            <b-form-group :label="$saas.t('pages.team-user-team.forms.create.fields.email.label')" label-for="team-invitation">
                 <team-invitation :obj="teamInvitationTeamCreate"></team-invitation>
                 <b-form-invalid-feedback :state="validateEmails()">
                     {{ $saas.t('pages.team-user-team.forms.invite.validations.invitations.email') }}
@@ -21,11 +21,11 @@
 
         <template v-slot:modal-footer="{ cancel }">
             <b-button @click="cancel()">
-                {{ $saas.t('pages.team-user-team.forms.invite.buttons.cancel') }}
+                {{ $saas.t('pages.team-user-team.forms.create.buttons.cancel') }}
             </b-button>
             <b-button form="form-team-invitation-team-create" type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                 <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
-                {{ $saas.t('pages.team-user-team.forms.invite.buttons.invite') }}
+                {{ $saas.t('pages.team-user-team.forms.create.buttons.invite') }}
             </b-button>
         </template>
     </b-modal>

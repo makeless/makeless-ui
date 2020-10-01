@@ -10,7 +10,7 @@
                     <b-col lg="9">
                         <h1 class="d-flex justify-content-between align-items-center">
                             {{ $saas.t('pages.team-user-team.title') }}
-                            <b-button size="sm" variant="primary" v-b-modal.team-invitation-team-create>{{ $saas.t('pages.team-user-team.actions.invite') }}</b-button>
+                            <b-button size="sm" variant="primary" v-b-modal.team-invitation-team-create>{{ $saas.t('pages.team-user-team.actions.create') }}</b-button>
                         </h1>
                         <hr>
                         <b-list-group v-if="response && teamUsers">
