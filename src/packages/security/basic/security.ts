@@ -283,8 +283,8 @@ export default class Security {
   }
 
   public verifyUser(): void {
-    if (this.isAuth()) {
-      this.getUser()!.emailVerification!.verified = true;
+    if (this.isAuth() && this.user!.emailVerification !== null) {
+      this.user!.emailVerification!.verified = true;
     }
   }
 

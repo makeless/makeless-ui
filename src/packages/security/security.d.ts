@@ -76,7 +76,7 @@ export default interface Security {
   switchToUser(): void
 
   /**
-   * Verify user when user is authenticated
+   * Verify user if user is authenticated
    */
   verifyUser(): void
 
