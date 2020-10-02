@@ -76,6 +76,11 @@ export default interface Security {
   switchToUser(): void
 
   /**
+   * Verify user when user is authenticated
+   */
+  verifyUser(): void
+
+  /**
    * Switchs to team and redirects to dashboard if successful
    * @param id - team id
    */

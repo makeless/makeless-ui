@@ -282,6 +282,12 @@ export default class Security {
     this.router.redirectToDashboard();
   }
 
+  public verifyUser(): void {
+    if (this.isAuth()) {
+      this.getUser()!.emailVerification!.verified = true;
+    }
+  }
+
   public isPageEnabled(page: PageInterface, configuration: ConfigurationInterface): boolean {
     if (page.getMeta() === null) {
       return true;

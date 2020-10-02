@@ -18,9 +18,16 @@
                                     </div>
 
                                     <div class="mt-4">
-                                        <b-button class="btn-block" variant="primary" :to="{name: 'login'}">
-                                            {{ $saas.t('pages.email-verification.button.login') }}
-                                        </b-button>
+                                        <template v-if="$saas.getSecurity().isAuth()">
+                                            <b-button class="btn-block" variant="primary" :to="{name: 'dashboard'}">
+                                                {{ $saas.t('pages.email-verification.button.dashboard') }}
+                                            </b-button>
+                                        </template>
+                                        <template v-else>
+                                            <b-button class="btn-block" variant="primary" :to="{name: 'login'}">
+                                                {{ $saas.t('pages.email-verification.button.login') }}
+                                            </b-button>
+                                        </template>
                                     </div>
                                 </template>
 
@@ -68,6 +75,7 @@ export default class EmailVerification extends Vue {
 
     this.$saas.getHttp().patch(`/api/email-verification/verify?token=${this.$route.query.token}`, null).then((data) => {
       this.response = this.$saas.getHttp().response(data);
+      this.$saas.getSecurity().verifyUser();
     }).catch((data) => {
       this.response = this.$saas.getHttp().response(data.response);
     });
