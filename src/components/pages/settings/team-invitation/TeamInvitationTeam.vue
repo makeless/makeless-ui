@@ -23,6 +23,10 @@
                                         <div class="d-flex flex-column flex-sm-row align-items-sm-center flex-wrap text-right">
                                             <div class="pt-1 pb-1" v-if="responseResendTeamInvitation || responseDeleteTeamInvitation">
                                                 <template v-if="responseResendTeamInvitation">
+                                                    <template v-if="responseResendTeamInvitation.getCode() === 200">
+                                                        <span class="text-success">{{ $saas.t('pages.team-invitation-team.errors.resend.2x') }}</span>
+                                                    </template>
+
                                                     <template v-if="responseResendTeamInvitation.getCode() >= 400 && responseResendTeamInvitation.getCode() < 500">
                                                         <span class="text-danger">{{ $saas.t('pages.team-invitation-team.errors.resend.4x') }}</span>
                                                     </template>
