@@ -72,19 +72,49 @@ makeless.json
   "logo": null,
   "locale": "en",
   "host": "http://localhost:3000",
+  "mail": {
+    "name": "Makeless",
+    "logo": null,
+    "from": "Makeless <info@makeless.io>",
+    "link": "https://localhost",
+    "buttonColor": "#4586ab",
+    "buttonTextColor": "#FFFFFF",
+    "texts": {
+      "en": {
+        "greeting": "Hello",
+        "signature": "Best Regards",
+        "copyright": "Copyright © 2020 Makeless. All rights reserved."
+      }
+    }
+  },
   "tokens": true,
   "teams": {
-    "tokens": false
+    "tokens": true
   },
   "navigation": {
     "left": {
       "en": [
-        {"label": "Dashboard","to": "dashboard"}
+        {
+          "label": "Dashboard",
+          "to": "dashboard"
+        }
       ]
     },
     "right": {
       "en": [
-        {"label": "Login","to": "login"}
+        {
+          "label": "GitHub",
+          "to": "https://github.com/makeless",
+          "external": true
+        },
+        {
+          "label": "Login",
+          "to": "login"
+        },
+        {
+          "label": "Register",
+          "to": "register"
+        }
       ]
     }
   }
