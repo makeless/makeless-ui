@@ -4,7 +4,7 @@
             id="team-invitation"
             name="team-invitation"
             :options="obj.invitations"
-            :placeholder="$saas.t('components.selects.team.invitation.placeholder')"
+            :placeholder="$makeless.t('components.selects.team.invitation.placeholder')"
             :multiple="true"
             label="email"
             :showLabels="false"
@@ -15,7 +15,7 @@
             @tag="addTeamInvitation"
     >
 
-        <template slot="noOptions">{{ $saas.t('components.selects.team.invitation.noOption') }}</template>
+        <template slot="noOptions">{{ $makeless.t('components.selects.team.invitation.noOption') }}</template>
     </vue-multiselect>
 </template>
 

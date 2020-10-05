@@ -5,7 +5,7 @@
                 <b-row>
                     <b-col>
                         <div>
-                            <h1>{{ $saas.t('pages.page-not-found.title') }}</h1>
+                            <h1>{{ $makeless.t('pages.page-not-found.title') }}</h1>
                         </div>
                     </b-col>
                 </b-row>

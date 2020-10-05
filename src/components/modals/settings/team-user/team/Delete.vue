@@ -1,31 +1,31 @@
 <template>
-    <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.team-user-team.forms.delete.title')">
+    <b-modal :id="modalId" :ref="modalId" no-fade :title="$makeless.t('pages.team-user-team.forms.delete.title')">
         <b-form v-if="teamUser" id="form-team-user-team-delete" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
-                    {{ $saas.t('pages.team-user-team.forms.delete.errors.4x') }}
+                    {{ $makeless.t('pages.team-user-team.forms.delete.errors.4x') }}
                 </template>
 
                 <template v-if="form.getResponse().getCode() >= 500">
-                    {{ $saas.t('pages.team-user-team.forms.delete.errors.5x') }}
+                    {{ $makeless.t('pages.team-user-team.forms.delete.errors.5x') }}
                 </template>
             </b-alert>
 
-            <b-form-group :label="$saas.t('pages.team-user-team.forms.delete.fields.name.label', {name: this.teamUser.user.name})" label-for="name">
-                <b-form-input id="name" type="text" v-model="name" autocomplete="off" required :placeholder="$saas.t('pages.team-user-team.forms.delete.fields.name.placeholder')"></b-form-input>
+            <b-form-group :label="$makeless.t('pages.team-user-team.forms.delete.fields.name.label', {name: this.teamUser.user.name})" label-for="name">
+                <b-form-input id="name" type="text" v-model="name" autocomplete="off" required :placeholder="$makeless.t('pages.team-user-team.forms.delete.fields.name.placeholder')"></b-form-input>
                 <b-form-invalid-feedback :state="validateName()">
-                    {{ $saas.t('pages.team-user-team.forms.delete.validations.name') }}
+                    {{ $makeless.t('pages.team-user-team.forms.delete.validations.name') }}
                 </b-form-invalid-feedback>
             </b-form-group>
         </b-form>
 
         <template v-slot:modal-footer="{ cancel }">
             <b-button @click="cancel()">
-                {{ $saas.t('pages.team-user-team.forms.delete.buttons.cancel') }}
+                {{ $makeless.t('pages.team-user-team.forms.delete.buttons.cancel') }}
             </b-button>
             <b-button form="form-team-user-team-delete" type="submit" variant="danger" :disabled="form.isDisabled() || !validator.isValid()">
                 <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
-                {{ $saas.t('pages.team-user-team.forms.delete.buttons.delete') }}
+                {{ $makeless.t('pages.team-user-team.forms.delete.buttons.delete') }}
             </b-button>
         </template>
     </b-modal>
@@ -96,18 +96,18 @@ export default class Delete extends Vue {
       id: this.teamUser.id,
     });
 
-    this.$saas.getHttp().delete('/api/auth/team/team-user', {
+    this.$makeless.getHttp().delete('/api/auth/team/team-user', {
       data: teamUserTeamDelete,
       headers: {
-        'Team': this.$saas.getSecurity().getTeam()!.id,
+        'Team': this.$makeless.getSecurity().getTeam()!.id,
       },
     }).then((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data));
+      this.form.setResponse(this.$makeless.getHttp().response(data));
       this.form.setDisabled(false);
       this.removeTeamUser(this.teamUser);
       (this.$refs[this.modalId] as BModal).hide();
     }).catch((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data.response));
+      this.form.setResponse(this.$makeless.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
     });

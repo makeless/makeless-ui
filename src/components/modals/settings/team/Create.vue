@@ -1,38 +1,38 @@
 <template>
-    <b-modal :id="modalId" no-fade :title="$saas.t('pages.team.forms.create.title')">
+    <b-modal :id="modalId" no-fade :title="$makeless.t('pages.team.forms.create.title')">
         <b-form id="form-team-create" v-if="teamCreate" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
-                    {{ $saas.t('pages.team.forms.create.errors.4x') }}
+                    {{ $makeless.t('pages.team.forms.create.errors.4x') }}
                 </template>
 
                 <template v-if="form.getResponse().getCode() >= 500">
-                    {{ $saas.t('pages.team.forms.create.errors.5x') }}
+                    {{ $makeless.t('pages.team.forms.create.errors.5x') }}
                 </template>
             </b-alert>
 
-            <b-form-group :label="$saas.t('pages.team.forms.create.fields.name.label')" label-for="name">
-                <b-form-input id="name" type="text" v-model="teamCreate.name" required autocomplete="off" :placeholder="$saas.t('pages.team.forms.create.fields.name.placeholder')"></b-form-input>
+            <b-form-group :label="$makeless.t('pages.team.forms.create.fields.name.label')" label-for="name">
+                <b-form-input id="name" type="text" v-model="teamCreate.name" required autocomplete="off" :placeholder="$makeless.t('pages.team.forms.create.fields.name.placeholder')"></b-form-input>
                 <b-form-invalid-feedback :state="validateName()">
-                    {{ $saas.t('pages.team.forms.create.validations.name') }}
+                    {{ $makeless.t('pages.team.forms.create.validations.name') }}
                 </b-form-invalid-feedback>
             </b-form-group>
 
-            <b-form-group :label="$saas.t('pages.team.forms.create.fields.invitation.label')" label-for="team-invitation">
+            <b-form-group :label="$makeless.t('pages.team.forms.create.fields.invitation.label')" label-for="team-invitation">
                 <team-invitation :obj="teamCreate"></team-invitation>
                 <b-form-invalid-feedback :state="validateEmails()">
-                    {{ $saas.t('pages.team.forms.create.validations.invitations.email') }}
+                    {{ $makeless.t('pages.team.forms.create.validations.invitations.email') }}
                 </b-form-invalid-feedback>
             </b-form-group>
         </b-form>
 
         <template v-slot:modal-footer="{ cancel }">
             <b-button @click="cancel()">
-                {{ $saas.t('pages.team.forms.create.buttons.cancel') }}
+                {{ $makeless.t('pages.team.forms.create.buttons.cancel') }}
             </b-button>
             <b-button form="form-team-create" type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                 <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
-                {{ $saas.t('pages.team.forms.create.buttons.create') }}
+                {{ $makeless.t('pages.team.forms.create.buttons.create') }}
             </b-button>
         </template>
     </b-modal>
@@ -81,7 +81,7 @@ export default class Create extends Vue {
 
     for (let i = 0; i < this.teamCreate.invitations.length; i++) {
       const invitation = this.teamCreate.invitations[i];
-      if (!ValidatorUtil.isValidEmail(invitation.email) || invitation.email === this.$saas.getSecurity().getUser()!.getEmail()) {
+      if (!ValidatorUtil.isValidEmail(invitation.email) || invitation.email === this.$makeless.getSecurity().getUser()!.getEmail()) {
         return false;
       }
     }
@@ -110,14 +110,14 @@ export default class Create extends Vue {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.$saas.getHttp().post('/api/auth/team', this.teamCreate).then((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data));
+    this.$makeless.getHttp().post('/api/auth/team', this.teamCreate).then((data) => {
+      this.form.setResponse(this.$makeless.getHttp().response(data));
       this.form.setDisabled(false);
       const team = Object.assign(new Team(), this.form.getResponse()!.getData().data);
-      this.$saas.getSecurity().addTeam(team);
-      this.$saas.getSecurity().switchToTeam(team.id!);
+      this.$makeless.getSecurity().addTeam(team);
+      this.$makeless.getSecurity().switchToTeam(team.id!);
     }).catch((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data.response));
+      this.form.setResponse(this.$makeless.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
     });

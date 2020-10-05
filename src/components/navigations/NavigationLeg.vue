@@ -1,6 +1,6 @@
 <template>
     <b-navbar-nav v-if="leg">
-        <div v-for="(item, index) in leg[this.$saas.getI18n().getLocale()]" :key="index">
+        <div v-for="(item, index) in leg[this.$makeless.getI18n().getLocale()]" :key="index">
             <b-nav-item v-if="!item.hasChildren() && show(item)" @click="to(item)">{{ item.getLabel() }}</b-nav-item>
             <b-nav-item-dropdown v-if="item.hasChildren() && showDropdown(item)">
                 <template slot="button-content">{{ item.getLabel() }}</template>
@@ -29,7 +29,7 @@ export default class NavigationLeg extends Vue {
       return;
     }
 
-    this.$saas.getRouter().redirectToName(item.getTo());
+    this.$makeless.getRouter().redirectToName(item.getTo());
   }
 
   public show(item: NavigationItemInterface): boolean {
@@ -37,7 +37,7 @@ export default class NavigationLeg extends Vue {
       return true;
     }
 
-    return this.$saas.getSecurity().isPageAccessible(this.$saas.getPage(item.getTo()));
+    return this.$makeless.getSecurity().isPageAccessible(this.$makeless.getPage(item.getTo()));
   }
 
   public showDropdown(item: NavigationItemInterface): boolean {

@@ -1,9 +1,9 @@
 <template>
     <b-navbar-brand :to="to">
-        <template v-if="$saas.getConfig().getConfiguration().getLogo()">
-            <img :src="$saas.getConfig().getConfiguration().getLogo()" alt="logo">
+        <template v-if="$makeless.getConfig().getConfiguration().getLogo()">
+            <img :src="$makeless.getConfig().getConfiguration().getLogo()" alt="logo">
         </template>
-        <template v-else>{{ $saas.getConfig().getConfiguration().getName() }}</template>
+        <template v-else>{{ $makeless.getConfig().getConfiguration().getName() }}</template>
     </b-navbar-brand>
 </template>
 
@@ -14,7 +14,7 @@ import {Location} from 'vue-router';
 @Component
 export default class NavigationBrand extends Vue {
   protected get to(): Location {
-    if (this.$saas.getSecurity().isAuth()) {
+    if (this.$makeless.getSecurity().isAuth()) {
       return {name: 'dashboard'};
     }
 

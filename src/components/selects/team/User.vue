@@ -4,7 +4,7 @@
             id="user"
             name="user"
             :options="users"
-            :placeholder="$saas.t('components.selects.team.user.placeholder')"
+            :placeholder="$makeless.t('components.selects.team.user.placeholder')"
             :multiple="false"
             :loading="loading"
             :showLabels="false"
@@ -16,8 +16,8 @@
             <div>{{ props.option.name }}<br><small>{{ props.option.email }}</small></div>
         </template>
 
-        <template slot="noOptions">{{ $saas.t('components.selects.team.user.noOption') }}</template>
-        <template slot="noResult">{{ $saas.t('components.selects.team.user.noResult') }}</template>
+        <template slot="noOptions">{{ $makeless.t('components.selects.team.user.noOption') }}</template>
+        <template slot="noResult">{{ $makeless.t('components.selects.team.user.noResult') }}</template>
     </vue-multiselect>
 </template>
 
@@ -38,18 +38,18 @@ export default class User extends Vue {
   private loading: boolean = false;
 
   public onSearch(value: string): void {
-    if (!this.$saas.getSecurity().getTeam() || value === '') {
+    if (!this.$makeless.getSecurity().getTeam() || value === '') {
       return;
     }
 
     this.loading = true;
-    this.$saas.getHttp().get(`/api/auth/team/team-user?search=${value}`, {
+    this.$makeless.getHttp().get(`/api/auth/team/team-user?search=${value}`, {
       headers: {
-        'Team': this.$saas.getSecurity().getTeam()!.id,
+        'Team': this.$makeless.getSecurity().getTeam()!.id,
       },
     }).then((data) => {
       this.users = [];
-      this.$saas.getHttp().response(data).getData().data.forEach((teamUser: TeamUserModel) => {
+      this.$makeless.getHttp().response(data).getData().data.forEach((teamUser: TeamUserModel) => {
         this.users!.push(Object.assign(new UserModel(), teamUser.user));
       });
       this.loading = false;

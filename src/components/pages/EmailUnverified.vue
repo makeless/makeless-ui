@@ -10,31 +10,31 @@
                             </div>
 
                             <div class="mt-3">
-                                <h2>{{ $saas.t('pages.email-unverified.title') }}</h2>
+                                <h2>{{ $makeless.t('pages.email-unverified.title') }}</h2>
                             </div>
 
                             <div class="mt-4">
-                                <span>{{ $saas.t('pages.email-unverified.hint', {name: $saas.getConfig().getConfiguration().getName(), email: $saas.getSecurity().getUser().email}) }}</span>
+                                <span>{{ $makeless.t('pages.email-unverified.hint', {name: $makeless.getConfig().getConfiguration().getName(), email: $makeless.getSecurity().getUser().email}) }}</span>
                             </div>
 
                             <b-alert v-if="response && response.getCode() >= 400" variant="danger" dismissible :show="true" class="text-left mt-3 mb-n2">
                                 <template v-if="response.getCode() >= 400 && response.getCode() < 500">
-                                    {{ $saas.t('pages.email-unverified.errors.4x') }}
+                                    {{ $makeless.t('pages.email-unverified.errors.4x') }}
                                 </template>
 
                                 <template v-if="response.getCode() >= 500">
-                                    {{ $saas.t('pages.email-unverified.errors.5x') }}
+                                    {{ $makeless.t('pages.email-unverified.errors.5x') }}
                                 </template>
                             </b-alert>
 
                             <b-alert v-if="response && response.getCode() === 200" variant="success" dismissible :show="true" class="text-left mt-3 mb-n2">
-                                {{ $saas.t('pages.email-unverified.errors.2x') }}
+                                {{ $makeless.t('pages.email-unverified.errors.2x') }}
                             </b-alert>
 
                             <div class="mt-4">
                                 <b-button class="btn-block" @click="resendEmailVerification()">
                                     <b-spinner v-if="isLoadingResend" small class="mr-1"></b-spinner>
-                                    <span>{{ $saas.t('pages.email-unverified.button.resend') }}</span>
+                                    <span>{{ $makeless.t('pages.email-unverified.button.resend') }}</span>
                                 </b-button>
                             </div>
                         </b-card>
@@ -59,11 +59,11 @@ export default class EmailUnverified extends Vue {
     this.response = null;
     this.isLoadingResend = true;
 
-    this.$saas.getHttp().post('/api/auth/email-verification/resend', this.$saas.getSecurity().getUser()).then((data) => {
-      this.response = this.$saas.getHttp().response(data);
+    this.$makeless.getHttp().post('/api/auth/email-verification/resend', this.$makeless.getSecurity().getUser()).then((data) => {
+      this.response = this.$makeless.getHttp().response(data);
       this.isLoadingResend = false;
     }).catch((data) => {
-      this.response = this.$saas.getHttp().response(data.response);
+      this.response = this.$makeless.getHttp().response(data.response);
       this.isLoadingResend = false;
     });
   }

@@ -178,7 +178,7 @@ export default class Makeless {
     await this.getSecurity().setup();
 
     // prototypes
-    Vue.prototype.$saas = Vue.observable(this);
+    Vue.prototype.$makeless = Vue.observable(this);
 
     return new Promise<Makeless>(resolve => resolve(this));
   }

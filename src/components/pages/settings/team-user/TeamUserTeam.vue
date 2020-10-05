@@ -9,22 +9,22 @@
 
                     <b-col lg="9">
                         <h1 class="d-flex justify-content-between align-items-center">
-                            {{ $saas.t('pages.team-user-team.title') }}
-                            <b-button size="sm" variant="primary" v-b-modal.team-invitation-team-create>{{ $saas.t('pages.team-user-team.actions.create') }}</b-button>
+                            {{ $makeless.t('pages.team-user-team.title') }}
+                            <b-button size="sm" variant="primary" v-b-modal.team-invitation-team-create>{{ $makeless.t('pages.team-user-team.actions.create') }}</b-button>
                         </h1>
                         <hr>
                         <b-list-group v-if="response && teamUsers">
                             <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="teamUser in teamUsers" :key="teamUser.userId">
                                 {{ teamUser.user.name }}
-                                <b-button v-if="$saas.getSecurity().getTeam().userId !== teamUser.userId" size="sm" variant="danger" v-b-modal.team-user-team-delete @click="selectTeamUser(teamUser)">{{ $saas.t('pages.team-user-team.actions.delete') }}</b-button>
+                                <b-button v-if="$makeless.getSecurity().getTeam().userId !== teamUser.userId" size="sm" variant="danger" v-b-modal.team-user-team-delete @click="selectTeamUser(teamUser)">{{ $makeless.t('pages.team-user-team.actions.delete') }}</b-button>
                                 <div v-else>
                                     <b-icon-lock></b-icon-lock>
-                                    {{ $saas.t('pages.team-user-team.owner') }}
+                                    {{ $makeless.t('pages.team-user-team.owner') }}
                                 </div>
                             </b-list-group-item>
                         </b-list-group>
                         <div v-else class="text-center">
-                            <b-spinner :label="$saas.t('pages.team-user-team.loading')"></b-spinner>
+                            <b-spinner :label="$makeless.t('pages.team-user-team.loading')"></b-spinner>
                         </div>
                     </b-col>
                 </b-row>
@@ -65,13 +65,13 @@ export default class TeamUserTeam extends Vue {
   }
 
   loadTeamUsers(): void {
-    this.$saas.getHttp().get('/api/auth/team/team-user', {
+    this.$makeless.getHttp().get('/api/auth/team/team-user', {
       headers: {
-        'Team': this.$saas.getSecurity().getTeam()!.id,
+        'Team': this.$makeless.getSecurity().getTeam()!.id,
       },
     }).then((data) => {
       this.teamUsers = [];
-      this.response = this.$saas.getHttp().response(data);
+      this.response = this.$makeless.getHttp().response(data);
       this.response.getData().data.forEach((teamUser: TeamUser) => {
         this.teamUsers!.push(teamUser);
       });
