@@ -3,7 +3,7 @@
 Makeless - SaaS Framework - TypeScript & Vue.js Implementation
 
 [![Build Status](https://ci.loeffel.io/api/badges/makeless/makeless-ui/status.svg)](https://ci.loeffel.io/makeless/makeless-ui)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgo-saas%2Fgo-saas-ui.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgo-saas%2Fgo-saas-ui?ref=badge_shield)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmakeless%2Fmakeless-ui.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmakeless%2Fmakeless-ui?ref=badge_shield)
 <a href="https://www.npmjs.com/package/@makeless/makeless-ui"><img src="https://img.shields.io/npm/v/@makeless/makeless-ui.svg?sanitize=true" alt="Version"></a>
 
 - Based on TypeScript, Vue.js & Bootstrap 4
@@ -21,7 +21,7 @@ Makeless - SaaS Framework - TypeScript & Vue.js Implementation
 
 ## Backend
 
-- Go: [https://github.com/go-saas/go-saas](https://github.com/go-saas/go-saas)
+- Go: [https://github.com/makeless/makeless-go](https://github.com/makeless/makeless-go)
 
 ## Demo
 
@@ -91,6 +91,6 @@ makeless.json
 }
 ```
 
-
 ## License
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fgo-saas%2Fgo-saas-ui.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fgo-saas%2Fgo-saas-ui?ref=badge_large)
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fmakeless%2Fmakeless-ui.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fmakeless%2Fmakeless-ui?ref=badge_large)
