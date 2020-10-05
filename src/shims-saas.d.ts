@@ -1,7 +1,7 @@
-import Saas from './saas';
+import Makeless from './saas';
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $saas: Saas;
+    $saas: Makeless;
   }
 }

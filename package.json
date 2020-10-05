@@ -1,6 +1,6 @@
 {
-  "name": "@go-saas/go-saas-ui",
-  "version": "0.8.7",
+  "name": "@makeless/makeless-ui",
+  "version": "0.9.0",
   "private": false,
   "files": [
     "src",
@@ -28,7 +28,7 @@
     "vue-template-compiler": "^2.6.11"
   },
   "devDependencies": {
-    "@ls-lint/ls-lint": "^1.8.0",
+    "@ls-lint/ls-lint": "^1.9.2",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
     "@vue/cli-plugin-eslint": "~4.3.0",
