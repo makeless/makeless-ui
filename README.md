@@ -7,6 +7,7 @@ Makeless - SaaS Framework - TypeScript & Vue.js Implementation
 <a href="https://www.npmjs.com/package/@makeless/makeless-ui"><img src="https://img.shields.io/npm/v/@makeless/makeless-ui.svg?sanitize=true" alt="Version"></a>
 
 - Based on TypeScript, Vue.js & Bootstrap 4
+- Concurrency safe & scalable
 - Super clean and small
 - Fully customizable and configurable
 - State of the art Authentication with JWT HttpOnly Cookies
