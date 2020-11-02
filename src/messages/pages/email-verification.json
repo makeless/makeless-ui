@@ -4,7 +4,8 @@
     "access": "You have now access to {name}",
     "loading": "Loading ...",
     "button": {
-      "login": "Login"
+      "login": "Login",
+      "dashboard": "Go to Dashboard"
     },
     "errors": {
       "2x": "Email verification was successful",
