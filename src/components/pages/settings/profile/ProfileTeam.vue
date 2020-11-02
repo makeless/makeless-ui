@@ -8,33 +8,33 @@
                     </b-col>
 
                     <b-col lg="9">
-                        <h1>{{ $saas.t('pages.profile-team.title') }}</h1>
+                        <h1>{{ $makeless.t('pages.profile-team.title') }}</h1>
                         <hr>
                         <b-form @submit="onSubmit">
                             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
-                                    {{ $saas.t('pages.profile-team.form.errors.4x') }}
+                                    {{ $makeless.t('pages.profile-team.form.errors.4x') }}
                                 </template>
 
                                 <template v-if="form.getResponse().getCode() >= 500">
-                                    {{ $saas.t('pages.profile-team.form.errors.5x') }}
+                                    {{ $makeless.t('pages.profile-team.form.errors.5x') }}
                                 </template>
                             </b-alert>
 
                             <b-alert v-if="form.getResponse() && form.getResponse().getCode() === 200" variant="success" dismissible :show="true">
-                                {{ $saas.t('pages.profile-team.form.errors.2x') }}
+                                {{ $makeless.t('pages.profile-team.form.errors.2x') }}
                             </b-alert>
 
-                            <b-form-group :label="$saas.t('pages.profile-team.form.fields.name.label')" label-for="name">
-                                <b-form-input id="name" v-model="profile.name" type="text" required :placeholder="$saas.t('pages.profile-team.form.fields.name.placeholder')"></b-form-input>
+                            <b-form-group :label="$makeless.t('pages.profile-team.form.fields.name.label')" label-for="name">
+                                <b-form-input id="name" v-model="profile.name" type="text" required :placeholder="$makeless.t('pages.profile-team.form.fields.name.placeholder')"></b-form-input>
                                 <b-form-invalid-feedback :state="validateName()">
-                                    {{ $saas.t('pages.profile-team.form.validations.name') }}
+                                    {{ $makeless.t('pages.profile-team.form.validations.name') }}
                                 </b-form-invalid-feedback>
                             </b-form-group>
 
                             <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                                 <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
-                                {{ $saas.t('pages.profile-team.form.button') }}
+                                {{ $makeless.t('pages.profile-team.form.button') }}
                             </b-button>
                         </b-form>
                     </b-col>
@@ -54,7 +54,7 @@ import DomUtil from '../../../../utils/dom';
 
 @Component
 export default class ProfileTeam extends Vue {
-  private profile: ProfileTeamStruct = UtilObject.clone(this.$saas.getSecurity().getTeam());
+  private profile: ProfileTeamStruct = UtilObject.clone(this.$makeless.getSecurity().getTeam());
   private form: Form = new Form();
   private validator: Validator = new Validator([
     this.validateName,
@@ -76,18 +76,18 @@ export default class ProfileTeam extends Vue {
     this.form.setResponse(null);
     this.form.setDisabled(true);
 
-    this.$saas.getHttp().patch('/api/auth/team/profile', this.profile, {
+    this.$makeless.getHttp().patch('/api/auth/team/profile', this.profile, {
       headers: {
-        'Team': this.$saas.getSecurity().getTeam()!.id,
+        'Team': this.$makeless.getSecurity().getTeam()!.id,
       },
     }).then((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data));
+      this.form.setResponse(this.$makeless.getHttp().response(data));
       this.form.setDisabled(false);
-      Object.assign(this.$saas.getSecurity().getTeam(), {
+      Object.assign(this.$makeless.getSecurity().getTeam(), {
         name: this.form.getResponse()!.getData().data.name,
       });
     }).catch((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data.response));
+      this.form.setResponse(this.$makeless.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
     });

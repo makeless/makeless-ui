@@ -9,22 +9,32 @@
 
                     <b-col lg="9">
                         <h1 class="d-flex justify-content-between align-items-center">
-                            {{ $saas.t('pages.token-team.title') }}
-                            <b-button size="sm" variant="primary" v-b-modal.token-team-create>{{ $saas.t('pages.token-team.actions.create') }}</b-button>
+                            {{ $makeless.t('pages.token-team.title') }}
+                            <b-button size="sm" variant="primary" v-b-modal.token-team-create>{{ $makeless.t('pages.token-team.actions.create') }}</b-button>
                         </h1>
                         <hr>
-                        <b-list-group v-if="response && tokens">
-                            <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="token in tokens" :key="token.id" :variant="token.new ? 'success': null">
-                                <div>
-                                    <template v-if="token.new">{{ token.token }}</template>
-                                    <template v-else>{{ token.note }}</template>
-                                    <br><small class="mr-2">{{ token.user.name }}</small>
-                                </div>
-                                <b-button size="sm" variant="danger" v-b-modal.token-team-delete @click="selectToken(token)">{{ $saas.t('pages.token-team.actions.delete') }}</b-button>
-                            </b-list-group-item>
-                        </b-list-group>
+                        <div v-if="response && tokens">
+                            <b-list-group v-if="tokens.length">
+                                <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="token in tokens" :key="token.id" :variant="token.new ? 'success': null">
+                                    <div>
+                                        <template v-if="token.new">{{ token.token }}</template>
+                                        <template v-else>{{ token.note }}</template>
+                                        <br><small class="mr-2">{{ token.user.name }}</small>
+                                    </div>
+                                    <b-button size="sm" variant="danger" v-b-modal.token-team-delete @click="selectToken(token)">{{ $makeless.t('pages.token-team.actions.delete') }}</b-button>
+                                </b-list-group-item>
+                            </b-list-group>
+                            <div v-else class="text-center">
+                                <b-col class="mt-2 mt-sm-5">
+                                    <b-icon :icon="icon" variant="primary" :font-scale="3"/>
+                                </b-col>
+                                <b-col class="mt-3 mt-sm-3">
+                                    <h2>{{ $makeless.t('pages.token-team.noTokens') }}</h2>
+                                </b-col>
+                            </div>
+                        </div>
                         <div v-else class="text-center">
-                            <b-spinner :label="$saas.t('pages.token-team.loading')"></b-spinner>
+                            <b-spinner :label="$makeless.t('pages.token-team.loading')"></b-spinner>
                         </div>
                     </b-col>
                 </b-row>
@@ -52,6 +62,7 @@ import DeleteModal from '../../../modals/settings/token/team/Delete.vue';
   },
 })
 export default class TokenTeam extends Vue {
+  public icon: string = 'box';
   private selectedToken: TokenModel | null = null;
   private response: ResponseInterface | null = null;
   private tokens: TokenModel[] = [];
@@ -65,12 +76,12 @@ export default class TokenTeam extends Vue {
   }
 
   loadTokens(): void {
-    this.$saas.getHttp().get('/api/auth/team/token', {
+    this.$makeless.getHttp().get('/api/auth/team/token', {
       headers: {
-        'Team': this.$saas.getSecurity().getTeam()!.id,
+        'Team': this.$makeless.getSecurity().getTeam()!.id,
       },
     }).then((data) => {
-      this.response = this.$saas.getHttp().response(data);
+      this.response = this.$makeless.getHttp().response(data);
       this.response.getData().data.forEach((token: TokenModel) => {
         this.tokens!.push(token);
       });

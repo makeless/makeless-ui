@@ -167,7 +167,7 @@ export default class Security {
   }
 
   private handleEvents(): void {
-    if (!this.isAuth()) {
+    if (!this.isAuth() || !this.getUser()!.isVerified()) {
       return;
     }
 

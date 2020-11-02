@@ -5,7 +5,7 @@
                 <b-row>
                     <b-col>
                         <div class="text-center">
-                            <h1>{{ $saas.getConfig().getConfiguration().getName() }}</h1>
+                            <h1>{{ $makeless.getConfig().getConfiguration().getName() }}</h1>
                             <h2>SaaS Framework</h2>
                             <a href="https://github.com/go-saas/go-saas" target="_blank">
                                 <b-icon-link45deg></b-icon-link45deg>

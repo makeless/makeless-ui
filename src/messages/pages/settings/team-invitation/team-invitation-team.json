@@ -10,6 +10,7 @@
     "loading": "Loading ...",
     "errors": {
       "resend": {
+        "2x": "Resend was successful",
         "4x": "Resend failed",
         "5x": "Server error - Please try again later"
       },

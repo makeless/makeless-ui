@@ -1,31 +1,31 @@
 <template>
-    <b-modal :id="modalId" :ref="modalId" no-fade :title="$saas.t('pages.team-user-team.forms.create.title')">
+    <b-modal :id="modalId" :ref="modalId" no-fade :title="$makeless.t('pages.team-user-team.forms.create.title')">
         <b-form id="form-team-invitation-team-create" v-if="teamInvitationTeamCreate" @submit="onSubmit">
             <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                 <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
-                    {{ $saas.t('pages.team-user-team.forms.create.errors.4x') }}
+                    {{ $makeless.t('pages.team-user-team.forms.create.errors.4x') }}
                 </template>
 
                 <template v-if="form.getResponse().getCode() >= 500">
-                    {{ $saas.t('pages.team-user-team.forms.create.errors.5x') }}
+                    {{ $makeless.t('pages.team-user-team.forms.create.errors.5x') }}
                 </template>
             </b-alert>
 
-            <b-form-group :label="$saas.t('pages.team-user-team.forms.create.fields.email.label')" label-for="team-invitation">
+            <b-form-group :label="$makeless.t('pages.team-user-team.forms.create.fields.email.label')" label-for="team-invitation">
                 <team-invitation :obj="teamInvitationTeamCreate"></team-invitation>
                 <b-form-invalid-feedback :state="validateEmails()">
-                    {{ $saas.t('pages.team-user-team.forms.create.validations.invitations.email') }}
+                    {{ $makeless.t('pages.team-user-team.forms.create.validations.invitations.email') }}
                 </b-form-invalid-feedback>
             </b-form-group>
         </b-form>
 
         <template v-slot:modal-footer="{ cancel }">
             <b-button @click="cancel()">
-                {{ $saas.t('pages.team-user-team.forms.create.buttons.cancel') }}
+                {{ $makeless.t('pages.team-user-team.forms.create.buttons.cancel') }}
             </b-button>
             <b-button form="form-team-invitation-team-create" type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                 <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
-                {{ $saas.t('pages.team-user-team.forms.create.buttons.create') }}
+                {{ $makeless.t('pages.team-user-team.forms.create.buttons.create') }}
             </b-button>
         </template>
     </b-modal>
@@ -100,16 +100,16 @@ export default class Create extends Vue {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.$saas.getHttp().post('/api/auth/team/team-invitation', this.teamInvitationTeamCreate, {
+    this.$makeless.getHttp().post('/api/auth/team/team-invitation', this.teamInvitationTeamCreate, {
       headers: {
-        'Team': this.$saas.getSecurity().getTeam()!.id,
+        'Team': this.$makeless.getSecurity().getTeam()!.id,
       },
     }).then((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data));
+      this.form.setResponse(this.$makeless.getHttp().response(data));
       this.form.setDisabled(false);
       (this.$refs[this.modalId] as BModal).hide();
     }).catch((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data.response));
+      this.form.setResponse(this.$makeless.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
     });

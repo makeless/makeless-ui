@@ -4,43 +4,43 @@
             <b-container>
                 <b-row class="justify-content-md-center">
                     <b-col lg="6">
-                        <b-card :title="$saas.t('pages.login.title')">
+                        <b-card :title="$makeless.t('pages.login.title')">
                             <b-form @submit="onSubmit">
                                 <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                                     <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
-                                        {{ $saas.t('pages.login.form.errors.4x') }}
+                                        {{ $makeless.t('pages.login.form.errors.4x') }}
                                     </template>
 
                                     <template v-if="form.getResponse().getCode() >= 500">
-                                        {{ $saas.t('pages.login.form.errors.5x') }}
+                                        {{ $makeless.t('pages.login.form.errors.5x') }}
                                     </template>
                                 </b-alert>
 
-                                <b-form-group :label="$saas.t('pages.login.form.fields.email.label')" label-for="email">
-                                    <b-form-input id="email" v-model="login.email" type="email" required :placeholder="$saas.t('pages.login.form.fields.email.placeholder')"></b-form-input>
+                                <b-form-group :label="$makeless.t('pages.login.form.fields.email.label')" label-for="email">
+                                    <b-form-input id="email" v-model="login.email" type="email" required :placeholder="$makeless.t('pages.login.form.fields.email.placeholder')"></b-form-input>
                                     <b-form-invalid-feedback :state="validateEmail()">
-                                        {{ $saas.t('pages.login.form.validations.email') }}
+                                        {{ $makeless.t('pages.login.form.validations.email') }}
                                     </b-form-invalid-feedback>
                                 </b-form-group>
 
                                 <b-form-group>
                                     <b-row>
                                         <b-col cols="6">
-                                            <label for="password">{{ $saas.t('pages.login.form.fields.password.label') }}</label>
+                                            <label for="password">{{ $makeless.t('pages.login.form.fields.password.label') }}</label>
                                         </b-col>
                                         <b-col cols="6" class="text-right">
-                                            <b-link :to="{name: 'password-request'}">{{ $saas.t('pages.login.passwordRequest') }}</b-link>
+                                            <b-link :to="{name: 'password-request'}">{{ $makeless.t('pages.login.passwordRequest') }}</b-link>
                                         </b-col>
                                     </b-row>
-                                    <b-form-input id="password" v-model="login.password" type="password" required :placeholder="$saas.t('pages.login.form.fields.password.placeholder')" autocomplete="false"></b-form-input>
+                                    <b-form-input id="password" v-model="login.password" type="password" required :placeholder="$makeless.t('pages.login.form.fields.password.placeholder')" autocomplete="false"></b-form-input>
                                     <b-form-invalid-feedback :state="validatePassword()">
-                                        {{ $saas.t('pages.login.form.validations.password') }}
+                                        {{ $makeless.t('pages.login.form.validations.password') }}
                                     </b-form-invalid-feedback>
                                 </b-form-group>
 
                                 <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                                     <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
-                                    {{ $saas.t('pages.login.form.button') }}
+                                    {{ $makeless.t('pages.login.form.button') }}
                                 </b-button>
                             </b-form>
                         </b-card>
@@ -91,19 +91,19 @@ export default class Login extends Vue {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.$saas.getHttp().post('/api/login', this.login).then((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data));
+    this.$makeless.getHttp().post('/api/login', this.login).then((data) => {
+      this.form.setResponse(this.$makeless.getHttp().response(data));
       this.form.setDisabled(false);
       this.login = new LoginModel();
 
-      this.$saas.getSecurity().login(this.form.getResponse()!);
+      this.$makeless.getSecurity().login(this.form.getResponse()!);
     }).catch((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data.response));
+      this.form.setResponse(this.$makeless.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
       this.login = new LoginModel();
 
-      this.$saas.getSecurity().logout(false);
+      this.$makeless.getSecurity().logout(false);
     });
   }
 }

@@ -11,21 +11,21 @@
                                         <b-icon :icon="iconVerifySuccess" variant="primary" :font-scale="3"/>
                                     </div>
 
-                                    <h2 class="mt-3">{{ $saas.t('pages.email-verification.errors.2x') }}</h2>
+                                    <h2 class="mt-3">{{ $makeless.t('pages.email-verification.errors.2x') }}</h2>
 
                                     <div class="mt-2">
-                                        {{ $saas.t('pages.email-verification.access', {name: $saas.getConfig().getConfiguration().getName()}) }}
+                                        {{ $makeless.t('pages.email-verification.access', {name: $makeless.getConfig().getConfiguration().getName()}) }}
                                     </div>
 
                                     <div class="mt-4">
-                                        <template v-if="$saas.getSecurity().isAuth()">
+                                        <template v-if="$makeless.getSecurity().isAuth()">
                                             <b-button class="btn-block" variant="primary" :to="{name: 'dashboard'}">
-                                                {{ $saas.t('pages.email-verification.button.dashboard') }}
+                                                {{ $makeless.t('pages.email-verification.button.dashboard') }}
                                             </b-button>
                                         </template>
                                         <template v-else>
                                             <b-button class="btn-block" variant="primary" :to="{name: 'login'}">
-                                                {{ $saas.t('pages.email-verification.button.login') }}
+                                                {{ $makeless.t('pages.email-verification.button.login') }}
                                             </b-button>
                                         </template>
                                     </div>
@@ -37,16 +37,16 @@
                                     </div>
 
                                     <template v-if="response.getCode() >= 400 && response.getCode() < 500">
-                                        <h2 class="mt-3">{{ $saas.t('pages.email-verification.errors.4x') }}</h2>
+                                        <h2 class="mt-3">{{ $makeless.t('pages.email-verification.errors.4x') }}</h2>
                                     </template>
 
                                     <template v-if="response.getCode() >= 500">
-                                        <h2 class="mt-3">{{ $saas.t('pages.email-verification.errors.5x') }}</h2>
+                                        <h2 class="mt-3">{{ $makeless.t('pages.email-verification.errors.5x') }}</h2>
                                     </template>
                                 </template>
                             </div>
                             <div v-else>
-                                <b-spinner :label="$saas.t('pages.email-verification.loading')"></b-spinner>
+                                <b-spinner :label="$makeless.t('pages.email-verification.loading')"></b-spinner>
                             </div>
                         </b-card>
                     </b-col>
@@ -73,11 +73,11 @@ export default class EmailVerification extends Vue {
   verifyEmailVerification(): void {
     this.response = null;
 
-    this.$saas.getHttp().patch(`/api/email-verification/verify?token=${this.$route.query.token}`, null).then((data) => {
-      this.response = this.$saas.getHttp().response(data);
-      this.$saas.getSecurity().verifyUser();
+    this.$makeless.getHttp().patch(`/api/email-verification/verify?token=${this.$route.query.token}`, null).then((data) => {
+      this.response = this.$makeless.getHttp().response(data);
+      this.$makeless.getSecurity().verifyUser();
     }).catch((data) => {
-      this.response = this.$saas.getHttp().response(data.response);
+      this.response = this.$makeless.getHttp().response(data.response);
     });
   }
 }

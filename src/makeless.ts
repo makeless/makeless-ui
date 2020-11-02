@@ -4,7 +4,7 @@ import VueI18n from 'vue-i18n';
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue';
 
 // main
-import SaasComponent from './Saas.vue';
+import MakelessComponent from './Makeless.vue';
 
 // interfaces
 import ConfigInterface from './packages/config/config';
@@ -48,7 +48,7 @@ Vue.use(IconsPlugin);
 Vue.use(VueRouter);
 Vue.use(VueI18n);
 
-export default class Saas {
+export default class Makeless {
   private readonly config: ConfigInterface;
   private readonly router: RouterInterface;
   private readonly http: HttpInterface;
@@ -162,7 +162,7 @@ export default class Saas {
     return this.getI18n().getI18n().t(key, values);
   }
 
-  public async init(): Promise<Saas> {
+  public async init(): Promise<Makeless> {
     // components
     for (const key in this.components) {
       Vue.component(key, this.components[key]);
@@ -178,14 +178,14 @@ export default class Saas {
     await this.getSecurity().setup();
 
     // prototypes
-    Vue.prototype.$saas = Vue.observable(this);
+    Vue.prototype.$makeless = Vue.observable(this);
 
-    return new Promise<Saas>(resolve => resolve(this));
+    return new Promise<Makeless>(resolve => resolve(this));
   }
 
   public run(): Vue {
     return new Vue({
-      render: (h) => h(SaasComponent),
+      render: (h) => h(MakelessComponent),
       router: this.getRouter().getVueRouter(),
     }).$mount('#app');
   }

@@ -4,36 +4,36 @@
             <b-container>
                 <b-row class="justify-content-md-center">
                     <b-col lg="6">
-                        <b-card :title="$saas.t('pages.password-request.title')">
+                        <b-card :title="$makeless.t('pages.password-request.title')">
                             <b-form @submit="onSubmit">
                                 <b-alert v-if="form.hasError() && form.getResponse()" variant="danger" dismissible :show="true">
                                     <template v-if="form.getResponse().getCode() >= 400 && form.getResponse().getCode() < 500">
-                                        {{ $saas.t('pages.password-request.form.errors.4x') }}
+                                        {{ $makeless.t('pages.password-request.form.errors.4x') }}
                                     </template>
 
                                     <template v-if="form.getResponse().getCode() >= 500">
-                                        {{ $saas.t('pages.password-request.form.errors.5x') }}
+                                        {{ $makeless.t('pages.password-request.form.errors.5x') }}
                                     </template>
                                 </b-alert>
 
                                 <b-alert v-if="form.getResponse() && form.getResponse().getCode() === 200" variant="success" dismissible :show="true">
-                                    {{ $saas.t('pages.password-request.form.errors.2x') }}
+                                    {{ $makeless.t('pages.password-request.form.errors.2x') }}
                                 </b-alert>
 
-                                <b-form-group :label="$saas.t('pages.password-request.form.fields.email.label')" label-for="email">
-                                    <b-form-input id="email" v-model="passwordRequest.email" type="email" required :placeholder="$saas.t('pages.password-request.form.fields.email.placeholder')"></b-form-input>
+                                <b-form-group :label="$makeless.t('pages.password-request.form.fields.email.label')" label-for="email">
+                                    <b-form-input id="email" v-model="passwordRequest.email" type="email" required :placeholder="$makeless.t('pages.password-request.form.fields.email.placeholder')"></b-form-input>
                                     <b-form-invalid-feedback :state="validateEmail()">
-                                        {{ $saas.t('pages.password-request.form.validations.email') }}
+                                        {{ $makeless.t('pages.password-request.form.validations.email') }}
                                     </b-form-invalid-feedback>
                                 </b-form-group>
 
                                 <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                                     <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
-                                    {{ $saas.t('pages.password-request.form.button') }}
+                                    {{ $makeless.t('pages.password-request.form.button') }}
                                 </b-button>
 
                                 <b-button variant="link" :to="{name: 'login'}" class="ml-1">
-                                    {{ $saas.t('pages.password-request.login') }}
+                                    {{ $makeless.t('pages.password-request.login') }}
                                 </b-button>
                             </b-form>
                         </b-card>
@@ -75,12 +75,12 @@ export default class PasswordRequest extends Vue {
     this.form.setDisabled(true);
     this.form.setResponse(null);
 
-    this.$saas.getHttp().post('/api/password-request', this.passwordRequest).then((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data));
+    this.$makeless.getHttp().post('/api/password-request', this.passwordRequest).then((data) => {
+      this.form.setResponse(this.$makeless.getHttp().response(data));
       this.form.setDisabled(false);
       this.passwordRequest = new PasswordRequestModel();
     }).catch((data) => {
-      this.form.setResponse(this.$saas.getHttp().response(data.response));
+      this.form.setResponse(this.$makeless.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
       this.passwordRequest = new PasswordRequestModel();

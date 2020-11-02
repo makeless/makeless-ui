@@ -4,11 +4,11 @@
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
         <b-collapse id="nav-collapse" is-nav>
-            <navigation-leg :leg="$saas.getConfig().getConfiguration().getNavigation().getLeft()"></navigation-leg>
+            <navigation-leg :leg="$makeless.getConfig().getConfiguration().getNavigation().getLeft()"></navigation-leg>
 
             <b-navbar-nav class="ml-auto">
-                <navigation-leg :leg="$saas.getConfig().getConfiguration().getNavigation().getRight()"></navigation-leg>
-                <user-dropdown v-if="this.$saas.getSecurity().isAuth()"></user-dropdown>
+                <navigation-leg :leg="$makeless.getConfig().getConfiguration().getNavigation().getRight()"></navigation-leg>
+                <user-dropdown v-if="this.$makeless.getSecurity().isAuth()"></user-dropdown>
             </b-navbar-nav>
         </b-collapse>
     </b-navbar>

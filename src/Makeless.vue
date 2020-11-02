@@ -8,6 +8,6 @@
 import {Component, Vue} from 'vue-property-decorator';
 
 @Component({})
-export default class Saas extends Vue {
+export default class Makeless extends Vue {
 }
 </script>

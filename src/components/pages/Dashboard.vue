@@ -6,7 +6,7 @@
                     <b-col>
                         <div>
                             <h1>Dashboard</h1>
-                            <h2 v-if="$saas.getSecurity().isAuth()">{{ $saas.getSecurity().getDisplayName() }}</h2>
+                            <h2 v-if="$makeless.getSecurity().isAuth()">{{ $makeless.getSecurity().getDisplayName() }}</h2>
                         </div>
                     </b-col>
                 </b-row>
