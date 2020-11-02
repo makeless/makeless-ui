@@ -16,7 +16,7 @@ export default interface Security {
   storage: StorageInterface;
 
   /**
-   * Required method to init go-saas
+   * Required method to init makeless
    * Loads user, sets up auth middleware, starts silent auth refresh and sets up logout handler
    * Awaits user and auth middleware for security reasons (!)
    */

@@ -175,7 +175,7 @@ export default class Security {
       this.event.connect();
     }
 
-    this.event.subscribe('go-saas', (data: DataInterface) => {
+    this.event.subscribe('makeless', (data: DataInterface) => {
       console.log(data);
     });
   }
