@@ -251,7 +251,7 @@ export default class Security {
     }
 
     this.user.teamUsers.push(team.teamUsers[0]);
-    this.teamIndex[team.id] = team;
+    this.teamIndex[team.id] = team.teamUsers[0].team;
   }
 
   public deleteTeam(team: Team): void {
