@@ -15,15 +15,15 @@
                         <hr>
 
                         <div v-if="!$makeless.getSecurity().getUser().teamUsers.length" class="text-center">
-                            <b-col class="mt-2 mt-sm-5">
+                            <div class="mt-2 mt-sm-5">
                                 <b-icon :icon="icon" variant="primary" :font-scale="3"/>
-                            </b-col>
-                            <b-col class="mt-3 mt-sm-3">
+                            </div>
+                            <div class="mt-3 mt-sm-3">
                                 <h2>{{ $makeless.t('pages.team.noTeam') }}</h2>
-                            </b-col>
-                            <b-col class="mt-4 mt-sm-4">
+                            </div>
+                            <div class="mt-4 mt-sm-4">
                                 <b-button size="sm" variant="primary" v-b-modal.team-create>{{ $makeless.t('pages.team.actions.createNewTeam') }}</b-button>
-                            </b-col>
+                            </div>
                         </div>
 
                         <div v-if="$makeless.getSecurity().getUser().teamUsers.length">
