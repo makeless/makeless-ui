@@ -25,12 +25,12 @@
                                 </b-list-group-item>
                             </b-list-group>
                             <div v-else class="text-center">
-                                <b-col class="mt-2 mt-sm-5">
+                                <div class="mt-2 mt-sm-5">
                                     <b-icon :icon="icon" variant="primary" :font-scale="3"/>
-                                </b-col>
-                                <b-col class="mt-3 mt-sm-3">
+                                </div>
+                                <div class="mt-3 mt-sm-3">
                                     <h2>{{ $makeless.t('pages.token-team.noTokens') }}</h2>
-                                </b-col>
+                                </div>
                             </div>
                         </div>
                         <div v-else class="text-center">
