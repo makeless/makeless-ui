@@ -5,7 +5,7 @@
                 <b-row>
                     <b-col>
                         <div>
-                            <h1>Dashboard</h1>
+                            <h1>{{ $makeless.t('pages.dashboard.title') }}</h1>
                             <h2 v-if="$makeless.getSecurity().isAuth()">{{ $makeless.getSecurity().getDisplayName() }}</h2>
                         </div>
                     </b-col>
