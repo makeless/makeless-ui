@@ -3,7 +3,13 @@
     "title": "Users",
     "actions": {
       "create": "Invite",
-      "delete": "Remove"
+      "delete": "Remove",
+      "changeRole": {
+        "header": "Roles",
+        "buttons": {
+          "role": "Role: {role}"
+        }
+      }
     },
     "loading": "Loading ...",
     "owner": "Owner",
