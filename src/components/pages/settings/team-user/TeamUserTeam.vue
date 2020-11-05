@@ -25,7 +25,7 @@
                                                 {{ $makeless.t('pages.team-user-team.actions.changeRole.header') }}
                                             </b-dropdown-header>
                                             <b-dropdown-divider></b-dropdown-divider>
-                                            <b-dropdown-item-button :disabled="teamUser.role === role.toLowerCase()" @click.native.capture.stop="updateRoleTeamUserTeam(teamUser, role, index)" v-for="(role, index) in roles">
+                                            <b-dropdown-item :disabled="teamUser.role === role.toLowerCase()" @click="updateRoleTeamUserTeam(teamUser, role, index)" v-for="(role, index) in roles">
                                                 <div class="d-flex flex-row flex-wrap">
                                                     <div class="dropdown-item-icon">
                                                         <b-icon-check v-if="teamUser.role === role.toLowerCase()"></b-icon-check>
@@ -33,7 +33,7 @@
                                                     </div>
                                                     <div class="ml-1">{{ role }}</div>
                                                 </div>
-                                            </b-dropdown-item-button>
+                                            </b-dropdown-item>
                                         </b-dropdown>
                                     </div>
                                     <div class="ml-2 pt-1 pb-1">
