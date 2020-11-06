@@ -46,8 +46,8 @@
           "name": "Input must match user name"
         },
         "errors": {
-            "4x": "Remove user failed",
-            "5x": "Server error - Please try again later"
+          "4x": "Remove user failed",
+          "5x": "Server error - Please try again later"
         }
       }
     },
