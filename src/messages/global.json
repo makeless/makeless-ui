@@ -29,6 +29,12 @@
           "invitation": {
             "placeholder": "Email",
             "noOption": "Enter email"
+          },
+          "role": {
+            "header": "Roles",
+            "buttons": {
+              "role": "Role: {role}"
+            }
           }
         }
       }

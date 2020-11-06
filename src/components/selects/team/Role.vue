@@ -1,10 +1,10 @@
 <template>
-    <b-dropdown v-if="obj.userId !== $makeless.getSecurity().getUser().id" right variant="default" class="dropdown" size="sm" :text="$makeless.t('pages.team-user-team.actions.update.buttons.role', {role: obj.role})">
+    <b-dropdown v-if="obj.userId !== $makeless.getSecurity().getUser().id" right variant="default" class="dropdown" size="sm" :text="$makeless.t('components.selects.team.role.buttons.role', {role: obj.role})">
         <b-dropdown-header class="mt-n2 mb-n2">
-            {{ $makeless.t('pages.team-user-team.actions.update.header') }}
+            {{ $makeless.t('components.selects.team.role.header') }}
         </b-dropdown-header>
         <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item :disabled="obj.role === role" @click.native.capture.stop="updateRoleTeamUserTeam(obj, role, index)" v-for="(role, index) in $makeless.getConfig().getConfiguration().getTeams().getRoles()">
+        <b-dropdown-item :disabled="obj.role === role" @click.native.capture.stop="updateRoleTeamUserTeam(obj, role.toString(), index)" v-for="(role, index) in roles">
             <div class="d-flex flex-row flex-wrap">
                 <div class="dropdown-item-icon">
                     <b-icon-check v-if="obj.role === role"></b-icon-check>
@@ -24,6 +24,8 @@ import TeamUserTeamUpdateRole from '../../../structs/team-user-team-update-role'
 @Component
 export default class Role extends Vue {
   @Prop(Object) obj!: any;
+
+  private roles: string[] = ['owner', 'user']
 
   updateRoleTeamUserTeam(teamUser: TeamUser, role: string, index: number): void {
     if (teamUser.role === role) {
