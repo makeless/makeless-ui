@@ -44,13 +44,13 @@
                                             </div>
                                             <div class="ml-2 pt-1 pb-1">
                                                 <b-button size="sm" variant="primary" @click="acceptTeamInvitation(teamInvitation)">
-                                                    <b-spinner small v-if="teamInvitation.state.isLoadingAccept" class="mr-1"></b-spinner>
+                                                    <b-spinner small v-if="teamInvitation.state.loadingAccept" class="mr-1"></b-spinner>
                                                     <span>{{ $makeless.t('pages.team-invitation.actions.accept') }}</span>
                                                 </b-button>
                                             </div>
                                             <div class="ml-2 pt-1 pb-1">
                                                 <b-button size="sm" @click="deleteTeamInvitation(teamInvitation)">
-                                                    <b-spinner small v-if="teamInvitation.state.isLoadingDelete" class="mr-1"></b-spinner>
+                                                    <b-spinner small v-if="teamInvitation.state.loadingDelete" class="mr-1"></b-spinner>
                                                     <span>{{ $makeless.t('pages.team-invitation.actions.delete') }}</span>
                                                 </b-button>
                                             </div>
@@ -108,8 +108,8 @@ export default class TeamInvitation extends Vue {
           state: {
             responseAccept: null,
             responseDelete: null,
-            isLoadingDelete: false,
-            isLoadingAccept: false
+            loadingDelete: false,
+            loadingAccept: false
           }
         }));
       });
@@ -119,8 +119,8 @@ export default class TeamInvitation extends Vue {
   acceptTeamInvitation(teamInvitation: TeamInvitationModel): void {
     teamInvitation.state.responseAccept = null;
     teamInvitation.state.responseDelete = null;
-    teamInvitation.state.isLoadingDelete = false;
-    teamInvitation.state.isLoadingAccept = true;
+    teamInvitation.state.loadingDelete = false;
+    teamInvitation.state.loadingAccept = true;
 
     const teamInvitationAccept: TeamInvitationAccept = Object.assign(new TeamInvitationAccept(), {
       id: teamInvitation.id,
@@ -129,20 +129,20 @@ export default class TeamInvitation extends Vue {
     this.$makeless.getHttp().patch('/api/auth/team-invitation/accept', teamInvitationAccept).then((data) => {
       teamInvitation.state.responseAccept = this.$makeless.getHttp().response(data);
       const team: Team = teamInvitation.state.responseAccept.getData().data;
-      teamInvitation.state.isLoadingAccept = false;
+      teamInvitation.state.loadingAccept = false;
       this.$makeless.getSecurity().addTeam(team);
       this.$makeless.getSecurity().switchToTeam(team.id!);
     }).catch((data) => {
       teamInvitation.state.responseAccept = this.$makeless.getHttp().response(data.response);
-      teamInvitation.state.isLoadingAccept = false;
+      teamInvitation.state.loadingAccept = false;
     });
   }
 
   deleteTeamInvitation(teamInvitation: TeamInvitationModel): void {
     teamInvitation.state.responseDelete = null;
     teamInvitation.state.responseAccept = null;
-    teamInvitation.state.isLoadingAccept = false;
-    teamInvitation.state.isLoadingDelete = true;
+    teamInvitation.state.loadingAccept = false;
+    teamInvitation.state.loadingDelete = true;
 
     const teamInvitationDelete: TeamInvitationDelete = Object.assign(new TeamInvitationDelete(), {
       id: teamInvitation.id,
@@ -153,10 +153,10 @@ export default class TeamInvitation extends Vue {
     }).then((data) => {
       teamInvitation.state.responseDelete = this.$makeless.getHttp().response(data);
       this.removeTeamInvitation(teamInvitation);
-      teamInvitation.state.isLoadingDelete = false;
+      teamInvitation.state.loadingDelete = false;
     }).catch((data) => {
       teamInvitation.state.responseDelete = this.$makeless.getHttp().response(data.response);
-      teamInvitation.state.isLoadingDelete = false;
+      teamInvitation.state.loadingDelete = false;
     });
   }
 

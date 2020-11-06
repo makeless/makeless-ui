@@ -33,21 +33,7 @@
                                         </template>
                                     </div>
                                     <div class="ml-2 pt-1 pb-1">
-                                        <b-dropdown v-if="teamUser.userId !== $makeless.getSecurity().getUser().id" right variant="default" class="dropdown" size="sm" :text="$makeless.t('pages.team-user-team.actions.update.buttons.role', {role: teamUser.role})">
-                                            <b-dropdown-header class="mt-n2 mb-n2">
-                                                {{ $makeless.t('pages.team-user-team.actions.update.header') }}
-                                            </b-dropdown-header>
-                                            <b-dropdown-divider></b-dropdown-divider>
-                                            <b-dropdown-item :disabled="teamUser.role === role.toLowerCase()" @click.native.capture.stop="updateRoleTeamUserTeam(teamUser, role, index)" v-for="(role, index) in roles">
-                                                <div class="d-flex flex-row flex-wrap">
-                                                    <div class="dropdown-item-icon">
-                                                        <b-icon-check v-if="teamUser.role === role.toLowerCase()"></b-icon-check>
-                                                        <b-spinner v-if="teamUser.state.isLoadingUpdateRole === index" small></b-spinner>
-                                                    </div>
-                                                    <div class="ml-1">{{ role }}</div>
-                                                </div>
-                                            </b-dropdown-item>
-                                        </b-dropdown>
+                                        <role :obj="teamUser"></role>
                                     </div>
                                     <div class="ml-2 pt-1 pb-1">
                                         <b-button v-if="$makeless.getSecurity().getTeam().userId !== teamUser.userId" size="sm" variant="danger" v-b-modal.team-user-team-delete @click="selectTeamUser(teamUser)">{{ $makeless.t('pages.team-user-team.actions.delete') }}</b-button>
@@ -80,20 +66,19 @@ import ResponseInterface from '../../../../packages/http/response';
 import TeamUser from '../../../../models/team-user';
 import DeleteModal from '../../../modals/settings/team-user/team/Delete.vue';
 import CreateModal from '../../../modals/settings/team-invitation/team/Create.vue';
-import TeamUserTeamUpdateRole from '../../../../structs/team-user-team-update-role';
+import Role from '../../../selects/team/Role.vue';
 
 @Component({
   components: {
     DeleteModal,
     CreateModal,
+    Role,
   },
 })
 export default class TeamUserTeam extends Vue {
   private selectedTeamUser: TeamUser | null = null;
   private response: ResponseInterface | null = null;
   private teamUsers: TeamUser[] | null = null;
-
-  private roles: string[] = ['Owner', 'User', 'Schwanz'];
 
   public selectTeamUser(teamUser: TeamUser) {
     this.selectedTeamUser = teamUser;
@@ -115,37 +100,10 @@ export default class TeamUserTeam extends Vue {
         this.teamUsers!.push(Object.assign(new TeamUser(), teamUser, {
           state: {
             responseUpdateRole: null,
-            isLoadingUpdateRole: false
+            loadingUpdateRole: false
           }
         }));
       });
-    });
-  }
-
-  updateRoleTeamUserTeam(teamUser: TeamUser, role: string, index: number): void {
-    if (teamUser.role === role.toLowerCase()) {
-      return;
-    }
-
-    teamUser.state.responseUpdateRole = null;
-    teamUser.state.isLoadingUpdateRole = index;
-
-    const teamUserTeamUpdateRole: TeamUserTeamUpdateRole = Object.assign(new TeamUserTeamUpdateRole(), {
-      id: teamUser.id,
-      role: role.toLowerCase(),
-    });
-
-    this.$makeless.getHttp().patch('/api/auth/team/team-user/role', teamUserTeamUpdateRole, {
-      headers: {
-        'Team': this.$makeless.getSecurity().getTeam()!.id,
-      },
-    }).then((data) => {
-      teamUser.state.responseUpdateRole = this.$makeless.getHttp().response(data);
-      teamUser.state.isLoadingUpdateRole = null;
-      teamUser.role = role.toLowerCase();
-    }).catch((data) => {
-      teamUser.state.responseUpdateRole = this.$makeless.getHttp().response(data.response);
-      teamUser.state.isLoadingUpdateRole = null;
     });
   }
 }

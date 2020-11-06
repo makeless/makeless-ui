@@ -48,13 +48,13 @@
                                             </div>
                                             <div class="ml-2 pt-1 pb-1">
                                                 <b-button size="sm" @click="resendTeamInvitation(teamInvitation)" variant="primary">
-                                                    <b-spinner small v-if="teamInvitation.state.isLoadingResend" class="mr-1"></b-spinner>
+                                                    <b-spinner small v-if="teamInvitation.state.loadingResend" class="mr-1"></b-spinner>
                                                     <span>{{ $makeless.t('pages.team-invitation-team.actions.resend') }}</span>
                                                 </b-button>
                                             </div>
                                             <div class="ml-2 pt-1 pb-1">
                                                 <b-button size="sm" @click="deleteTeamInvitation(teamInvitation)">
-                                                    <b-spinner small v-if="teamInvitation.state.isLoadingDelete" class="mr-1"></b-spinner>
+                                                    <b-spinner small v-if="teamInvitation.state.loadingDelete" class="mr-1"></b-spinner>
                                                     <span>{{ $makeless.t('pages.team-invitation-team.actions.delete') }}</span>
                                                 </b-button>
                                             </div>
@@ -115,8 +115,8 @@ export default class TeamInvitationTeam extends Vue {
           state: {
             responseResend: null,
             responseDelete: null,
-            isLoadingDelete: false,
-            isLoadingResend: false
+            loadingDelete: false,
+            loadingResend: false
           }
         }));
       });
@@ -126,8 +126,8 @@ export default class TeamInvitationTeam extends Vue {
   resendTeamInvitation(teamInvitation: TeamInvitation): void {
     teamInvitation.state.responseResend = null;
     teamInvitation.state.responseDelete = null;
-    teamInvitation.state.isLoadingDelete = false;
-    teamInvitation.state.isLoadingResend = true;
+    teamInvitation.state.loadingDelete = false;
+    teamInvitation.state.loadingResend = true;
 
     const teamInvitationTeamResend: TeamInvitationTeamResend = Object.assign(new TeamInvitationTeamResend(), {
       id: teamInvitation.id,
@@ -139,18 +139,18 @@ export default class TeamInvitationTeam extends Vue {
       },
     }).then((data) => {
       teamInvitation.state.responseResend = this.$makeless.getHttp().response(data);
-      teamInvitation.state.isLoadingResend = false;
+      teamInvitation.state.loadingResend = false;
     }).catch((data) => {
       teamInvitation.state.responseResend = this.$makeless.getHttp().response(data.response);
-      teamInvitation.state.isLoadingResend = false;
+      teamInvitation.state.loadingResend = false;
     });
   }
 
   deleteTeamInvitation(teamInvitation: TeamInvitation): void {
     teamInvitation.state.responseDelete = null;
     teamInvitation.state.responseResend = null;
-    teamInvitation.state.isLoadingResend = false;
-    teamInvitation.state.isLoadingDelete = true;
+    teamInvitation.state.loadingResend = false;
+    teamInvitation.state.loadingDelete = true;
 
     const teamInvitationTeamDelete: TeamInvitationTeamDelete = Object.assign(new TeamInvitationTeamDelete(), {
       id: teamInvitation.id,
@@ -164,10 +164,10 @@ export default class TeamInvitationTeam extends Vue {
     }).then((data) => {
       teamInvitation.state.responseDelete = this.$makeless.getHttp().response(data);
       this.removeTeamInvitation(teamInvitation);
-      teamInvitation.state.isLoadingDelete = false;
+      teamInvitation.state.loadingDelete = false;
     }).catch((data) => {
       teamInvitation.state.responseDelete = this.$makeless.getHttp().response(data.response);
-      teamInvitation.state.isLoadingDelete = false;
+      teamInvitation.state.loadingDelete = false;
     });
   }
 
