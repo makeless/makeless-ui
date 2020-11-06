@@ -14,22 +14,22 @@
                         </h1>
                         <hr>
                         <b-list-group v-if="response && teamUsers">
-                            <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="(teamUser, index) in teamUsers" :key="teamUser.userId">
+                            <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="teamUser in teamUsers" :key="teamUser.userId">
                                 <div>
                                     {{ teamUser.user.name }}
                                 </div>
                                 <div class="d-flex flex-column flex-sm-row align-items-sm-center flex-wrap text-right">
-                                    <div class="pt-1 pb-1" v-if="responseUpdateRoleTeamUserTeam && isLoadingUpdateRole === index">
-                                        <template v-if="responseUpdateRoleTeamUserTeam.getCode() === 200">
+                                    <div class="pt-1 pb-1" v-if="teamUser.state.responseUpdateRole">
+                                        <template v-if="teamUser.state.responseUpdateRole.getCode() === 200">
                                             <span class="text-success">{{ $makeless.t('pages.team-user-team.errors.update.2x') }}</span>
                                         </template>
 
-                                        <template v-if="responseUpdateRoleTeamUserTeam.getCode() >= 400 && responseUpdateRoleTeamUserTeam.getCode() < 500">
-                                            <span class="text-danger">{{ $makeless.t('pages.team-invitation-team.errors.update.4x') }}</span>
+                                        <template v-if="teamUser.state.responseUpdateRole.getCode() >= 400 && teamUser.state.responseUpdateRole.getCode() < 500">
+                                            <span class="text-danger">{{ $makeless.t('pages.team-user-team.errors.update.4x') }}</span>
                                         </template>
 
-                                        <template v-if="responseUpdateRoleTeamUserTeam.getCode() >= 500">
-                                            <span class="text-danger">{{ $makeless.t('pages.team-invitation-team.errors.update.5x') }}</span>
+                                        <template v-if="teamUser.state.responseUpdateRole.getCode() >= 500">
+                                            <span class="text-danger">{{ $makeless.t('pages.team-user-team.errors.update.5x') }}</span>
                                         </template>
                                     </div>
                                     <div class="ml-2 pt-1 pb-1">
@@ -42,7 +42,7 @@
                                                 <div class="d-flex flex-row flex-wrap">
                                                     <div class="dropdown-item-icon">
                                                         <b-icon-check v-if="teamUser.role === role.toLowerCase()"></b-icon-check>
-                                                        <b-spinner v-if="isLoadingUpdateRole === index" small></b-spinner>
+                                                        <b-spinner v-if="teamUser.state.isLoadingUpdateRole === index" small></b-spinner>
                                                     </div>
                                                     <div class="ml-1">{{ role }}</div>
                                                 </div>
@@ -91,9 +91,7 @@ import TeamUserTeamUpdateRole from '../../../../structs/team-user-team-update-ro
 export default class TeamUserTeam extends Vue {
   private selectedTeamUser: TeamUser | null = null;
   private response: ResponseInterface | null = null;
-  private responseUpdateRoleTeamUserTeam: ResponseInterface | null = null;
   private teamUsers: TeamUser[] | null = null;
-  private isLoadingUpdateRole: number | null = null;
 
   private roles: string[] = ['Owner', 'User', 'Schwanz'];
 
@@ -114,7 +112,12 @@ export default class TeamUserTeam extends Vue {
       this.teamUsers = [];
       this.response = this.$makeless.getHttp().response(data);
       this.response.getData().data.forEach((teamUser: TeamUser) => {
-        this.teamUsers!.push(teamUser);
+        this.teamUsers!.push(Object.assign(new TeamUser(), teamUser, {
+          state: {
+            responseUpdateRole: null,
+            isLoadingUpdateRole: false
+          }
+        }));
       });
     });
   }
@@ -124,8 +127,8 @@ export default class TeamUserTeam extends Vue {
       return;
     }
 
-    this.responseUpdateRoleTeamUserTeam = null;
-    this.isLoadingUpdateRole = index;
+    teamUser.state.responseUpdateRole = null;
+    teamUser.state.isLoadingUpdateRole = index;
 
     const teamUserTeamUpdateRole: TeamUserTeamUpdateRole = Object.assign(new TeamUserTeamUpdateRole(), {
       id: teamUser.id,
@@ -137,12 +140,12 @@ export default class TeamUserTeam extends Vue {
         'Team': this.$makeless.getSecurity().getTeam()!.id,
       },
     }).then((data) => {
-      this.responseUpdateRoleTeamUserTeam = this.$makeless.getHttp().response(data);
-      this.isLoadingUpdateRole = null;
+      teamUser.state.responseUpdateRole = this.$makeless.getHttp().response(data);
+      teamUser.state.isLoadingUpdateRole = null;
       teamUser.role = role.toLowerCase();
     }).catch((data) => {
-      this.responseUpdateRoleTeamUserTeam = this.$makeless.getHttp().response(data.response);
-      this.isLoadingUpdateRole = null;
+      teamUser.state.responseUpdateRole = this.$makeless.getHttp().response(data.response);
+      teamUser.state.isLoadingUpdateRole = null;
     });
   }
 }
