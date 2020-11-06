@@ -150,7 +150,7 @@ export default class TeamInvitationTeam extends Vue {
       id: teamInvitation.id,
     });
 
-    this.$makeless.getHttp().delete('/api/auth/team/team-invitationss', {
+    this.$makeless.getHttp().delete('/api/auth/team/team-invitation', {
       data: teamInvitationTeamDelete,
       headers: {
         'Team': this.$makeless.getSecurity().getTeam()!.id,
