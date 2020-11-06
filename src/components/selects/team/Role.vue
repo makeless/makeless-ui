@@ -4,7 +4,7 @@
             {{ $makeless.t('components.selects.team.role.header') }}
         </b-dropdown-header>
         <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item :disabled="obj.role === role" @click.native.capture.stop="updateRoleTeamUserTeam(obj, role, index)" v-for="(t, role, index) in $makeless.getConfig().getConfiguration().getTeams().getRoles()">
+        <b-dropdown-item :disabled="obj.role === role" @click.native.capture.stop="updateRoleTeamUserTeam(obj, role, index)" v-for="(t, role, index) in $makeless.getConfig().getConfiguration().getTeams().getRoles()" :key="role">
             <div class="d-flex flex-row flex-wrap">
                 <div class="dropdown-item-icon">
                     <b-icon-check v-if="obj.role === role"></b-icon-check>
