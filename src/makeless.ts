@@ -16,6 +16,9 @@ import I18nInterface from './packages/i18n/i18n';
 import EventInterface from './packages/event/event';
 
 // pages
+import TermsPage from './pages/terms';
+import ImprintPage from './pages/imprint';
+import PrivacyPage from './pages/privacy';
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
 import InvitationPage from './pages/invitation';
@@ -73,6 +76,9 @@ export default class Makeless {
   }
 
   private pages: { [key: string]: PageInterface } = {
+    'terms': new TermsPage(),
+    'imprint': new ImprintPage(),
+    'privacy': new PrivacyPage(),
     'home': new HomePage(),
     'login': new LoginPage(),
     'invitation': new InvitationPage(),
