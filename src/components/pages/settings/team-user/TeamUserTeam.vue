@@ -20,17 +20,17 @@
                                 </div>
                                 <div class="d-flex flex-column flex-sm-row align-items-sm-center flex-wrap text-right">
                                     <div class="pt-1 pb-1" v-if="responseUpdateRoleTeamUserTeam && isLoadingUpdateRole === index">
-                                            <template v-if="responseUpdateRoleTeamUserTeam.getCode() === 200">
-                                                <span class="text-success">{{ $makeless.t('pages.team-user-team.errors.update.2x') }}</span>
-                                            </template>
+                                        <template v-if="responseUpdateRoleTeamUserTeam.getCode() === 200">
+                                            <span class="text-success">{{ $makeless.t('pages.team-user-team.errors.update.2x') }}</span>
+                                        </template>
 
-                                            <template v-if="responseUpdateRoleTeamUserTeam.getCode() >= 400 && responseUpdateRoleTeamUserTeam.getCode() < 500">
-                                                <span class="text-danger">{{ $makeless.t('pages.team-invitation-team.errors.update.4x') }}</span>
-                                            </template>
+                                        <template v-if="responseUpdateRoleTeamUserTeam.getCode() >= 400 && responseUpdateRoleTeamUserTeam.getCode() < 500">
+                                            <span class="text-danger">{{ $makeless.t('pages.team-invitation-team.errors.update.4x') }}</span>
+                                        </template>
 
-                                            <template v-if="responseUpdateRoleTeamUserTeam.getCode() >= 500">
-                                                <span class="text-danger">{{ $makeless.t('pages.team-invitation-team.errors.update.5x') }}</span>
-                                            </template>
+                                        <template v-if="responseUpdateRoleTeamUserTeam.getCode() >= 500">
+                                            <span class="text-danger">{{ $makeless.t('pages.team-invitation-team.errors.update.5x') }}</span>
+                                        </template>
                                     </div>
                                     <div class="ml-2 pt-1 pb-1">
                                         <b-dropdown v-if="teamUser.userId !== $makeless.getSecurity().getUser().id" right variant="default" class="dropdown" size="sm" :text="$makeless.t('pages.team-user-team.actions.update.buttons.role', {role: teamUser.role})">
@@ -38,7 +38,7 @@
                                                 {{ $makeless.t('pages.team-user-team.actions.update.header') }}
                                             </b-dropdown-header>
                                             <b-dropdown-divider></b-dropdown-divider>
-                                            <b-dropdown-item :disabled="teamUser.role === role.toLowerCase()" @click="updateRoleTeamUserTeam(teamUser, role, index)" v-for="(role, index) in roles">
+                                            <b-dropdown-item :disabled="teamUser.role === role.toLowerCase()" @click.native.capture.stop="updateRoleTeamUserTeam(teamUser, role, index)" v-for="(role, index) in roles">
                                                 <div class="d-flex flex-row flex-wrap">
                                                     <div class="dropdown-item-icon">
                                                         <b-icon-check v-if="teamUser.role === role.toLowerCase()"></b-icon-check>
@@ -120,6 +120,10 @@ export default class TeamUserTeam extends Vue {
   }
 
   updateRoleTeamUserTeam(teamUser: TeamUser, role: string, index: number): void {
+    if (teamUser.role === role.toLowerCase()) {
+      return;
+    }
+
     this.responseUpdateRoleTeamUserTeam = null;
     this.isLoadingUpdateRole = index;
 
