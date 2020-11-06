@@ -14,15 +14,28 @@
                         </h1>
                         <hr>
                         <b-list-group v-if="response && teamUsers">
-                            <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="teamUser in teamUsers" :key="teamUser.userId">
+                            <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="(teamUser, index) in teamUsers" :key="teamUser.userId">
                                 <div>
                                     {{ teamUser.user.name }}
                                 </div>
-                                <div class="d-flex flex-column flex-sm-row align-items-center flex-wrap text-right">
-                                    <div class="pt-1 pb-1">
-                                        <b-dropdown v-if="teamUser.userId !== $makeless.getSecurity().getUser().id" right variant="default" class="dropdown" size="sm" :text="$makeless.t('pages.team-user-team.actions.changeRole.buttons.role', {role: teamUser.role})">
+                                <div class="d-flex flex-column flex-sm-row align-items-sm-center flex-wrap text-right">
+                                    <div class="pt-1 pb-1" v-if="responseUpdateRoleTeamUserTeam && isLoadingUpdateRole === index">
+                                            <template v-if="responseUpdateRoleTeamUserTeam.getCode() === 200">
+                                                <span class="text-success">{{ $makeless.t('pages.team-user-team.errors.update.2x') }}</span>
+                                            </template>
+
+                                            <template v-if="responseUpdateRoleTeamUserTeam.getCode() >= 400 && responseUpdateRoleTeamUserTeam.getCode() < 500">
+                                                <span class="text-danger">{{ $makeless.t('pages.team-invitation-team.errors.update.4x') }}</span>
+                                            </template>
+
+                                            <template v-if="responseUpdateRoleTeamUserTeam.getCode() >= 500">
+                                                <span class="text-danger">{{ $makeless.t('pages.team-invitation-team.errors.update.5x') }}</span>
+                                            </template>
+                                    </div>
+                                    <div class="ml-2 pt-1 pb-1">
+                                        <b-dropdown v-if="teamUser.userId !== $makeless.getSecurity().getUser().id" right variant="default" class="dropdown" size="sm" :text="$makeless.t('pages.team-user-team.actions.update.buttons.role', {role: teamUser.role})">
                                             <b-dropdown-header class="mt-n2 mb-n2">
-                                                {{ $makeless.t('pages.team-user-team.actions.changeRole.header') }}
+                                                {{ $makeless.t('pages.team-user-team.actions.update.header') }}
                                             </b-dropdown-header>
                                             <b-dropdown-divider></b-dropdown-divider>
                                             <b-dropdown-item :disabled="teamUser.role === role.toLowerCase()" @click="updateRoleTeamUserTeam(teamUser, role, index)" v-for="(role, index) in roles">

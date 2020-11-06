@@ -4,7 +4,7 @@
     "actions": {
       "create": "Invite",
       "delete": "Remove",
-      "changeRole": {
+      "update": {
         "header": "Roles",
         "buttons": {
           "role": "Role: {role}"
@@ -52,9 +52,16 @@
           "name": "Input must match user name"
         },
         "errors": {
-          "4x": "Remove user failed",
-          "5x": "Server error - Please try again later"
+            "4x": "Remove user failed",
+            "5x": "Server error - Please try again later"
         }
+      }
+    },
+    "errors": {
+      "update": {
+        "2x": "Role change was successful",
+        "4x": "Role change failed",
+        "5x": "Server error - Please try again later"
       }
     }
   }
