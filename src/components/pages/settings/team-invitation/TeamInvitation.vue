@@ -21,36 +21,36 @@
                                     </div>
                                     <div>
                                         <div class="d-flex flex-column flex-sm-row align-items-sm-center flex-wrap text-right">
-                                            <div class="pt-1 pb-1" v-if="teamInvitation.responseAccept || teamInvitation.responseDelete">
-                                                <template v-if="teamInvitation.responseAccept">
-                                                    <template v-if="teamInvitation.responseAccept.getCode() >= 400 && teamInvitation.responseAccept.getCode() < 500">
+                                            <div class="pt-1 pb-1" v-if="teamInvitation.state.responseAccept || teamInvitation.state.responseDelete">
+                                                <template v-if="teamInvitation.state.responseAccept">
+                                                    <template v-if="teamInvitation.state.responseAccept.getCode() >= 400 && teamInvitation.state.responseAccept.getCode() < 500">
                                                         <span class="text-danger">{{ $makeless.t('pages.team-invitation.errors.accept.4x') }}</span>
                                                     </template>
 
-                                                    <template v-if="teamInvitation.responseAccept.getCode() >= 500">
+                                                    <template v-if="teamInvitation.state.responseAccept.getCode() >= 500">
                                                         <span class="text-danger">{{ $makeless.t('pages.team-invitation.errors.accept.5x') }}</span>
                                                     </template>
                                                 </template>
 
-                                                <template v-if="teamInvitation.responseDelete">
-                                                    <template v-if="teamInvitation.responseDelete.getCode() >= 400 && teamInvitation.responseDelete.getCode() < 500">
+                                                <template v-if="teamInvitation.state.responseDelete">
+                                                    <template v-if="teamInvitation.state.responseDelete.getCode() >= 400 && teamInvitation.state.responseDelete.getCode() < 500">
                                                         <span class="text-danger">{{ $makeless.t('pages.team-invitation.errors.delete.4x') }}</span>
                                                     </template>
 
-                                                    <template v-if="teamInvitation.responseDelete.getCode() >= 500">
+                                                    <template v-if="teamInvitation.state.responseDelete.getCode() >= 500">
                                                         <span class="text-danger">{{ $makeless.t('pages.team-invitation.errors.delete.5x') }}</span>
                                                     </template>
                                                 </template>
                                             </div>
                                             <div class="ml-2 pt-1 pb-1">
                                                 <b-button size="sm" variant="primary" @click="acceptTeamInvitation(teamInvitation)">
-                                                    <b-spinner small v-if="teamInvitation.isLoadingAccept" class="mr-1"></b-spinner>
+                                                    <b-spinner small v-if="teamInvitation.state.loadingAccept" class="mr-1"></b-spinner>
                                                     <span>{{ $makeless.t('pages.team-invitation.actions.accept') }}</span>
                                                 </b-button>
                                             </div>
                                             <div class="ml-2 pt-1 pb-1">
                                                 <b-button size="sm" @click="deleteTeamInvitation(teamInvitation)">
-                                                    <b-spinner small v-if="teamInvitation.isLoadingDelete" class="mr-1"></b-spinner>
+                                                    <b-spinner small v-if="teamInvitation.state.loadingDelete" class="mr-1"></b-spinner>
                                                     <span>{{ $makeless.t('pages.team-invitation.actions.delete') }}</span>
                                                 </b-button>
                                             </div>
@@ -105,38 +105,44 @@ export default class TeamInvitation extends Vue {
       this.response.getData().data.forEach((teamInvitation: TeamInvitationModel) => {
         this.teamInvitations!.push(Object.assign(new TeamInvitationModel(), teamInvitation, {
           expire: new Date(teamInvitation.expire!),
+          state: {
+            responseAccept: null,
+            responseDelete: null,
+            loadingDelete: false,
+            loadingAccept: false
+          }
         }));
       });
     });
   }
 
   acceptTeamInvitation(teamInvitation: TeamInvitationModel): void {
-    teamInvitation.responseAccept = null;
-    teamInvitation.responseDelete = null;
-    teamInvitation.isLoadingDelete = false;
-    teamInvitation.isLoadingAccept = true;
+    teamInvitation.state.responseAccept = null;
+    teamInvitation.state.responseDelete = null;
+    teamInvitation.state.loadingDelete = false;
+    teamInvitation.state.loadingAccept = true;
 
     const teamInvitationAccept: TeamInvitationAccept = Object.assign(new TeamInvitationAccept(), {
       id: teamInvitation.id,
     });
 
     this.$makeless.getHttp().patch('/api/auth/team-invitation/accept', teamInvitationAccept).then((data) => {
-      teamInvitation.responseAccept = this.$makeless.getHttp().response(data);
-      const team: Team = teamInvitation.responseAccept.getData().data;
-      teamInvitation.isLoadingAccept = false;
+      teamInvitation.state.responseAccept = this.$makeless.getHttp().response(data);
+      const team: Team = teamInvitation.state.responseAccept.getData().data;
+      teamInvitation.state.loadingAccept = false;
       this.$makeless.getSecurity().addTeam(team);
       this.$makeless.getSecurity().switchToTeam(team.id!);
     }).catch((data) => {
-      teamInvitation.responseAccept = this.$makeless.getHttp().response(data.response);
-      teamInvitation.isLoadingAccept = false;
+      teamInvitation.state.responseAccept = this.$makeless.getHttp().response(data.response);
+      teamInvitation.state.loadingAccept = false;
     });
   }
 
   deleteTeamInvitation(teamInvitation: TeamInvitationModel): void {
-    teamInvitation.responseDelete = null;
-    teamInvitation.responseAccept = null;
-    teamInvitation.isLoadingAccept = false;
-    teamInvitation.isLoadingDelete = true;
+    teamInvitation.state.responseDelete = null;
+    teamInvitation.state.responseAccept = null;
+    teamInvitation.state.loadingAccept = false;
+    teamInvitation.state.loadingDelete = true;
 
     const teamInvitationDelete: TeamInvitationDelete = Object.assign(new TeamInvitationDelete(), {
       id: teamInvitation.id,
@@ -145,12 +151,12 @@ export default class TeamInvitation extends Vue {
     this.$makeless.getHttp().delete('/api/auth/team-invitation', {
       data: teamInvitationDelete,
     }).then((data) => {
-      teamInvitation.responseDelete = this.$makeless.getHttp().response(data);
+      teamInvitation.state.responseDelete = this.$makeless.getHttp().response(data);
       this.removeTeamInvitation(teamInvitation);
-      teamInvitation.isLoadingDelete = false;
+      teamInvitation.state.loadingDelete = false;
     }).catch((data) => {
-      teamInvitation.responseDelete = this.$makeless.getHttp().response(data.response);
-      teamInvitation.isLoadingDelete = false;
+      teamInvitation.state.responseDelete = this.$makeless.getHttp().response(data.response);
+      teamInvitation.state.loadingDelete = false;
     });
   }
 

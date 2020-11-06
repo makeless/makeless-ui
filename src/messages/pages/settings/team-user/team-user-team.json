@@ -50,6 +50,12 @@
           "5x": "Server error - Please try again later"
         }
       }
+    },
+    "errors": {
+      "update": {
+        "4x": "Role change failed",
+        "5x": "Server error - Please try again later"
+      }
     }
   }
 }
