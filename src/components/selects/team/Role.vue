@@ -4,13 +4,13 @@
             {{ $makeless.t('components.selects.team.role.header') }}
         </b-dropdown-header>
         <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item :disabled="obj.role === role" @click.native.capture.stop="updateRoleTeamUserTeam(obj, role.toString(), index)" v-for="(role, index) in roles">
+        <b-dropdown-item :disabled="obj.role === role" @click.native.capture.stop="updateRoleTeamUserTeam(obj, role, index)" v-for="(t, role, index) in $makeless.getConfig().getConfiguration().getTeams().getRoles()">
             <div class="d-flex flex-row flex-wrap">
                 <div class="dropdown-item-icon">
                     <b-icon-check v-if="obj.role === role"></b-icon-check>
                     <b-spinner v-if="obj.state.loadingUpdateRole === index" small></b-spinner>
                 </div>
-                <div class="ml-1">{{ role }}</div>
+                <div class="ml-1">{{ t[$makeless.getI18n().getLocale()] }}</div>
             </div>
         </b-dropdown-item>
     </b-dropdown>
@@ -24,8 +24,6 @@ import TeamUserTeamUpdateRole from '../../../structs/team-user-team-update-role'
 @Component
 export default class Role extends Vue {
   @Prop(Object) obj!: any;
-
-  private roles: string[] = ['owner', 'user']
 
   updateRoleTeamUserTeam(teamUser: TeamUser, role: string, index: number): void {
     if (teamUser.role === role) {
