@@ -1,12 +1,12 @@
 <template>
-    <b-dropdown v-if="obj.userId !== $makeless.getSecurity().getUser().id" right variant="default" class="dropdown" size="sm" :text="$makeless.t('components.selects.team.role.buttons.role', {role: obj.role})">
+    <b-dropdown v-if="obj.userId !== $makeless.getSecurity().getUser().id" right variant="default" class="dropdown" size="sm" :text="$makeless.t('components.selects.team.role.buttons.role', {role: $makeless.getConfig().getConfiguration().getTeams().getRole(obj.role)[$makeless.getI18n().getLocale()]})">
         <b-dropdown-header class="mt-n2 mb-n2">
             {{ $makeless.t('components.selects.team.role.header') }}
         </b-dropdown-header>
         <b-dropdown-divider></b-dropdown-divider>
         <b-dropdown-item :disabled="obj.role === role" @click.native.capture.stop="updateRoleTeamUserTeam(obj, role, index)" v-for="(t, role, index) in $makeless.getConfig().getConfiguration().getTeams().getRoles()" :key="role">
-            <div class="d-flex flex-row flex-wrap">
-                <div class="dropdown-item-icon">
+            <div class="d-flex flex-row">
+                <div style="width: 20px;">
                     <b-icon-check v-if="obj.role === role"></b-icon-check>
                     <b-spinner v-if="obj.state.loadingUpdateRole === index" small></b-spinner>
                 </div>

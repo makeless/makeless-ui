@@ -20,10 +20,6 @@
                                 </div>
                                 <div class="d-flex flex-column flex-sm-row align-items-sm-center flex-wrap text-right">
                                     <div class="pt-1 pb-1" v-if="teamUser.state.responseUpdateRole">
-                                        <template v-if="teamUser.state.responseUpdateRole.getCode() === 200">
-                                            <span class="text-success">{{ $makeless.t('pages.team-user-team.errors.update.2x') }}</span>
-                                        </template>
-
                                         <template v-if="teamUser.state.responseUpdateRole.getCode() >= 400 && teamUser.state.responseUpdateRole.getCode() < 500">
                                             <span class="text-danger">{{ $makeless.t('pages.team-user-team.errors.update.4x') }}</span>
                                         </template>
@@ -100,8 +96,8 @@ export default class TeamUserTeam extends Vue {
         this.teamUsers!.push(Object.assign(new TeamUser(), teamUser, {
           state: {
             responseUpdateRole: null,
-            loadingUpdateRole: false
-          }
+            loadingUpdateRole: false,
+          },
         }));
       });
     });

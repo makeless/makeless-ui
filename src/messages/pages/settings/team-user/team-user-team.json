@@ -53,7 +53,6 @@
     },
     "errors": {
       "update": {
-        "2x": "Role change was successful",
         "4x": "Role change failed",
         "5x": "Server error - Please try again later"
       }
