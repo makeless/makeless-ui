@@ -41,7 +41,6 @@ import MasterComponent from './components/layouts/Master.vue';
 import NavigationComponent from './components/navigations/Navigation.vue';
 import SettingsNavigationComponent from './components/navigations/SettingsNavigation.vue';
 import UserDropdownComponent from './components/navigations/UserDropdown.vue';
-import Terms from './pages/terms';
 
 // plugins
 Vue.use(BootstrapVue);
@@ -74,7 +73,6 @@ export default class Makeless {
   }
 
   private pages: { [key: string]: PageInterface } = {
-    'terms': new Terms(),
     'home': new HomePage(),
     'login': new LoginPage(),
     'invitation': new InvitationPage(),

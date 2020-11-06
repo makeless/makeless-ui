@@ -118,10 +118,10 @@ export default class TeamInvitationTeam extends Vue {
   }
 
   resendTeamInvitation(teamInvitation: TeamInvitation): void {
-    teamInvitation.state.responseResend = null;
-    teamInvitation.state.responseDelete = null;
-    teamInvitation.state.isLoadingDelete = false;
-    teamInvitation.state.isLoadingResend = true;
+    teamInvitation.responseResend = null;
+    teamInvitation.responseDelete = null;
+    teamInvitation.isLoadingDelete = false;
+    teamInvitation.isLoadingResend = true;
 
     const teamInvitationTeamResend: TeamInvitationTeamResend = Object.assign(new TeamInvitationTeamResend(), {
       id: teamInvitation.id,
