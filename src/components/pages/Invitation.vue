@@ -65,7 +65,7 @@
                                             {{ $makeless.t('pages.invitation.form.fields.legalConfirmation.accept') }}
                                             <b-link :to="{name: 'terms'}">{{ $makeless.t('pages.invitation.form.fields.legalConfirmation.termsOfService') }}</b-link>
                                             {{ $makeless.t('pages.invitation.form.fields.legalConfirmation.and') }}
-                                            <b-link :to="{name: 'privacy-policy'}">{{ $makeless.t('pages.invitation.form.fields.legalConfirmation.privacyPolicy') }}</b-link>
+                                            <b-link :to="{name: 'privacy'}">{{ $makeless.t('pages.invitation.form.fields.legalConfirmation.privacyPolicy') }}</b-link>
                                         </b-form-checkbox>
                                         <b-form-invalid-feedback :state="validateLegalConfirmation()">
                                             {{ $makeless.t('pages.invitation.form.validations.legalConfirmation') }}

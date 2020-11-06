@@ -1,7 +1,7 @@
-import {LocaleMessageObject} from "vue-i18n";
-import {VueConstructor} from "vue";
+import {LocaleMessageObject} from 'vue-i18n';
+import {VueConstructor} from 'vue';
 
-export default class Page {
+export default abstract class Page {
   name!: string;
   path!: string;
   component!: VueConstructor;
