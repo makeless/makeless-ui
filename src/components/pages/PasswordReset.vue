@@ -22,25 +22,19 @@
                                     <b-link :to="{name: 'login'}">{{ $makeless.t('pages.password-reset.login') }}</b-link>
                                 </b-alert>
 
-                                <b-row>
-                                    <b-col sm="6">
-                                        <b-form-group :label="$makeless.t('pages.password-reset.form.fields.password.label')" label-for="password">
-                                            <b-form-input id="password" v-model="passwordReset.password" type="password" required :placeholder="$makeless.t('pages.password-reset.form.fields.password.placeholder')"></b-form-input>
-                                            <b-form-invalid-feedback :state="validatePassword()">
-                                                {{ $makeless.t('pages.password-reset.form.validations.password') }}
-                                            </b-form-invalid-feedback>
-                                        </b-form-group>
-                                    </b-col>
+                                <b-form-group :label="$makeless.t('pages.password-reset.form.fields.password.label')" label-for="password">
+                                    <b-form-input id="password" v-model="passwordReset.password" type="password" required :placeholder="$makeless.t('pages.password-reset.form.fields.password.placeholder')"></b-form-input>
+                                    <b-form-invalid-feedback :state="validatePassword()">
+                                        {{ $makeless.t('pages.password-reset.form.validations.password') }}
+                                    </b-form-invalid-feedback>
+                                </b-form-group>
 
-                                    <b-col sm="6">
-                                        <b-form-group :label="$makeless.t('pages.password-reset.form.fields.passwordConfirmation.label')" label-for="passwordConfirmation">
-                                            <b-form-input id="passwordConfirmation" v-model="passwordReset.passwordConfirmation" type="password" required :placeholder="$makeless.t('pages.password-reset.form.fields.passwordConfirmation.placeholder')"></b-form-input>
-                                            <b-form-invalid-feedback :state="validatePasswordConfirmation()">
-                                                {{ $makeless.t('pages.password-reset.form.validations.passwordConfirmation') }}
-                                            </b-form-invalid-feedback>
-                                        </b-form-group>
-                                    </b-col>
-                                </b-row>
+                                <b-form-group :label="$makeless.t('pages.password-reset.form.fields.passwordConfirmation.label')" label-for="passwordConfirmation">
+                                    <b-form-input id="passwordConfirmation" v-model="passwordReset.passwordConfirmation" type="password" required :placeholder="$makeless.t('pages.password-reset.form.fields.passwordConfirmation.placeholder')"></b-form-input>
+                                    <b-form-invalid-feedback :state="validatePasswordConfirmation()">
+                                        {{ $makeless.t('pages.password-reset.form.validations.passwordConfirmation') }}
+                                    </b-form-invalid-feedback>
+                                </b-form-group>
 
                                 <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                                     <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
