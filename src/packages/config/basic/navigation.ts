@@ -1,14 +1,14 @@
-import NavigationLegInterface from "../navigation-leg";
+import NavigationItem from '../navigation-item';
 
 export default class Navigation {
-  left: NavigationLegInterface | null = null;
-  right: NavigationLegInterface | null = null;
+  left: { [key: string]: NavigationItem[] } | null = null;
+  right: { [key: string]: NavigationItem[] } | null = null;
 
-  public getLeft(): NavigationLegInterface | null {
+  public getLeft(): { [key: string]: NavigationItem[] } | null {
     return this.left;
   }
 
-  public getRight(): NavigationLegInterface | null {
+  public getRight(): { [key: string]: NavigationItem[] } | null {
     return this.right;
   }
 }

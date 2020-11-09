@@ -4,7 +4,7 @@
             <b-container>
                 <b-row>
                     <b-col lg="3">
-                        <settings-navigation></settings-navigation>
+                        <setting-navigation></setting-navigation>
                     </b-col>
 
                     <b-col lg="9">

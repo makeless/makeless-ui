@@ -1,5 +1,6 @@
 import NavigationInterface from './navigation';
 import TeamInterface from './team';
+import SettingNavigation from './setting-navigation';
 
 export default interface Configuration {
   name: string;
@@ -9,6 +10,7 @@ export default interface Configuration {
   tokens: boolean | null;
   teams: TeamInterface | null;
   navigation: NavigationInterface;
+  settingsNavigation: { [key: string]: SettingNavigation[] };
 
   getName(): string;
 
@@ -23,4 +25,6 @@ export default interface Configuration {
   getTeams(): TeamInterface | null;
 
   getNavigation(): NavigationInterface;
+
+  getSettingsNavigation(): { [key: string]: SettingNavigation[] };
 }

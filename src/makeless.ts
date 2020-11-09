@@ -42,7 +42,7 @@ import PageNotFoundPage from './pages/page-not-found';
 // components
 import MasterComponent from './components/layouts/Master.vue';
 import NavigationComponent from './components/navigations/Navigation.vue';
-import SettingsNavigationComponent from './components/navigations/SettingsNavigation.vue';
+import SettingNavigationComponent from './components/navigations/SettingNavigation.vue';
 import UserDropdownComponent from './components/navigations/UserDropdown.vue';
 
 // plugins
@@ -103,7 +103,7 @@ export default class Makeless {
   private components: { [key: string]: VueConstructor } = {
     'master': MasterComponent,
     'navigation': NavigationComponent,
-    'settings-navigation': SettingsNavigationComponent,
+    'setting-navigation': SettingNavigationComponent,
     'user-dropdown': UserDropdownComponent,
   };
 

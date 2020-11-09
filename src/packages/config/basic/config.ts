@@ -1,8 +1,10 @@
-import ConfigurationInterface from "./configuration";
-import Configuration from "./configuration";
-import Navigation from "./navigation";
-import Team from "./team";
-import NavigationItem from "./navigation-item";
+import ConfigurationInterface from './configuration';
+import Configuration from './configuration';
+import Navigation from './navigation';
+import Team from './team';
+import NavigationItem from './navigation-item';
+import SettingNavigation from './setting-navigation';
+import SettingNavigationItem from './setting-navigation-item';
 
 export default class Config {
   configuration: ConfigurationInterface;
@@ -10,6 +12,7 @@ export default class Config {
   constructor(config: any) {
     let obj = Object.assign(new Configuration(), config);
     this.assignNavigation(obj);
+    this.assignSettingsNavigation(obj);
     this.assignTeams(obj);
     this.configuration = obj;
   }
@@ -34,7 +37,7 @@ export default class Config {
           leg[locale][j] = Object.assign(new NavigationItem(), leg[locale][j]);
 
           if (!leg[locale][j].hasChildren()) {
-            continue
+            continue;
           }
 
           for (let k = 0; k < leg[locale][j].getChildren()!.length; k++) {
@@ -43,6 +46,47 @@ export default class Config {
         }
       }
     }
+  }
+
+  protected assignSettingsNavigation(obj: Configuration) {
+    const locales = Object.keys(obj.settingsNavigation);
+
+    for (let i = 0; i < locales.length; i++) {
+      obj.settingsNavigation[locales[i]] = Object.assign(new SettingNavigation(), obj.settingsNavigation[locales[i]]);
+
+      for (let j in obj.settingsNavigation[locales[i]]) {
+        for (let k = 0; k < obj.settingsNavigation[locales[i]][j].items.length; k++) {
+          obj.settingsNavigation[locales[i]][j].items[k] = Object.assign(
+              new SettingNavigationItem(),
+              obj.settingsNavigation[locales[i]][j].items[k],
+          );
+        }
+      }
+    }
+
+    /*const legs = Object.values(obj.navigation);
+
+    for (let i = 0; i < legs.length; i++) {
+      const leg = Object.values(obj.navigation)[i];
+
+      for (let locale in leg) {
+        if (!leg.hasOwnProperty(locale)) {
+          continue;
+        }
+
+        for (let j = 0; j < leg[locale].length; j++) {
+          leg[locale][j] = Object.assign(new NavigationItem(), leg[locale][j]);
+
+          if (!leg[locale][j].hasChildren()) {
+            continue;
+          }
+
+          for (let k = 0; k < leg[locale][j].getChildren()!.length; k++) {
+            leg[locale][j].getChildren()![k] = Object.assign(new NavigationItem(), leg[locale][j].getChildren()![k]);
+          }
+        }
+      }
+    }*/
   }
 
   protected assignTeams(obj: Configuration) {

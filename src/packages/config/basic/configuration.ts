@@ -1,5 +1,6 @@
 import Navigation from './navigation';
 import Team from './team';
+import SettingNavigation from './setting-navigation';
 
 export default class Configuration {
   name!: string;
@@ -9,6 +10,7 @@ export default class Configuration {
   tokens: boolean | null = null;
   teams: Team | null = null;
   navigation!: Navigation;
+  settingsNavigation!: { [key: string]: SettingNavigation[] };
 
   public getName(): string {
     return this.name;
@@ -36,5 +38,9 @@ export default class Configuration {
 
   public getNavigation(): Navigation {
     return this.navigation;
+  }
+
+  public getSettingsNavigation(): { [key: string]: SettingNavigation[] } {
+    return this.settingsNavigation;
   }
 }
