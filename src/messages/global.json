@@ -8,7 +8,7 @@
           "account": "Account",
           "logout": "Logout"
         },
-        "settingsNavigation": {
+        "settingNavigation": {
           "settings": "Settings",
           "profile": "Profile",
           "password": "Password",
