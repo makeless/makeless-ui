@@ -7,16 +7,6 @@
           "settings": "Settings",
           "account": "Account",
           "logout": "Logout"
-        },
-        "settingNavigation": {
-          "settings": "Settings",
-          "profile": "Profile",
-          "password": "Password",
-          "teams": "Teams",
-          "teamInvitations": "Team invitations",
-          "teamInvitationsTeam": "Pending invitations",
-          "tokens": "Tokens",
-          "teamUsers": "Users"
         }
       },
       "selects": {
