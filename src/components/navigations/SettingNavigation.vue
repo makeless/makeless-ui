@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-for="navigation in $makeless.getConfig().getConfiguration().getSettingsNavigation()[$makeless.getI18n().getLocale()]">
+        <div v-for="navigation in getSettingsNavigation($makeless.getI18n().getLocale())">
             <b-card no-body :header="navigation.getTitle()" class="mb-3 mb-lg-0">
                 <b-list-group flush>
                     <template v-for="item in navigation.getItems()">
@@ -14,6 +14,7 @@
 
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
+import SettingNavigationInterface from '../../packages/config/setting-navigation';
 
 @Component
 export default class SettingNavigation extends Vue {
@@ -23,6 +24,14 @@ export default class SettingNavigation extends Vue {
 
   public isActive(name: string): boolean {
     return this.$makeless.getRouter().getVueRouter().currentRoute.name === name;
+  }
+
+  public getSettingsNavigation(locale: string): SettingNavigationInterface[] {
+    if (this.$makeless.getSecurity().getTeam()) {
+      return this.$makeless.getConfig().getConfiguration().getTeams()!.getSettingsNavigation()[locale];
+    }
+
+    return this.$makeless.getConfig().getConfiguration().getSettingsNavigation()[locale];
   }
 }
 </script>

@@ -48,11 +48,15 @@ export default class Config {
     }
   }
 
-  protected assignSettingsNavigation(obj: Configuration) {
+  protected assignSettingsNavigation(obj: any) {
     const locales = Object.keys(obj.settingsNavigation);
 
     for (let i = 0; i < locales.length; i++) {
       for (let j in obj.settingsNavigation[locales[i]]) {
+        if (!obj.settingsNavigation[locales[i]].hasOwnProperty(j)) {
+          break;
+        }
+
         obj.settingsNavigation[locales[i]][j] = Object.assign(new SettingNavigation(), obj.settingsNavigation[locales[i]][j]);
         for (let k = 0; k < obj.settingsNavigation[locales[i]][j].items.length; k++) {
           obj.settingsNavigation[locales[i]][j].items[k] = Object.assign(
@@ -70,6 +74,7 @@ export default class Config {
     }
 
     obj.teams = Object.assign(new Team(), obj.teams);
+    this.assignSettingsNavigation(obj.teams);
   }
 
   public getConfiguration(): ConfigurationInterface {
