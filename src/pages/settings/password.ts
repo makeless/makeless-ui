@@ -11,5 +11,6 @@ export default class Password extends Page {
   messages: LocaleMessageObject | null = messages;
   meta: any | null = {
     requiresAuth: true,
+    requiresUserAuth: true,
   };
 }
