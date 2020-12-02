@@ -1,6 +1,6 @@
 {
   "name": "@makeless/makeless-ui",
-  "version": "1.0.0-beta.7",
+  "version": "1.0.0-beta.8",
   "private": false,
   "files": [
     "src",
@@ -26,7 +26,7 @@
     "vue-markdown": "^2.2.4",
     "vue-multiselect": "^2.1.6",
     "vue-property-decorator": "^8.4.1",
-    "vue-router": "^3.1.6",
+    "vue-router": "^3.4.9",
     "vue-template-compiler": "^2.6.11"
   },
   "devDependencies": {
