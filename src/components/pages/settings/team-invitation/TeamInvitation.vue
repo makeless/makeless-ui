@@ -16,7 +16,7 @@
                                 <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
                                     <div>
                                         <div>{{ teamInvitation.team.name }}</div>
-                                        <div><small>{{ teamInvitation.user.name }}</small></div>
+                                        <div><small>{{ teamInvitation.teamUser.user.name }}</small></div>
                                         <div class="mt-2"><small>{{ `${$makeless.t('pages.team-invitation.expires')} ${teamInvitation.expire.toLocaleString()}` }}</small></div>
                                     </div>
                                     <div>

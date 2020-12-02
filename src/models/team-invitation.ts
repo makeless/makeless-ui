@@ -1,14 +1,13 @@
 import Model from './model';
-import User from './user';
 import Team from './team';
-import ResponseInterface from '../packages/http/response';
+import TeamUser from './team-user';
 
 export default class TeamInvitation extends Model {
   teamId: number | null = null;
   team: Team | null = null;
 
-  userId: number | null = null;
-  user: User | null = null;
+  teamUserId: number | null = null;
+  teamUser: TeamUser | null = null;
 
   email: string | null = null;
   token: string | null = null;
