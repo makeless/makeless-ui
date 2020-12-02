@@ -16,7 +16,7 @@
                                 <b-list-group-item class="d-flex justify-content-between align-items-center" v-for="teamInvitation in teamInvitations" :key="teamInvitation.id">
                                     <div>
                                         <div>{{ teamInvitation.email }}</div>
-                                        <div><small>{{ `${$makeless.t('pages.team-invitation-team.invitedBy')} ${teamInvitation.user.name}` }}</small></div>
+                                        <div><small>{{ `${$makeless.t('pages.team-invitation-team.invitedBy')} ${teamInvitation.teamUser.user.name}` }}</small></div>
                                         <div class="mt-2"><small>{{ teamInvitation.createdAt.toLocaleString() }}</small></div>
                                     </div>
                                     <div>
