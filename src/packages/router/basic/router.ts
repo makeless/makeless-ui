@@ -1,5 +1,7 @@
-import VueRouter, {RouteConfig} from 'vue-router';
+import VueRouter, {Location, RouteConfig} from 'vue-router';
 import PageInterface from './../../../packages/page/page';
+
+const {NavigationFailureType, isNavigationFailure} = VueRouter;
 
 export default class Router {
   mode: any = 'history';
@@ -21,6 +23,14 @@ export default class Router {
     return configs;
   }
 
+  private push(location: Location): void {
+    this.getVueRouter().push(location).catch((err: Error) => {
+      if (!isNavigationFailure(err, NavigationFailureType.duplicated)) {
+        throw err;
+      }
+    });
+  }
+
   public create(pages: PageInterface[]): void {
     this.router = new VueRouter({
       mode: this.mode,
@@ -29,28 +39,22 @@ export default class Router {
     });
   }
 
-  public redirectToName(name: string): void {
-    if (this.getVueRouter().currentRoute.name === name) {
-      return;
-    }
-
-    this.getVueRouter().push({name: name}).then();
+  public redirectToName(name: string, data?: Location) {
+    const location: Location = Object.assign(data || {}, {name: name, path: null});
+    this.push(location);
   }
 
-  public redirectToLogin(): void {
-    this.redirectToName('login');
+  public redirectToLogin(data?: Location): void {
+    this.redirectToName('login', data);
   }
 
-  public redirectToDashboard(): void {
-    this.redirectToName('dashboard');
+  public redirectToDashboard(data?: Location): void {
+    this.redirectToName('dashboard', data);
   }
 
-  public redirectToPath(path: string): void {
-    if (this.getVueRouter().currentRoute.fullPath === path) {
-      return;
-    }
-
-    this.getVueRouter().push({path: path}).then();
+  public redirectToPath(path: string, data?: Location): void {
+    const location: Location = Object.assign(data || {}, {path: path, name: null});
+    this.push(location);
   }
 
   public getVueRouter(): VueRouter {
