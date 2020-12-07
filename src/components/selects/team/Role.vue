@@ -1,10 +1,10 @@
 <template>
-    <b-dropdown v-if="obj.userId !== $makeless.getSecurity().getUser().id" right variant="default" class="dropdown" size="sm" :text="$makeless.t('components.selects.team.role.buttons.role', {role: $makeless.getConfig().getConfiguration().getTeams().getRole(obj.role)[$makeless.getI18n().getLocale()]})">
+    <b-dropdown @toggle="setShowDropdown(false)" @hide="(bvEvt) => suppressHideDropdown(bvEvt)" v-if="obj.userId !== $makeless.getSecurity().getUser().id" right variant="default" class="dropdown" size="sm" :text="$makeless.t('components.selects.team.role.buttons.role', {role: $makeless.getConfig().getConfiguration().getTeams().getRole(obj.role)[$makeless.getI18n().getLocale()]})">
         <b-dropdown-header class="mt-n2 mb-n2">
             {{ $makeless.t('components.selects.team.role.header') }}
         </b-dropdown-header>
         <b-dropdown-divider></b-dropdown-divider>
-        <b-dropdown-item :disabled="obj.role === role" @click.native.capture.stop="updateRoleTeamUserTeam(obj, role, index)" v-for="(t, role, index) in $makeless.getConfig().getConfiguration().getTeams().getRoles()" :key="role">
+        <b-dropdown-item :disabled="obj.role === role" @click="updateRoleTeamUserTeam(obj, role, index)" v-for="(t, role, index) in $makeless.getConfig().getConfiguration().getTeams().getRoles()" :key="role">
             <div class="d-flex flex-row">
                 <div style="width: 20px;">
                     <b-icon-check v-if="obj.role === role"></b-icon-check>
@@ -25,7 +25,21 @@ import TeamUserTeamUpdateRole from '../../../structs/team-user-team-update-role'
 export default class Role extends Vue {
   @Prop(Object) obj!: any;
 
+  private showDropdown: boolean = false;
+
+  private suppressHideDropdown(bvEvt: Event): void {
+    if (this.showDropdown) {
+      bvEvt.preventDefault();
+    }
+  }
+
+  private setShowDropdown(value: boolean): void {
+    this.showDropdown = value;
+  }
+
   updateRoleTeamUserTeam(teamUser: TeamUser, role: string, index: number): void {
+    this.setShowDropdown(true);
+
     if (teamUser.role === role) {
       return;
     }
