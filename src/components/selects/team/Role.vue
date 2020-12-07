@@ -33,8 +33,8 @@ export default class Role extends Vue {
     }
   }
 
-  private setShowDropdown(value: boolean): void {
-    this.showDropdown = value;
+  private setShowDropdown(show: boolean): void {
+    this.showDropdown = show;
   }
 
   updateRoleTeamUserTeam(teamUser: TeamUser, role: string, index: number): void {
