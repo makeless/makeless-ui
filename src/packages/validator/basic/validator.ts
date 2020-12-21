@@ -17,6 +17,10 @@ export default class Validator {
     return true;
   }
 
+  public addValidators(validators: ValidatorMethod[]): void {
+    this.validators.push(...validators);
+  }
+
   public getValidators(): ValidatorMethod[] {
     return this.validators;
   }

@@ -8,6 +8,11 @@ export default interface Validator {
   isValid(): boolean
 
   /**
+   * Add validators
+   */
+  addValidators(validators: ValidatorMethod[]): void
+
+  /**
    * Retrieves all validators
    * @returns ValidatorMethod[]
    */
