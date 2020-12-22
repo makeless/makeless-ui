@@ -1,7 +1,7 @@
 import ValidatorMethod from '../validator-method';
 
 export default class Validator {
-  private readonly validators: ValidatorMethod[];
+  private validators: ValidatorMethod[];
 
   constructor(validators: ValidatorMethod[]) {
     this.validators = validators;
@@ -19,6 +19,10 @@ export default class Validator {
 
   public addValidators(validators: ValidatorMethod[]): void {
     this.validators.push(...validators);
+  }
+
+  public setValidators(validators: ValidatorMethod[]): void {
+    this.validators = validators;
   }
 
   public getValidators(): ValidatorMethod[] {
