@@ -13,6 +13,11 @@ export default interface Validator {
   addValidators(validators: ValidatorMethod[]): void
 
   /**
+   * Remove validators
+   */
+  removeValidators(validators: ValidatorMethod[]): void
+
+  /**
    * Set validators
    */
   setValidators(validators: ValidatorMethod[]): void
