@@ -21,16 +21,6 @@ export default class Validator {
     this.validators.push(...validators);
   }
 
-  public removeValidators(validators: ValidatorMethod[]): void {
-    for (let i = 0; i < this.validators.length; i++) {
-      for (let j = 0; j < validators.length; j++) {
-        if (this.validators[i] === validators[j]) {
-          this.validators.splice(i, 1);
-        }
-      }
-    }
-  }
-
   public setValidators(validators: ValidatorMethod[]): void {
     this.validators = validators;
   }
