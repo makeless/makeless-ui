@@ -112,7 +112,7 @@ export default class Register extends Vue {
       return null;
     }
 
-    return this.register.name.length > 0;
+    return this.register.name.length >= 4 && this.register.name.length <= 50;
   }
 
   public validatePassword(): boolean | null {
