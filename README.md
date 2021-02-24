@@ -1,6 +1,6 @@
 # Makeless
 
-Makeless - SaaS Framework - TypeScript & Vue.js Implementation
+Makeless - SaaS Ecosystem - TypeScript & Vue.js Implementation
 
 [![License](https://img.shields.io/badge/license-polyform:noncommercial-blue)](https://polyformproject.org/licenses/noncommercial/1.0.0/)
 [![Build Status](https://ci.loeffel.io/api/badges/makeless/makeless-ui/status.svg)](https://ci.loeffel.io/makeless/makeless-ui)
