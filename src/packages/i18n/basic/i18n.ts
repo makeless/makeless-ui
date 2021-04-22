@@ -1,14 +1,21 @@
 import VueI18n, {Locale, LocaleMessages} from 'vue-i18n';
 import PageInterface from './../../../packages/page/page';
-import global from './../../../messages/global.json';
+import globalMessages from './../../../messages/global.json';
 
 export default class i18n {
   private readonly vueI18n: VueI18n;
 
-  constructor(locale: string) {
+  constructor(locale: string, isolated?: boolean) {
+    if (isolated === true) {
+      this.vueI18n = new VueI18n({
+        locale: locale,
+      });
+      return;
+    }
+
     this.vueI18n = new VueI18n({
       locale: locale,
-      messages: global,
+      messages: globalMessages,
     });
   }
 
