@@ -176,7 +176,7 @@ export default class Security {
     }
 
     this.event.subscribe('makeless', (data: DataInterface) => {
-      console.log(data);
+      document.dispatchEvent(new CustomEvent('makeless', {detail: data}));
     });
   }
 
