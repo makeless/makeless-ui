@@ -154,7 +154,7 @@ export default class Security {
 
   private logoutHandler(): void {
     window.addEventListener('storage', (event: StorageEvent) => {
-      if (event.key !== this.localStorageJwtKey) {
+      if (event.key !== this.localStorageJwtKey || event.newValue !== null) {
         return;
       }
 
