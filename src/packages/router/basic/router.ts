@@ -9,7 +9,7 @@ export default class Router {
   router: VueRouter | null = null;
 
   private computePages(pages: PageInterface[]): RouteConfig[] {
-    let configs: RouteConfig[] = [];
+    const configs: RouteConfig[] = [];
 
     pages.forEach((page: PageInterface) => {
       configs.push({

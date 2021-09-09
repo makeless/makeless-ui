@@ -10,7 +10,7 @@ export default class Config {
   configuration: ConfigurationInterface;
 
   constructor(config: any) {
-    let obj = Object.assign(new Configuration(), config);
+    const obj = Object.assign(new Configuration(), config);
     this.assignNavigation(obj);
     this.assignSettingsNavigation(obj);
     this.assignTeams(obj);
@@ -28,7 +28,7 @@ export default class Config {
     for (let i = 0; i < legs.length; i++) {
       const leg = Object.values(obj.navigation)[i];
 
-      for (let locale in leg) {
+      for (const locale in leg) {
         if (!leg.hasOwnProperty(locale)) {
           continue;
         }
@@ -52,7 +52,7 @@ export default class Config {
     const locales = Object.keys(obj.settingsNavigation);
 
     for (let i = 0; i < locales.length; i++) {
-      for (let j in obj.settingsNavigation[locales[i]]) {
+      for (const j in obj.settingsNavigation[locales[i]]) {
         if (!obj.settingsNavigation[locales[i]].hasOwnProperty(j)) {
           break;
         }
