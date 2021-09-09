@@ -4,17 +4,17 @@ name: docker
 
 steps:
   - name: install
-    image: node:14
+    image: node:16
     commands:
       - yarn install
 
   - name: eslint
-    image: node:14
+    image: node:16
     commands:
       - make eslint
 
   - name: ls-lint
-    image: node:14
+    image: node:16
     commands:
       - make ls-lint
 

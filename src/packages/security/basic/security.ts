@@ -124,7 +124,7 @@ export default class Security {
         return;
       }
 
-      if (to.matched.some(record => record.meta.requiresTeamRoleAuth) && !this.isTeamRole(to.meta.requiresTeamRoleAuth)) {
+      if (to.matched.some(record => record.meta.requiresTeamRoleAuth) && !this.isTeamRole(to.meta!.requiresTeamRoleAuth)) {
         next({name: 'dashboard'});
         return;
       }
@@ -158,7 +158,7 @@ export default class Security {
         return;
       }
 
-      if (!this.router.getVueRouter().currentRoute.meta.requiresAuth) {
+      if (!this.router.getVueRouter().currentRoute.meta!.requiresAuth) {
         return;
       }
 
