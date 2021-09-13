@@ -1,7 +1,7 @@
 <template>
     <b-navbar-nav v-if="leg">
         <div v-for="(item, index) in leg[this.$makeless.getI18n().getLocale()]" :key="index">
-            <b-nav-item v-if="!item.hasChildren() && show(item)" @click="to(item)">{{ item.getLabel() }}</b-nav-item>
+            <b-nav-item v-if="!item.hasChildren() && show(item)" @click="to(item)" :active="active(item)">{{ item.getLabel() }}</b-nav-item>
             <b-nav-item-dropdown v-if="item.hasChildren() && showDropdown(item)">
                 <template slot="button-content">{{ item.getLabel() }}</template>
                 <div v-for="(children, index) in item.getChildren()" :key="index">
@@ -16,12 +16,20 @@
 
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
-import NavigationItemInterface from "../../packages/config/navigation-item";
-import NavigationLegInterface from "../../packages/config/navigation-leg";
+import NavigationItemInterface from '../../packages/config/navigation-item';
+import NavigationLegInterface from '../../packages/config/navigation-leg';
 
 @Component
 export default class NavigationLeg extends Vue {
   @Prop(Object) leg!: NavigationLegInterface;
+
+  private active(item: NavigationItemInterface): boolean {
+    if (item.isExternal()) {
+      return false;
+    }
+
+    return this.$route.name === item.to;
+  }
 
   public to(item: NavigationItemInterface): void {
     if (item.isExternal()) {
