@@ -16,6 +16,11 @@ export default interface Security {
   storage: StorageInterface;
 
   /**
+   * AuthMiddleware process navigation guard(s)
+   */
+  authMiddleware(): void;
+
+  /**
    * Required method to init makeless
    * Loads user, sets up auth middleware, starts silent auth refresh and sets up logout handler
    * Awaits user and auth middleware for security reasons (!)

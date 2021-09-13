@@ -10,7 +10,7 @@ import Team from './../../../models/team';
 import User from './../../../models/user';
 import TeamUser from '../../../models/team-user';
 import {TeamRole} from '../../../enums/team-role';
-import {Route} from 'vue-router';
+import {NavigationGuardNext, Route} from 'vue-router';
 
 export default class Security {
   user: User | null = null;
@@ -24,7 +24,7 @@ export default class Security {
   readonly event: EventInterface;
   readonly storage: StorageInterface;
 
-  constructor(router: RouterInterface, http: HttpInterface, event: EventInterface, storage: StorageInterface) {
+  public constructor(router: RouterInterface, http: HttpInterface, event: EventInterface, storage: StorageInterface) {
     this.router = router;
     this.http = http;
     this.event = event;
@@ -96,46 +96,48 @@ export default class Security {
     });
   }
 
-  private async authMiddleware() {
-    this.router.getVueRouter().beforeEach((to: Route, from: Route, next) => {
-      if (to.matched.some(record => record.meta.requiresAuth) && !this.isAuth()) {
-        next({name: 'login', query: {redirect: to.fullPath}});
+  protected authMiddlewareNavigationGuard = (security: this) => (to: Route, from: Route, next: NavigationGuardNext) => {
+    if (to.matched.some(record => record.meta.requiresAuth) && !security.isAuth()) {
+      next({name: 'login', query: {redirect: to.fullPath}});
+      return;
+    }
+
+    if (to.matched.some(record => record.meta.requiresAuth) && security.isAuth()) {
+      if (to.name !== 'email-unverified' && !this.getUser()!.isVerified()) {
+        next({name: 'email-unverified'});
         return;
       }
-
-      if (to.matched.some(record => record.meta.requiresAuth) && this.isAuth()) {
-        if (to.name !== 'email-unverified' && !this.getUser()!.isVerified()) {
-          next({name: 'email-unverified'});
-          return;
-        }
-        if (to.name === 'email-unverified' && this.getUser()!.isVerified()) {
-          next({name: 'dashboard'});
-          return;
-        }
-      }
-
-      if (to.matched.some(record => record.meta.requiresUserAuth) && !this.getUser()) {
+      if (to.name === 'email-unverified' && security.getUser()!.isVerified()) {
         next({name: 'dashboard'});
         return;
       }
+    }
 
-      if (to.matched.some(record => record.meta.requiresTeamAuth) && !this.getTeam()) {
-        next({name: 'dashboard'});
-        return;
-      }
+    if (to.matched.some(record => record.meta.requiresUserAuth) && !security.getUser()) {
+      next({name: 'dashboard'});
+      return;
+    }
 
-      if (to.matched.some(record => record.meta.requiresTeamRoleAuth) && !this.isTeamRole(to.meta!.requiresTeamRoleAuth)) {
-        next({name: 'dashboard'});
-        return;
-      }
+    if (to.matched.some(record => record.meta.requiresTeamAuth) && !security.getTeam()) {
+      next({name: 'dashboard'});
+      return;
+    }
 
-      if (to.matched.some(record => record.meta.guest) && this.isAuth()) {
-        next({name: 'dashboard'});
-        return;
-      }
+    if (to.matched.some(record => record.meta.requiresTeamRoleAuth) && !security.isTeamRole(to.meta!.requiresTeamRoleAuth)) {
+      next({name: 'dashboard'});
+      return;
+    }
 
-      next();
-    });
+    if (to.matched.some(record => record.meta.guest) && security.isAuth()) {
+      next({name: 'dashboard'});
+      return;
+    }
+
+    next();
+  };
+
+  public authMiddleware(): void {
+    this.router.getVueRouter().beforeEach(this.authMiddlewareNavigationGuard(this));
   }
 
   private refreshAuth(): void {
@@ -182,7 +184,7 @@ export default class Security {
 
   public async setup(): Promise<void> {
     await this.loadUser();
-    await this.authMiddleware();
+    this.authMiddleware();
     this.refreshAuth();
     this.logoutHandler();
     this.handleEvents();
