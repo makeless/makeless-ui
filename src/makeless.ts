@@ -124,8 +124,13 @@ export default class Makeless {
     return this.config;
   }
 
-  public setPage(key: string, page: PageInterface) {
-    this.pages[key] = page;
+  public setPage(key: string, page: PageInterface | null): void {
+    if (page === null && this.pages[key]) {
+      delete this.pages[key];
+      return;
+    }
+
+    this.pages[key] = page!;
   }
 
   public getPage(key: string): PageInterface | null {
