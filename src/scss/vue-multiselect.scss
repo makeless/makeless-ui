@@ -43,6 +43,10 @@ $tag-margin: 3px;
     }
   }
 
+  .multiselect__select {
+    background: none;
+  }
+
   .multiselect__option--highlight {
     background-color: $primary;
   }
