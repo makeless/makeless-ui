@@ -345,8 +345,6 @@ export default class Security {
 
   public async login(response: ResponseInterface): Promise<void> {
     this.setExpire(new Date(response.getData().expire));
-    await this.loadUser();
-    this.handleEvents();
 
     if (this.isRedirectToPath()) {
       this.router.redirectToPath(this.router.getVueRouter().currentRoute.query.redirect as string);
