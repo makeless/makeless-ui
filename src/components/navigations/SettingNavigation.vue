@@ -1,6 +1,6 @@
 <template>
     <div id="settings-navigation">
-        <b-card no-body v-for="(navigation, index) in getSettingsNavigation($makeless.getI18n().getLocale())" :key="index" :header="navigation.getTitle()" class="mb-3 mb-lg-0">
+        <b-card no-body v-for="(navigation, index) in getSettingsNavigation($makeless.getI18n().getLocale())" :key="index" :header="navigation.getTitle()" class="mb-3">
             <b-list-group flush>
                 <template v-for="(item, index) in navigation.getItems()">
                     <b-list-group-item v-if="isAccessible(item.getTo())" :key="index" :to="{name: item.getTo()}" :active="isActive(item.getTo())">{{ item.getLabel() }}</b-list-group-item>

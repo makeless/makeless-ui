@@ -1,15 +1,5 @@
 #settings-navigation {
-  .card {
-
-    &:not(:first-of-type) {
-      border-top: none;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-
-    &:not(:last-of-type) {
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
+  .card:last-child {
+    margin-bottom: 0 !important;
   }
 }
