@@ -1,5 +1,5 @@
 <template>
-    <div id="settings-navigation">
+    <div>
         <b-card no-body v-for="(navigation, index) in getSettingsNavigation($makeless.getI18n().getLocale())" :key="index" :header="navigation.getTitle()" class="mb-3">
             <b-list-group flush>
                 <template v-for="(item, index) in navigation.getItems()">
