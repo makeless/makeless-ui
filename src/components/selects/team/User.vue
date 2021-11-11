@@ -24,7 +24,6 @@
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import VueMultiselect from 'vue-multiselect';
-import 'vue-multiselect/dist/vue-multiselect.min.css';
 import UserModel from '../../../models/user';
 import TeamUserModel from '../../../models/team-user';
 

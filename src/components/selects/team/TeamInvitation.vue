@@ -22,7 +22,6 @@
 <script lang="ts">
 import {Component, Prop, Vue} from 'vue-property-decorator';
 import VueMultiselect from 'vue-multiselect';
-import 'vue-multiselect/dist/vue-multiselect.min.css';
 import TeamInvitationStruct from '../../../structs/team-invitation';
 
 @Component({
