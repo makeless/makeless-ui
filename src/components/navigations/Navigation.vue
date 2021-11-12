@@ -6,9 +6,9 @@
         <b-collapse id="nav-collapse" is-nav>
             <navigation-leg :leg="$makeless.getConfig().getConfiguration().getNavigation().getLeft()"></navigation-leg>
 
-            <navigation-leg :leg="$makeless.getConfig().getConfiguration().getNavigation().getRight()">
+            <navigation-leg :leg="$makeless.getConfig().getConfiguration().getNavigation().getRight()" class="ml-auto">
                 <template v-slot:after>
-                    <user-dropdown v-if="this.$makeless.getSecurity().isAuth()"></user-dropdown>
+                    <user-dropdown v-if="$makeless.getSecurity().isAuth()"></user-dropdown>
                 </template>
             </navigation-leg>
         </b-collapse>
