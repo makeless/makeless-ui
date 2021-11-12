@@ -1,16 +1,18 @@
 <template>
     <b-navbar-nav v-if="leg">
-        <div v-for="(item, index) in leg[this.$makeless.getI18n().getLocale()]" :key="index">
-            <b-nav-item v-if="!item.hasChildren() && show(item)" @click="to(item)" :active="active(item)">{{ item.getLabel() }}</b-nav-item>
-            <b-nav-item-dropdown v-if="item.hasChildren() && showDropdown(item)">
+        <slot name="before"></slot>
+        <template v-for="(item, index) in leg[this.$makeless.getI18n().getLocale()]">
+            <b-nav-item v-if="!item.hasChildren() && show(item)" @click="to(item)" :active="active(item)" :key="`nav-item-${index}`">{{ item.getLabel() }}</b-nav-item>
+            <b-nav-item-dropdown v-if="item.hasChildren() && showDropdown(item)" :key="`nav-item-dropdown-${index}`">
                 <template slot="button-content">{{ item.getLabel() }}</template>
-                <div v-for="(children, index) in item.getChildren()" :key="index">
-                    <b-dropdown-item v-if="show(children)" @click="to(children)">
+                <template v-for="(children, index) in item.getChildren()">
+                    <b-dropdown-item v-if="show(children)" @click="to(children)" :key="`nav-item-dropdown-item-${index}`">
                         {{ children.getLabel() }}
                     </b-dropdown-item>
-                </div>
+                </template>
             </b-nav-item-dropdown>
-        </div>
+        </template>
+        <slot name="after"></slot>
     </b-navbar-nav>
 </template>
 

@@ -6,10 +6,11 @@
         <b-collapse id="nav-collapse" is-nav>
             <navigation-leg :leg="$makeless.getConfig().getConfiguration().getNavigation().getLeft()"></navigation-leg>
 
-            <b-navbar-nav class="ml-auto">
-                <navigation-leg :leg="$makeless.getConfig().getConfiguration().getNavigation().getRight()"></navigation-leg>
-                <user-dropdown v-if="this.$makeless.getSecurity().isAuth()"></user-dropdown>
-            </b-navbar-nav>
+            <navigation-leg :leg="$makeless.getConfig().getConfiguration().getNavigation().getRight()">
+                <template v-slot="after">
+                    <user-dropdown v-if="this.$makeless.getSecurity().isAuth()"></user-dropdown>
+                </template>
+            </navigation-leg>
         </b-collapse>
     </b-navbar>
 </template>
