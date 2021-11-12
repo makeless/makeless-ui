@@ -7,7 +7,7 @@
             <navigation-leg :leg="$makeless.getConfig().getConfiguration().getNavigation().getLeft()"></navigation-leg>
 
             <navigation-leg :leg="$makeless.getConfig().getConfiguration().getNavigation().getRight()">
-                <template v-slot="after">
+                <template v-slot:after>
                     <user-dropdown v-if="this.$makeless.getSecurity().isAuth()"></user-dropdown>
                 </template>
             </navigation-leg>
