@@ -17,6 +17,7 @@ export default class Event {
     const obj = JSON.parse(event.data);
 
     return {
+      channel: obj.channel,
       id: obj.id,
       data: obj.data,
     };
