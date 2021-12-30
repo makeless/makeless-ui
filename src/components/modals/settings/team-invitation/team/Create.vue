@@ -38,6 +38,7 @@ import Validator from '../../../../../packages/validator/basic/validator';
 import {BModal, BvModalEvent} from 'bootstrap-vue';
 import ValidatorUtil from '../../../../../utils/validator';
 import TeamInvitation from '../../../../selects/team/TeamInvitation.vue';
+import TeamInvitationStruct from '../../../../../structs/team-invitation';
 import TeamUser from '../../../../../models/team-user';
 import TeamInvitationTeamCreate from '../../../../../structs/team-invitation-team-create';
 import DomUtil from '../../../../../utils/dom';
@@ -70,7 +71,7 @@ export default class Create extends Vue {
     }
 
     for (let i = 0; i < this.teamInvitationTeamCreate.invitations.length; i++) {
-      const invitation = this.teamInvitationTeamCreate.invitations[i];
+      const invitation: TeamInvitationStruct = this.teamInvitationTeamCreate.invitations[i];
       if (!ValidatorUtil.isValidEmail(invitation.email) || invitation.email in index) {
         return false;
       }
