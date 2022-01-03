@@ -45,7 +45,7 @@ $tag-margin: 3px;
   }
 
   .multiselect__select {
-    background: none;
+    background: none !important;
   }
 
   .multiselect__option--highlight {
@@ -54,5 +54,5 @@ $tag-margin: 3px;
 }
 
 .multiselect--disabled {
-  background: none;
+  background: none !important;
 }
