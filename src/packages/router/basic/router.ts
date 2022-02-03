@@ -1,11 +1,9 @@
 import VueRouter, {Location, RouteConfig} from 'vue-router';
 import PageInterface from './../../../packages/page/page';
-
 const {NavigationFailureType, isNavigationFailure} = VueRouter;
 
 export default class Router {
   mode: any = 'history';
-  base: string = __dirname;
   router: VueRouter | null = null;
 
   private computePages(pages: PageInterface[]): RouteConfig[] {
@@ -34,7 +32,6 @@ export default class Router {
   public create(pages: PageInterface[]): void {
     this.router = new VueRouter({
       mode: this.mode,
-      base: this.base,
       routes: this.computePages(pages),
     });
   }
