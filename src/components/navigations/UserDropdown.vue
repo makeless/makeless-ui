@@ -26,7 +26,9 @@
 import {Component, Vue} from 'vue-property-decorator';
 import {TeamRole} from '../../enums/team-role';
 
-@Component
+@Component({
+  name: 'UserDropdown',
+})
 export default class UserDropdown extends Vue {
   isTeamOwner(): boolean {
     return this.$makeless.getSecurity().isTeamRole(TeamRole.Owner);

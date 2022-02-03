@@ -21,7 +21,9 @@ import {Component, Prop, Vue} from 'vue-property-decorator';
 import TeamUser from '../../../models/team-user';
 import TeamUserTeamUpdateRole from '../../../structs/team-user-team-update-role';
 
-@Component
+@Component({
+  name: 'Role',
+})
 export default class Role extends Vue {
   @Prop(Object) obj!: any;
 

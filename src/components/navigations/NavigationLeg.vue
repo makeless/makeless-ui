@@ -21,7 +21,9 @@ import {Component, Prop, Vue} from 'vue-property-decorator';
 import NavigationItemInterface from '../../packages/config/navigation-item';
 import NavigationLegInterface from '../../packages/config/navigation-leg';
 
-@Component
+@Component({
+  name: 'NavigationLeg',
+})
 export default class NavigationLeg extends Vue {
   @Prop(Object) leg!: NavigationLegInterface;
 

@@ -25,6 +25,7 @@ import VueMultiselect from 'vue-multiselect';
 import TeamInvitationStruct from '../../../structs/team-invitation';
 
 @Component({
+  name: 'TeamInvitation',
   components: {VueMultiselect},
 })
 export default class TeamInvitation extends Vue {

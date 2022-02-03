@@ -21,6 +21,7 @@ import VueMarkdown from 'vue-markdown';
 import StaticPageUtil from '../../utils/static-page';
 
 @Component({
+  name: 'Static',
   components: {
     VueMarkdown,
   },

@@ -14,7 +14,9 @@
 import {Component, Vue} from 'vue-property-decorator';
 import SettingNavigationInterface from '../../packages/config/setting-navigation';
 
-@Component
+@Component({
+  name: 'SettingNavigation',
+})
 export default class SettingNavigation extends Vue {
   isAccessible(name: string): boolean {
     return this.$makeless.getSecurity().isPageAccessible(this.$makeless.getPage(name));

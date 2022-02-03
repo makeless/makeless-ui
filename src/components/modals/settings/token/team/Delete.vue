@@ -39,7 +39,9 @@ import {BModal, BvModalEvent} from 'bootstrap-vue';
 import Token from '../../../../../models/token';
 import DomUtil from '../../../../../utils/dom';
 
-@Component
+@Component({
+  name: 'Delete',
+})
 export default class Delete extends Vue {
   @Prop(Object) readonly token!: Token;
   @Prop(Array) readonly tokens!: Token[];

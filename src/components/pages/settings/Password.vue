@@ -71,7 +71,9 @@ import Validator from '../../../packages/validator/basic/validator';
 import DomUtil from '../../../utils/dom';
 import PasswordUpdate from '../../../structs/password-update';
 
-@Component
+@Component({
+  name: 'Password',
+})
 export default class Password extends Vue {
   private passwordUpdate: PasswordUpdate = new PasswordUpdate();
   private form: Form = new Form();

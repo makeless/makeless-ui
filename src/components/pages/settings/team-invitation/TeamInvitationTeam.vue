@@ -90,7 +90,7 @@ import TeamInvitationTeamDelete from '../../../../structs/team-invitation-team-d
 import TeamInvitationTeamResend from '../../../../structs/team-invitation-team-resend';
 
 @Component({
-  components: {},
+  name: 'TeamInvitationTeam',
 })
 export default class TeamInvitationTeam extends Vue {
   public icon: string = 'people';
@@ -116,8 +116,8 @@ export default class TeamInvitationTeam extends Vue {
             responseResend: null,
             responseDelete: null,
             loadingDelete: false,
-            loadingResend: false
-          }
+            loadingResend: false,
+          },
         }));
       });
     });

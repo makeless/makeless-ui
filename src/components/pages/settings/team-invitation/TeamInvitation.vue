@@ -87,7 +87,7 @@ import TeamInvitationAccept from '../../../../structs/team-invitation-accept';
 import Team from '../../../../models/team';
 
 @Component({
-  components: {},
+  name: 'TeamInvitation',
 })
 export default class TeamInvitation extends Vue {
   public icon: string = 'box-seam';
@@ -109,8 +109,8 @@ export default class TeamInvitation extends Vue {
             responseAccept: null,
             responseDelete: null,
             loadingDelete: false,
-            loadingAccept: false
-          }
+            loadingAccept: false,
+          },
         }));
       });
     });

@@ -44,6 +44,7 @@ import TeamInvitationTeamCreate from '../../../../../structs/team-invitation-tea
 import DomUtil from '../../../../../utils/dom';
 
 @Component({
+  name: 'Create',
   components: {TeamInvitation},
 })
 export default class Create extends Vue {

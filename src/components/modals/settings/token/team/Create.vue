@@ -50,6 +50,7 @@ import TokenTeamCreate from '../../../../../structs/token-team-create';
 import DomUtil from '../../../../../utils/dom';
 
 @Component({
+  name: 'Create',
   components: {User},
 })
 export default class Create extends Vue {

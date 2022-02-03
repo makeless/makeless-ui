@@ -7,7 +7,9 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 
-@Component({})
+@Component({
+  name: 'Makeless',
+})
 export default class Makeless extends Vue {
 }
 </script>

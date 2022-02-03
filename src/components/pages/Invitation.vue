@@ -99,7 +99,9 @@ import DomUtil from '../../utils/dom';
 import ValidatorUtil from '../../utils/validator';
 import TeamInvitation from '../../models/team-invitation';
 
-@Component
+@Component({
+  name: 'Invitation',
+})
 export default class Invitation extends Vue {
   private register: Register = new Register();
   private teamInvitation: TeamInvitation | null = null;

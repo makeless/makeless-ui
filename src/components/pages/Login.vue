@@ -58,7 +58,9 @@ import Form from '../../packages/form/basic/form';
 import Validator from '../../packages/validator/basic/validator';
 import DomUtil from '../../utils/dom';
 
-@Component
+@Component({
+  name: 'Login',
+})
 export default class Login extends Vue {
   private login: LoginModel = new LoginModel();
   private form: Form = new Form();

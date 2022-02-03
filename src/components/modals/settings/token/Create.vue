@@ -41,7 +41,9 @@ import TokenUtil from '../../../../utils/token';
 import TokenCreate from '../../../../structs/token-create';
 import DomUtil from '../../../../utils/dom';
 
-@Component
+@Component({
+  name: 'Create',
+})
 export default class Create extends Vue {
   @Prop(Array) readonly tokens!: Token[];
 

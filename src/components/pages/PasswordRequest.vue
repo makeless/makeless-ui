@@ -51,7 +51,9 @@ import Form from '../../packages/form/basic/form';
 import Validator from '../../packages/validator/basic/validator';
 import DomUtil from '../../utils/dom';
 
-@Component
+@Component({
+  name: 'PasswordRequest',
+})
 export default class PasswordRequest extends Vue {
   private passwordRequest: PasswordRequestModel = new PasswordRequestModel();
   private form: Form = new Form();

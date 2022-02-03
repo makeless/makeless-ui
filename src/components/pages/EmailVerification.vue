@@ -60,7 +60,9 @@
 import {Component, Vue} from 'vue-property-decorator';
 import ResponseInterface from '../../packages/http/response';
 
-@Component
+@Component({
+  name: 'EmailVerification',
+})
 export default class EmailVerification extends Vue {
   private iconVerifySuccess: string = 'check-circle';
   private iconVerifyFailed: string = 'exclamation-circle';

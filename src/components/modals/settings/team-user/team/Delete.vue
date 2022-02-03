@@ -40,7 +40,9 @@ import TeamUser from '../../../../../models/team-user';
 import DomUtil from '../../../../../utils/dom';
 import TeamUserTeamDelete from '../../../../../structs/team-user-team-delete';
 
-@Component
+@Component({
+  name: 'Delete',
+})
 export default class Delete extends Vue {
   @Prop(Object) readonly teamUser!: TeamUser;
   @Prop(Array) readonly teamUsers!: TeamUser[];

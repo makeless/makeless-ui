@@ -56,6 +56,7 @@ import LeaveModal from './../../../components/modals/settings/team/Leave.vue';
 import TeamModel from '../../../models/team';
 
 @Component({
+  name: 'Team',
   components: {
     CreateModal,
     DeleteModal,

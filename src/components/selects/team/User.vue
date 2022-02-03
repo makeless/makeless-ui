@@ -28,6 +28,7 @@ import UserModel from '../../../models/user';
 import TeamUserModel from '../../../models/team-user';
 
 @Component({
+  name: 'User',
   components: {VueMultiselect},
 })
 export default class User extends Vue {

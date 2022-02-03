@@ -52,7 +52,9 @@ import Form from '../../../../packages/form/basic/form';
 import Validator from '../../../../packages/validator/basic/validator';
 import DomUtil from '../../../../utils/dom';
 
-@Component
+@Component({
+  name: 'Profile',
+})
 export default class Profile extends Vue {
   private profile: ProfileStruct = UtilObject.clone(this.$makeless.getSecurity().getUser());
   private form: Form = new Form();

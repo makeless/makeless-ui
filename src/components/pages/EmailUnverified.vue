@@ -49,7 +49,9 @@
 import {Component, Vue} from 'vue-property-decorator';
 import ResponseInterface from '../../packages/http/response';
 
-@Component
+@Component({
+  name: 'EmailUnverified',
+})
 export default class EmailUnverified extends Vue {
   private icon: string = 'inbox';
   private response: ResponseInterface | null = null;

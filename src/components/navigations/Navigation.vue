@@ -21,6 +21,7 @@ import NavigationLeg from './NavigationLeg.vue';
 import NavigationBrand from './NavigationBrand.vue';
 
 @Component({
+  name: 'Navigation',
   components: {NavigationBrand, NavigationLeg},
 })
 export default class Navigation extends Vue {

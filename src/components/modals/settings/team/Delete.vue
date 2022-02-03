@@ -39,7 +39,9 @@ import Team from '../../../../models/team';
 import {BvModalEvent} from 'bootstrap-vue';
 import DomUtil from '../../../../utils/dom';
 
-@Component
+@Component({
+  name: 'Delete',
+})
 export default class Delete extends Vue {
   @Prop(Object) readonly team!: Team;
 

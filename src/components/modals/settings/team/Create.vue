@@ -50,6 +50,7 @@ import ValidatorUtil from '../../../../utils/validator';
 import DomUtil from '../../../../utils/dom';
 
 @Component({
+  name: 'Create',
   components: {TeamInvitation},
 })
 export default class Create extends Vue {

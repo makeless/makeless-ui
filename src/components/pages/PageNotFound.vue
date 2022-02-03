@@ -17,7 +17,9 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 
-@Component({})
+@Component({
+  name: 'PageNotFound',
+})
 export default class PageNotFound extends Vue {
 }
 </script>

@@ -87,7 +87,9 @@ import DomUtil from '../../utils/dom';
 import ValidatorUtil from '../../utils/validator';
 import RegisterModel from '../../structs/register';
 
-@Component
+@Component({
+  name: 'Register',
+})
 export default class Register extends Vue {
   private register: RegisterModel = new RegisterModel();
   private form: Form = new Form();

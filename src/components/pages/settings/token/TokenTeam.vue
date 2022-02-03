@@ -56,6 +56,7 @@ import CreateModal from '../../../modals/settings/token/team/Create.vue';
 import DeleteModal from '../../../modals/settings/token/team/Delete.vue';
 
 @Component({
+  name: 'TokenTeam',
   components: {
     CreateModal,
     DeleteModal,

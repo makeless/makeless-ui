@@ -53,6 +53,7 @@ import CreateModal from '../../../modals/settings/token/Create.vue';
 import DeleteModal from '../../../modals/settings/token/Delete.vue';
 
 @Component({
+  name: 'Token',
   components: {
     CreateModal,
     DeleteModal,

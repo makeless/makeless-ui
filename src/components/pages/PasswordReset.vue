@@ -60,7 +60,9 @@ import Form from '../../packages/form/basic/form';
 import Validator from '../../packages/validator/basic/validator';
 import DomUtil from '../../utils/dom';
 
-@Component
+@Component({
+  name: 'PasswordReset',
+})
 export default class PasswordReset extends Vue {
   private passwordReset: PasswordResetModel = new PasswordResetModel();
   private form: Form = new Form();

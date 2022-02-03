@@ -11,7 +11,9 @@
 import {Component, Vue} from 'vue-property-decorator';
 import {Location} from 'vue-router';
 
-@Component
+@Component({
+  name: 'NavigationBrand',
+})
 export default class NavigationBrand extends Vue {
   protected get to(): Location {
     if (this.$makeless.getSecurity().isAuth()) {

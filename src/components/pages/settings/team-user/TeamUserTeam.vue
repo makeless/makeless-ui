@@ -65,6 +65,7 @@ import CreateModal from '../../../modals/settings/team-invitation/team/Create.vu
 import Role from '../../../selects/team/Role.vue';
 
 @Component({
+  name: 'TeamUserTeam',
   components: {
     DeleteModal,
     CreateModal,

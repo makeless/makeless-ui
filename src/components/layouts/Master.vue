@@ -9,7 +9,9 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 
-@Component
+@Component({
+  name: 'Master',
+})
 export default class Master extends Vue {
 }
 </script>
