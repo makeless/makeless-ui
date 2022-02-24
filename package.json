@@ -16,7 +16,7 @@
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.17.3",
     "eslint-plugin-tsdoc": "^0.2.14",
-    "nanoid": "^3.1.25",
+    "nanoid": "^3.1.31",
     "sass": "^1.39.0",
     "sass-loader": "^10.2.0",
     "typescript": "^4.4.2",
