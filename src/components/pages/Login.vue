@@ -103,7 +103,7 @@ export default class Login extends Vue {
       this.form.setResponse(this.$makeless.getHttp().response(data.response));
       this.form.setError(true);
       this.form.setDisabled(false);
-      this.login = new LoginModel();
+      this.login.password = null;
 
       this.$makeless.getSecurity().logout(false);
     });
