@@ -10,5 +10,17 @@
       "4x": "Resend failed",
       "5x": "Server error - Please try again later"
     }
+  },
+  "de": {
+    "title": "Bitte verifiziere deine Email",
+    "hint": "Bevor du {name} beitreten kannst, müssen wir deine Email {email} verifizieren",
+    "button": {
+      "resend": "Verifizerungsemail erneut senden"
+    },
+    "errors": {
+      "2x": "Email wurde gesendet",
+      "4x": "Erneut senden fehlgeschlagen",
+      "5x": "Server Fehler - Bitte versuche es später erneut"
+    }
   }
 }

@@ -23,5 +23,30 @@
         "5x": "Server error - Please try again later"
       }
     }
+  },
+  "de": {
+    "title": "Login",
+    "passwordRequest": "Passwort vergessen?",
+    "form": {
+      "fields": {
+        "email": {
+          "label": "Email",
+          "placeholder": "Email"
+        },
+        "password": {
+          "label": "Passwort",
+          "placeholder": "Passwort"
+        }
+      },
+      "button": "Login",
+      "validations": {
+        "email": "Email ist erforderlich",
+        "password": "Passwort ist erforderlich und muss mindestens 6 Zeichen beinhalten"
+      },
+      "errors": {
+        "4x": "Login fehlgeschlagen",
+        "5x": "Server Fehler - Bitte versuche es später erneut"
+      }
+    }
   }
 }
