@@ -12,6 +12,7 @@
                                 <h2>{{ $makeless.t('pages.invitation.information.invitedTo', {team: teamInvitation.team.name}) }}</h2>
                                 <div><small>{{ $makeless.t('pages.invitation.information.invitedBy', {user: teamInvitation.teamUser.user.name}) }}</small></div>
                                 <hr>
+                                <div>{{ `${$makeless.t('pages.invitation.instruction.newTo', {name: $makeless.getConfig().getConfiguration().getName()})}?` }}</div>
                                 <div class="mb-1 mb-sm-3">{{ $makeless.t('pages.invitation.instruction.createAccount') }}</div>
 
                                 <b-form @submit="onSubmit">
