@@ -12,5 +12,19 @@
       "4x": "Email verification failed",
       "5x": "Server error - Please try again later"
     }
+  },
+  "de": {
+    "title": "Emailverifizierung",
+    "access": "Du hast nun Zugang zu {name}",
+    "loading": "Lädt ...",
+    "button": {
+      "login": "Login",
+      "dashboard": "Dashboard"
+    },
+    "errors": {
+      "2x": "Emailverifizierung war erfolgreich",
+      "4x": "Emailverifizierung fehlgeschlagen",
+      "5x": "Server Fehler - Bitte versuche es später erneut"
+    }
   }
 }
