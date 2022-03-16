@@ -41,7 +41,7 @@
       "button": "Login",
       "validations": {
         "email": "Email ist erforderlich",
-        "password": "Passwort ist erforderlich und muss mindestens 6 Zeichen beinhalten"
+        "password": "Passwort ist erforderlich und muss mindestens 6 Zeichen enthalten"
       },
       "errors": {
         "4x": "Login fehlgeschlagen",

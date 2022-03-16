@@ -19,7 +19,7 @@
     "loading": "Lädt ...",
     "button": {
       "login": "Login",
-      "dashboard": "Geh zum Dashboard"
+      "dashboard": "Dashboard"
     },
     "errors": {
       "2x": "Emailverifizierung war erfolgreich",
