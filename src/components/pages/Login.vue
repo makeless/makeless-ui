@@ -28,7 +28,7 @@
                                         <b-col cols="6">
                                             <label for="password">{{ $makeless.t('pages.login.form.fields.password.label') }}</label>
                                         </b-col>
-                                        <b-col cols="6" class="text-right">
+                                        <b-col cols="6" class="d-none d-lg-inline-block text-right">
                                             <b-link :to="{name: 'password-request'}">{{ $makeless.t('pages.login.passwordRequest') }}</b-link>
                                         </b-col>
                                     </b-row>
@@ -41,6 +41,10 @@
                                 <b-button type="submit" variant="primary" :disabled="form.isDisabled() || !validator.isValid()">
                                     <b-spinner small v-if="form.isDisabled()" class="mr-1"></b-spinner>
                                     {{ $makeless.t('pages.login.form.button') }}
+                                </b-button>
+
+                                <b-button variant="link" :to="{name: 'password-request'}" class="ml-1 d-lg-none">
+                                    {{ $makeless.t('pages.login.passwordRequest') }}
                                 </b-button>
                             </b-form>
                         </b-card>
