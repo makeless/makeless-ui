@@ -258,11 +258,6 @@ export {
   TokenTeamPage,
   PageNotFoundPage,
 
-  MasterComponent,
-  NavigationComponent,
-  SettingNavigationComponent,
-  UserDropdownComponent,
-
   DomUtil,
   ObjectUtil,
   StaticPageUtil,
