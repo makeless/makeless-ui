@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
     "target": "esnext",
     "module": "esnext",
     "strict": true,
@@ -13,7 +15,6 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "types": [
-      "webpack-env",
       "node"
     ],
     "lib": [

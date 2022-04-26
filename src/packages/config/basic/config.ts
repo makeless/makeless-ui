@@ -29,7 +29,7 @@ export default class Config {
       const leg = Object.values(obj.navigation)[i];
 
       for (const locale in leg) {
-        if (!leg.hasOwnProperty(locale)) {
+        if (!Object.prototype.hasOwnProperty.call(leg, locale)) {
           continue;
         }
 
@@ -53,7 +53,7 @@ export default class Config {
 
     for (let i = 0; i < locales.length; i++) {
       for (const j in obj.settingsNavigation[locales[i]]) {
-        if (!obj.settingsNavigation[locales[i]].hasOwnProperty(j)) {
+        if (!Object.prototype.hasOwnProperty.call(obj.settingsNavigation[locales[i]], j)) {
           break;
         }
 

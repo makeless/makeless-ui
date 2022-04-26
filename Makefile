@@ -7,5 +7,8 @@ eslint:
 ls-lint:
 	node_modules/.bin/ls-lint @ls-lint/ls-lint
 
+build:
+	pnpm build
+
 yalc-watch:
 	~/go/bin/reflex -R '^node_modules/' yalc push

@@ -19,6 +19,12 @@ steps:
     commands:
       - make ls-lint
 
+  - name: build
+    image: node:18
+    commands:
+      - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+      - make build
+
   - name: npm
     image: plugins/npm
     settings:
