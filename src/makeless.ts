@@ -15,6 +15,14 @@ import SecurityInterface from './packages/security/security';
 import I18nInterface from './packages/i18n/i18n';
 import EventInterface from './packages/event/event';
 
+import ConfigBasicPackage from './packages/config/basic/config';
+import RouterBasicPackage from './packages/router/basic/router';
+import HttpAxiosPackage from './packages/http/axios/axios';
+import SecurityBasicPackage from './packages/security/basic/security';
+import I18nBasicPackage from './packages/i18n/basic/i18n';
+import StorageLocalStoragePackage from './packages/storage/local-storage/local-storage';
+import EventBasicPackage from './packages/event/basic/event';
+
 // pages
 import TermsPage from './pages/terms';
 import ImprintPage from './pages/imprint';
@@ -51,7 +59,7 @@ Vue.use(IconsPlugin);
 Vue.use(VueRouter);
 Vue.use(VueI18n);
 
-export default class Makeless {
+class Makeless {
   private readonly config: ConfigInterface;
   private readonly router: RouterInterface;
   private readonly http: HttpInterface;
@@ -201,3 +209,23 @@ export default class Makeless {
     }).$mount('#app');
   }
 }
+
+export {
+  Makeless,
+
+  ConfigInterface,
+  RouterInterface,
+  PageInterface,
+  HttpInterface,
+  SecurityInterface,
+  I18nInterface,
+  EventInterface,
+
+  ConfigBasicPackage,
+  RouterBasicPackage,
+  HttpAxiosPackage,
+  SecurityBasicPackage,
+  I18nBasicPackage,
+  StorageLocalStoragePackage,
+  EventBasicPackage,
+};
