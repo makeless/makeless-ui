@@ -1,11 +1,11 @@
 install:
-	yarn
+	pnpm install
 
 eslint:
-	npx eslint src --ext ts,js,vue,json
+	node_modules/.bin/eslint src --ext ts,js,vue,json
 
 ls-lint:
-	npx @ls-lint/ls-lint
+	node_modules/.bin/ls-lint @ls-lint/ls-lint
 
 yalc-watch:
 	~/go/bin/reflex -R '^node_modules/' yalc push

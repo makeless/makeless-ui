@@ -4,17 +4,18 @@ name: docker
 
 steps:
   - name: install
-    image: node:16
+    image: node:18
     commands:
-      - yarn install
+      - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+      - make install
 
   - name: eslint
-    image: node:16
+    image: node:18
     commands:
       - make eslint
 
   - name: ls-lint
-    image: node:16
+    image: node:18
     commands:
       - make ls-lint
 
