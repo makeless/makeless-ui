@@ -1,8 +1,9 @@
+import EventInterface from '../event';
 import {Handler as HandlerInterface, SubscribeHandler as SubscribeHandlerInterface} from '../handler';
 import StdEventInterface from '../std';
 import DataInterface from '../data';
 
-export default class Event {
+export default class Event implements EventInterface {
   private readonly host: string;
   private readonly path: string;
   private eventSource: EventSource | null;

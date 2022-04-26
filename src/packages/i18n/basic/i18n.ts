@@ -1,8 +1,9 @@
 import VueI18n, {Locale, LocaleMessages} from 'vue-i18n';
-import PageInterface from './../../../packages/page/page';
+import PageInterface from '../../page/page';
 import globalMessages from './../../../messages/global.json';
+import I18nInterface from '../i18n';
 
-export default class i18n {
+export default class i18n implements I18nInterface {
   private readonly vueI18n: VueI18n;
 
   constructor(locale: string, isolated?: boolean) {

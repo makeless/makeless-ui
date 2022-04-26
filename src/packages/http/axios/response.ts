@@ -1,6 +1,7 @@
 import {AxiosResponse} from 'axios';
+import ResponseInterface from '../response';
 
-export default class Response {
+export default class Response implements ResponseInterface {
   private readonly code: number;
   private readonly data: any;
 

@@ -1,4 +1,6 @@
-export default class LocalStorage {
+import StorageInterface from '../storage';
+
+export default class LocalStorage implements StorageInterface {
   private readonly storage = localStorage;
 
   public getItem(key: string): string | null {

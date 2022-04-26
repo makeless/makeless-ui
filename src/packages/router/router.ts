@@ -1,9 +1,8 @@
 import VueRouter, {Location} from 'vue-router';
-import PageInterface from './../../packages/page/page';
+import PageInterface from '../page/page';
 
 export default interface Router {
   mode: any;
-  base: string;
   router: VueRouter | null;
 
   /**
@@ -15,26 +14,26 @@ export default interface Router {
   /**
    * Redirect to route name
    */
-  redirectToName(name: string, data?: Location): void
+  redirectToName(name: string, data?: Location): void;
 
   /**
    * Shorthand for login redirection
    */
-  redirectToLogin(data?: Location): void
+  redirectToLogin(data?: Location): void;
 
   /**
    * Shorthand for dashboard redirection
    */
-  redirectToDashboard(data?: Location): void
+  redirectToDashboard(data?: Location): void;
 
   /**
    * Redirect to route path
    */
-  redirectToPath(path: string, data?: Location): void
+  redirectToPath(path: string, data?: Location): void;
 
   /**
    * Returns VueRouter
    * @returns VueRouter
    */
-  getVueRouter(): VueRouter
+  getVueRouter(): VueRouter;
 }

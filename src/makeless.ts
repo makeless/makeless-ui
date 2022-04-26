@@ -15,13 +15,16 @@ import SecurityInterface from './packages/security/security';
 import I18nInterface from './packages/i18n/i18n';
 import EventInterface from './packages/event/event';
 
-import ConfigBasicPackage from './packages/config/basic/config';
-import RouterBasicPackage from './packages/router/basic/router';
-import HttpAxiosPackage from './packages/http/axios/axios';
-import SecurityBasicPackage from './packages/security/basic/security';
-import I18nBasicPackage from './packages/i18n/basic/i18n';
-import StorageLocalStoragePackage from './packages/storage/local-storage/local-storage';
-import EventBasicPackage from './packages/event/basic/event';
+import Config from './packages/config/basic/config';
+import Router from './packages/router/basic/router';
+import Form from './packages/form/basic/form';
+import State from './packages/state/basic/state';
+import Validator from './packages/validator/basic/validator';
+import Axios from './packages/http/axios/axios';
+import Security from './packages/security/basic/security';
+import I18n from './packages/i18n/basic/i18n';
+import LocalStorage from './packages/storage/local-storage/local-storage';
+import Event from './packages/event/basic/event';
 
 // pages
 import TermsPage from './pages/terms';
@@ -213,19 +216,42 @@ class Makeless {
 export {
   Makeless,
 
-  ConfigInterface,
-  RouterInterface,
-  PageInterface,
-  HttpInterface,
-  SecurityInterface,
-  I18nInterface,
-  EventInterface,
+  Config,
+  Router,
+  Form,
+  State,
+  Validator,
+  Axios,
+  Security,
+  I18n,
+  LocalStorage,
+  Event,
 
-  ConfigBasicPackage,
-  RouterBasicPackage,
-  HttpAxiosPackage,
-  SecurityBasicPackage,
-  I18nBasicPackage,
-  StorageLocalStoragePackage,
-  EventBasicPackage,
+  TermsPage,
+  ImprintPage,
+  PrivacyPage,
+  HomePage,
+  LoginPage,
+  InvitationPage,
+  PasswordRequest,
+  PasswordReset,
+  RegisterPage,
+  EmailUnverifiedPage,
+  EmailVerificationPage,
+  DashboardPage,
+  ProfilePage,
+  ProfileTeamPage,
+  TeamPage,
+  TeamUserTeamPage,
+  PasswordPage,
+  TeamInvitationPage,
+  TeamInvitationTeamPage,
+  TokenPage,
+  TokenTeamPage,
+  PageNotFoundPage,
+
+  MasterComponent,
+  NavigationComponent,
+  SettingNavigationComponent,
+  UserDropdownComponent,
 };

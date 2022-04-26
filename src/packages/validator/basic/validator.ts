@@ -1,9 +1,10 @@
-import ValidatorMethod from '../validator-method';
+import ValidatorInterface from '../validator';
+import ValidatorMethodInterface from '../validator-method';
 
-export default class Validator {
-  private validators: ValidatorMethod[];
+export default class Validator implements ValidatorInterface {
+  private validators: ValidatorMethodInterface[];
 
-  constructor(validators: ValidatorMethod[]) {
+  constructor(validators: ValidatorMethodInterface[]) {
     this.validators = validators;
   }
 
@@ -17,15 +18,15 @@ export default class Validator {
     return true;
   }
 
-  public addValidators(validators: ValidatorMethod[]): void {
+  public addValidators(validators: ValidatorMethodInterface[]): void {
     this.validators.push(...validators);
   }
 
-  public setValidators(validators: ValidatorMethod[]): void {
+  public setValidators(validators: ValidatorMethodInterface[]): void {
     this.validators = validators;
   }
 
-  public getValidators(): ValidatorMethod[] {
+  public getValidators(): ValidatorMethodInterface[] {
     return this.validators;
   }
 }

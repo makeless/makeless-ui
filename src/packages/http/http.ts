@@ -1,4 +1,4 @@
-import ResponseInterface from './../../packages/http/response';
+import ResponseInterface from './response';
 
 export default interface Http {
   /**

@@ -1,6 +1,7 @@
-import ResponseInterface from './../../http/response';
+import FormInterface from '../form';
+import ResponseInterface from '../../http/response';
 
-export default class Form {
+export default class Form implements FormInterface {
   private error: boolean = false;
   private disabled: boolean = false;
   private response: ResponseInterface | null = null;

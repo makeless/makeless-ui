@@ -1,8 +1,10 @@
 import VueRouter, {Location, RouteConfig} from 'vue-router';
-import PageInterface from './../../../packages/page/page';
+import RouterInterface from '../router';
+import PageInterface from '../../page/page';
+
 const {NavigationFailureType, isNavigationFailure} = VueRouter;
 
-export default class Router {
+export default class Router implements RouterInterface {
   mode: any = 'history';
   router: VueRouter | null = null;
 

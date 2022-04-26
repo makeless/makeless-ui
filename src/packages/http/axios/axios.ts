@@ -1,8 +1,9 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
-import ResponseInterface from './../../../packages/http/response';
+import ResponseInterface from '../response';
 import Response from './../../../packages/http/axios/response';
+import HttpInterface from '../http';
 
-export default class Axios {
+export default class Axios implements HttpInterface {
   private axios: AxiosInstance;
   private readonly baseConfig: Object = {
     withCredentials: true,

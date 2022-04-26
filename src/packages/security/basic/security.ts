@@ -1,8 +1,8 @@
-import HttpInterface from './../../../packages/http/http';
-import RouterInterface from './../../../packages/router/router';
-import ResponseInterface from './../../../packages/http/response';
-import EventInterface from './../../../packages/event/event';
-import StorageInterface from './../../../packages/storage/storage';
+import HttpInterface from '../../http/http';
+import RouterInterface from '../../router/router';
+import ResponseInterface from '../../http/response';
+import EventInterface from '../../event/event';
+import StorageInterface from '../../storage/storage';
 import DataInterface from '../../event/data';
 import PageInterface from '../../page/page';
 import ConfigurationInterface from '../../config/configuration';
@@ -11,8 +11,9 @@ import User from './../../../models/user';
 import TeamUser from '../../../models/team-user';
 import {TeamRole} from '../../../enums/team-role';
 import {NavigationGuardNext, Route} from 'vue-router';
+import SecurityInterface from '../security';
 
-export default class Security {
+export default class Security implements SecurityInterface {
   user: User | null = null;
   team: Team | null = null;
   teamIndex: { [key: number]: Team | null } = {};

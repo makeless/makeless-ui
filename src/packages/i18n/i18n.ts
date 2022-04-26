@@ -1,4 +1,4 @@
-import PageInterface from './../../packages/page/page';
+import PageInterface from '../page/page';
 import VueI18n, {Locale, LocaleMessages} from 'vue-i18n';
 
 export default interface i18n {

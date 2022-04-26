@@ -1,3 +1,4 @@
+import ConfigInterface from '../config';
 import ConfigurationInterface from './configuration';
 import Configuration from './configuration';
 import Navigation from './navigation';
@@ -6,7 +7,7 @@ import NavigationItem from './navigation-item';
 import SettingNavigation from './setting-navigation';
 import SettingNavigationItem from './setting-navigation-item';
 
-export default class Config {
+export default class Config implements ConfigInterface {
   configuration: ConfigurationInterface;
 
   constructor(config: any) {
