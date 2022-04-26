@@ -27,14 +27,15 @@ import LocalStorage from './packages/storage/local-storage/local-storage';
 import Event from './packages/event/basic/event';
 
 // pages
+import Page from './pages/page';
 import TermsPage from './pages/terms';
 import ImprintPage from './pages/imprint';
 import PrivacyPage from './pages/privacy';
 import HomePage from './pages/home';
 import LoginPage from './pages/login';
 import InvitationPage from './pages/invitation';
-import PasswordRequest from './pages/password-request';
-import PasswordReset from './pages/password-reset';
+import PasswordRequestPage from './pages/password-request';
+import PasswordResetPage from './pages/password-reset';
 import RegisterPage from './pages/register';
 import EmailUnverifiedPage from './pages/email-unverified';
 import EmailVerificationPage from './pages/email-verification';
@@ -55,6 +56,12 @@ import MasterComponent from './components/layouts/Master.vue';
 import NavigationComponent from './components/navigations/Navigation.vue';
 import SettingNavigationComponent from './components/navigations/SettingNavigation.vue';
 import UserDropdownComponent from './components/navigations/UserDropdown.vue';
+
+// utils
+import DomUtil from './utils/dom';
+import ObjectUtil from './utils/object';
+import StaticPageUtil from './utils/static-page';
+import ValidatorUtil from './utils/validator';
 
 // plugins
 Vue.use(BootstrapVue);
@@ -93,8 +100,8 @@ class Makeless {
     'home': new HomePage(),
     'login': new LoginPage(),
     'invitation': new InvitationPage(),
-    'password-request': new PasswordRequest(),
-    'password-reset': new PasswordReset(),
+    'password-request': new PasswordRequestPage(),
+    'password-reset': new PasswordResetPage(),
     'register': new RegisterPage(),
     'email-unverified': new EmailUnverifiedPage(),
     'email-verification': new EmailVerificationPage(),
@@ -227,14 +234,15 @@ export {
   LocalStorage,
   Event,
 
+  Page,
   TermsPage,
   ImprintPage,
   PrivacyPage,
   HomePage,
   LoginPage,
   InvitationPage,
-  PasswordRequest,
-  PasswordReset,
+  PasswordRequestPage,
+  PasswordResetPage,
   RegisterPage,
   EmailUnverifiedPage,
   EmailVerificationPage,
@@ -254,4 +262,9 @@ export {
   NavigationComponent,
   SettingNavigationComponent,
   UserDropdownComponent,
+
+  DomUtil,
+  ObjectUtil,
+  StaticPageUtil,
+  ValidatorUtil,
 };
