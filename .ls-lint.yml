@@ -6,3 +6,9 @@ ls:
     .json: kebab-case
     .vue: PascalCase
     .d.ts: kebab-case
+
+ignore:
+  - .git
+  - .github
+  - node_modules
+  - dist
