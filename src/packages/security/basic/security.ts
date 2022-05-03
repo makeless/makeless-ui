@@ -25,6 +25,8 @@ export default class Security implements SecurityInterface {
   readonly event: EventInterface;
   readonly storage: StorageInterface;
 
+  private refreshInterval: number | null = null;
+
   public constructor(router: RouterInterface, http: HttpInterface, event: EventInterface, storage: StorageInterface) {
     this.router = router;
     this.http = http;
@@ -146,7 +148,7 @@ export default class Security implements SecurityInterface {
       return;
     }
 
-    setInterval(() => {
+    this.refreshInterval = window.setInterval(() => {
       this.http.get('/api/auth/refresh-token').then((data) => {
         this.setExpire(new Date(this.http.response(data).getData().expire));
       }).catch((_) => {
@@ -363,6 +365,10 @@ export default class Security implements SecurityInterface {
     this.removeTeam();
     this.removeTeamIndex();
     this.event.close();
+
+    if (this.refreshInterval !== null) {
+      window.clearInterval(this.refreshInterval);
+    }
 
     if (redirect) {
       this.router.redirectToLogin();
