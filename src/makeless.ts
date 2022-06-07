@@ -63,6 +63,9 @@ import ObjectUtil from './utils/object';
 import StaticPageUtil from './utils/static-page';
 import ValidatorUtil from './utils/validator';
 
+// structs
+import PasswordUpdate from './structs/password-update'
+
 // plugins
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -262,4 +265,6 @@ export {
   ObjectUtil,
   StaticPageUtil,
   ValidatorUtil,
+
+  PasswordUpdate
 };
